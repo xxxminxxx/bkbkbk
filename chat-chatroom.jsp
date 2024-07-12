@@ -23,12 +23,12 @@
     </head>
     <body>
         
-        <div class="bg-elements elements-top-header position-relative">
+        <div class="bg-light elements-top-header position-relative">
             <!-- navbar -->
             <div class="elements-nav">
               
                 <!-- bootom nav -->
-                <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
+                <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-50">
                     <div class="container">
                         <div class="position-relative d-flex align-items-center gap-2 site-brand">
                             <img src="../img/bookbookbookLogo.png" alt="북북북 로고"/>
@@ -65,7 +65,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <a href="./page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그인 </a>
+                            <a href="/logout" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그아웃 </a>
                             <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
                         </div>
                     </div>
@@ -80,9 +80,8 @@
                                 <img src="../img/co2.png">
                                 <h3 class="fw-bold mb-1">참가자 목록</h3>
                             </div>
-                            <div class="p-4 osahan-sidebar-links">
-                                <p class="joinedUser"><i class="ri-user-line me-2"></i> 참가자 닉네임 얻어오기 </p>
-                                
+                            <div id="joinedUser" class="p-4 osahan-sidebar-links">
+                                <p ><i class="ri-user-line me-2"></i> 참가자 닉네임 얻어오기 </p>
                             </div>
                         </div>
                     </div>
@@ -293,18 +292,40 @@
 		       var socket = new SockJS('/chat-websocket'); // WebSocket endpoint URL
 		       var stompClient = Stomp.over(socket);
  			   var message={};
+			   //var username= 로그인 세션 얻어오기
 			   
 		       stompClient.connect({}, function(frame) {
 		           //console.log('Connected: ' + frame);
+				   //메세지 송수신
 		           stompClient.subscribe('/topic/public', function(messageOutput) {
 		               showMessage(JSON.parse(messageOutput.body));
 		           });
-				   stompClient.send("/app/chat.register",
-				           {},
-				           JSON.stringify({sender: 'username', type: 'JOIN'})
-				       )
-		       });
+				   //유저 JOIN
+				   stompClient.subscribe('/app/chat.addUser', function(messageOutput) {
+				           showMessage(JSON.parse(messageOutput.body));
+				       });
+				   stompClient.send("/app/chat.addUser",
+			           {},
+			           JSON.stringify({sender: 'username', type: 'JOIN', time: new Date().toISOString()})
+			       )
+				
+				   window.addEventListener('beforeunload', function(event) {
+				               // WebSocket 연결이 있다면 연결 종료
+				               if (stompClient !== null) {
+				                   stompClient.send("/app/chat.removeUser",
+				                       {},
+				                       JSON.stringify({sender: 'username', type: 'LEAVE', time: new Date().toISOString()})
+				                   );
 
+				                   stompClient.disconnect(function() {
+				                       console.log('WebSocket disconnected');
+				                   });
+				               }
+				           });
+				      
+		       });
+			   
+			   
 		       function showMessage(message) {
 		           var messageArea = document.getElementById('messageArea');
 		           var li = document.createElement('li');
@@ -313,9 +334,8 @@
 				   var parsedMessage = JSON.parse(text);
 				   var messageId=parsedMessage.time;
 				   var messageContent='';
-				   	console.log(parsedMessage.type);
+				   	//console.log(parsedMessage.type);
 				
-					
 				   // ISO 문자열을 Date 객체로 변환
 				   var date = new Date(messageId);
 
@@ -331,8 +351,21 @@
 				   };
 
 				   var localizedDate = date.toLocaleDateString('ko-KR', options);
-
-					var messageContent = 
+					console.log(localizedDate);
+				   
+				   if(parsedMessage.type==='JOIN'){
+				   		messageContent='username 님이 참여하였습니다.'+ '<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
+						
+						//var userList= document.getElementById('joinedUser');
+						//var userAdd = '<i class="ri-user-line me-2"></i>'+ 'username';
+						//var pElement = document.createElement('p');
+						//pElement.innerHTML=userAdd;
+						//userList.appendChild(pElement);
+						
+				   }else if(parsedMessage.type==='LEAVE'){
+						messageContent='username 님이 나가셨습니다.'+'<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
+				   }else{
+					messageContent = 
 					    '<div class="col">' +
 					        '<div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">' +
 					            '<div class="w-75">' +
@@ -364,8 +397,21 @@
 																'<div class="row col-md-7 ms-auto">'+ '<span name="reportedUser">'+parsedMessage.sender +'</span></div>'+
 															'</div>'+
 															'<div class="row">'+
+																'<br/>'+
+															'</div>'+
+															'<div class="row">'+
 																'<div class="col-md-5">신고자:</div>'+
 																'<div class="row col-md-7 ms-auto">'+ '<span name="reportUser">'+'신고자아이디' +'</span></div>'+
+															'</div>'+
+															'<div class="row">'+
+																'<br/>'+
+															'</div>'+
+															'<div class="row">'+
+																'<div class="col-md-5">신고 내용:</div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<span>'+parsedMessage.content +'</span></div>'+
+															'</div>'+
+															'<div class="row">'+
+																'<br/>'+
 															'</div>'+
 															'<div class="row">'+
 												               	'<div class="col-md-5">신고 사유:<br/></div>'+
@@ -374,6 +420,13 @@
 																'<option>광고</option>'+
 																'<option>기타</option>'+
 																'</select>'+
+															'</div>'+
+															'<div class="row">'+
+																'<br/>'+
+															'</div>'+
+															'<div class="row">'+
+																'<hr/>'+
+																'<div class="col-md-12">허위신고시 서비스 이용이 제한될 수 있습니다.<br/></div>'+
 															'</div>'+
 														'</div>'+
 										              '</div>'+
@@ -387,9 +440,10 @@
 									  '</div>' +
 							        '</div>' +
 							    '</div>';
-
+					}//end of if
 				   //console.log("결과:"+messageContent)
 		           li.innerHTML = messageContent;
+				   li.className = 'list-unstyled';
 		           messageArea.appendChild(li);
 				   //스크롤 아래로 이동
 				   document.getElementById('messageAreaScroll').scrollTop = messageArea.scrollHeight;
