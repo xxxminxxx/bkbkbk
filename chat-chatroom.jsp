@@ -16,7 +16,7 @@
         <!-- Remix Icons -->
         <link rel="stylesheet" href="../vender/remixicon/remixicon.css">
         <!-- Custom Css -->
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
 		<link rel="stylesheet" href="../css/style2.css">
         <!-- Common Css -->
         <link rel="stylesheet" href="../css/common.css">
@@ -26,22 +26,7 @@
         <div class="bg-elements elements-top-header position-relative">
             <!-- navbar -->
             <div class="elements-nav">
-                <!-- top nav -->
-                <!-- <div class="top-nav d-none d-lg-block py-2 bg-black bg-opacity-50">
-                    <div class="container">
-                        <div class="row align-items-center justify-content-between g-4">
-                            <div class="col-auto">
-                                <small class="link-secondary"><i class="ri-map-pin-line"></i> Rammurthy nagar, Bangalore-560016</small>
-                            </div>
-                            <div class="col-auto">
-                                <div class="d-flex align-items-center gap-3">
-                                    <a href="#" class="link-secondary"><i class="ri-facebook-circle-fill"></i></a> <a href="#" class="link-secondary"><i class="ri-twitter-fill"></i></a>
-                                    <a href="#" class="link-secondary"><i class="ri-instagram-fill"></i></a> <a href="#" class="link-secondary"><i class="ri-linkedin-box-fill"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+              
                 <!-- bootom nav -->
                 <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
                     <div class="container">
@@ -96,11 +81,8 @@
                                 <h3 class="fw-bold mb-1">참가자 목록</h3>
                             </div>
                             <div class="p-4 osahan-sidebar-links">
-                                <p><i class="ri-user-line me-2"></i> 참가자 닉네임 얻어오기 </p>
-                                <p><i class="ri-user-line me-2"></i> User2 </p>
-                                <p><i class="ri-user-line me-2"></i> User3 </p>
-                                <p><i class="ri-user-line me-2"></i> User4 </p>
-                                <p><i class="ri-user-line me-2"></i> User5 </p>
+                                <p class="joinedUser"><i class="ri-user-line me-2"></i> 참가자 닉네임 얻어오기 </p>
+                                
                             </div>
                         </div>
                     </div>
@@ -113,8 +95,9 @@
                            <div>
 							<br/>
 							</div>
-                            <ul id="messageArea">
-								<div class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
+							<div id="messageAreaScroll">
+                            <ul id="messageArea" >
+								<div style="display:none" class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
 									<div class="col">
 	                                    <div class="d-flex align-items-center justify-content-between bg-white border px-2 py-2 rounded-4">
 	                                        <div class="w-75">
@@ -126,7 +109,8 @@
 	                                    </div>
 	                                </div>
 								</div>
-                                <div class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
+								
+                                <div style="display:none" class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
                                     <div class="col">
                                         <div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">
                                             <div class="w-75">
@@ -151,16 +135,26 @@
 										                  <h1 class="modal-title fs-5" id="exampleModalLabel">메세지 신고</h1>
 										                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										              </div>
-													  <form>
+													  <form id="reportForm">
 											              <div class="modal-body">
-															신고 대상: [피신고자 아이디]<br/>
-															신고자: [본인 아이디]<br/>
-											               	신고 사유를 선택해주세요.<br/>
-														   <select>
-															<option>욕설</option>
-															<option>광고</option>
-															<option>기타</option>
-															</select>
+															<div class="container-fluid">
+																<div class="row">
+																	<div class="col-md-5">신고 대상:</div>
+																	<div class="row col-md-7 ms-auto"> [피신고자 아이디]</div>
+																</div>
+																<div class="row">
+																	<div class="col-md-5">신고자:</div>
+																	<div class="row col-md-7 ms-auto"> [신고자 아이디]</div>
+																</div>
+																<div class="row">
+													               	<div class="col-md-5">신고 사유:<br/></div>
+																   <select class="row col-md-7 ms-auto">
+																	<option>욕설</option>
+																	<option>광고</option>
+																	<option>기타</option>
+																	</select>
+																</div>
+															</div>
 											              </div>
 										              <div class="modal-footer">
 										                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -175,28 +169,33 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col">
-                                        <div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">
-                                            <div class="w-75">
-                                                <div class="d-flex align-items-center gap-3 osahan-mb-1">
-                                                    <i class="ri-user-line text-muted fs-5"></i>
-                                                    <div class="lh-sm">
-                                                        <h4 class="fw-bold text-success mb-2">[내 이름]</h4>
-                                                        <p class="text-truncate mb-2 small">내가 보낸 메세지</p>
-                                                        <small class="text-muted">채팅 친 시간</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto d-flex align-items-center gap-3 text-center small"><!-- <span class="text-danger fw-bold h5 m-0">-$75</span> --></div>
-                                        </div>
-                                    </div>
+									<div id="messageTemplate" style="display:none">
+	                                    <div class="col">
+	                                        <div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">
+	                                            <div class="w-75">
+	                                                <div class="d-flex align-items-center gap-3 osahan-mb-1">
+	                                                    <i class="ri-user-line text-muted fs-5"></i>
+	                                                    <div class="lh-sm">
+	                                                        <h4 class="fw-bold text-success mb-2">나의 이름</h4>
+	                                                        <p class="text-truncate mb-2 small">내가 보낸 메세지</p>
+	                                                        <small class="text-muted">메세지를 보낸 시간</small>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                            <div class="ms-auto d-flex align-items-center gap-3 text-center small"><!-- <span class="text-danger fw-bold h5 m-0">-$75</span> --></div>
+	                                        </div>
+	                                    </div>
+									</div>
+									
                                 </div>
                             </ul>
+							</div>
                             <!-- 메세지 입력창 -->
                             <form id="messageForm" name="messageForm" nameForm="messageForm">
                             	<div class="form-group">
                             		<div class="input-group input-group-lg">
-                            			<input id="message" type="text" class="input-group-lg col-md-10" placeholder="메세지를 입력하세요"><button type="submit" class="col-md-2 btn btn-purple btn-theme">보내기</button>
+                            			<input id="messageInput" type="text" class="input-group-lg col-md-10" placeholder="메세지를 입력하세요">
+										<button type="submit" class="col-md-2 btn btn-purple btn-theme">보내기</button>
                             		</div>
                             	</div>
                             </form>
@@ -286,10 +285,136 @@
         <!-- Custom Js -->
         <script src="../js/script.js"></script>
         
-        <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-        <script src="../js/chat.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+   
+		<!-- 채팅기능-->
+		<script>
+		       var socket = new SockJS('/chat-websocket'); // WebSocket endpoint URL
+		       var stompClient = Stomp.over(socket);
+ 			   var message={};
+			   
+		       stompClient.connect({}, function(frame) {
+		           //console.log('Connected: ' + frame);
+		           stompClient.subscribe('/topic/public', function(messageOutput) {
+		               showMessage(JSON.parse(messageOutput.body));
+		           });
+				   stompClient.send("/app/chat.register",
+				           {},
+				           JSON.stringify({sender: 'username', type: 'JOIN'})
+				       )
+		       });
+
+		       function showMessage(message) {
+		           var messageArea = document.getElementById('messageArea');
+		           var li = document.createElement('li');
+		           li.className = 'mb-2';
+				   var text = JSON.stringify(message);
+				   var parsedMessage = JSON.parse(text);
+				   var messageId=parsedMessage.time;
+				   var messageContent='';
+				   	console.log(parsedMessage.type);
+				
+					
+				   // ISO 문자열을 Date 객체로 변환
+				   var date = new Date(messageId);
+
+				   // 한국 시간대로 변환 (Asia/Seoul)
+				   var options = {
+				       timeZone: 'Asia/Seoul',
+				       year: 'numeric',
+				       month: '2-digit',
+				       day: '2-digit',
+				       hour: '2-digit',
+				       minute: '2-digit',
+				       second: '2-digit'
+				   };
+
+				   var localizedDate = date.toLocaleDateString('ko-KR', options);
+
+					var messageContent = 
+					    '<div class="col">' +
+					        '<div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">' +
+					            '<div class="w-75">' +
+					                '<div class="d-flex align-items-center gap-3 osahan-mb-1">' +
+					                    '<i class="ri-user-line text-muted fs-5"></i>' +
+					                    '<div class="lh-sm">' +
+					                        '<h6 class="fw-bold text-primary mb-2">' + parsedMessage.sender + '</h6>' +
+					                        '<h6 class="text-truncate mb-2 bold">' + parsedMessage.content + '</h6>' +
+					                        '<small class="text-muted">' + localizedDate + '</small>' +
+					                    '</div>' +
+					                '</div>' +
+					            '</div>' +
+					            '<div class="ms-auto d-flex align-items-center gap-3 text-center small">' +
+					                '<button type="button" class="badge rounded-pill text-bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModal'+messageId+'">' +
+					                    '신고하기' +
+					                '</button>' +
+									'<div class="modal fade" id="exampleModal'+messageId+'" tabindex="-1" aria-labelledby="exampleModalLabel'+messageId+'" aria-hidden="true">'+
+									     '<div class="modal-dialog">'+
+									          '<div class="modal-content">'+
+									              '<div class="modal-header">'+
+									                  '<h1 class="modal-title fs-5" id="exampleModalLabel'+messageId+'">메세지 신고</h1>'+
+									                      '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'+
+									              '</div>'+
+												  '<form name="reportForm">'+
+										              '<div class="modal-body">'+
+														'<div class="container-fluid">'+
+															'<div class="row">'+
+																'<div class="col-md-5">신고 대상:</div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<span name="reportedUser">'+parsedMessage.sender +'</span></div>'+
+															'</div>'+
+															'<div class="row">'+
+																'<div class="col-md-5">신고자:</div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<span name="reportUser">'+'신고자아이디' +'</span></div>'+
+															'</div>'+
+															'<div class="row">'+
+												               	'<div class="col-md-5">신고 사유:<br/></div>'+
+															   '<select name="reportType" class="row col-md-7 ms-auto">'+
+																'<option>욕설</option>'+
+																'<option>광고</option>'+
+																'<option>기타</option>'+
+																'</select>'+
+															'</div>'+
+														'</div>'+
+										              '</div>'+
+									              '<div class="modal-footer">'+
+									                 '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>'+
+									                 '<button type="submit" class="btn btn-danger">신고하기</button>'+
+									               '</div>'+
+											   '</form>'+
+									             '</div>'+
+									         '</div>'+
+									  '</div>' +
+							        '</div>' +
+							    '</div>';
+
+				   //console.log("결과:"+messageContent)
+		           li.innerHTML = messageContent;
+		           messageArea.appendChild(li);
+				   //스크롤 아래로 이동
+				   document.getElementById('messageAreaScroll').scrollTop = messageArea.scrollHeight;
+				  
+		       }
+
+		       document.getElementById('messageForm').onsubmit = function(event) {
+		           event.preventDefault();
+		           var messageInput = document.getElementById('messageInput');
+		           var messageContent = messageInput.value.trim();
+				  
+				   //console.log("메세지콘텐트"+messageContent);
+		           if (messageContent) {
+		               var message = {
+						   type: 'CHAT',
+		                   sender: 'username', // 사용자명을 여기에 설정 (실제로는 로그인 정보에서 가져와야 함)
+		                   content: messageContent,
+		                   //time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) // 현재 시간
+						   time: new Date().toISOString()  // ISO-8601 형식으로 변환
+					    };
+		               stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
+		               messageInput.value = '';
+		           }
+		       };
+		   </script>
+		
     </body>
 </html>
