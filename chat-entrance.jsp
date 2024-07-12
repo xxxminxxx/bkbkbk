@@ -26,22 +26,6 @@
         <div class="bg-elements elements-top-header position-relative">
             <!-- navbar -->
             <div class="elements-nav">
-                <!-- top nav -->
-                <!-- <div class="top-nav d-none d-lg-block py-2 bg-black bg-opacity-50">
-                    <div class="container">
-                        <div class="row align-items-center justify-content-between g-4">
-                            <div class="col-auto">
-                                <small class="link-secondary"><i class="ri-map-pin-line"></i> Rammurthy nagar, Bangalore-560016</small>
-                            </div>
-                            <div class="col-auto">
-                                <div class="d-flex align-items-center gap-3">
-                                    <a href="#" class="link-secondary"><i class="ri-facebook-circle-fill"></i></a> <a href="#" class="link-secondary"><i class="ri-twitter-fill"></i></a>
-                                    <a href="#" class="link-secondary"><i class="ri-instagram-fill"></i></a> <a href="#" class="link-secondary"><i class="ri-linkedin-box-fill"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <!-- bootom nav -->
                 <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
                     <div class="container">
@@ -55,10 +39,7 @@
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav m-auto gap-4 m-none">
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link active" href="../index.html"><i class="ri-apps-2-line"></i> Home</a>
-                                </li> -->
-                                
+                               
                                 <li class="nav-item dropdown single-dropdown-nav">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 서재 </a>
                                     <ul class="dropdown-menu">
@@ -79,85 +60,6 @@
                                         <li><a class="dropdown-item" href="shop-product-full-four-coulmn.html">나의 통계</a></li>
                                     </ul>
                                 </li>
-                                <!-- <li class="nav-item dropdown osahan-mega-menu position-static">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Extra Pages </a>
-                                    <ul class="dropdown-menu w-100 m-0 border-opacity-10 border-dark border-top border-bottom p-0 start-0 end-0 rounded-0 shadow">
-                                        <li>
-                                            <div class="dropdown-mega-content container">
-                                                <div class="row g-0">
-                                                    <div class="col-lg-3 p-5 border-end border-start border-opacity-10 border-dark">
-                                                        <h6 class="dropdown-mega-sub-title mb-3 fw-bold">Portfolio</h6>
-                                                        <ul class="dropdown-mega-sub-nav list-unstyled">
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="portfolio-full-width.html">Portfolio Full Width</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="portfolio-boxed.html">Portfolio Boxed</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="portfolio-classic.html">Portfolio Classic</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="portfolio-masonry.html">Portfolio Masonry</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="single-project.html">Single Project</a></li>
-                                                        </ul>
-                                                        <h6 class="dropdown-mega-sub-title mb-3 fw-bold mt-4">Help</h6>
-                                                        <ul class="dropdown-mega-sub-nav list-unstyled">
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-help-center.html">Help Center</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-help-center-categories.html">Help Center: Categories</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-help-center-article.html">Help Center: Article</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                                                        <h6 class="dropdown-mega-sub-title mb-3 fw-bold">Blog</h6>
-                                                        <ul class="dropdown-mega-sub-nav list-unstyled">
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-grid.html">Blog Grid</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-grid-classic.html">Blog Grid Classic</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-grid-sidebar.html">Blog Grid Sidebar</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-list.html">Blog List</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-list-sidebar.html">Blog List Right Sidebar</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-left-sidebar.html">Blog List Left Sidebar</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-full-width.html">Blog Full Width</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-post.html">Blog Post</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="blog-author-profile.html">Author Profile</a></li>
-                                                        </ul>
-                                                        <h6 class="dropdown-mega-sub-title mb-3 fw-bold mt-4">FAQ</h6>
-                                                        <ul class="dropdown-mega-sub-nav list-unstyled">
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="faq.html">FAQ v.1</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="faq-2.html">FAQ v.2</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                                                        <h6 class="dropdown-mega-sub-title mb-3 fw-bold">Company</h6>
-                                                        <ul class="dropdown-mega-sub-nav list-unstyled">
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-hire-us.html">Hire Us</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-careers.html">Careers</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-careers-role-overview.html">Careers: Role Overview</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-careers-apply.html">Careers: Apply</a></li>
-                                                        </ul>
-                                                        <h6 class="dropdown-mega-sub-title mb-3 fw-bold mt-4">Additional Pages</h6>
-                                                        <ul class="dropdown-mega-sub-nav list-unstyled">
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-coming-soon.html">Coming Soon</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-coming-soon-simple.html">Coming Soon: Simple</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-error-404.html">Maintenance</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-error-404.html">Error 404</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-terms.html">Terms &amp; Conditions</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-privacy.html">Privacy &amp; Policy</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                                                        <h6 class="dropdown-mega-sub-title mb-3 fw-bold">My Account</h6>
-                                                        <ul class="dropdown-mega-sub-nav list-unstyled">
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-login.html">Log In v.1</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-login-2.html">Log In v.2</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-signup.html">Sign Up v.1</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-signup-2.html">Sign Up v.2</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="page-reset-password.html">Forgot Password</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="account-orders.html">Orders</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="account-settings.html">Settings</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="account-address.html">Address</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="my-wallet.html">My Wallet</a></li>
-                                                            <li><a class="dropdown-item px-0 py-1 bg-transparent" href="account-notification.html">Notification</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li> -->
                             </ul>
                             <a href="./page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그인 </a>
                             <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
@@ -176,7 +78,7 @@
                                 <span class=""> 원하는 방이 없다면 </span>
 								<button id="createNewChatroom" class="btn btn-purple rounded-pill ms-1 "data-bs-toggle="modal" data-bs-target="#exampleModal">새 방 만들기</button></span>
 	                        <!-- Modal -->
-		                        <div class=" text-black align-items-center text-center modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                        <div class=" text-black align-items-center modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		                            <div class="modal-dialog">
 		                                <div class="modal-content">
 		                                    <div class="modal-header">
@@ -185,9 +87,23 @@
 		                                    </div>
 											<form id="createChatroom" name="createChatroom">
 		                                    <div class="modal-body">
-		                                        채팅방 이름<input type="text" name="chatroonName"><br/>
-												인원수 제한<input type="number" name="chatUserLimit"><br/>
-												주제 도서<input type="text" name="bookTitle"><br/>
+												<div class="container-fluid">
+													<div class="row">
+		                                        		<div class="col-md-5">채팅방 이름</div>
+														<div class="row col-md-7 ms-auto"><input type="text" name="chatroonName"></div>
+													</div>
+													<div class="row">
+														<div class="col-md-5">채팅방 이미지</div>
+														<div class="row col-md-7 ms-auto"> <input id="imageUpload" type="file" name="cfrealname"></div>
+													</div>
+													<div class="row">
+														<div class="col-md-5">인원수 제한(최대 30명)</div>
+														<div class="row col-md-7 ms-auto"><input type="number" value="30" max="30" name="chatUserLimit"></div>
+													</div>
+													<div class="row">
+														<div id="previewContainer"></div>
+													</div>
+												</div>
 		                                    </div>
 		                                    <div class="modal-footer">
 		                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -217,25 +133,11 @@
                                                 <i class="ri-user-line"></i>
                                                 <div>
                                                     <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">15명/50명</p>
+                                                    <p class="m-0">15명/30명</p>
                                                 </div>
                                             </div>
-                                            <!-- <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-award-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Experience</small>
-                                                    <p class="m-0">2 - 3 Years</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-calendar-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Deadline</small>
-                                                    <p class="m-0">Oct 12, 2024</p>
-                                                </div>
-                                            </div> -->
                                         </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">참여하기</a>
+                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12 mb-4">
@@ -247,23 +149,9 @@
                                                  <i class="ri-user-line"></i>
                                                 <div>
                                                     <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">10명/50명</p>
+                                                    <p class="m-0">10명/30명</p>
                                                 </div>
                                             </div>
-                                            <!-- <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-award-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Experience</small>
-                                                    <p class="m-0">1 - 7 Years</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-calendar-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Deadline</small>
-                                                    <p class="m-0">Oct 22, 2024</p>
-                                                </div>
-                                            </div> -->
                                         </div>
                                         <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
                                     </div>
@@ -272,32 +160,18 @@
                             <div class="row g-4">
                                 <div class="col-lg-6 col-12 mb-4">
                                     <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">Open</span>
+                                        <span class="badge bg-danger small text-danger bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여불가</span>
                                         <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">Technical Support Engineer</h5>
                                         <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
                                             <div class="d-flex align-items-center gap-2">
                                                  <i class="ri-user-line"></i>
                                                 <div>
                                                     <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">50명/50명</p>
+                                                    <p class="m-0">30명/30명</p>
                                                 </div>
                                             </div>
-                                            <!-- <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-award-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Experience</small>
-                                                    <p class="m-0">5 - 7 Years</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-calendar-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Deadline</small>
-                                                    <p class="m-0">Oct 31, 2021</p>
-                                                </div>
-                                            </div> -->
                                         </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">APPLY NOW</a>
+                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12 mb-4">
@@ -306,60 +180,32 @@
                                         <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">React Lead Developer</h5>
                                         <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
                                             <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-briefcase-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Job Type</small>
-                                                    <p class="m-0">Permanent</p>
-                                                </div>
+												<i class="ri-user-line"></i>
+	                                                <div>
+	                                                    <small class="text-muted">참여자 수</small>
+	                                                    <p class="m-0">15명/30명</p>
+	                                                </div>
                                             </div>
-                                            <!-- <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-award-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Experience</small>
-                                                    <p class="m-0">1 - 7 Years</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-calendar-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Deadline</small>
-                                                    <p class="m-0">Oct 22, 2024</p>
-                                                </div>
-                                            </div> -->
                                         </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">APPLY NOW</a>
+                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-4">
                                 <div class="col-lg-6 col-12 mb-4">
                                     <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-danger small text-danger bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여불가</span>
+                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
                                         <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">[그의 운명에 대한 아주 개인적인 생각]</h5>
                                         <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
                                             <div class="d-flex align-items-center gap-2">
                                                  <i class="ri-user-line"></i>
                                                 <div>
                                                     <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">15명/50명</p>
+                                                    <p class="m-0">15명/30명</p>
                                                 </div>
                                             </div>
-                                            <!-- <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-award-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Experience</small>
-                                                    <p class="m-0">5 - 7 Years</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-calendar-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Deadline</small>
-                                                    <p class="m-0">Oct 31, 2021</p>
-                                                </div>
-                                            </div> -->
                                         </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">APPLY NOW</a>
+                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-12 mb-4">
@@ -368,28 +214,14 @@
                                         <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">Category Manager</h5>
                                         <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
                                             <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-briefcase-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Job Type</small>
-                                                    <p class="m-0">Permanent</p>
-                                                </div>
+												<i class="ri-user-line"></i>
+	                                                <div>
+	                                                    <small class="text-muted">참여자 수</small>
+	                                                    <p class="m-0">15명/30명</p>
+	                                                </div>
                                             </div>
-                                            <!-- <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-award-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Experience</small>
-                                                    <p class="m-0">1 - 7 Years</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-calendar-line"></i>
-                                                <div>
-                                                    <small class="text-muted">Deadline</small>
-                                                    <p class="m-0">Oct 22, 2024</p>
-                                                </div>
-                                            </div> -->
                                         </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">APPLY NOW</a>
+                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
                                     </div>
                                 </div>
                             </div>
@@ -498,5 +330,6 @@
         <script src="../vender/aos/dist/aos.js"></script>
         <!-- Custom Js -->
         <script src="../js/script.js"></script>
+		<script src="../js/chat.js"></script>
     </body>
 </html>
