@@ -20,6 +20,20 @@
 		<link rel="stylesheet" href="../css/style2.css">
         <!-- Common Css -->
         <link rel="stylesheet" href="../css/common.css">
+
+		<style>
+		@font-face {
+			     font-family: 'DungGeunMo';
+			     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+			     font-weight: normal;
+			     font-style: normal;
+		}
+
+		div{
+			font-family: 'DungGeunMo';
+		}
+
+		</style>
     </head>
     <body>
         
@@ -103,29 +117,27 @@
                                           <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
                                                 <ul class="list-unstyled m-0">
-                                                    <li class="mb-1"><a href="#" class="text-dark">건강/취미 </a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">경제경영 </a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">과학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">대학교재</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">만화</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">사회과학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">소설/시/희곡</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">어린이</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">에세이</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">여행</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">역사</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">예술/대중문화</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">외국어</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">요리/살림</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">유아</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">인문학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">자기계발</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">잡지</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">장르소설</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">종교/역학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">좋은부모</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">청소년</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark">컴퓨터/모바일</a></li>
+													<li class="mb-1"><a href="#" class="text-dark" name="가정/요리/뷰티">가정/요리/뷰티 </a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="건강/취미/레저">건강/취미/레저</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="경제경영">경제경영 </a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="과학">과학</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="만화">만화</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="사회과학">사회과학</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="소설/시/희곡">소설/시/희곡</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="어린이">어린이</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="에세이">에세이</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="여행">여행</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="역사">역사</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="예술/대중문화">예술/대중문화</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="외국어">외국어</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="유아">유아</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="인문학">인문학</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="자기계발">자기계발</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="잡지">잡지</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="종교/역학">종교/역학</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="좋은부모">좋은부모</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="청소년">청소년</a></li>
+                                                    <li class="mb-1"><a href="#" class="text-dark" name="컴퓨터/모바일">컴퓨터/모바일</a></li>
                                                 </ul>
                                             </div>
                                           </div>
@@ -136,31 +148,11 @@
                                                   카테고리 중분류
                                               </button>
                                             </h2>
-                                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                            <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                               <div class="accordion-body">
-                                                  <ul class="list-unstyled m-0">
-                                                      <li class="mb-1"><a href="#" class="text-dark">중분류 카테고리 항목 출력해오기 </a></li>
-													  <li class="mb-1"><a href="#" class="text-dark">{category.middle}</a></li>
-                                                      <li class="mb-1"><a href="#" class="text-dark">Books, Magazines </a></li>
-                                                      <li class="mb-1"><a href="#" class="text-dark"></a></li>
-                                                  </ul>
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                  카테고리 소분류
-                                              </button>
-                                            </h2>
-                                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                              <div class="accordion-body">
-                                                  <ul class="list-unstyled m-0">
-                                                      <li class="mb-1"><a href="#" class="text-dark">소분류 카테고리 항목 출력해오기 </a></li>
-                                                      <li class="mb-1"><a href="#" class="text-dark">Home items </a></li>
-                                                      <li class="mb-1"><a href="#" class="text-dark">Books, Magazines </a></li>
-                                                      <li class="mb-1"><a href="#" class="text-dark"></a></li>
-                                                      
+                                                  <ul id="depth_second" class="list-unstyled m-0">
+                                                      <!--<li class="mb-1"><a href="#" class="text-dark">중분류 카테고리 항목 출력해오기 </a></li>-->
+													 
                                                   </ul>
                                               </div>
                                             </div>
@@ -171,39 +163,39 @@
                                                 평점
                                               </button>
                                             </h2>
-                                            <div id="collapseThreew" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                            <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                               <div class="accordion-body">
                                                 <!-- Default checkbox -->
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i>
                                                     </label>
                                                 </div>
                                                 <!-- Default checkbox -->
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
                                                 </div>
                                                 <!-- Default checkbox -->
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
                                                 </div>
                                                 <!-- Default checkbox -->
                                                 <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
                                                 </div>
                                                 <!-- Default checkbox -->
                                                 <div class="form-check mb-0">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
@@ -229,172 +221,10 @@
                                     <option value="5">페이지 수 많은 순 정렬</option>
                                 </select>
                             </div>
-                            <div class="row g-4">
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html" class="position-relative">
-                                            <span class="badge bg-purple rounded-1 p-2 position-absolute m-3">인기도서</span> <img src="../img/pages/products/product-1.jpg" class="card-img-top rounded" alt="featured-1">
-                                        </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i>
-                                                <i class="ri-star-fill text-warning"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">데이터 가져와서 출력 하기</h6>
-                                            <p class="card-text">
-                                                $70.00 <span class="text-muted small"><del>$80.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html"> <img src="../img/pages/products/product-2.jpg" class="card-img-top rounded" alt="featured-1"> </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-half-line text-warning"></i>
-                                                <i class="ri-star-fill text-body-tertiary"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">when an unknown printer took a galley of type.</h6>
-                                            <p class="card-text">
-                                                $55.00 <span class="text-muted small"><del>$65.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html" class="position-relative">
-                                            <span class="badge bg-purple rounded-1 p-2 position-absolute m-3">SALE!</span> <img src="../img/pages/products/product-3.jpg" class="card-img-top rounded" alt="featured-1">
-                                        </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-body-tertiary"></i>
-                                                <i class="ri-star-fill text-body-tertiary"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">Lorem ipsum dolor sit amet consectetur.</h6>
-                                            <p class="card-text">
-                                                $45.00 <span class="text-muted small"><del>$60.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html" class="position-relative">
-                                            <span class="badge bg-purple rounded-1 p-2 position-absolute m-3">SALE!</span> <img src="../img/pages/products/product-4.jpg" class="card-img-top rounded" alt="featured-1">
-                                        </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i>
-                                                <i class="ri-star-fill text-body-tertiary"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">Lorem ipsum dolor sit amet consectetur adipisicing.</h6>
-                                            <p class="card-text">
-                                                $35.00 <span class="text-muted small"><del>$40.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html" class="position-relative">
-                                            <span class="badge bg-purple rounded-1 p-2 position-absolute m-3">SALE!</span> <img src="../img/pages/products/product-5.jpg" class="card-img-top rounded" alt="featured-1">
-                                        </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i>
-                                                <i class="ri-star-fill text-warning"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">Lorem Ipsum is simply dummy text of the printing.</h6>
-                                            <p class="card-text">
-                                                $70.00 <span class="text-muted small"><del>$80.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html"> <img src="../img/pages/products/product-6.jpg" class="card-img-top rounded" alt="featured-1"> </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-half-line text-warning"></i>
-                                                <i class="ri-star-fill text-body-tertiary"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">when an unknown printer took a galley of type.</h6>
-                                            <p class="card-text">
-                                                $55.00 <span class="text-muted small"><del>$65.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html" class="position-relative">
-                                            <span class="badge bg-purple rounded-1 p-2 position-absolute m-3">SALE!</span> <img src="../img/pages/products/product-7.jpg" class="card-img-top rounded" alt="featured-1">
-                                        </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-body-tertiary"></i>
-                                                <i class="ri-star-fill text-body-tertiary"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">Lorem ipsum dolor sit amet consectetur.</h6>
-                                            <p class="card-text">
-                                                $45.00 <span class="text-muted small"><del>$60.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html" class="position-relative">
-                                            <span class="badge bg-purple rounded-1 p-2 position-absolute m-3">SALE!</span> <img src="../img/pages/products/product-8.jpg" class="card-img-top rounded" alt="featured-1">
-                                        </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i>
-                                                <i class="ri-star-fill text-body-tertiary"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">Lorem ipsum dolor sit amet consectetur adipisicing.</h6>
-                                            <p class="card-text">
-                                                $35.00 <span class="text-muted small"><del>$40.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="card bg-transparent border-0 h-100">
-                                        <a href="shop-product-detail.html" class="position-relative">
-                                            <span class="badge bg-purple rounded-1 p-2 position-absolute m-3">SALE!</span> <img src="../img/pages/products/product-1.jpg" class="card-img-top rounded" alt="featured-1">
-                                        </a>
-                                        <div class="card-body px-0">
-                                            <div class="d-flex align-items-center gap-2 mb-2">
-                                                <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-warning"></i> <i class="ri-star-fill text-body-tertiary"></i>
-                                                <i class="ri-star-fill text-body-tertiary"></i>
-                                            </div>
-                                            <h6 class="card-title lh-base">Lorem ipsum dolor sit amet consectetur.</h6>
-                                            <p class="card-text">
-                                                $45.00 <span class="text-muted small"><del>$60.00</del></span>
-                                            </p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="text-center mt-5 mb-5">
-                                        <!-- <div class="spinner-border" role="status">
-                                          <span class="visually-hidden">Loading...</span>
-                                        </div> -->
-                                    </div>
-                                </div>
+                            <div id="bookList" class="row g-4">
+								
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -489,6 +319,80 @@
         <script src="../vender/aos/dist/aos.js"></script>
         <!-- Custom Js -->
         <script src="../js/script.js"></script>
+		<script>
+			$(document).ready(function() {
+		        $('a[name]').click(function(e) {
+		            e.preventDefault();
+		            var categoryName = $(this).attr('name');
+					//대분류 선택 시 중분류 목록 가져오는 함수
+		            loadCategoryData(categoryName);
+		        });
+			});
+				
+				
+				//대분류 선택 시 중분류 목록 가져오는 함수
+			    function loadCategoryData(categoryName) {
+			        $.ajax({
+			            url: '/loadCategoryData',  // 서버 측 엔드포인트 URL
+			            method: 'GET',
+			            data: { category: categoryName },
+			            success: function(data) {
+							var html = '<ul class="list-unstyled">';  // 리스트 시작
+				            for (var i = 0; i < data.length; i++) {
+				                html += '<li class="list-unstyled mb-1"><a href="#" class="text-dark" value="'+data[i].interestNum2+'">' + data[i].interestNum2 + '</a></li>';
+				            }
+				            html += '</ul>';
+				            $('#depth_second').html(html);  // #depth_second에 HTML 추가
+							
+							// 생성된 <a> 태그에 클릭 이벤트 추가
+				            $('a[value]').click(function(e){
+				                e.preventDefault();
+				                var categoryValue = $(this).attr('value');
+				                // 중분류 선택 시 책을 가져오는 함수 호출
+								
+				                cateBookList(categoryName, categoryValue);      
+				            });
+						},
+			            error: function(err) {
+			                console.error('Failed to load category data:', err);
+			            }
+			        });//end of ajax
+			    }//end of loadCategoryData
+				
+				
+				
+				//중분류 선택 시 책을 가져오는 함수
+				function cateBookList(categoryName, categoryValue){
+					console.log("2-1"+ categoryName, categoryValue);
+					$.ajax({
+						url:'/loadCateBookList',
+						method:'GET',
+						data: {categoryName: categoryName, categoryValue: categoryValue},
+						success:function(data){
+							var bookData='';
+							for(let i=0; i<data.length;i++){
+							bookData += '<div class="col-lg-4 col-md-6 col-12">'+
+			                                    '<div class="card bg-transparent border-0 h-100">'+
+			                                        '<a href="shop-product-detail.html" class="position-relative">'+
+														'<img src="'+ data[i].bfrealName+'" class="card-img-top rounded" alt="featured-1">'+
+			                                        '</a>'+
+			                                        '<div class="card-body px-0">'+
+			                                            '<h6 class="card-title lh-base">'+data[i].bookTitle+'</h6>'+
+			                                            '<p class="card-text">'+
+			                                                data[i].writer+'<br/><span class="text-muted small">'+data[i].publisher+'</span>'+
+			                                            '</p>'+
+			                                        '</div>'+
+			                                    '</div>'+
+			                               '</div>'
+							}
+							$('#bookList').html(bookData);
+						},
+						error: function(err) {
+			                console.error('Failed to load category data:', err);
+			            }
+					});//end of ajax
+				}
+		</script>
     </body>
 	
 </html>
