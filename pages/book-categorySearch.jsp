@@ -374,7 +374,7 @@
 							bookData += '<div class="col-lg-4 col-md-6 col-12">'+
 			                                    '<div class="card bg-transparent border-0 h-100">'+
 			                                        '<a href="shop-product-detail.html" class="position-relative">'+
-														'<img src="'+ data[i].bfrealName+'" class="card-img-top rounded" alt="featured-1">'+
+								'<img src="'+ data[i].bfrealName+'" class="card-img-top rounded" alt="featured-1">'+
 			                                        '</a>'+
 			                                        '<div class="card-body px-0">'+
 			                                            '<h6 class="card-title lh-base">'+data[i].bookTitle+'</h6>'+
