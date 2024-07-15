@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.LibraryDAO">
+	
+	<select id="getCategory" parameterType="CategoryVO" resultType="CategoryVO">
+		SELECT "categoryName" interestNum2
+		FROM CATEGORY 
+		WHERE "depth_first"= #{interestNum1}
+		ORDER BY "categoryName" ASC
+	</select>
+	
+	<select id="getCateBookList" parameterType="CategoryVO" resultType="BookVO">
+		SELECT * FROM "book"
+		WHERE "cateNum"=(SELECT "cateNum"
+						FROM CATEGORY 
+						WHERE "categoryName"=#{interestNum2}
+						AND "depth_first"=#{interestNum1})
+	</select>
+</mapper>
