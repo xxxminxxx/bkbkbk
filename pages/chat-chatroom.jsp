@@ -7,6 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../img/pages/icon.png" type="image/png">
         <title>채팅방</title>
+		<style>
+				       @font-face {
+				           font-family: 'DungGeunMo';
+				           src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+				           font-weight: normal;
+				           font-style: normal;
+				       }
+					   
+					   div{
+						 font-family: 'DungGeunMo';
+					   }
+				</style>
         <!-- Bootstrap Css -->
         <link rel="stylesheet" href="../vender/bootstrap/css/bootstrap.min.css">
         <!-- Icofont Css -->
