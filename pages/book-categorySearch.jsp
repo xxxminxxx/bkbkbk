@@ -81,7 +81,7 @@
                 </nav>
             </div>
             <!-- header -->
-            <div class="py-5">
+            <div class=" py-5">
                 <div class="container py-5">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-xl-6 col-lg-5 col-md-10 col-12 text-center">
@@ -156,8 +156,8 @@
                                                   </ul>
                                               </div>
                                             </div>
-                                          </div>
-                                          <div class="accordion-item">
+                                      	</div>
+                                         <!-- <div class="accordion-item">
                                             <h2 class="accordion-header">
                                               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreew" aria-expanded="false" aria-controls="collapseThreew">
                                                 평점
@@ -165,50 +165,50 @@
                                             </h2>
                                             <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                               <div class="accordion-body">
-                                                <!-- Default checkbox -->
+                                                 Default checkbox 
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i>
                                                     </label>
                                                 </div>
-                                                <!-- Default checkbox -->
+                                                 Default checkbox 
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
                                                 </div>
-                                                <!-- Default checkbox -->
+                                                 Default checkbox 
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
                                                 </div>
-                                                <!-- Default checkbox -->
+                                                 Default checkbox 
                                                 <div class="form-check mb-2">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
                                                 </div>
-                                                <!-- Default checkbox -->
+                                                 Default checkbox 
                                                 <div class="form-check mb-0">
                                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked>
                                                     <label class="form-check-label" for="flexCheckDefault">
                                                         <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
                                                     </label>
                                                 </div>
-                                              </div>
+                                              </div>end of accordion body
                                             </div>
-                                          </div>
+                                          </div>--> <!--end of <div class="accordion-item">-->
                                       </div>
                                   </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 col-12">
+                    <div class="bg-light col-lg-9 col-12">
                         <div class="p-3">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <small>선택하신 분야에 맞는 책은 다음과 같습니다.</small>
@@ -399,11 +399,11 @@
 							for(let i=0; i<data.length;i++){
 							bookData += '<div class="col-lg-4 col-md-6 col-12">'+
 			                                    '<div class="card bg-transparent border-0 h-100">'+
-			                                        '<a href="shop-product-detail.html" class="position-relative">'+
+			                                        '<a href="책상세페이지 링크'+data[i].isbn+'" class="position-relative">'+ //상세페이지로 수정. isbn값으로 넘기기
 														'<img src="'+ data[i].bfrealName+'" class="card-img-top rounded" alt="featured-1">'+
-			                                        '</a>'+
-			                                        '<div class="card-body px-0">'+
+			                                        	'<div class="card-body px-0">'+
 			                                            '<h6 class="card-title lh-base">'+data[i].bookTitle+'</h6>'+
+														'</a>'+
 			                                            '<p class="card-text">'+
 			                                                data[i].writer+'<br/><span class="text-muted small">'+data[i].publisher+'</span>'+
 			                                            '</p>'+
