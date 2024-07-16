@@ -11,5 +11,5 @@ import com.bookbookbook.domain.CategoryVO;
 public interface LibraryDAO {
 	//책 카테고리 검색
 	List<CategoryVO> getCategory(CategoryVO cate);
-	List<BookVO> getCateBookList(CategoryVO cate);
+	List<BookVO> getCateBookList(HashMap map);
 }
