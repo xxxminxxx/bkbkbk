@@ -93,7 +93,7 @@
                                 <h3 class="fw-bold mb-1">참가자 목록</h3>
                             </div>
                             <div id="joinedUser" class="p-4 osahan-sidebar-links">
-                                <p ><i class="ri-user-line me-2"></i> 참가자 닉네임 얻어오기 </p>
+                                <p ><i class="ri-user-line me-2"></i> ${members.participants} </p>
                             </div>
                         </div>
                     </div>
@@ -101,14 +101,14 @@
                         <div class="ps-lg-5 pt-lg-5">
                             
                             <div class="col d-flex align-items-center justify-content-between bg-white border px-4 py-4 rounded-4">
-                                <h1 class="m-0 fw-bold">[채팅방 이름]</h1>
+                                <h1 class="m-0 fw-bold">${room.chatroomName}</h1>
                             </div>
                            <div>
 							<br/>
 							</div>
 							<div id="messageAreaScroll">
                             <ul id="messageArea" >
-								<div style="display:none" class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
+								<!--<div style="display:none" class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
 									<div class="col">
 	                                    <div class="d-flex align-items-center justify-content-between bg-white border px-2 py-2 rounded-4">
 	                                        <div class="w-75">
@@ -119,7 +119,7 @@
 	                                        </div>
 	                                    </div>
 	                                </div>
-								</div>
+								</div>-->
 								
                                 <div style="display:none" class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
                                     <div class="col">
@@ -179,8 +179,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-									<div id="messageTemplate" style="display:none">
+									<!--<div id="messageTemplate" style="display:none">
 	                                    <div class="col">
 	                                        <div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">
 	                                            <div class="w-75">
@@ -193,11 +192,10 @@
 	                                                    </div>
 	                                                </div>
 	                                            </div>
-	                                            <div class="ms-auto d-flex align-items-center gap-3 text-center small"><!-- <span class="text-danger fw-bold h5 m-0">-$75</span> --></div>
+	                                            <div class="ms-auto d-flex align-items-center gap-3 text-center small"> <span class="text-danger fw-bold h5 m-0">-$75</span> </div>
 	                                        </div>
 	                                    </div>
-									</div>
-									
+									</div>-->
                                 </div>
                             </ul>
 							</div>
@@ -307,7 +305,7 @@
 			   //var username= 로그인 세션 얻어오기
 			   
 		       stompClient.connect({}, function(frame) {
-		           //console.log('Connected: ' + frame);
+				   //console.log('Connected: ' + frame);
 				   //메세지 송수신
 		           stompClient.subscribe('/topic/public', function(messageOutput) {
 		               showMessage(JSON.parse(messageOutput.body));
