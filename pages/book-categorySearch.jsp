@@ -212,13 +212,11 @@
                         <div class="p-3">
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <small>선택하신 분야에 맞는 책은 다음과 같습니다.</small>
-                                <select class="form-select w-25" aria-label="Default select example">
+                                <select id="select" class="form-select w-25" aria-label="Default select example">
                                     <option selected>정렬</option>
-                                    <option value="1">이름 오름차순 정렬</option>
-                                    <option value="2">이름 내림차순 정렬</option>
-                                    <option value="3">발매일 순 정렬</option>
-                                    <option value="4">평점 순 정렬</option>
-                                    <option value="5">페이지 수 많은 순 정렬</option>
+                                    <option value="titleAsc">이름 오름차순 정렬</option>
+                                    <option value="titleDesc">이름 내림차순 정렬</option>
+                                    <option value="pubAsc">발매일 순 정렬</option>
                                 </select>
                             </div>
                             <div id="bookList" class="row g-4">
@@ -227,6 +225,26 @@
                                 
                             </div>
                         </div>
+						<!-- 페이지-->
+						<!--<nav aria-label="Page navigation example">
+                            <ul class="pagination align-items-center justify-content-center" margin-left="3rem">
+                                <li class="page-item">
+                                    <a class="page-link text-purple" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link text-purple" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link text-purple" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link text-purple" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link text-purple" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link text-purple" href="#">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link text-purple" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>-->
                     </div>
                 </div>
             </div>
@@ -320,13 +338,21 @@
         <!-- Custom Js -->
         <script src="../js/script.js"></script>
 		<script>
+			var sort_first='';
+			var sort_second='';
 			$(document).ready(function() {
-		        $('a[name]').click(function(e) {
+				    $('a[name]').click(function(e) {
 		            e.preventDefault();
-		            var categoryName = $(this).attr('name');
+		            var categoryName = $(this).attr('name');//categoryName이 대분류
+					sort_first=categoryName;
 					//대분류 선택 시 중분류 목록 가져오는 함수
 		            loadCategoryData(categoryName);
-		        });
+		        });//end of click
+				
+				$('#select').change(function(){
+					var sortType= $(this).val();
+					cateBookList(sort_first, sort_second, sortType);
+				});//end of change
 			});
 				
 				
@@ -334,22 +360,23 @@
 			    function loadCategoryData(categoryName) {
 			        $.ajax({
 			            url: '/loadCategoryData',  // 서버 측 엔드포인트 URL
-			            method: 'GET',
+			            method: 'POST',
 			            data: { category: categoryName },
 			            success: function(data) {
+							console.log(data);
 							var html = '<ul class="list-unstyled">';  // 리스트 시작
 				            for (var i = 0; i < data.length; i++) {
-				                html += '<li class="list-unstyled mb-1"><a href="#" class="text-dark" value="'+data[i].interestNum2+'">' + data[i].interestNum2 + '</a></li>';
+				                html += '<li class="list-unstyled mb-1"><a href="#" class="text-dark" data-value="'+data[i].interestNum2+'">' + data[i].interestNum2 + '</a></li>';
 				            }
 				            html += '</ul>';
 				            $('#depth_second').html(html);  // #depth_second에 HTML 추가
 							
 							// 생성된 <a> 태그에 클릭 이벤트 추가
-				            $('a[value]').click(function(e){
+				            $('a[data-value]').click(function(e){
 				                e.preventDefault();
-				                var categoryValue = $(this).attr('value');
+				                var categoryValue = $(this).attr('data-value');//categoryValue는 중분류
+								sort_second=categoryValue;
 				                // 중분류 선택 시 책을 가져오는 함수 호출
-								
 				                cateBookList(categoryName, categoryValue);      
 				            });
 						},
@@ -362,19 +389,18 @@
 				
 				
 				//중분류 선택 시 책을 가져오는 함수
-				function cateBookList(categoryName, categoryValue){
-					console.log("2-1"+ categoryName, categoryValue);
+				function cateBookList(sort_first, sort_second, sortType){
 					$.ajax({
 						url:'/loadCateBookList',
-						method:'GET',
-						data: {categoryName: categoryName, categoryValue: categoryValue},
+						method:'POST',
+						data: {categoryName: sort_first, categoryValue: sort_second, sortType: sortType},
 						success:function(data){
 							var bookData='';
 							for(let i=0; i<data.length;i++){
 							bookData += '<div class="col-lg-4 col-md-6 col-12">'+
 			                                    '<div class="card bg-transparent border-0 h-100">'+
 			                                        '<a href="shop-product-detail.html" class="position-relative">'+
-								'<img src="'+ data[i].bfrealName+'" class="card-img-top rounded" alt="featured-1">'+
+														'<img src="'+ data[i].bfrealName+'" class="card-img-top rounded" alt="featured-1">'+
 			                                        '</a>'+
 			                                        '<div class="card-body px-0">'+
 			                                            '<h6 class="card-title lh-base">'+data[i].bookTitle+'</h6>'+
@@ -391,7 +417,7 @@
 			                console.error('Failed to load category data:', err);
 			            }
 					});//end of ajax
-				}
+				}//end of cateBookList
 		</script>
     </body>
 	
