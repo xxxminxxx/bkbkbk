@@ -1,0 +1,210 @@
+.container-fluid {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.calendar-wrapper {
+	width: 100%;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+}
+
+#calendar {
+	width: 100%;
+	font-size: 1.1em;
+}
+
+.fc-daygrid-day-number {
+	font-size: 1.2em;
+}
+
+.fc-daygrid-day-events {
+	min-height: 2em;
+}
+
+.fc-daygrid-day:not(.fc-day-other):not(.fc-day-today) {
+	cursor: pointer;
+}
+
+.fc-event {
+	cursor: default !important;
+}
+
+#year-select, #month-select {
+	margin-right: 10px;
+	display: inline-block;
+	width: auto;
+	font-size: 1.1em;
+}
+
+.fc-header-toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+	font-size: 1.1em;
+}
+
+.fc-toolbar-title {
+	font-size: 1.8em;
+	flex-grow: 1;
+	text-align: center;
+}
+
+.fc-toolbar-chunk {
+	display: flex;
+	align-items: center;
+}
+
+.row.no-gutters {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.row.no-gutters>[class*="col-"] {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+#selected-date {
+	margin-bottom: 15px;
+	font-size: 1.2em;
+	color: #333;
+}
+
+.event-list {
+	list-style-type: none;
+	padding: 0;
+}
+
+.event-item {
+	background-color: #3788d8;
+	color: white;
+	padding: 5px 10px;
+	margin-bottom: 5px;
+	border-radius: 3px;
+}
+/* 평일, 토요일, 일요일 날짜 색상 변경 */
+.fc-col-header-cell .fc-col-header-cell-cushion {
+	color: black; /* 기본적으로 모든 요일 헤더를 검정색으로 설정 */
+}
+
+.fc-daygrid-day .fc-daygrid-day-number {
+	color: black; /* 기본적으로 모든 날짜를 검정색으로 설정 */
+}
+
+.fc-col-header-cell.fc-day-sun .fc-col-header-cell-cushion {
+	color: red;
+}
+
+.fc-col-header-cell.fc-day-sat .fc-col-header-cell-cushion {
+	color: blue;
+}
+
+.fc-daygrid-day.fc-day-sun .fc-daygrid-day-number {
+	color: red;
+}
+
+.fc-daygrid-day.fc-day-sat .fc-daygrid-day-number {
+	color: blue;
+}
+
+.fc-day-today {
+	background-color: #E4F7BA !important; /* 오늘 날짜 배경색 복원 */
+}
+
+.fc-day-today .fc-daygrid-day-number {
+	background-color: inherit; /* 날짜 숫자 배경색 제거 */
+	border-radius: 0;
+}
+
+/* 출석체크 버튼 스타일 */
+/* #attendance-check {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	font-size: 12px;
+	cursor: pointer;
+	display: none; 기본적으로 숨김
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+} */
+/* 출석체크 버튼 스타일 */
+#attendance-check {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	background-image: url('../img/출석완료이미지.png');
+	background-size: cover;
+	color: white;
+	border: none;
+	font-size: 12px;
+	cursor: pointer;
+	display: none; /* 기본적으로 숨김 */
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+#attendance-check span {
+	position: relative;
+	z-index: 1;
+}
+
+.attendance-mark {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 20px;
+	height: 20px;
+	background-image: url('../img/출석완료이미지.png'); /* 출석 체크 이미지 경로 */
+	background-size: cover;
+}
+/* 이벤트 사이드바 스타일 */
+#event-sidebar {
+	position: relative;
+	min-height: 300px; /* 사이드바의 최소 높이 설정 */
+}
+
+#event-sidebar {
+	background-color: #f8f9fa;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	height: 100%;
+}
+/* today 이후 날짜들 커서 처리 */
+.future-date {
+	background-color: #f0f0f0;
+	cursor: default !important;
+}
+
+.future-date .fc-daygrid-day-top a {
+	pointer-events: none;
+}
+
+.future-date:not(.fc-day-other) {
+	opacity: 0.3;
+	cursor: default !important;
+}
+
+.future-date:not(.fc-day-other) .fc-daygrid-day-top a {
+	pointer-events: none;
+}
+
+.fc-day-other.future-date {
+	opacity: 0.1;
+}
