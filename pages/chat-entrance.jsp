@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,6 +8,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../img/pages/icon.png" type="image/png">
         <title>오픈책팅방</title>
+		<style>
+		       @font-face {
+		           font-family: 'DungGeunMo';
+		           src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+		           font-weight: normal;
+		           font-style: normal;
+		       }
+			   
+			   div{
+				 font-family: 'DungGeunMo';
+			   }
+		</style>
         <!-- Bootstrap Css -->
         <link rel="stylesheet" href="../vender/bootstrap/css/bootstrap.min.css">
         <!-- Icofont Css -->
@@ -23,11 +36,11 @@
     </head>
     <body>
         
-        <div class="bg-elements elements-top-header position-relative">
+        <div class="bg-light elements-top-header position-relative">
             <!-- navbar -->
             <div class="elements-nav">
                 <!-- bootom nav -->
-                <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
+                <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-50">
                     <div class="container">
                         <div class="position-relative d-flex align-items-center gap-2 site-brand">
                             <img src="../img/bookbookbookLogo.png" alt="북북북 로고"/>
@@ -61,7 +74,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <a href="./page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그인 </a>
+                            <a href="./page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그아웃 </a>
                             <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
                         </div>
                     </div>
@@ -72,11 +85,11 @@
                 <div class="container py-5">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-xl-8 col-lg-8 col-md-10 col-12">
-                            <div class="text-white py-5 text-center">
-                                <span class="d-block text-white mb-3">책에 대한 이야기를 나눠보세요 
-                                <h1 class="display-4 text-white fw-bold">오픈책팅방</h1>
+                            <div class="text-black py-5 text-center">
+                                <span class="fw-bold d-block text-black mb-3">책에 대한 이야기를 나눠보세요.
+                                <h1 class="display-4 text-purple fw-bold">오픈책팅방</h1>
                                 <span class=""> 원하는 방이 없다면 </span>
-								<button id="createNewChatroom" class="btn btn-purple rounded-pill ms-1 "data-bs-toggle="modal" data-bs-target="#exampleModal">새 방 만들기</button></span>
+								<button id="createNewChatroom" class="btn btn-outline-purple rounded-pill ms-1 "data-bs-toggle="modal" data-bs-target="#exampleModal">새 방 만들기</button></span>
 	                        <!-- Modal -->
 		                        <div class=" text-black align-items-center modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		                            <div class="modal-dialog">
@@ -85,20 +98,29 @@
 		                                        <h1 class="modal-title fs-5" id="exampleModalLabel">새 채팅방 만들기</h1>
 		                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		                                    </div>
-											<form id="createChatroom" name="createChatroom">
+											<form action="/createChatroom" name="createChatroom">
 		                                    <div class="modal-body">
 												<div class="container-fluid">
 													<div class="row">
 		                                        		<div class="col-md-5">채팅방 이름</div>
-														<div class="row col-md-7 ms-auto"><input type="text" name="chatroonName"></div>
+														<div class="row col-md-7 ms-auto"><input type="text" name="chatroomName"></div>
+													</div>
+													<div class="row">
+														<br/>
 													</div>
 													<div class="row">
 														<div class="col-md-5">채팅방 이미지</div>
 														<div class="row col-md-7 ms-auto"> <input id="imageUpload" type="file" name="cfrealname"></div>
 													</div>
 													<div class="row">
+														<br/>
+													</div>
+													<div class="row">
 														<div class="col-md-5">인원수 제한(최대 30명)</div>
-														<div class="row col-md-7 ms-auto"><input type="number" value="30" max="30" name="chatUserLimit"></div>
+														<div class="row col-md-7 ms-auto"><input type="number" value="30" max="30" name="chatroomStatus"></div>
+													</div>
+													<div class="row">
+														<br/>
 													</div>
 													<div class="row">
 														<div id="previewContainer"></div>
@@ -116,119 +138,41 @@
 								
 								<p class="lead text-white-50 m-0"></p>
                             </div>
-                            <div class="row">
-                                
-                                <input class="col-md-10" placeholder="채팅방을 검색해보세요.">
-                                <button class="col-md-2 btn btn-purple d-none d-lg-block btn-theme" type="submit">검색</button>
-                               
-                            </div>
+							<form action="/searchChatroom" name="chatRoomSearch">
+                            	<div class="row">
+                                	<input name="chatRoomName" class="col-md-10" placeholder="채팅방을 검색해보세요.">
+                                	<button id="searchBtn" class="col-md-2 btn btn-purple d-none d-lg-block btn-theme" type="submit">검색</button>
+                            	</div>
+							</form>
                             <div><br/></div>
+							
                             <div class="row g-4">
-                                <div class="col-lg-6 col-12 mb-4">
-                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
-                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">[불편한 편의점]독서토론방</h5>
-                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <i class="ri-user-line"></i>
-                                                <div>
-                                                    <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">15명/30명</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12 mb-4">
-                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
-                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">[해독 혁명] 오픈채팅방입니다.</h5>
-                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
-                                            <div class="d-flex align-items-center gap-2">
-                                                 <i class="ri-user-line"></i>
-                                                <div>
-                                                    <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">10명/30명</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-4">
-                                <div class="col-lg-6 col-12 mb-4">
-                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-danger small text-danger bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여불가</span>
-                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">Technical Support Engineer</h5>
-                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
-                                            <div class="d-flex align-items-center gap-2">
-                                                 <i class="ri-user-line"></i>
-                                                <div>
-                                                    <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">30명/30명</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12 mb-4">
-                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">Open</span>
-                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">React Lead Developer</h5>
-                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
-                                            <div class="d-flex align-items-center gap-2">
-												<i class="ri-user-line"></i>
-	                                                <div>
-	                                                    <small class="text-muted">참여자 수</small>
-	                                                    <p class="m-0">15명/30명</p>
-	                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-4">
-                                <div class="col-lg-6 col-12 mb-4">
-                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
-                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">[그의 운명에 대한 아주 개인적인 생각]</h5>
-                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
-                                            <div class="d-flex align-items-center gap-2">
-                                                 <i class="ri-user-line"></i>
-                                                <div>
-                                                    <small class="text-muted">참여자 수</small>
-                                                    <p class="m-0">15명/30명</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12 mb-4">
-                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">Open</span>
-                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">Category Manager</h5>
-                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
-                                            <div class="d-flex align-items-center gap-2">
-												<i class="ri-user-line"></i>
-	                                                <div>
-	                                                    <small class="text-muted">참여자 수</small>
-	                                                    <p class="m-0">15명/30명</p>
-	                                                </div>
-                                            </div>
-                                        </div>
-                                        <a href="page-careers-apply.html" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
-                                    </div>
-                                </div>
+								<div id="getChatroom" class="row g-4">
+	                                <c:forEach items="${chatrooms}" var="chatroom">
+										<div class="col-lg-6 col-12 mb-4">
+		                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
+		                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
+		                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">${chatroom.chatroomName}</h5>
+		                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
+		                                            <div class="d-flex align-items-center gap-2">
+		                                                 <i class="ri-user-line"></i>
+		                                                <div>
+		                                                    <small class="text-muted">참여자 수</small>
+		                                                    <p class="m-0">/${chatroom.chatroomStatus}명</p>
+		                                                </div>
+		                                            </div>
+		                                        </div>
+		                                        <a href="chat-chatroom?roomNum=${chatroom.chatroomNum}" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
+		                                    </div>
+		                                </div>
+									</c:forEach>
+	                            </div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <nav aria-label="Page navigation example">
+						<!-- 페이지-->
+                        <!--<nav aria-label="Page navigation example">
                             <ul class="pagination align-items-center justify-content-center" margin-left="3rem">
                                 <li class="page-item">
                                     <a class="page-link text-purple" href="#" aria-label="Previous">
@@ -246,7 +190,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </nav>
+                        </nav>-->
                      </div>
                 </div>
             </div>
@@ -330,6 +274,67 @@
         <script src="../vender/aos/dist/aos.js"></script>
         <!-- Custom Js -->
         <script src="../js/script.js"></script>
-		<script src="../js/chat.js"></script>
+		<script>
+
+			//채팅방 이미지 업로드 미리보기
+			var imageUpload = document.getElementById('imageUpload');
+			imageUpload.addEventListener('change', function(event) {  
+				var file = event.target.files[0];
+			 		 if (file) {   
+			  	 		var reader = new FileReader();
+			   				 reader.onload = function(event) {      
+			  	 				var previewImage = document.createElement('img');      
+			   	 				previewImage.src = event.target.result;      
+			 	   				previewImage.style.width = '150px'; // 미리보기 이미지 크기 조절      
+			  	  				previewImage.style.height = '200px';// 미리보기 이미지를 원하는 위치 (예: 컨테이너 요소)에 표시
+			    				var previewContainer = document.getElementById('previewContainer'); 
+			    				$('#previewContainer img').remove();
+			    				previewContainer.appendChild(previewImage);    
+			    			};//end of reader.onload function
+			    		reader.readAsDataURL(file);  
+			   		 } //end of if
+			 });//end of imageUpload addEventListener
+			 
+			 
+			 //채팅방 검색
+			 $('#searchBtn').click(function(e){
+				var keyword = $('input[name="chatRoomName"]').val();
+				e.preventDefault();
+				$('input[name="chatRoomName"]').val('');
+				$.ajax({
+					url:'/searchChatroom',
+					method:'GET',
+					data:{keyword: keyword},
+					success:function(data){
+						var chatroomList = $('#getChatroom');
+						var searchResult='';
+						chatroomList.html('');
+						for(let i=0; i<data.length;i++){
+							searchResult+='<div class="col-lg-6 col-12 mb-4">'+
+		                                    '<div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">'+
+		                                        '<span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>'+
+		                                        '<h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">'+data[i].chatroomName+'</h5>'+
+		                                        '<div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">'+
+		                                            '<div class="d-flex align-items-center gap-2">'+
+		                                                 '<i class="ri-user-line"></i>'+
+		                                                '<div>'+
+		                                                    '<small class="text-muted">참여자 수</small>'+
+		                                                    '<p class="m-0">'+data[i].chatroomStatus+'명</p>'+
+		                                                '</div>'+
+		                                            '</div>'+
+		                                        '</div>'+
+		                                        '<a href="chat-chatroom?roomNum='+data[i].chatroomNum+'" class="btn btn-outline-purple w-100 mt-2">입장하기</a>'+
+		                                    '</div>'+
+		                                '</div>';
+						}//end of for
+							chatroomList.html(searchResult);
+					},
+					error:function(err){
+						console.error('Failed to load chatroom search:', err);
+					}
+				});//end of ajax
+			 });//end of click event
+		 
+		</script>
     </body>
 </html>
