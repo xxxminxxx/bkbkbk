@@ -10,5 +10,5 @@ public interface LibraryService {
 	
 	//책 카테고리 검색
 	public List<CategoryVO> getCategory(CategoryVO cate);
-	public List<BookVO> getCateBookList(CategoryVO cate);
+	public List<BookVO> getCateBookList(HashMap map);
 }
