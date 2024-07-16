@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.BookshelfDAO">
+
+ <!--나의 서재 전체 탭팬-->
+ <!--  
+     쿼리 목적: 	특정 사용자(userId)에 대한 나의 서재 전체 탭팬에 출력될 데이터 조회
+     인자:      		String형 userId
+     리턴형:     	BookshelfVO 객체 리스트
+     역할:      		특정 userId에 해당하는 사용자의 단계와 캐릭터 이미지 및 읽은 책의 목록 정보를 가져오는 쿼리
+     설명:      		bookshelf 테이블, user 테이블, book 테이블을 조인하여 특정 사용자가 읽은 책의 수와 
+                		해당하는 캐릭터 단계, 캐릭터 이미지를 계산하고, 읽은 책의 제목 목록도 함께 가져온다
+                
+						****                
+						OVER는 "이 작업을 어디에 적용할지"를 말하고,
+						PARTITION BY는 "어떻게 데이터를 나눌지"를 정한다
+						
+						초과, 미만 기호가 에러가 나서 HTML 엔티티인 &lt 등을 사용
+						
+						case문 구조
+						SELECT
+							  CASE 
+							    WHEN 조건1 THEN 결과1
+							    WHEN 조건2 THEN 결과2
+							    ELSE 기본결과
+							  END AS 새_컬럼명 (END: CASE 문 종료)
+							FROM 테이블명;
+
+    -->
+    <select id="getUserData" parameterType="String" resultType="com.bookbookbook.domain.BookshelfVO">
+   SELECT 
+    u.userId,  
+    b.bookTitle,
+    COUNT(bs.isbn) OVER (PARTITION BY u.userId) AS readBooks, <!--읽은 책 수 -->
+    
+    CASE  <!--단계 글씨 출력-->
+      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 1 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 5 THEN '1단계'
+      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 5 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 10 THEN '2단계'
+      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 10 THEN '3단계'
+      ELSE '캐릭터 없음'
+    END AS characterStage, 
+    
+    CASE  <!--이미지 출력-->
+      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 1 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 5 THEN '../img/pixeled_little_corgi.png'
+      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 5 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 10 THEN '../img/pixeled_adolescent_corgi.png'
+      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 10 THEN '../img/pixeled_grown_corgi.png'
+        ELSE '../img/8.png'
+     END AS characterImage
+
+  FROM bookshelf bs
+
+  JOIN `user` u 
+  								ON bs.userNum = u.userNum
+  JOIN `book` b 
+  								ON bs.isbn = b.isbn
+
+  WHERE bs.readStatus = 'Y' AND 
+  													u.userId = 'user1' <!--다 읽은 상태이면서 특정 userId로 필터링된 결과 모두에 만족-->
+  </select>
+  
+   <select id="getReadBooksDetails" resultType="com.bookbookbook.domain.BookshelfVO">
+	       SELECT
+        b.bookTitle,
+        b.writer,
+        bs.rating,
+        bs.startDate,
+        bs.endDate,
+        b.bfrealname AS bfrealname
+    FROM bookshelf bs
+    JOIN `book` b ON bs.isbn = b.isbn
+    WHERE bs.readStatus = 'Y' AND bs.userNum = 1
+    </select>
+    
+    <select id="getReadingBooksDetails" resultType="com.bookbookbook.domain.BookshelfVO">
+    SELECT
+        b.bookTitle,
+        b.writer,
+        bs.startDate,
+        b.bfrealname AS bfrealname
+    FROM bookshelf bs
+    JOIN `book` b ON bs.isbn = b.isbn
+    WHERE bs.readStatus = 'N' AND bs.userNum = 1
+</select>
+    
+<select id="getWishlistBooks" resultType="com.bookbookbook.domain.BookshelfVO">
+        SELECT
+            b.bfrealname AS bfrealname,
+            b.bookTitle,
+            b.writer,
+            w.addedDate
+        FROM wishlist w
+        JOIN book b ON w.isbn = b.isbn
+        WHERE w.userNum = 1
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,52 @@
+#header{
+	background-color: white !important;
+}
+
+.stage-character {
+    
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stage {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.character-image {
+
+    height: 250px;
+   
+}
+
+.book-spines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.book-spine {
+    width: 200px;
+    height: 30px;
+    background-color: lightgreen;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.star {
+    font-size: 40px; /* 원하는 크기로 설정 */
+    color: gold; /* 별 색상 설정 */
+}
+
+.star-empty {
+    font-size: 40px; /* 원하는 크기로 설정 */
+    color: lightgray; /* 빈 별 색상 설정 */
+}
+
