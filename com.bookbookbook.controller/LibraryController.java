@@ -1,9 +1,10 @@
 package com.bookbookbook.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ public class LibraryController {
 	private LibraryService libraryService;
 	
 	//대분류 선택 시 중분류 항목 가져오기
-	 @GetMapping("/loadCategoryData")
+	@PostMapping("/loadCategoryData")
 	 @ResponseBody
 	    public List<CategoryVO> loadCategoryData(@RequestParam("category") String category) {
 		 CategoryVO cate = new CategoryVO();
@@ -28,17 +29,21 @@ public class LibraryController {
 	     return categoryData;
 	    }
 	 
-	 
-	 //중분류 선택 시 책 가져오기
-	 @GetMapping("/loadCateBookList")
+	@PostMapping("/loadCateBookList")
 	 @ResponseBody
-	 public List<BookVO> loadCateBookList(String categoryName, String categoryValue){
-		 CategoryVO cate = new CategoryVO();
-		 cate.setInterestNum1(categoryName);
-		 cate.setInterestNum2(categoryValue);
-		 List<BookVO> cateBookList= libraryService.getCateBookList(cate);
-		 return cateBookList;
-	 }
-
-	
+	 public List<BookVO> loadAndSortCateBookList(@RequestParam("categoryName") String categoryName,
+             @RequestParam("categoryValue") String categoryValue,
+             @RequestParam(value = "sortType", required = false) String sortType) {
+		// HashMap을 이용한 파라미터 전달
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("categoryName", categoryName);
+		map.put("categoryValue", categoryValue);
+		
+		if (sortType != null) {
+			map.put("sortType", sortType);
+		}
+		List<BookVO> cateBookList = libraryService.getCateBookList(map);
+		
+		return cateBookList;
+		}
 }
