@@ -21,8 +21,8 @@ public class LibraryServiceImpl implements LibraryService {
 		return result;
 	}
 	
-	public List<BookVO> getCateBookList(CategoryVO cate){
-		List<BookVO> result= libraryDAO.getCateBookList(cate);
+	public List<BookVO> getCateBookList(HashMap map){
+		List<BookVO> result= libraryDAO.getCateBookList(map);
 		return result;
 	}
 }
