@@ -4,33 +4,41 @@
 
 <mapper namespace="com.bookbookbook.dao.LibraryDAO">
 	
+	<!-- 대분류 선택 시 중분류 가져오기 -->
 	<select id="getCategory" parameterType="CategoryVO" resultType="CategoryVO">
+		SELECT categoryName interestNum2
+		FROM CATEGORY 
+		WHERE depth_first= #{interestNum1}
+		ORDER BY categoryName ASC
+	</select>
+	
+	<!-- <select id="getCategory" parameterType="CategoryVO" resultType="CategoryVO">
 		SELECT "categoryName" interestNum2
 		FROM CATEGORY 
 		WHERE "depth_first"= #{interestNum1}
 		ORDER BY "categoryName" ASC
-	</select>
+	</select> -->
 	
-	
+	<!-- 중분류 선택+정렬 기능으로 데이터베이스에서 책 가져오기 -->
 	<select id="getCateBookList" parameterType="hashmap" resultType="BookVO">
-		SELECT * FROM "book"
-		WHERE "cateNum"=(SELECT "cateNum"
+		SELECT * FROM book
+		WHERE cateNum=(SELECT cateNum
 						FROM CATEGORY 
-						WHERE "categoryName"=#{categoryValue}
-						AND "depth_first"=#{categoryName})
+						WHERE categoryName=#{categoryValue}
+						AND depth_first=#{categoryName})
 		<!-- 조건이 있는 경우 -->
 	    <choose>
 	        <!-- 이름 오름차순 정렬을 선택한 경우 -->
 	        <when test="sortType == 'titleAsc'">
-	            ORDER BY "bookTitle" ASC
+	            ORDER BY bookTitle ASC
 	        </when>
 	        <!-- 이름 내림차순 정렬을 선택한 경우 -->
 	        <when test="sortType == 'titleDesc'">
-	            ORDER BY "bookTitle" DESC
+	            ORDER BY bookTitle DESC
 	        </when>
 	        <!-- 기본 정렬 순서 (예: 발매일 순) -->
 	        <otherwise>
-	            ORDER BY "publicationDate" ASC
+	            ORDER BY publicationDate ASC
 	        </otherwise> 
 	    </choose>
 	</select>
