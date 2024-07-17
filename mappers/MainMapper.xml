@@ -19,6 +19,6 @@
 	
 	<!-- 채팅방 검색 -->
 	<select id="searchChatroom" parameterType="String" resultType="ChatroomVO">
-	SELECT * FROM chatroom WHERE chatroomName LIKE '%' || #{keyword} || '%'
+	SELECT * FROM chatroom WHERE chatroomName LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 </mapper>
