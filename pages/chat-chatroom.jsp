@@ -474,7 +474,7 @@
 			   //신고기능
 			  $(document).on('submit', 'form[name="reportForm"]', function(e) {
 				e.preventDefault();
-				var formData = $('form[name="reportForm"]').serialize(); // 폼 데이터 직렬화
+				var formData = $(this).serialize();
 				$.ajax({
 				    url: '/submitReport',
 				    method: 'POST',
