@@ -51,11 +51,11 @@ public class WebSocketController {
         messagingTemplate.convertAndSend("/topic/public/"+ roomNum, chatMessage);
     }
     
-    @MessageMapping("/chat.removeUser")
-    public void removeUser(@Payload ChatMessageVO chatMessage) {
+    @MessageMapping("/chat.removeUser/{roomNum}")
+    public void removeUser(@Payload ChatMessageVO chatMessage,@DestinationVariable String roomNum) {
         chatMessage.setType(MessageType.LEAVE);
         chatMessage.setTime(LocalDateTime.now());
-        messagingTemplate.convertAndSend("/topic/public", chatMessage);
+        messagingTemplate.convertAndSend("/topic/public/"+roomNum, chatMessage);
     }
     
 }
