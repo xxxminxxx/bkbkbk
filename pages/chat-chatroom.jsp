@@ -395,6 +395,7 @@
 														'<div class="container-fluid">'+
 															'<div class="row">'+
 																'<input type="hidden" name="chatroomNum" value="'+${room.chatroomNum}+'">'+
+																'<input type="hidden" name="reportTime" value="'+messageId.replaceAll('-','').replace('T','').replaceAll(':','').replace('.','')+'">'+
 																'<div class="col-md-5">신고 대상:</div>'+
 																'<div class="row col-md-7 ms-auto">'+ '<input name="reportedUser" value="'+parsedMessage.sender+'" readonly></div>'+
 															'</div>'+
