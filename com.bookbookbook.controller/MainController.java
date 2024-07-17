@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bookbookbook.domain.ChatroomVO;
-import com.bookbookbook.service.ChatRoomService;
 import com.bookbookbook.service.MainService;
 
 @Controller
@@ -20,7 +19,6 @@ public class MainController {
 
 	@Autowired
 	MainService mainService;
-	ChatRoomService chatroomService;
 	
 	@RequestMapping("/pages/{step}")
 	public String step(@PathVariable String step) {
@@ -36,8 +34,6 @@ public class MainController {
 	//채팅방 생성
 	@GetMapping("/createChatroom")
 	public String createChatroom(ChatroomVO chat) {
-		//MultipartFile files로 받아서 chat.set~~하여서 넘기기
-		System.out.println(chat.toString());		
 		mainService.createChatroom(chat);
 		return "redirect:pages/chat-entrance";
 	}
