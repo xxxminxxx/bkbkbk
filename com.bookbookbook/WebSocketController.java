@@ -1,9 +1,9 @@
 package com.bookbookbook;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -37,18 +37,18 @@ public class WebSocketController {
         return message;
     }
     
-    @MessageMapping("/chat.sendMessage")
-    public void sendMessage(@Payload ChatMessageVO chatMessage) {
+    @MessageMapping("/chat.sendMessage/{roomNum}")
+    public void sendMessage(@Payload ChatMessageVO chatMessage ,@DestinationVariable String roomNum) {
         chatMessage.setTime(LocalDateTime.now());
         chatMessageCSVService.saveChatMessage(chatMessage);
-        messagingTemplate.convertAndSend("/topic/public", chatMessage);
+        messagingTemplate.convertAndSend("/topic/public/"+ roomNum, chatMessage);
     }
 
-    @MessageMapping("/chat.addUser")
-    public void addUser(@Payload ChatMessageVO chatMessage) {
+    @MessageMapping("/chat.addUser/{roomNum}")
+    public void addUser(@Payload ChatMessageVO chatMessage,@DestinationVariable String roomNum) {
         chatMessage.setType(MessageType.JOIN);
         chatMessage.setTime(LocalDateTime.now());
-        messagingTemplate.convertAndSend("/topic/public", chatMessage);
+        messagingTemplate.convertAndSend("/topic/public/"+ roomNum, chatMessage);
     }
     
     @MessageMapping("/chat.removeUser")
