@@ -218,6 +218,12 @@
 <!-- footer -->
 
 <script>
+    /*
+        * method명: moveMap
+        * 인자:      없음
+        * 리턴형:     없음
+        * 역할:      사용자가 선택한 구의 좌표를 기반으로 지도에 해당 위치를 표시하고, 해당 구의 도서관 정보를 가져와 마커와 인포윈도우를 생성해 지도에 표시하는 함수
+        */
     function moveMap() {
 
         let selectBox = document.getElementById('gu');
