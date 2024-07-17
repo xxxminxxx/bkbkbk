@@ -19,7 +19,6 @@ public class UserController {
 	  @PostMapping("/submitReport")
 	    @ResponseBody
 		public void submitReport(@ModelAttribute ReportVO vo) {
-		  System.out.println(vo.toString());
 			userService.submitReport(vo);
 		}
 	
