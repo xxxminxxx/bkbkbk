@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import com.bookbookbook.domain.ChatMessageVO;
 import com.bookbookbook.domain.ChatMessageVO.MessageType;
 import com.bookbookbook.service.ChatMessageCSVService;
-import com.bookbookbook.service.ChatRoomService;
 
 @Controller
 public class WebSocketController {
@@ -21,11 +20,10 @@ public class WebSocketController {
     private ChatMessageCSVService chatMessageCSVService;
 	
     private final SimpMessageSendingOperations messagingTemplate;
-	//private final ChatRoomService chatRoomService;
 
-    public WebSocketController(SimpMessageSendingOperations messagingTemplate, ChatRoomService chatRoomService) {
+
+    public WebSocketController(SimpMessageSendingOperations messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
-        //this.chatRoomService = chatRoomService;
     }
 
     
@@ -49,6 +47,7 @@ public class WebSocketController {
         chatMessage.setType(MessageType.JOIN);
         chatMessage.setTime(LocalDateTime.now());
         messagingTemplate.convertAndSend("/topic/public/"+ roomNum, chatMessage);
+        
     }
     
     @MessageMapping("/chat.removeUser/{roomNum}")
