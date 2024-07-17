@@ -1,3 +1,5 @@
+# ReportVO에서 private String reportedUser; 자료형 변경
+
 # 설정파일(src>main>java>com.bookbookbook)
 ![image](https://github.com/user-attachments/assets/abdcedd4-5d25-4df8-a81f-22249ef70d36)
 
