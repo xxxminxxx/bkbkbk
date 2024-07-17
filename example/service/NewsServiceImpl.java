@@ -35,7 +35,7 @@ public class NewsServiceImpl implements NewsService {
         headers.set("X-Naver-Client-Id", clientId);
         headers.set("X-Naver-Client-Secret", clientSecret);
         
-        String url = API_URL + "?query=도서관&display=3";
+        String url = API_URL + "?query=도서관+서적&display=3";
         
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         
@@ -51,6 +51,7 @@ public class NewsServiceImpl implements NewsService {
             Map<String, String> news = new HashMap<>();
             news.put("title", item.getString("title"));
             news.put("description", item.getString("description"));
+            news.put("originallink", item.getString("originallink"));  // 원본 링크 추가
             newsList.add(news);
         }
         
