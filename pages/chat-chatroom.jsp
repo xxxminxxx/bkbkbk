@@ -52,18 +52,9 @@
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav m-auto gap-4 m-none">
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link active" href="../index.html"><i class="ri-apps-2-line"></i> Home</a>
-                                </li> -->
-                                
-                                <li class="nav-item dropdown single-dropdown-nav">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 서재 </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="shop-product-grid.html">읽은 책</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-list.html">읽고 있는 책</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-three-coulmn.html">읽고 싶은 책</a></li>
-                                    </ul>
-                                </li>
+								<li class="nav-item dropdown single-dropdown-nav">
+										                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
+										                        </li>
                                 <li>
                                     <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
                                 </li>
@@ -399,19 +390,20 @@
 									                  '<h1 class="modal-title fs-5" id="exampleModalLabel'+messageId+'">메세지 신고</h1>'+
 									                      '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'+
 									              '</div>'+
-												  '<form name="reportForm">'+
+												  '<form action="/submitReport" name="reportForm">'+
 										              '<div class="modal-body">'+
 														'<div class="container-fluid">'+
 															'<div class="row">'+
+																'<input type="hidden" name="chatroomNum" value="'+${room.chatroomNum}+'">'+
 																'<div class="col-md-5">신고 대상:</div>'+
-																'<div class="row col-md-7 ms-auto">'+ '<span name="reportedUser">'+parsedMessage.sender +'</span></div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<input name="reportedUser" value="'+parsedMessage.sender+'" readonly></div>'+
 															'</div>'+
 															'<div class="row">'+
 																'<br/>'+
 															'</div>'+
 															'<div class="row">'+
 																'<div class="col-md-5">신고자:</div>'+
-																'<div class="row col-md-7 ms-auto">'+ '<span name="reportUser">'+'신고자아이디' +'</span></div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<input name="reportUser" value="신고자 아이디" readonly/></div>'+
 															'</div>'+
 															'<div class="row">'+
 																'<br/>'+
@@ -451,7 +443,6 @@
 							        '</div>' +
 							    '</div>';
 					}//end of if
-				   //console.log("결과:"+messageContent)
 		           li.innerHTML = messageContent;
 				   li.className = 'list-unstyled';
 		           messageArea.appendChild(li);
@@ -478,6 +469,24 @@
 		               messageInput.value = '';
 		           }
 		       };
+			   
+			   //신고기능
+			  $(document).on('submit', 'form[name="reportForm"]', function(e) {
+				e.preventDefault();
+				var formData = $('form[name="reportForm"]').serialize(); // 폼 데이터 직렬화
+				$.ajax({
+				    url: '/submitReport',
+				    method: 'POST',
+				    data: formData, 
+				    success: function(response) {
+				        $('div .modal').modal('hide');
+						alert('신고가 성공적으로 제출되었습니다.');
+				    },
+				    error: function(err) {
+				        console.error('Failed to submit report:', err);
+				    }
+				});//end of ajax
+			   });
 		   </script>
 		
     </body>
