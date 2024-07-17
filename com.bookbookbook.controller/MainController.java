@@ -52,7 +52,6 @@ public class MainController {
 	@GetMapping("/pages/chat-chatroom")
 	public void chatroom(String roomNum, Model m) {
 		m.addAttribute("room",mainService.getRoomInfo(roomNum));
-		//return "pages/chat-chatroom?roomNum="+roomNum;
 	}
 	
 	
