@@ -5,6 +5,6 @@
 <mapper namespace="com.bookbookbook.dao.UserDAO">
 
 <insert id="submitReport" parameterType="ReportVO">
-INSERT INTO report (chatroomNum, reportedUser, reportTime, reportType, reportUser) VALUES (#{chatroomNum},#{reportedUser},now(),#{reportType},#{reportUser})
+INSERT INTO report (chatroomNum, reportedUser, reportTime, reportType, reportUser) VALUES (#{chatroomNum},#{reportedUser},${reportTime},#{reportType},#{reportUser})
 </insert>
 </mapper>
