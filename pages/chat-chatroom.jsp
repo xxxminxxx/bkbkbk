@@ -53,8 +53,8 @@
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav m-auto gap-4 m-none">
 								<li class="nav-item dropdown single-dropdown-nav">
-										                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
-										                        </li>
+		                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
+		                        </li>
                                 <li>
                                     <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
                                 </li>
@@ -298,14 +298,14 @@
 		       stompClient.connect({}, function(frame) {
 				   //console.log('Connected: ' + frame);
 				   //메세지 송수신
-		           stompClient.subscribe('/topic/public', function(messageOutput) {
+		           stompClient.subscribe('/topic/public/'+${room.chatroomNum}, function(messageOutput) {
 		               showMessage(JSON.parse(messageOutput.body));
 		           });
 				   //유저 JOIN
-				   stompClient.subscribe('/app/chat.addUser', function(messageOutput) {
+				   stompClient.subscribe('/app/chat.addUser/'+${room.chatroomNum}, function(messageOutput) {
 				           showMessage(JSON.parse(messageOutput.body));
 				       });
-				   stompClient.send("/app/chat.addUser",
+				   stompClient.send("/app/chat.addUser/"+${room.chatroomNum},
 			           {},
 			           JSON.stringify({sender: 'username', type: 'JOIN', time: new Date().toISOString()})
 			       )
@@ -313,7 +313,7 @@
 				   window.addEventListener('beforeunload', function(event) {
 				               // WebSocket 연결이 있다면 연결 종료
 				               if (stompClient !== null) {
-				                   stompClient.send("/app/chat.removeUser",
+				                   stompClient.send("/app/chat.removeUser/"+${room.chatroomNum},
 				                       {},
 				                       JSON.stringify({sender: 'username', type: 'LEAVE', time: new Date().toISOString()})
 				                   );
@@ -323,7 +323,6 @@
 				                   });
 				               }
 				           });
-				      
 		       });
 			   
 			   
@@ -466,7 +465,7 @@
 		                   //time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) // 현재 시간
 						   time: new Date().toISOString()  // ISO-8601 형식으로 변환
 					    };
-		               stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(message));
+		               stompClient.send("/app/chat.sendMessage/"+${room.chatroomNum}, {}, JSON.stringify(message));
 		               messageInput.value = '';
 		           }
 		       };
