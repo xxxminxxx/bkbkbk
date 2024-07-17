@@ -36,9 +36,13 @@
 	        <when test="sortType == 'titleDesc'">
 	            ORDER BY bookTitle DESC
 	        </when>
-	        <!-- 기본 정렬 순서 (예: 발매일 순) -->
-	        <otherwise>
+	        <!-- 발매일순 정렬을 선택한 경우 -->
+	        <when test="sortType == 'titleDesc'">
 	            ORDER BY publicationDate ASC
+	        </when>
+	        <!-- 기본 정렬 순서 이름 오름차순 -->
+	        <otherwise>
+	             ORDER BY bookTitle ASC
 	        </otherwise> 
 	    </choose>
 	</select>
