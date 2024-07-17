@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="vender/aos/dist/aos.css">
     <!-- Custom Css -->
     <link rel="stylesheet" href="pages/css/style.css">
+	
     <style>
 		
 		
@@ -39,7 +40,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 9999; /* 더 높은 z-index 값 */
+            z-index: 9999;
             background-color: #D85D47;
             display: flex;
             justify-content: center;
@@ -295,6 +296,7 @@
 				            <div class="news-content">
 				                <h5>${news.title}</h5>
 				                <p>${news.description}</p>
+								<a href="${news.originallink}" class="newsLink" target="_blank">더보기</a>
 				            </div>
 				        </div>
 				    </c:forEach>
@@ -374,45 +376,9 @@
         </div>
     </div>
     <!-- 푸터 포함 -->
-	<footer class="footer-container text-white py-3">
-							    <div class="container">
-							        <div class="row">
-							            <div class="col-md-6 mb-2 mb-md-0">
-							                <p class="mb-0">
-							                    <small>
-							                        위치: 서울 마포구 백범로 23<br>
-							                        연락처: 02-739-7235 | 이메일: hi@bookbookbook.com<br>
-													이용약관 | 개인정보처리방침
-							                    </small>
-							                </p>
-							            </div>
-							        </div>
-							    </div>
-							</footer>
+	<%@ include file="footer.jsp" %>
 
-							<style>
-							.footer-container{
-								background-color: #e74c3c;
-							}
-
-							@font-face {
-								     font-family: 'DungGeunMo';
-								     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-								     font-weight: normal;
-								     font-style: normal;
-							}
-
-							footer{
-								font-family: 'DungGeunMo';
-							}
-							
-							.booklogo {
-								width: 300px;
-								height: 50px;
-								
-							}
-
-							</style>
+	
     <!-- Bootsrap Bundle Js -->
     <script src="vender/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Jquery Js -->
