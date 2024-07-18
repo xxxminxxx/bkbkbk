@@ -68,8 +68,9 @@ public class UserServiceImpl implements UserService {
             String subject = "BOOKBOOKBOOK 임시 비밀번호 안내";
             String text = "안녕하세요 " + userName + "님,\n\n"
                         + "귀하의 임시 비밀번호는 " + tempPassword + " 입니다.\n"
-                        + "보안을 위해 로그인 후 즉시 비밀번호를 변경해 주세요.\n\n"
-                        + "감사합니다.";
+                        + "보안을 위해 로그인 후 비밀번호를 바꿔주세요.\n\n"
+                        + "감사합니다."
+                        + "-BOOKBOOKBOOK-";
             
             try {
                 emailService.sendSimpleMessage(user.getUserId(), subject, text);
@@ -81,15 +82,26 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+    
+    
+    @Override
+    public boolean isEmailDuplicate(String email) {
+        return userDAO.existsByUserId(email) > 0;
+    }
+    
+    
+    @Override
+    public boolean isDuplicateUser(String userId, String userTel) {
+        return userDAO.checkDuplicateUser(userId, userTel) > 0;
+    }
 
 
     private String generateTempPassword() {
         String upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
         String numbers = "0123456789";
-        String specialChars = "!@#$%^&*()_+-=[]{}|;:,.<>?";
         
-        String allChars = upperAlphabet + lowerAlphabet + numbers + specialChars;
+        String allChars = upperAlphabet + lowerAlphabet + numbers;
         Random random = new Random();
         StringBuilder password = new StringBuilder();
 
@@ -102,6 +114,8 @@ public class UserServiceImpl implements UserService {
         
         return password.toString();
     }
+    
+    
 
     
 }

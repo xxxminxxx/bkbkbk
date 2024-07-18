@@ -12,7 +12,8 @@ public interface UserService {
 	String findEmail(String userName, String userTel);
 
 	boolean findAndResetPassword(String userName, String userId, String userTel);
+    
+	boolean isDuplicateUser(String userId, String userTel);
 
-    
-    
+	boolean isEmailDuplicate(String email);
 }
