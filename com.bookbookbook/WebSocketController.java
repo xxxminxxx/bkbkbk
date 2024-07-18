@@ -66,5 +66,4 @@ public class WebSocketController {
     private void sendActiveUsers(String roomNum) {
         messagingTemplate.convertAndSend("/topic/activeUsers/" + roomNum, activeUsers);
     }
-    
 }
