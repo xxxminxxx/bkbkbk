@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -84,7 +85,7 @@
                                 <h3 class="fw-bold mb-1">참가자 목록</h3>
                             </div>
                             <div id="joinedUser" class="p-4 osahan-sidebar-links">
-                                <p ><i class="ri-user-line me-2"></i> ${members.participants} </p>
+                                <!-- 여기에 명단 출력-->
                             </div>
                         </div>
                     </div>
@@ -293,29 +294,59 @@
 		       var socket = new SockJS('/chat-websocket'); // WebSocket endpoint URL
 		       var stompClient = Stomp.over(socket);
  			   var message={};
-			   //var username= 로그인 세션 얻어오기
+			   var username= '';
+			   <c:choose>
+			        <c:when test="${not empty sessionScope.userId}">
+			            username="${sessionScope.userName}";
+			        </c:when>
+			        <c:otherwise>
+			            username= "임시";
+			        </c:otherwise>
+			    </c:choose>
+			   
+			   
+			   var roomNum = ${room.chatroomNum};
 			   
 		       stompClient.connect({}, function(frame) {
 				   //console.log('Connected: ' + frame);
 				   //메세지 송수신
-		           stompClient.subscribe('/topic/public/'+${room.chatroomNum}, function(messageOutput) {
+		           stompClient.subscribe('/topic/public/'+roomNum, function(messageOutput) {
 		               showMessage(JSON.parse(messageOutput.body));
 		           });
 				   //유저 JOIN
-				   stompClient.subscribe('/app/chat.addUser/'+${room.chatroomNum}, function(messageOutput) {
+				   stompClient.subscribe('/app/chat.addUser/'+roomNum, function(messageOutput) {
 				           showMessage(JSON.parse(messageOutput.body));
 				       });
-				   stompClient.send("/app/chat.addUser/"+${room.chatroomNum},
+				   stompClient.send("/app/chat.addUser/"+roomNum,
 			           {},
-			           JSON.stringify({sender: 'username', type: 'JOIN', time: new Date().toISOString()})
+			           JSON.stringify({sender: username, type: 'JOIN', time: new Date().toISOString()})
 			       )
-				
+				   //유저 목록
+				   stompClient.subscribe('/topic/activeUsers/'+roomNum, function(users) {
+				           let userList = JSON.parse(users.body); // 받은 데이터를 파싱
+				           // 여기서 userList를 이용하여 UI를 업데이트하거나 다른 작업을 수행할 수 있음
+						   var li = document.createElement('li');
+						   var joinedUser = document.getElementById('joinedUser');
+						   joinedUser.innerHTML='';
+						   var members='';
+						   for(let i=0;i<userList.length;i++){
+							//console.log(userList[i].split('/'));
+							if (userList[i].split('/')[0] == roomNum){
+								members += '<p><i class="ri-user-line mb-2"></i>'+userList[i].split('/')[1]+'</p>';
+							}
+						   }//end of for
+						   li.innerHTML=members;
+						   li.className = 'mb-2 list-unstyled';
+						   joinedUser.appendChild(li);
+				       });
+					   
+				   //유저 LEAVE
 				   window.addEventListener('beforeunload', function(event) {
 				               // WebSocket 연결이 있다면 연결 종료
 				               if (stompClient !== null) {
 				                   stompClient.send("/app/chat.removeUser/"+${room.chatroomNum},
 				                       {},
-				                       JSON.stringify({sender: 'username', type: 'LEAVE', time: new Date().toISOString()})
+				                       JSON.stringify({sender: username, type: 'LEAVE', time: new Date().toISOString()})
 				                   );
 
 				                   stompClient.disconnect(function() {
@@ -335,7 +366,6 @@
 				   var messageId=parsedMessage.time;
 				   var messageContent='';
 				   	//console.log(parsedMessage.type);
-				
 				   // ISO 문자열을 Date 객체로 변환
 				   var date = new Date(messageId);
 
@@ -351,10 +381,9 @@
 				   };
 
 				   var localizedDate = date.toLocaleDateString('ko-KR', options);
-					console.log(localizedDate);
 				   
 				   if(parsedMessage.type==='JOIN'){
-				   		messageContent='username 님이 참여하였습니다.'+ '<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
+				   		messageContent= parsedMessage.sender+'님이 참여하였습니다.'+ '<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
 						
 						//var userList= document.getElementById('joinedUser');
 						//var userAdd = '<i class="ri-user-line me-2"></i>'+ 'username';
@@ -363,7 +392,7 @@
 						//userList.appendChild(pElement);
 						
 				   }else if(parsedMessage.type==='LEAVE'){
-						messageContent='username 님이 나가셨습니다.'+'<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
+						messageContent= parsedMessage.sender+'님이 나가셨습니다.'+'<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
 				   }else{
 					messageContent = 
 					    '<div class="col">' +
@@ -372,7 +401,10 @@
 					                '<div class="d-flex align-items-center gap-3 osahan-mb-1">' +
 					                    '<i class="ri-user-line text-muted fs-5"></i>' +
 					                    '<div class="lh-sm">' +
-					                        '<h6 class="fw-bold text-primary mb-2">' + parsedMessage.sender + '</h6>' +
+											(parsedMessage.sender === username ?
+											        '<h6 class="fw-bold text-success mb-2">' + parsedMessage.sender + '</h6>' :
+											        '<h6 class="fw-bold text-primary mb-2">' + parsedMessage.sender + '</h6>'
+											    ) +
 					                        '<h6 class="text-truncate mb-2 bold">' + parsedMessage.content + '</h6>' +
 					                        '<small class="text-muted">' + localizedDate + '</small>' +
 					                    '</div>' +
@@ -460,7 +492,7 @@
 		           if (messageContent) {
 		               var message = {
 						   type: 'CHAT',
-		                   sender: 'username', // 사용자명을 여기에 설정 (실제로는 로그인 정보에서 가져와야 함)
+		                   sender: username, // 사용자명을 여기에 설정 (실제로는 로그인 정보에서 가져와야 함)
 		                   content: messageContent,
 		                   //time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) // 현재 시간
 						   time: new Date().toISOString()  // ISO-8601 형식으로 변환
