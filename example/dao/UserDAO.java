@@ -24,6 +24,13 @@ public interface UserDAO {
 	public UserVO findUserByNameIdAndTel(String userName, String userId, String userTel);
 	
     public void updatePassword(String userId, String newPassword);
+    
+    int checkDuplicateUser(String userId, String userTel);
+    
+    public UserVO findUserByEmail(String email);
+    public void updateUser(UserVO user);
+
+	public int existsByUserId(String email);
 
  // DAO 채워넣기
 
