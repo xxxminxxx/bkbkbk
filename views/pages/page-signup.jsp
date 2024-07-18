@@ -178,8 +178,9 @@
                             <h2 class="fw-bold mb-4" style="text-align: center;">회원가입</h2>
                             <form action="/register"  method="post" id=formSignin class="d-grid gap-3 input-group-lg">
                                 
-                                <input type="email" name=userId class="form-control bg-dark bg-opacity-50 border-0 px-3 py-2" id="signupEmail" aria-describedby="emailHelp" placeholder="이메일">
-                                <input type="password" name=password class="form-control bg-grey border-0 px-3 py-2" id="signupPassword" placeholder="비밀번호">
+								<input type="email" name="userId" class="form-control bg-dark bg-opacity-50 border-0 px-3 py-2" id="signupEmail" aria-describedby="emailHelp" placeholder="이메일">
+								<small id="emailFeedback" class="form-text"></small>
+								<input type="password" name=password class="form-control bg-grey border-0 px-3 py-2" id="signupPassword" placeholder="비밀번호">
                                 <input type="password" class="form-control bg-dark border-0 px-3 py-2" id="signupPasswordCheck" placeholder="비밀번호 확인">
                                 <input type="text" name=userName class="form-control bg-dark border-0 px-3 py-2" id="signupName" aria-describedby="nameHelp" placeholder="이름">
                                 <input type="tel" name=userTel class="form-control bg-dark border-0 px-3 py-2" id="signupTel" aria-describedby="nameHelp" placeholder="연락처">
@@ -228,52 +229,21 @@
             </div>
         </div>
 		
-		<footer class="footer-container text-white py-3">
-						    <div class="container">
-						        <div class="row">
-						            <div class="col-md-6 mb-2 mb-md-0">
-						                <p class="mb-0">
-						                    <small>
-						                        위치: 서울 마포구 백범로 23<br>
-						                        연락처: 02-739-7235 | 이메일: hi@bookbookbook.com<br>
-												이용약관 | 개인정보처리방침
-						                    </small>
-						                </p>
-						            </div>
-						        </div>
-						    </div>
-						</footer>
-
-						<style>
-						.footer-container{
-							background-color: #e74c3c;
-						}
-
-						@font-face {
-							     font-family: 'DungGeunMo';
-							     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-							     font-weight: normal;
-							     font-style: normal;
-						}
-
-						footer{
-							font-family: 'DungGeunMo';
-						}
-
-
-						</style>
+		<!-- 푸터 -->
+		<%@ include file="../footer.jsp" %>
+		
 						
-						<style>
-						       .form-control.bg-dark {
-						           background-color: #f0f0f0 !important;
-						       }
-						       .form-control.bg-grey {
-						           background-color: #f0f0f0 !important;
-						       }
-						       .form-control.bg-light {
-						           background-color: #f0f0f0 !important;
-						       }
-						</style>
+		<style>
+						.form-control.bg-dark {
+						background-color: #f0f0f0 !important;
+						}
+						.form-control.bg-grey {
+						background-color: #f0f0f0 !important;
+						}
+						.form-control.bg-light {
+						background-color: #f0f0f0 !important;
+						}
+		</style>
 		
 		
 		
@@ -289,13 +259,14 @@
 		<!-- 이용약관은 임시로 네이버 약관을 링크함 -->
 		<script>
 		function openTerms() {
-		    window.open('terms', 'termsWindow', 'width=600,height=400,resizable=yes,scrollbars=yes');
+		    window.open('terms', 'termsWindow', 'width=600,height=700,resizable=yes,scrollbars=yes');
 		}
 		</script>
 		
 		<script>
 			
 			$(document).ready(function() {
+				
 			    $('#formSignin').on('submit', function(e) {
 			        e.preventDefault(); // 기본 제출 동작을 막습니다.
 			        
@@ -307,7 +278,7 @@
 			            return false;
 			        }
 			        if($('#signupPassword').val() != $('#signupPasswordCheck').val()) {
-			            alert('비밀번호와 확인이 일치하지 않습니다.');
+			            alert('비밀번호와 비밀번호 확인이 서로 일치하지 않습니다.');
 			            return false;
 			        }
 			        
@@ -327,6 +298,31 @@
 			                }
 			            }
 			        });
+			    });
+			});
+			
+			
+			// 이메일 실시간 중복 판별
+			$(document).ready(function() {
+			    $('#signupEmail').on('blur', function() {
+			        var email = $(this).val();
+			        if(email) {
+			            $.ajax({
+			                url: '/check-email',
+			                type: 'POST',
+			                data: { email: email },
+			                success: function(response) {
+			                    if(response === 'duplicate') {
+			                        $('#emailFeedback').text('중복된 이메일입니다.').css('color', 'red');
+			                    } else {
+			                        $('#emailFeedback').text('사용 가능한 이메일입니다.').css('color', 'green');
+			                    }
+			                },
+			                error: function() {
+			                    $('#emailFeedback').text('이메일 확인 중 오류가 발생했습니다.').css('color', 'red');
+			                }
+			            });
+			        }
 			    });
 			});
 		
