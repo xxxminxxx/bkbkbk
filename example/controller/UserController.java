@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.domain.UserVO;
 import com.example.service.UserService;
@@ -39,9 +41,19 @@ public class UserController {
     
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute UserVO userVO) {
-        userService.registerUser(userVO);
-        return "redirect:/pages/page-signup-success"; // 회원가입 후 로그인 페이지로 리다이렉트
+    public String registerUser(@ModelAttribute UserVO userVO, RedirectAttributes redirectAttributes) {
+        if (userService.isDuplicateUser(userVO.getUserId(), userVO.getUserTel())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "이미 동일인으로 가입이 되어있습니다.");
+            return "redirect:/pages/page-signup";
+        } else {
+            try {
+                userService.registerUser(userVO);
+                return "redirect:/pages/page-signup-success";
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "회원가입 중 오류가 발생했습니다.");
+                return "redirect:/pages/page-signup";
+            }
+        }
     }
     
     @GetMapping("/pages/page-signup-success")
@@ -69,7 +81,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/main";
+        return "redirect:/main";  // main 페이지로 리다이렉트
     }
     
     
@@ -102,6 +114,15 @@ public class UserController {
         return "pages/page-find-email";
     }
     
+//     이메일 중복 실시간 체크 
+    @PostMapping("/check-email")
+    @ResponseBody
+    public String checkEmail(@RequestParam String email) {
+        boolean isDuplicate = userService.isEmailDuplicate(email);
+        return isDuplicate ? "duplicate" : "ok";
+    }
+
+    
     
     @PostMapping("/find-password")
     @ResponseBody
@@ -122,4 +143,9 @@ public class UserController {
         return response;
     }
     
+    
 }
+
+
+
+
