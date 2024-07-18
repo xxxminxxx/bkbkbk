@@ -1,0 +1,54 @@
+.mb-3{
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+    justify-content: left; 
+}
+
+.input-group{
+    justify-content: left;
+    
+}
+
+.btn-light{
+    background-color: bisque;
+}
+
+/* Member.css */
+
+/* 모바일 화면 */
+@media (max-width: 767px) {
+    .table {
+      font-size: 0.8rem;
+    }
+  
+    .table th,
+    .table td {
+      padding: 0.3rem;
+    }
+  }
+  
+  /* 태블릿 화면 */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .table {
+      font-size: 0.9rem;
+    }
+  
+    .table th,
+    .table td {
+      padding: 0.75rem;
+    }
+  }
+  
+  /* 데스크탑 화면 */
+  @media (min-width: 992px) {
+    .table {
+      font-size: 1rem;
+    }
+  
+    .table th,
+    .table td {
+      padding: 1rem;
+    }
+  }
+  
