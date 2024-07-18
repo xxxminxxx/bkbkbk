@@ -27,11 +27,10 @@
         <nav class="navbar osahan-main-nav navbar-expand-lg app-nav py-3 py-lg-0 sticky-top bg-white" id="mainNav">
             <div class="container">
                 <div class="position-relative d-flex align-items-center gap-2 site-brand">
-                    <i class="ri-slideshow-line fs-2 lh-1 text-black"></i>
-                    <div class="lh-1">
-                       <h5 class="fw-bold m-0 text-black">BOOKBOOKBOOK</h5>
-                    </div>
-                    <a class="stretched-link" href="../index.html"></a>
+					<div class="position-relative d-flex align-items-center gap-2 site-brand">
+						<img src="../../../resources/img/booklogo.png" class="booklogo" alt="Book Logo">
+						<a class="stretched-link" href="../main"></a>
+					</div>
                 </div>
 
                 <button class="navbar-toggler border-0 shadow-none p-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar"><i class="ri-menu-3-line ri-lg"></i></button>
@@ -206,11 +205,12 @@
 
 								<div class="d-flex align-items-center justify-content-between">
 								    <div class="form-check">
-								        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+								        <input type="checkbox" class="form-check-input" id="exampleCheck1" disabled required>
 								        <label class="form-check-label small" for="exampleCheck1">서비스 이용약관에 동의합니다.</label>
 								        <a href="#" onclick="openTerms(); return false;">&nbsp;&nbsp;&nbsp;이용약관 바로가기</a>
 								    </div>
 								</div>
+
                                 <button type="submit" class="btn btn-purple btn-theme w-100" id=btnSubmit>회원가입</button>
                             </form>
                             <div class="pt-3">
@@ -289,7 +289,7 @@
 		<!-- 이용약관은 임시로 네이버 약관을 링크함 -->
 		<script>
 		function openTerms() {
-		    window.open('https://policy.naver.com/policy/service.html', 'termsWindow', 'width=600,height=400,resizable=yes,scrollbars=yes');
+		    window.open('terms', 'termsWindow', 'width=600,height=400,resizable=yes,scrollbars=yes');
 		}
 		</script>
 		
@@ -297,19 +297,36 @@
 			
 			$(document).ready(function() {
 			    $('#formSignin').on('submit', function(e) {
+			        e.preventDefault(); // 기본 제출 동작을 막습니다.
+			        
+			        // 기존의 클라이언트 측 유효성 검사
 			        if($('#signupEmail').val() == '' || $('#signupPassword').val() == '' || 
 			           $('#signupPasswordCheck').val() == '' || $('#signupName').val() == '' || 
 			           $('#signupTel').val() == '') {
-			            e.preventDefault(); // 폼 제출을 막습니다.
 			            alert('끝까지 입력해주세요');
 			            return false;
 			        }
 			        if($('#signupPassword').val() != $('#signupPasswordCheck').val()) {
-			            e.preventDefault(); // 폼 제출을 막습니다.
 			            alert('비밀번호와 확인이 일치하지 않습니다.');
 			            return false;
 			        }
-			        // 모든 검증을 통과하면 폼이 제출됩니다.
+			        
+			        // AJAX를 사용한 폼 제출
+			        $.ajax({
+			            url: $(this).attr('action'),
+			            type: 'POST',
+			            data: $(this).serialize(),
+			            success: function(response) {
+			                window.location.href = '/pages/page-signup-success';
+			            },
+			            error: function(xhr) {
+			                if (xhr.status === 400) {
+			                    alert(xhr.responseText);
+			                } else {
+			                    alert('회원가입 중 오류가 발생했습니다.');
+			                }
+			            }
+			        });
 			    });
 			});
 		
