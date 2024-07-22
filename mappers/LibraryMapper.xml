@@ -6,26 +6,29 @@
 	
 	<!-- 대분류 선택 시 중분류 가져오기 -->
 	<select id="getCategory" parameterType="CategoryVO" resultType="CategoryVO">
-		SELECT categoryName interestNum2
+		SELECT 2depth interestNum2
 		FROM CATEGORY 
-		WHERE depth_first= #{interestNum1}
-		ORDER BY categoryName ASC
+		WHERE 1depth= #{interestNum1}
+		GROUP BY 2depth
+		ORDER BY 2depth ASC
 	</select>
 	
-	<!-- <select id="getCategory" parameterType="CategoryVO" resultType="CategoryVO">
-		SELECT "categoryName" interestNum2
+	<!-- 중분류 선택 시 소분류 가져오기 -->
+	<select id="getCategorySecond" parameterType="CategoryVO" resultType="CategoryVO">
+		SELECT 3depth interestNum3
 		FROM CATEGORY 
-		WHERE "depth_first"= #{interestNum1}
-		ORDER BY "categoryName" ASC
-	</select> -->
+		WHERE 1depth= #{interestNum1} and 2depth=#{interestNum2}
+		ORDER BY 3depth asc
+	</select>
 	
-	<!-- 중분류 선택+정렬 기능으로 데이터베이스에서 책 가져오기 -->
+	<!-- 소분류 선택+정렬 기능으로 데이터베이스에서 책 가져오기 -->
 	<select id="getCateBookList" parameterType="hashmap" resultType="BookVO">
 		SELECT * FROM book
 		WHERE cateNum=(SELECT cateNum
 						FROM CATEGORY 
-						WHERE categoryName=#{categoryValue}
-						AND depth_first=#{categoryName})
+						WHERE 1depth=#{categoryFirst}
+						AND 2depth=#{categorySecond}
+						AND 3depth=#{categoryThird})
 		<!-- 조건이 있는 경우 -->
 	    <choose>
 	        <!-- 이름 오름차순 정렬을 선택한 경우 -->
@@ -40,11 +43,13 @@
 	        <when test="sortType == 'titleDesc'">
 	            ORDER BY publicationDate ASC
 	        </when>
-	        <!-- 기본 정렬 순서 이름 오름차순 -->
+	        <!-- 기본 정렬 순서 책번호순 -->
 	        <otherwise>
-	             ORDER BY bookTitle ASC
+	             ORDER BY bookNum ASC
 	        </otherwise> 
 	    </choose>
 	</select>
+	
+
 	
 </mapper>
