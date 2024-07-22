@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,6 +34,15 @@
 			font-family: 'DungGeunMo';
 		}
 
+		#bookList{
+			overflow-y:auto;
+			height: 59em;
+		}
+		.active .page-link{
+			background-color: white;
+			border-color: #e74c3c;
+		}
+		
 		</style>
     </head>
     <body>
@@ -53,14 +63,9 @@
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav m-auto gap-4 m-none">
-                                <li class="nav-item dropdown single-dropdown-nav">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 서재 </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="shop-product-grid.html">읽은 책</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-list.html">읽고 있는 책</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-three-coulmn.html">읽고 싶은 책</a></li>
-                                    </ul>
-                                </li>
+								<li class="nav-item dropdown single-dropdown-nav">
+		                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
+		                        </li>
                                 <li>
                                     <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
                                 </li>
@@ -86,7 +91,7 @@
                     <div class="row align-items-center justify-content-center">
                         <div class="col-xl-6 col-lg-5 col-md-10 col-12 text-center">
                             <div class="text-white">
-                                <h1 class="fw-bolder display-5 mb-3">카테고리별 도서 추천</h1>
+                                <h1 class="text-white fw-bolder display-5 mb-3">카테고리별 도서 추천</h1>
                                 <!-- <p class="m-0 text-white-50">Last updated: January 2024</p> -->
                             </div>
                         </div>
@@ -152,57 +157,26 @@
                                               <div class="accordion-body">
                                                   <ul id="depth_second" class="list-unstyled m-0">
                                                       <!--<li class="mb-1"><a href="#" class="text-dark">중분류 카테고리 항목 출력해오기 </a></li>-->
-													 
                                                   </ul>
                                               </div>
                                             </div>
-                                      	</div>
-                                         <!-- <div class="accordion-item">
+                                      	</div><!--카테고리 중분류-->
+										
+										<div class="accordion-item">
                                             <h2 class="accordion-header">
-                                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreew" aria-expanded="false" aria-controls="collapseThreew">
-                                                평점
+                                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                  카테고리 소분류
                                               </button>
                                             </h2>
                                             <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                               <div class="accordion-body">
-                                                 Default checkbox 
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5" checked>
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i>
-                                                    </label>
-                                                </div>
-                                                 Default checkbox 
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4" checked>
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i>
-                                                    </label>
-                                                </div>
-                                                 Default checkbox 
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3" checked>
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
-                                                    </label>
-                                                </div>
-                                                 Default checkbox 
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" checked>
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
-                                                    </label>
-                                                </div>
-                                                 Default checkbox 
-                                                <div class="form-check mb-0">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" checked>
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        <i class="ri-star-fill text-warning"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i><i class="ri-star-fill text-secondary"></i>
-                                                    </label>
-                                                </div>
-                                              </div>end of accordion body
+                                                  <ul id="depth_third" class="list-unstyled m-0">
+                                                      <!--<li class="mb-1"><a href="#" class="text-dark">중분류 카테고리 항목 출력해오기 </a></li>-->
+                                                  </ul>
+                                              </div>
                                             </div>
-                                          </div>--> <!--end of <div class="accordion-item">-->
+                                      	</div><!--카테고리 소분류-->
+										
                                       </div>
                                   </div>
                             </div>
@@ -219,32 +193,51 @@
                                     <option value="pubAsc">발매일 순 정렬</option>
                                 </select>
                             </div>
-                            <div id="bookList" class="row g-4">
-								
-                                
-                                
-                            </div>
+                        <div id="bookList" class="row g-4">    
                         </div>
+                    </div>
+					<div id="paginationContainer"></div>
 						<!-- 페이지-->
 						<!--<nav aria-label="Page navigation example">
-                            <ul class="pagination align-items-center justify-content-center" margin-left="3rem">
-                                <li class="page-item">
-                                    <a class="page-link text-purple" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link text-purple" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>-->
+						    <ul class="pagination align-items-center justify-content-center" style="margin-left: 3rem;">
+						        <li class="page-item">
+				                    <li class="page-item">
+				                        <a class="page-link text-purple" href="?page=1">&lt;&lt;</a>  첫 페이지로 
+				                    </li>
+									<c:if test="${currentPage>1}">
+					                    <li class="page-item">
+					                        <a class="page-link text-purple" href="?page=${currentPage - 1}" aria-label="Previous">
+					                            <span aria-hidden="true">&laquo;</span>
+					                        </a>
+					                    </li>
+									</c:if>
+						        </li>
+						        <c:forEach begin="${startPage}" end="${endPage}" var="pageNumber">
+						            <li class="page-item">
+						                <c:choose>
+						                    <c:when test="${pageNumber eq currentPage}">
+						                        <a class="page-link text-purple" href="#">${pageNumber}</a>
+						                    </c:when>
+						                    <c:otherwise>
+						                        <a class="page-link text-purple" href="?page=${pageNumber+1}">${pageNumber}</a>
+						                    </c:otherwise>
+						                </c:choose>
+						            </li>
+						        </c:forEach>
+						        <li class="page-item">
+						            <c:if test="${currentPage < totalPages}">
+										<li class="page-item">
+							                <a class="page-link text-purple" href="?page=${currentPage + 1}" aria-label="Next">
+							                    <span aria-hidden="true">&raquo;</span>
+							                </a>
+										</li>
+									</c:if>
+					                <li class="page-item">
+					                    <a class="page-link text-purple" href="?page=${totalPages}">&gt;&gt;</a>  마지막 페이지로 
+					                </li>
+						        </li>
+						    </ul>
+						</nav>-->
                     </div>
                 </div>
             </div>
@@ -340,30 +333,32 @@
 		<script>
 			var sort_first='';
 			var sort_second='';
+			var sort_third='';
+			var sortType='';
+			
 			$(document).ready(function() {
 				    $('a[name]').click(function(e) {
 		            e.preventDefault();
-		            var categoryName = $(this).attr('name');//categoryName이 대분류
-					sort_first=categoryName;
+		            var categoryFirst = $(this).attr('name');//categoryFirst이 대분류
+					sort_first=categoryFirst;
 					//대분류 선택 시 중분류 목록 가져오는 함수
-		            loadCategoryData(categoryName);
+		            loadCategoryData(categoryFirst);
 		        });//end of click
 				
 				$('#select').change(function(){
-					var sortType= $(this).val();
-					cateBookList(sort_first, sort_second, sortType);
+					sortType= $(this).val();
+					cateBookList(sort_first, sort_second, sort_third, sortType);
 				});//end of change
 			});
 				
 				
 				//대분류 선택 시 중분류 목록 가져오는 함수
-			    function loadCategoryData(categoryName) {
+			    function loadCategoryData(categoryFirst) {
 			        $.ajax({
 			            url: '/loadCategoryData',  // 서버 측 엔드포인트 URL
 			            method: 'POST',
-			            data: { category: categoryName },
+			            data: { category: categoryFirst },
 			            success: function(data) {
-							console.log(data);
 							var html = '<ul class="list-unstyled">';  // 리스트 시작
 				            for (var i = 0; i < data.length; i++) {
 				                html += '<li class="list-unstyled mb-1"><a href="#" class="text-dark" data-value="'+data[i].interestNum2+'">' + data[i].interestNum2 + '</a></li>';
@@ -374,45 +369,160 @@
 							// 생성된 <a> 태그에 클릭 이벤트 추가
 				            $('a[data-value]').click(function(e){
 				                e.preventDefault();
-				                var categoryValue = $(this).attr('data-value');//categoryValue는 중분류
-								sort_second=categoryValue;
+				                var categorySecond = $(this).attr('data-value');//categorySecond는 중분류
+								sort_second=categorySecond;
 				                // 중분류 선택 시 책을 가져오는 함수 호출
-				                cateBookList(categoryName, categoryValue);      
+				                loadCategoryDataSecond(categoryFirst, categorySecond);      
 				            });
 						},
 			            error: function(err) {
-			                console.error('Failed to load category data:', err);
+			                console.error('Failed to load category data1:', err);
 			            }
 			        });//end of ajax
 			    }//end of loadCategoryData
 				
+				//중분류 선택 시 
+				function loadCategoryDataSecond(categoryFirst, categorySecond){
+					$.ajax({
+						url:'/loadCategoryDataSecond',
+						method:'get',
+						data:{categoryFirst: categoryFirst, categorySecond: categorySecond},
+						success:function(data){
+							var html = '<ul class="list-unstyled">';  // 리스트 시작
+				            for (var i = 0; i < data.length; i++) {
+				                html += '<li class="list-unstyled mb-1"><a href="#" class="text-dark" cateThird="'+data[i].interestNum3+'">' + data[i].interestNum3 + '</a></li>';
+				            }
+				            html += '</ul>';
+				            $('#depth_third').html(html);  // #depth_second에 HTML 추가
+							
+							// 생성된 <a> 태그에 클릭 이벤트 추가
+				            $('a[cateThird]').click(function(e){
+				                e.preventDefault();
+				                var categoryThird = $(this).attr('cateThird');//categoryThird는 소분류
+								sort_third=categoryThird;
+								//소분류 선택 시 책 가져오는 함수 호출
+								cateBookList(sort_first, sort_second, sort_third, sortType)   
+				            });
+							
+						},
+						error:function(err){
+							console.error('Failed to load category data2:', err);
+						}
+					})//end of ajax
+				}
 				
-				
-				//중분류 선택 시 책을 가져오는 함수
-				function cateBookList(sort_first, sort_second, sortType){
+				//소분류 선택 시 책을 가져오는 함수
+				function cateBookList(sort_first, sort_second, sort_third, sortType){
 					$.ajax({
 						url:'/loadCateBookList',
-						method:'POST',
-						data: {categoryName: sort_first, categoryValue: sort_second, sortType: sortType},
+						method:'get',
+						data: {categoryFirst: sort_first, categorySecond: sort_second, categoryThird: sort_third, sortType: sortType},
 						success:function(data){
-							var bookData='';
-							for(let i=0; i<data.length;i++){
-							bookData += '<div class="col-lg-4 col-md-6 col-12">'+
-			                                    '<div class="card bg-transparent border-0 h-100">'+
-			                                        '<a href="책상세페이지 링크'+data[i].isbn+'" class="position-relative">'+ //상세페이지로 수정. isbn값으로 넘기기
-														'<img src="'+ data[i].bfrealName+'" class="card-img-top rounded" alt="featured-1">'+
-			                                        	'<div class="card-body px-0">'+
-			                                            '<h6 class="card-title lh-base">'+data[i].bookTitle+'</h6>'+
-														'</a>'+
-			                                            '<p class="card-text">'+
-			                                                data[i].writer+'<br/><span class="text-muted small">'+data[i].publisher+'</span>'+
-			                                            '</p>'+
-			                                        '</div>'+
-			                                    '</div>'+
-			                               '</div>'
-							}
-							$('#bookList').html(bookData);
-						},
+								//한 페이지에 9개씩 출력
+					            var itemsPerPage = 9; 
+					            var currentPage = 1;
+
+								//화면에 출력
+					            function displayPage(page) {
+									var bookData='';
+					                var startIndex = (page - 1) * itemsPerPage;
+					                var endIndex = startIndex + itemsPerPage;
+					                var slicedData = data.slice(startIndex, endIndex);
+									if(slicedData.length==0){
+										bookData="해당하는 데이터가 없습니다.";
+									}else{
+									//목록 출력
+									for(let i=0; i<slicedData.length;i++){
+									bookData += '<div class="col-lg-4 col-md-6 col-12">'+
+					                                    '<div class="card bg-transparent border-0 h-100">'+
+					                                        '<a href="책상세페이지 링크'+slicedData[i].isbn+'" class="position-relative">'+ //상세페이지로 수정. isbn값으로 넘기기
+																'<img src="../img/sample.png" class="card-img-top rounded" alt="featured-1">'+
+					                                        	'<div class="card-body px-0">'+
+					                                            '<h6 class="text-purple card-title lh-base">'+slicedData[i].bookTitle+'</h6>'+
+																'</a>'+
+					                                            '<p class="card-text">'+
+					                                                slicedData[i].writer+'<br/><span class="text-muted small">'+slicedData[i].publisher+'</span>'+
+					                                            '</p>'+
+					                                        '</div>'+
+					                                    '</div>'+
+					                               '</div>'
+									}//end of for
+									}//end of if
+									$('#bookList').html(bookData);
+								}//end of displayPage
+								
+								// 처음 페이지 로드
+						        displayPage(currentPage);
+
+						            // 페이지네이션 UI 생성 (Bootstrap Pagination 사용)
+						            function renderPagination() {
+						                var totalPages = Math.ceil(data.length / itemsPerPage);//소수점 올림
+										var range = 2; // 현재 페이지를 중심으로 표시할 범위 (현재 페이지 앞뒤로 몇 페이지씩 보여줄지)
+										var maxPagesToShow = 5; // 표시할 최대 페이지 수
+
+										    var paginationHtml = '<nav aria-label="Page navigation example"><ul class="pagination align-items-center justify-content-center" style="margin-left: 3rem;">';
+										    
+										    // 이전 페이지 버튼
+										    paginationHtml += '<li class="page-item"><a class="text-purple page-link" href="#" aria-label="Previous" id="prevPage"><span aria-hidden="true">&laquo;</span></a></li>';
+
+										    // 현재 페이지 기준으로 범위 내의 페이지 번호 추가
+										    var startPage = Math.max(1, currentPage - range);
+										    var endPage = Math.min(totalPages, currentPage + range);
+
+										    // 페이지 번호를 중앙에 맞추기 위한 보정
+										    if (endPage - startPage < maxPagesToShow - 1) {
+										        if (startPage === 1) {
+										            endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+										        } else if (endPage === totalPages) {
+										            startPage = Math.max(1, endPage - maxPagesToShow + 1);
+										        }
+										    }
+
+										    for (var i = startPage; i <= endPage; i++) {
+										        if (i === currentPage) {
+										            paginationHtml += '<li class="page-item active"><a class="text-purple page-link" href="#" data-page="' + i + '">' + i + '</a></li>';
+										        } else {
+										            paginationHtml += '<li class="page-item"><a class="text-purple page-link" href="#" data-page="' + i + '">' + i + '</a></li>';
+										        }
+										    }
+
+										    // 다음 페이지 버튼
+										    paginationHtml += '<li class="page-item"><a class="text-purple page-link" href="#" aria-label="Next" id="nextPage"><span aria-hidden="true">&raquo;</span></a></li>';
+										    paginationHtml += '</ul></nav>';
+						                $('#paginationContainer').html(paginationHtml);
+
+						                // 페이지 번호 클릭 시 해당 페이지 데이터 표시
+						                $('a[data-page]').click(function(e) {
+						                    e.preventDefault();
+						                    currentPage = parseInt($(this).attr('data-page'));
+						                    displayPage(currentPage);
+											renderPagination()
+						                });
+
+						                // 이전 페이지 버튼 클릭 시
+						                $('#prevPage').click(function(e) {
+						                    e.preventDefault();
+						                    if (currentPage > 1) {
+						                        currentPage--;
+						                        displayPage(currentPage);
+												renderPagination()
+						                    }
+						                });
+
+						                // 다음 페이지 버튼 클릭 시
+						                $('#nextPage').click(function(e) {
+						                    e.preventDefault();
+						                    if (currentPage < totalPages) {
+						                        currentPage++;
+						                        displayPage(currentPage);
+												renderPagination()
+						                    }
+						                });
+						            }//end of renderPagination
+
+						            // 페이지네이션 UI 초기 렌더링
+						            renderPagination();
+						},//end of success,
 						error: function(err) {
 			                console.error('Failed to load category data:', err);
 			            }
