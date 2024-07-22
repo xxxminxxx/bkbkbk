@@ -1,5 +1,6 @@
 package com.bookbookbook.controller;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -8,13 +9,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bookbookbook.domain.ChatroomVO;
 import com.bookbookbook.service.MainService;
 import com.bookbookbook.service.NewsService;
+import com.bookbookbook.util.MD5Generator;
 
 @Controller
 public class MainController {
@@ -96,10 +100,50 @@ public class MainController {
 		}
 
 		//채팅방 생성
-		@GetMapping("/createChatroom")
-		public String createChatroom(ChatroomVO chat) {
-			//MultipartFile files로 받아서 chat.set~~하여서 넘기기
-			mainService.createChatroom(chat);
+		@PostMapping("/createChatroom")
+		public String createChatroom(ChatroomVO chat, @RequestParam("file") MultipartFile file) {
+			
+			try{
+				//파일의 원래 이름
+				String cfrealname = file.getOriginalFilename();
+				System.out.println("원래 파일명:"+cfrealname);
+				//파일을 첨부한 경우
+				if(cfrealname !=null && !cfrealname.equals("")) {
+					String cfname= new MD5Generator(cfrealname).toString();
+					System.out.println("변경파일명:"+cfname);
+					/*
+					 * [1] 추후작업: 확장자가 필요한 경우  
+					 */
+					//정해진 폴더 지정
+					String savepath=System.getProperty("user.dir")+"\\src\\main\\resources\\static\\files";
+					System.out.println("저장 경로:"+savepath);
+					/*
+					 * [2] 
+					 */
+					if(! new File(savepath).exists()) {
+						new File(savepath).mkdir();
+					}
+					//실제 저장되는 파일
+					String chatFilePath = savepath+"\\"+cfname;
+					file.transferTo(new File(chatFilePath));
+					System.out.println(chatFilePath+"저장되었음");
+					
+					//디비 저장
+					chat.setCfrealname(cfrealname);
+					chat.setCfname(cfname);
+					chat.setChatFilePath(chatFilePath);
+					
+					//파일을 첨부한 경우	
+					mainService.createChatroom(chat);
+					
+				}//end of if(파일 첨부 경우)
+				else {
+					//파일을 첨부하지 않은 경우	
+					mainService.createChatroom(chat);
+				}
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
 			return "redirect:pages/chat-entrance";
 		}
 
