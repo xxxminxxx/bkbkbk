@@ -30,4 +30,9 @@
 	<select id="searchChatroom" parameterType="String" resultType="ChatroomVO">
 	SELECT * FROM chatroom WHERE chatroomName LIKE CONCAT('%', #{keyword}, '%')
 	</select>
+	
+	<!-- 방 삭제 -->
+	<delete id="deleteChatroom" parameterType="String">
+	 DELETE FROM chatroom WHERE chatroomNum=#{roomNum}
+	</delete>
 </mapper>
