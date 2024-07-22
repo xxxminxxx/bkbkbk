@@ -1,5 +1,6 @@
 package com.bookbookbook.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.bookbookbook.domain.BookVO;
@@ -10,5 +11,7 @@ public interface LibraryService {
 	
 	//책 카테고리 검색
 	public List<CategoryVO> getCategory(CategoryVO cate);
+	public List<CategoryVO> getCategorySecond(CategoryVO cate);
 	public List<BookVO> getCateBookList(HashMap map);
+
 }
