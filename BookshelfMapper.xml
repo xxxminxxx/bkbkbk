@@ -29,70 +29,91 @@
 							FROM 테이블명;
 
     -->
-    <select id="getUserData" parameterType="String" resultType="com.bookbookbook.domain.BookshelfVO">
-   SELECT 
-    u.userId,  
-    b.bookTitle,
-    COUNT(bs.isbn) OVER (PARTITION BY u.userId) AS readBooks, <!--읽은 책 수 -->
+     <select id="getUserData" parameterType="String" resultType="com.bookbookbook.domain.BookshelfVO">
+        SELECT 
+            u.userId,  
+            b.bookTitle,
+            COUNT(bs.bookNum) OVER (PARTITION BY u.userId) AS readBooks, 
     
-    CASE  <!--단계 글씨 출력-->
-      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 1 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 5 THEN '1단계'
-      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 5 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 10 THEN '2단계'
-      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 10 THEN '3단계'
-      ELSE '캐릭터 없음'
-    END AS characterStage, 
+            CASE <!-- 단계 글씨 출력 -->
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &gt;= 1 AND COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &lt; 5 THEN '1단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &gt;= 5 AND COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &lt; 10 THEN '2단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &gt;= 10 THEN '3단계'
+                ELSE '캐릭터 없음'
+            END AS characterStage, 
     
-    CASE  <!--이미지 출력-->
-      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 1 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 5 THEN '../img/pixeled_little_corgi.png'
-      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 5 AND COUNT(bs.isbn) OVER (PARTITION BY u.userId) &lt; 10 THEN '../img/pixeled_adolescent_corgi.png'
-      WHEN COUNT(bs.isbn) OVER (PARTITION BY u.userId) &gt;= 10 THEN '../img/pixeled_grown_corgi.png'
-        ELSE '../img/8.png'
-     END AS characterImage
-
-  FROM bookshelf bs
-
-  JOIN `user` u 
-  								ON bs.userNum = u.userNum
-  JOIN `book` b 
-  								ON bs.isbn = b.isbn
-
-  WHERE bs.readStatus = 'Y' AND 
-  													u.userId = 'user1' <!--다 읽은 상태이면서 특정 userId로 필터링된 결과 모두에 만족-->
-  </select>
+            CASE <!-- 이미지 출력 -->
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &gt;= 1 AND COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &lt; 5 THEN '../img/pixeled_little_corgi.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &gt;= 5 AND COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &lt; 10 THEN '../img/pixeled_adolescent_corgi.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userId) &gt;= 10 THEN '../img/pixeled_grown_corgi.png'
+                ELSE '../img/8.png'
+            END AS characterImage
+    
+        FROM bookshelf bs
+        JOIN `users` u 
+            ON bs.userNum = u.userNum
+        JOIN `book` b 
+            ON bs.bookNum = b.bookNum
+        WHERE bs.readStatus = 'Y' AND u.userId = 'user1@gmail.com'
+    </select>
   
-   <select id="getReadBooksDetails" resultType="com.bookbookbook.domain.BookshelfVO">
-	       SELECT
-        b.bookTitle,
-        b.writer,
-        bs.rating,
-        bs.startDate,
-        bs.endDate,
-        b.bfrealname AS bfrealname
-    FROM bookshelf bs
-    JOIN `book` b ON bs.isbn = b.isbn
-    WHERE bs.readStatus = 'Y' AND bs.userNum = 1
+    <!-- 읽은 책 상세 정보 -->
+    <!--
+        쿼리 목적: 특정 사용자의 읽은 책 상세 정보 조회
+        인자: 없음
+        리턴형: BookshelfVO 객체 리스트
+        역할: userNum 14인 사용자의 읽은 책 목록과 각 책의 제목, 저자, 평점, 시작일 및 종료일, 표지 파일 이름을 가져오는 쿼리
+        설명: bookshelf 테이블과 book 테이블을 조인하여 특정 사용자가 읽은 책의 상세 정보를 가져온다
+    -->
+    <select id="getReadBooksDetails" resultType="com.bookbookbook.domain.BookshelfVO">
+        SELECT
+            b.bookTitle,
+            b.writer,
+            bs.rating,
+            bs.startDate,
+            bs.endDate,
+            b.bfrealname AS bfrealname
+        FROM bookshelf bs
+        JOIN `book` b ON bs.bookNum = b.bookNum
+        WHERE bs.readStatus = 'Y' AND bs.userNum = 14
     </select>
     
+    <!-- 읽고 있는 책 상세 정보 -->
+    <!--
+        쿼리 목적: 특정 사용자의 읽고 있는 책 상세 정보 조회
+        인자: 없음
+        리턴형: BookshelfVO 객체 리스트
+        역할: userNum 14인 사용자의 읽고 있는 책 목록과 각 책의 제목, 저자, 시작일, 표지 파일 이름을 가져오는 쿼리
+        설명: bookshelf 테이블과 book 테이블을 조인하여 특정 사용자가 읽고 있는 책의 상세 정보를 가져온다
+    -->
     <select id="getReadingBooksDetails" resultType="com.bookbookbook.domain.BookshelfVO">
-    SELECT
-        b.bookTitle,
-        b.writer,
-        bs.startDate,
-        b.bfrealname AS bfrealname
-    FROM bookshelf bs
-    JOIN `book` b ON bs.isbn = b.isbn
-    WHERE bs.readStatus = 'N' AND bs.userNum = 1
-</select>
+        SELECT
+            b.bookTitle,
+            b.writer,
+            bs.startDate,
+            b.bfrealname AS bfrealname
+        FROM bookshelf bs
+        JOIN `book` b ON bs.bookNum = b.bookNum
+        WHERE bs.readStatus = 'N' AND bs.userNum = 14
+    </select>
     
-<select id="getWishlistBooks" resultType="com.bookbookbook.domain.BookshelfVO">
+    <!-- 위시리스트 책 정보 -->
+    <!--
+        쿼리 목적: 특정 사용자의 위시리스트에 있는 책 정보 조회
+        인자: 없음
+        리턴형: BookshelfVO 객체 리스트
+        역할: userNum 14인 사용자의 위시리스트 목록과 각 책의 표지 파일 이름, 제목, 저자, 추가된 날짜를 가져오는 쿼리
+        설명: wishlist 테이블과 book 테이블을 조인하여 특정 사용자의 위시리스트에 있는 책의 상세 정보를 가져온다
+    -->
+    <select id="getWishlistBooks" resultType="com.bookbookbook.domain.BookshelfVO">
         SELECT
             b.bfrealname AS bfrealname,
             b.bookTitle,
             b.writer,
             w.addedDate
         FROM wishlist w
-        JOIN book b ON w.isbn = b.isbn
-        WHERE w.userNum = 1
+        JOIN book b ON w.bookNum = b.bookNum
+        WHERE w.userNum = 14
     </select>
 
 
