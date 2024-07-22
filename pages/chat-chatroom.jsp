@@ -81,8 +81,21 @@
                     <div class="col-lg-4">
                         <div class="rounded-4 border  bg-white mb-4"><!-- osahan-sidebar -->
                             <div class="text-center p-5 border-bottom">
-                                <img src="../img/co2.png">
-                                <h3 class="fw-bold mb-1">참가자 목록</h3>
+								<script>
+							        var cfname = "${room.cfname}";
+							        if (cfname) {
+							            var imageSrc = `../files/${room.cfname}`;
+							        }else{
+										var imageSrc = `../img/co2.png`;
+									}
+									var imageElement = document.createElement("img");
+									imageElement.setAttribute("src", imageSrc);
+						            imageElement.setAttribute("width", "180px");
+						            imageElement.setAttribute("height", "240px");
+						            document.write(imageElement.outerHTML); // 이미지 출력
+							    </script>
+								<br/><br/>
+                                <h3 class="fw-bold mb-1">${room.chatroomName}<br/> 채팅에 참여중인 사람들</h3>
                             </div>
                             <div id="joinedUser" class="p-4 osahan-sidebar-links">
                                 <!-- 여기에 명단 출력-->
