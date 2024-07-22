@@ -15,6 +15,7 @@ public class BookshelfVO {
 	    private String  startDate;
 	    private String  endDate;
 	    private String bfrealname;
+	    private String bname; //주소
 	    private String addedDate;
 	    
 	    
