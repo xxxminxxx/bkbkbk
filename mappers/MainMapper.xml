@@ -6,12 +6,21 @@
 
 	<!-- 채팅방 전체 목록 불러오기 -->
 	<select id="getChatroom" resultType="ChatroomVO">
-	SELECT * FROM chatroom
+	SELECT * FROM chatroom ORDER BY chatroomNum DESC
 	</select>
+	
 	<!-- 채팅방 생성 -->
 	<insert id="createChatroom" parameterType="ChatroomVO">
-		INSERT INTO chatroom (CHATROOMNAME, CHATROOMSTATUS) VALUES(#{chatroomName}, #{chatroomStatus})
+		INSERT INTO chatroom (chatroomName, chatroomStatus, userNum
+		 <if test="cfrealname != null and cfrealname != ''">
+            , cfrealname, cfname, chatFilePath
+        </if>
+        ) VALUES (#{chatroomName}, #{chatroomStatus},'14'
+         <if test="cfrealname != null and cfrealname != ''">
+            , #{cfrealname}, #{cfname}, #{chatFilePath}
+        </if>)
 	</insert>
+	
 	<!-- 채팅방 하나 정보 불러오기 -->
 	<select id="getRoomInfo" parameterType="String" resultType="ChatroomVO">
 	SELECT * FROM chatroom WHERE chatroomNum=#{roomNum}
