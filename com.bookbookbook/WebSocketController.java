@@ -15,11 +15,15 @@ import org.springframework.stereotype.Controller;
 import com.bookbookbook.domain.ChatMessageVO;
 import com.bookbookbook.domain.ChatMessageVO.MessageType;
 import com.bookbookbook.service.ChatMessageCSVService;
+import com.bookbookbook.service.MainService;
 
 @Controller
 public class WebSocketController {
 	@Autowired
     private ChatMessageCSVService chatMessageCSVService;
+	@Autowired
+	private MainService mainService;
+	
 	
 	private Set<String> activeUsers = new HashSet<>(); // 유저 목록 저장을 위한 Set
     private final SimpMessageSendingOperations messagingTemplate;
@@ -61,9 +65,23 @@ public class WebSocketController {
         chatMessage.setTime(LocalDateTime.now());
         messagingTemplate.convertAndSend("/topic/public/"+roomNum, chatMessage);
         sendActiveUsers(roomNum); // 업데이트된 유저 목록 전송
+        System.out.println(roomNum+activeUsers.toString());
+        int result=0;
+        //채팅방 참여 유저가 없는 경우 채팅방 삭제
+        if(activeUsers.size() <1) {
+        	mainService.deleteChatroom(roomNum);
+        }
+        for(String user : activeUsers) {
+        	result += Integer.parseInt(user.split("/")[0]);
+        	if( result == 0) {
+        		//채팅방 삭제
+        		mainService.deleteChatroom(roomNum);
+        	}
+        }
     }
     // 유저 목록을 클라이언트에 전송하는 메소드
     private void sendActiveUsers(String roomNum) {
         messagingTemplate.convertAndSend("/topic/activeUsers/" + roomNum, activeUsers);
     }
+    
 }
