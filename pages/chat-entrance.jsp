@@ -91,7 +91,7 @@
 		                                        <h1 class="modal-title fs-5" id="exampleModalLabel">새 채팅방 만들기</h1>
 		                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		                                    </div>
-											<form  action="/createChatroom" name="createChatroom"><!--method="POST" enctype="multipart/form-data"-->
+											<form  action="/createChatroom" method="POST" enctype="multipart/form-data" name="createChatroom"><!---->
 		                                    <div class="modal-body">
 												<div class="container-fluid">
 													<div class="row">
@@ -145,15 +145,34 @@
 										<div class="col-lg-6 col-12 mb-4">
 		                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
 		                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
-		                                        <h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">${chatroom.chatroomName}</h5>
+		                                        <div class="row">
+													<div class="col-lg-8">
+													<h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">${chatroom.chatroomName}</h5>
+													<br/>
+													<!-- 아이콘 & 참여자 수-->
+														<div class="d-flex align-items-center gap-2">
+			                                                 <i class="ri-user-line"></i>
+			                                                <div>
+			                                                    <small class="text-muted">참여자 수</small>
+			                                                    <p class="m-0">/${chatroom.chatroomStatus}명</p>
+			                                                </div>
+			                                            </div>
+													</div><!--end of class="col-lg-8"-->
+												<div class="col-lg-4">
+													<script>
+													        var cfname = "${chatroom.cfname}";
+													        if (cfname) {
+													            var imageSrc = `../files/${chatroom.cfname}`;
+													            var imageElement = document.createElement("img");
+													            imageElement.setAttribute("src", imageSrc);
+													            imageElement.setAttribute("width", "80px");
+													            imageElement.setAttribute("height", "100px");
+													            document.write(imageElement.outerHTML); // 이미지 출력
+													        }
+												    </script>
+												</div>
+												</div><!--end of class="row"-->
 		                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
-		                                            <div class="d-flex align-items-center gap-2">
-		                                                 <i class="ri-user-line"></i>
-		                                                <div>
-		                                                    <small class="text-muted">참여자 수</small>
-		                                                    <p class="m-0">/${chatroom.chatroomStatus}명</p>
-		                                                </div>
-		                                            </div>
 		                                        </div>
 		                                        <a href="chat-chatroom?roomNum=${chatroom.chatroomNum}" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
 		                                    </div>
