@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,22 +29,36 @@ public class LibraryController {
 		 List<CategoryVO> categoryData = libraryService.getCategory(cate);
 	     return categoryData;
 	    }
-	 
-	@PostMapping("/loadCateBookList")
+	
+	//중분류 선택 시 소분류 가져오기
+	@GetMapping("/loadCategoryDataSecond")
+	@ResponseBody
+	 public List<CategoryVO> loadCategoryDataSecond(@RequestParam("categoryFirst") String categoryFirst,
+			 @RequestParam("categorySecond") String categorySecond) {
+		 CategoryVO cate = new CategoryVO();
+		 cate.setInterestNum1(categoryFirst);
+		 cate.setInterestNum2(categorySecond);
+		 List<CategoryVO> categoryData = libraryService.getCategorySecond(cate);
+	     return categoryData;
+	    }
+	
+	//소분류 선택 시 검색 결과 출력 및 정렬
+	@GetMapping("/loadCateBookList")
 	 @ResponseBody
-	 public List<BookVO> loadAndSortCateBookList(@RequestParam("categoryName") String categoryName,
-             @RequestParam("categoryValue") String categoryValue,
-             @RequestParam(value = "sortType", required = false) String sortType) {
+	 public List<BookVO> loadAndSortCateBookList(@RequestParam("categoryFirst") String categoryFirst,
+             @RequestParam("categorySecond") String categorySecond,
+             @RequestParam("categoryThird") String categoryThird,
+             @RequestParam(value = "sortType", required = false) String sortType
+             ) {
 		// HashMap을 이용한 파라미터 전달
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("categoryName", categoryName);
-		map.put("categoryValue", categoryValue);
-		
+		map.put("categoryFirst", categoryFirst);
+		map.put("categorySecond", categorySecond);
+		map.put("categoryThird", categoryThird);
 		if (sortType != null) {
 			map.put("sortType", sortType);
 		}
 		List<BookVO> cateBookList = libraryService.getCateBookList(map);
-		
 		return cateBookList;
 		}
 }
