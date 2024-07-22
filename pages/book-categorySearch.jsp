@@ -436,7 +436,7 @@
 									bookData += '<div class="col-lg-4 col-md-6 col-12">'+
 					                                    '<div class="card bg-transparent border-0 h-100">'+
 					                                        '<a href="책상세페이지 링크'+slicedData[i].isbn+'" class="position-relative">'+ //상세페이지로 수정. isbn값으로 넘기기
-																'<img src="../img/sample.png" class="card-img-top rounded" alt="featured-1">'+
+																'<img src="'+slicedData[i].bname+'" class="rounded" alt="featured-1">'+
 					                                        	'<div class="card-body px-0">'+
 					                                            '<h6 class="text-purple card-title lh-base">'+slicedData[i].bookTitle+'</h6>'+
 																'</a>'+
