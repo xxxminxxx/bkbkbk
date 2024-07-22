@@ -124,7 +124,7 @@ pageEncoding="UTF-8"%>
 			                                    <c:when test="${not empty readBooks}">
 			                                        <c:forEach var="book" items="${readBooks}">
 			                                            <div class="book-item d-flex align-items-start mb-4">
-			                                                <img src="${book.bfrealname}" alt="책 표지" class="book-cover me-3" style="width: 100px; height: 150px;">
+			                                                 <img src="${book.bname}" alt="책 표지" class="book-cover" style="width: 100px; height: 150px;">
 			                                                <div class="book-info flex-grow-1">
 			                                                    <div class="d-flex justify-content-between align-items-start">
 			                                                        <div>
@@ -182,7 +182,7 @@ pageEncoding="UTF-8"%>
 									            <c:when test="${not empty readingBooks}">
 									                <c:forEach var="book" items="${readingBooks}">
 									                    <div class="book-item d-flex align-items-start mb-4">
-									                        <img src="${book.bfrealname}" alt="책 표지" class="book-cover me-3" style="width: 100px; height: 150px;">
+									                        <img src="${book.bname}" alt="책 표지" class="book-cover me-3" style="width: 100px; height: 150px;">
 									                        <div class="book-info flex-grow-1">
 									                            <div class="d-flex justify-content-between align-items-start">
 									                                <div>
@@ -230,7 +230,7 @@ pageEncoding="UTF-8"%>
 									            <c:when test="${not empty wishlistBooks}">
 									                <c:forEach var="book" items="${wishlistBooks}">
 									                    <div class="book-item d-flex align-items-start mb-4">
-									                        <img src="${book.bfrealname}" alt="책 표지" class="book-cover me-3" style="width: 100px; height: 150px;">
+									                        <img src="${book.bname}" alt="책 표지" class="book-cover me-3" style="width: 100px; height: 150px;">
 									                        <div class="book-info flex-grow-1">
 									                            <div class="d-flex justify-content-between align-items-start">
 									                                <div>
