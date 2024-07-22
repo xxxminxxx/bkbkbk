@@ -15,7 +15,6 @@
 		           font-weight: normal;
 		           font-style: normal;
 		       }
-			   
 			   div{
 				 font-family: 'DungGeunMo';
 			   }
@@ -52,15 +51,9 @@
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="navbar-nav m-auto gap-4 m-none">
-                               
-                                <li class="nav-item dropdown single-dropdown-nav">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 서재 </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="shop-product-grid.html">읽은 책</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-list.html">읽고 있는 책</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-three-coulmn.html">읽고 싶은 책</a></li>
-                                    </ul>
-                                </li>
+								<li class="nav-item dropdown single-dropdown-nav">
+		                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
+		                        </li>
                                 <li>
                                     <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
                                 </li>
@@ -98,7 +91,7 @@
 		                                        <h1 class="modal-title fs-5" id="exampleModalLabel">새 채팅방 만들기</h1>
 		                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		                                    </div>
-											<form action="/createChatroom" name="createChatroom">
+											<form  action="/createChatroom" name="createChatroom"><!--method="POST" enctype="multipart/form-data"-->
 		                                    <div class="modal-body">
 												<div class="container-fluid">
 													<div class="row">
@@ -110,7 +103,7 @@
 													</div>
 													<div class="row">
 														<div class="col-md-5">채팅방 이미지</div>
-														<div class="row col-md-7 ms-auto"> <input id="imageUpload" type="file" name="cfrealname"></div>
+														<div class="row col-md-7 ms-auto"> <input id="imageUpload" type="file" name="file"></div>
 													</div>
 													<div class="row">
 														<br/>
@@ -166,31 +159,31 @@
 		                                    </div>
 		                                </div>
 									</c:forEach>
-	                            </div>
-                            </div>
+	                            </div> <!-- end of <div id="getChatroom" class="row g-4">-->
+									
+									<div class="row" id="chatroomPage">
+										<div class="col-xl-6">
+									<%-- 이전 버튼 --%>
+								        <c:if test="${currentPage > 1}">
+								            <a class="text-purple" href="/pages/chat-entrance?page=${currentPage - 1}">
+								                &lt; 이전으로
+								            </a>
+								        </c:if>
+										</div>
+										<div class="col-xl-6 ms-auto">
+									<%-- 다음 버튼 --%>
+								       <c:if test="${currentPage < totalPage}">
+								           <a class="text-purple" href="/pages/chat-entrance?page=${currentPage + 1}">
+								               다음으로 &gt;
+								           </a>
+								       </c:if>   
+									   </div> 
+								  	</div>
+								  
+							</div>
                         </div>
                     </div>
                     <div>
-						<!-- 페이지-->
-                        <!--<nav aria-label="Page navigation example">
-                            <ul class="pagination align-items-center justify-content-center" margin-left="3rem">
-                                <li class="page-item">
-                                    <a class="page-link text-purple" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link text-purple" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link text-purple" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>-->
                      </div>
                 </div>
             </div>
@@ -258,7 +251,7 @@
 		                        <a href="#" class="link-light"><i class="ri-facebook-circle-fill"></i></a> <a href="#" class="link-light"><i class="ri-twitter-fill"></i></a> <a href="#" class="link-light"><i class="ri-instagram-fill"></i></a>
 		                        <a href="#" class="link-light"><i class="ri-linkedin-box-fill"></i></a>
 		                    </div>
-		                    <a href="../index.html" class="btn btn-warning rounded-0"> <i class="ri-door-line me-2"></i> 로그아웃 </a>
+		                    <a href="/" class="btn btn-warning rounded-0"> <i class="ri-door-line me-2"></i> 로그아웃 </a>
 		                </div>
 		            </div>
 		        </div>
@@ -298,41 +291,76 @@
 			 
 			 //채팅방 검색
 			 $('#searchBtn').click(function(e){
-				var keyword = $('input[name="chatRoomName"]').val();
 				e.preventDefault();
-				$('input[name="chatRoomName"]').val('');
-				$.ajax({
-					url:'/searchChatroom',
-					method:'GET',
-					data:{keyword: keyword},
-					success:function(data){
-						var chatroomList = $('#getChatroom');
-						var searchResult='';
-						chatroomList.html('');
-						for(let i=0; i<data.length;i++){
-							searchResult+='<div class="col-lg-6 col-12 mb-4">'+
-		                                    '<div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">'+
-		                                        '<span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>'+
-		                                        '<h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">'+data[i].chatroomName+'</h5>'+
-		                                        '<div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">'+
-		                                            '<div class="d-flex align-items-center gap-2">'+
-		                                                 '<i class="ri-user-line"></i>'+
-		                                                '<div>'+
-		                                                    '<small class="text-muted">참여자 수</small>'+
-		                                                    '<p class="m-0">'+data[i].chatroomStatus+'명</p>'+
-		                                                '</div>'+
-		                                            '</div>'+
-		                                        '</div>'+
-		                                        '<a href="chat-chatroom?roomNum='+data[i].chatroomNum+'" class="btn btn-outline-purple w-100 mt-2">입장하기</a>'+
-		                                    '</div>'+
-		                                '</div>';
-						}//end of for
-							chatroomList.html(searchResult);
-					},
-					error:function(err){
-						console.error('Failed to load chatroom search:', err);
-					}
-				});//end of ajax
+				var keyword = $('input[name="chatRoomName"]').val();
+				
+					$('input[name="chatRoomName"]').val('');
+					$.ajax({
+					    url: '/searchChatroom',
+					    method: 'GET',
+					    data: { keyword: keyword },
+					    success: function (data) {
+					        var itemsPerPage = 6;
+					        var currentPage = 1;
+					        var totalPages;
+ 							var chatroomList = $('#getChatroom');
+				            var searchResult = '';
+		
+							//검색 결과 출력
+					        function displayPage(page) {
+					            var startIndex = (page - 1) * itemsPerPage;
+					            var endIndex = startIndex + itemsPerPage;
+					            totalPages = Math.ceil(data.length / itemsPerPage);
+					            var slicedData = data.slice(startIndex, endIndex);
+
+					            if (slicedData.length != 0) {
+					                $('#chatroomPage').html('');
+					                chatroomList.html('');
+					                for (let i = 0; i < slicedData.length; i++) {
+					                    searchResult += '<div class="col-lg-6 col-12 mb-4">' +
+					                        '<div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">' +
+					                        '<span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>' +
+					                        '<h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">' + slicedData[i].chatroomName + '</h5>' +
+					                        '<div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">' +
+					                        '<div class="d-flex align-items-center gap-2">' +
+					                        '<i class="ri-user-line"></i>' +
+					                        '<div>' +
+					                        '<small class="text-muted">참여자 수</small>' +
+					                        '<p class="m-0">' + slicedData[i].chatroomStatus + '명</p>' +
+					                        '</div>' +
+					                        '</div>' +
+					                        '</div>' +
+					                        '<a href="chat-chatroom?roomNum=' + slicedData[i].chatroomNum + '" class="btn btn-outline-purple w-100 mt-2">입장하기</a>' +
+					                        '</div>' +
+					                        '</div>';
+					                }
+					                chatroomList.append(searchResult);
+					                // 더보기 버튼
+					                if (currentPage < totalPages) {
+					                    $('#chatroomPage').html('<button class="btn btn-outline-purple mt-3" id="loadMoreBtn">더 보기</button>');
+					                } else {
+					                    $('#chatroomPage').html('');
+					                }//end of if-else
+					            }else{
+									if (currentPage === 1) { // currentPage가 1일 때만 alert를 띄워야 함
+					                    alert('검색 결과가 없습니다.');
+					                }
+								}//end of if  
+					        }//end of  function displayPage
+
+					        displayPage(currentPage);
+
+					        // 더보기 버튼 클릭 이벤트
+					        $('#chatroomPage').on('click', '#loadMoreBtn', function () {
+					            currentPage++;
+					            displayPage(currentPage);
+					        });
+					    },
+					    error: function (err) {
+					        console.error('Failed to load chatroom search:', err);
+					    }
+					});//end of ajax
+				
 			 });//end of click event
 		 
 		</script>
