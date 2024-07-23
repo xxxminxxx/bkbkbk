@@ -106,103 +106,20 @@
                         <div class="ps-lg-5 pt-lg-5">
                             
                             <div class="col d-flex align-items-center justify-content-between bg-white border px-4 py-4 rounded-4">
-                                <h1 class="m-0 fw-bold">${room.chatroomName}</h1>
+                                <div>
+								<h1 class="m-0 fw-bold">${room.chatroomName}</h1>
+								</div>
+								<div>
+									<a id="exit" href="/pages/chat-entrance" class="btn btn-outline-purple w-100 mt-2">나가기</a>
+								</div>
                             </div>
                            <div>
 							<br/>
 							</div>
 							<div id="messageAreaScroll">
-                            <ul id="messageArea" >
-								<!--<div style="display:none" class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
-									<div class="col">
-	                                    <div class="d-flex align-items-center justify-content-between bg-white border px-2 py-2 rounded-4">
-	                                        <div class="w-75">
-	                                            <div class="d-flex align-items-center gap-3 osahan-mb-1">
-													<i class="ri-door-open-line text-muted fs-5"></i>
-	                                                    <p class="text-truncate mb-2 small">oo님이 입장하셨습니다.</p>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
-								</div>-->
-								
-                                <div style="display:none" class="row row-cols-xl-1 row-cols-lg-1 row-cols-md-1 row-cols-1 g-3">
-                                    <div class="col">
-                                        <div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">
-                                            <div class="w-75">
-                                                <div class="d-flex align-items-center gap-3 osahan-mb-1">
-                                                    <i class="ri-user-line text-muted fs-5"></i>
-                                                    <div class="lh-sm">
-                                                        <h4 class="fw-bold text-primary mb-2">[상대 이름]</h4>
-                                                        <p class="text-truncate mb-2 small">채팅 메세지</p>
-                                                        <small class="text-muted">채팅 친 시간</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto d-flex align-items-center gap-3 text-center small">
-                                          <button type="button" class="badge rounded-pill text-bg-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-										  신고하기
-										   </button>
-										  <!-- Modal -->
-										   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										      <div class="modal-dialog">
-										          <div class="modal-content">
-										              <div class="modal-header">
-										                  <h1 class="modal-title fs-5" id="exampleModalLabel">메세지 신고</h1>
-										                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										              </div>
-													  <form id="reportForm">
-											              <div class="modal-body">
-															<div class="container-fluid">
-																<div class="row">
-																	<div class="col-md-5">신고 대상:</div>
-																	<div class="row col-md-7 ms-auto"> [피신고자 아이디]</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-5">신고자:</div>
-																	<div class="row col-md-7 ms-auto"> [신고자 아이디]</div>
-																</div>
-																<div class="row">
-													               	<div class="col-md-5">신고 사유:<br/></div>
-																   <select class="row col-md-7 ms-auto">
-																	<option>욕설</option>
-																	<option>광고</option>
-																	<option>기타</option>
-																	</select>
-																</div>
-															</div>
-											              </div>
-										              <div class="modal-footer">
-										                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-										                 <button type="submit" class="btn btn-danger">신고하기</button>
-										               </div>
-												   </form>
-										             </div>
-										         </div>
-										  </div><!--end of Modal-->
-										  
-                                            </div>
-                                        </div>
-                                    </div>
-									<!--<div id="messageTemplate" style="display:none">
-	                                    <div class="col">
-	                                        <div class="d-flex align-items-center justify-content-between bg-white border px-3 py-3 rounded-4">
-	                                            <div class="w-75">
-	                                                <div class="d-flex align-items-center gap-3 osahan-mb-1">
-	                                                    <i class="ri-user-line text-muted fs-5"></i>
-	                                                    <div class="lh-sm">
-	                                                        <h4 class="fw-bold text-success mb-2">나의 이름</h4>
-	                                                        <p class="text-truncate mb-2 small">내가 보낸 메세지</p>
-	                                                        <small class="text-muted">메세지를 보낸 시간</small>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="ms-auto d-flex align-items-center gap-3 text-center small"> <span class="text-danger fw-bold h5 m-0">-$75</span> </div>
-	                                        </div>
-	                                    </div>
-									</div>-->
-                                </div>
-                            </ul>
+	                            <ul id="messageArea" >
+	                               
+	                            </ul>
 							</div>
                             <!-- 메세지 입력창 -->
                             <form id="messageForm" name="messageForm" nameForm="messageForm">
@@ -308,9 +225,11 @@
 		       var stompClient = Stomp.over(socket);
  			   var message={};
 			   var username= '';
+			   var userId='';
 			   <c:choose>
 			        <c:when test="${not empty sessionScope.userId}">
 			            username="${sessionScope.userName}";
+						userId="${sessionScope.userId}";
 			        </c:when>
 			        <c:otherwise>
 			            username= "임시";
@@ -414,7 +333,7 @@
 					                '<div class="d-flex align-items-center gap-3 osahan-mb-1">' +
 					                    '<i class="ri-user-line text-muted fs-5"></i>' +
 					                    '<div class="lh-sm">' +
-											(parsedMessage.sender === username ?
+											(parsedMessage.senderId === userId?
 											        '<h6 class="fw-bold text-success mb-2">' + parsedMessage.sender + '</h6>' :
 											        '<h6 class="fw-bold text-primary mb-2">' + parsedMessage.sender + '</h6>'
 											    ) +
@@ -508,7 +427,8 @@
 		                   sender: username, // 사용자명을 여기에 설정 (실제로는 로그인 정보에서 가져와야 함)
 		                   content: messageContent,
 		                   //time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) // 현재 시간
-						   time: new Date().toISOString()  // ISO-8601 형식으로 변환
+						   time: new Date().toISOString(),  // ISO-8601 형식으로 변환
+						   senderId: userId
 					    };
 		               stompClient.send("/app/chat.sendMessage/"+${room.chatroomNum}, {}, JSON.stringify(message));
 		               messageInput.value = '';
@@ -532,6 +452,15 @@
 				    }
 				});//end of ajax
 			   });
+			   
+			   $('#exit').click(function(e) {
+			           e.preventDefault(); // 기본 동작(링크 이동)을 막음
+			           var href = $(this).attr('href'); // 클릭한 링크의 href 속성 값 가져오기
+					   var confirmResult = confirm("채팅방을 나가시겠습니까? 채팅방에 남은 인원이 0명이 될 경우 방은 자동으로 삭제됩니다.");
+			           if (confirmResult) {
+			               window.location.href = href; // 새로운 페이지로 이동
+			           }
+			       });
 		   </script>
 		
     </body>
