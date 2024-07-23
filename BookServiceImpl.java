@@ -12,25 +12,24 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookRepository bookRepository;
 
-	
-    @Override
+    
+    //책 제목, 작가, 출판사, 책 소개 별 검색 기능
     public List<BookVO> bookSearchResultByTitle(String bookTitle) {
         return bookRepository.findByBookTitleContainingIgnoreCase(bookTitle);
     }
-
-    @Override
     public List<BookVO> bookSearchResultByWriter(String writer) {
         return bookRepository.findByWriterContainingIgnoreCase(writer);
     }
-
-    @Override
     public List<BookVO> bookSearchResultByPublisher(String publisher) {
         return bookRepository.findByPublisherContainingIgnoreCase(publisher);
     }
-
-    @Override
     public List<BookVO> bookSearchResultByBookPreview(String bookPreview) {
         return bookRepository.findByBookPreviewContainingIgnoreCase(bookPreview);
+    }
+    
+    //책 상세 
+    public BookVO getBookDetails(Integer bookNum) {
+        return bookRepository.findById(bookNum).orElse(null);
     }
     
 }
