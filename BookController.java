@@ -16,6 +16,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    //도서 검색 기능
     @GetMapping("/bookSearchResult")
     public String bookSearchResult(@RequestParam("query") String query,
                                    @RequestParam("type") String type,
@@ -49,5 +50,13 @@ public class BookController {
         model.addAttribute("page", page);
         model.addAttribute("hasMore", hasMore);
         return "pages/book-bookSearchResult";
+    }
+    
+    //도서 상세 페이지
+    @GetMapping("/bookDetails")
+    public String getBookDetails(@RequestParam("bookNum") Integer bookNum, Model model) {
+        BookVO getBookDetails = bookService.getBookDetails(bookNum);
+        model.addAttribute("bookDetails", getBookDetails);
+        return "pages/book-bookDetails";
     }
 }
