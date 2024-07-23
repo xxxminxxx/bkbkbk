@@ -1,4 +1,4 @@
-package com.bookbookbook;
+package com.bookbookbook.domain;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +10,7 @@ public class ChatMessageVO {
 	private String content;
 	private String sender;
 	private LocalDateTime time;
-
+	private String senderId;
 
 	public enum MessageType {
 		CHAT,
