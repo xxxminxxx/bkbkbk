@@ -1,0 +1,107 @@
+.current-character {
+  margin-bottom: 2rem;
+}
+
+.current-character img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.character-item {
+  height: 200px; /* 적절한 높이로 조정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
+
+.character-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+.character-rank {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.character-name {
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+.character-rank,
+.character-name,
+.character-item span {
+  text-align: center;
+  width: 100%;
+}
+
+.character-item span {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.character-item::after {
+  content: attr(data-date);
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 0.7em;
+  color: #adb5bd;
+}
+
+/* 단계별 캐릭터 이미지 처리 */
+.character-image-container {
+    position: relative;
+}
+.character-item img {
+    width: 80px;
+  	height: 80px;
+    object-fit: cover;
+  	margin-bottom: 10px;
+}
+
+/* 잠금 상태인 캐릭터 설정 */
+.character-item[data-visible="false"] img {
+    content: url('../img/물음표.png'); /* 이미지 교체 */
+}
+
+.character-item[data-visible="false"] .character-name,
+.character-item[data-visible="false"] .character-length {
+    display: none;
+}
+
+.character-item[data-visible="false"]::after {
+  /* content: "?"; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  height: 80px; /* 이미지 높이와 동일하게 */
+  margin: 0 auto 10px;
+}
+
+.character-item[data-visible="true"] {
+    cursor: pointer;
+}
+
+.character-item[data-visible="false"] {
+    cursor: default;
+}
