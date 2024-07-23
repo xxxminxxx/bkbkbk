@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.UserDAO">
+
+	<!--회원가입-->
+	<insert id="registerUser" parameterType="UserVO">
+    	INSERT INTO users (
+        	userId,  password, userName, userTel, 
+        	gender, birthDate, joinedDate) 
+    	VALUES (
+        	#{userId}, #{password}, #{userName}, #{userTel},
+        	#{gender}, #{birthDate}, now() )
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="loginUser" parameterType="String" resultType="UserVO">
+        SELECT * FROM users WHERE userId = #{userId}
+    </select>
+
+	
+    <select id="findEmail" resultType="String">
+        SELECT userId FROM users 
+        WHERE userName = #{userName} AND userTel = #{userTel}
+    </select>
+    
+   
+	<!--채팅-->
+	<insert id="submitReport" parameterType="ReportVO">
+		INSERT INTO report 
+			(chatroomNum, reportedUser, reportTime, reportType, reportUser) 
+		VALUES 
+			(#{chatroomNum},#{reportedUser},${reportTime},#{reportType},#{reportUser})
+	</insert>
+	
+	
+	<!-- ################################### -->
+	<!-- 나의 달력 -->
+		<!-- 출석 정보 조회 -->
+	<select id="getAttendancesByUserId" parameterType="String"
+			resultType="CalendarVO">
+		SELECT *
+		FROM	calendar
+		WHERE userNum = (
+						SELECT userNum 
+						FROM users 
+						WHERE userId = #{userId}
+						)
+	</select>
+		<!-- 메모 정보 조회 -->
+	<select id="getMemosByUserId" parameterType="String"
+			resultType="MemoVO">
+		SELECT *
+		FROM	memo
+		WHERE userNum = (
+						SELECT userNum 
+						FROM users 
+						WHERE userId = #{userId}
+						)
+	</select>
+	
+		<!-- 출석체크 기록 저장 -->
+	<!-- <insert id="insertAttendance" parameterType="String">
+		INSERT INTO calendar
+			( userNum, attendance, calendarDate )
+		VALUES
+			( ( SELECT userNum 
+						FROM users 
+						WHERE userId = #{userId} ),
+						 true, 
+						 now() 
+			)
+		ON DUPLICATE KEY UPDATE calendarDate = now()
+	</insert> -->
+	<insert id="insertAttendance" parameterType="String">
+	    INSERT INTO calendar (userNum, attendance, calendarDate)
+	    SELECT 
+	        u.userNum, 
+	        true, 
+	        CURDATE()
+	    FROM 
+	        users u
+	    WHERE 
+	        u.userId = #{userId}
+	        AND NOT EXISTS (
+	            SELECT 1 
+	            FROM calendar c 
+	            WHERE c.userNum = u.userNum 
+	            AND DATE(c.calendarDate) = CURDATE()
+	        )
+	    ON DUPLICATE KEY UPDATE 
+	        attendance = calendar.attendance
+	</insert>
+		<!-- 달력 테이블에서 userNum이 가진 출석 정보 조회 -->
+	<select id="getAttendanceList" parameterType="String"
+			resultType="calendarVO">
+		SELECT 	c.calendarNum,
+				c.userNum,
+				c.attendance,
+				c.calendarDate
+		FROM 	calendar c
+			INNER JOIN users u
+			ON	c.userNum = u.userNum
+		WHERE u.userId = #{userId}
+		ORDER BY c.calendarDate	
+	</select>
+	<!-- ################################### -->
+	<!-- 나의 캐릭터 -->
+		<!-- userId로 userLevel에 따른 캐릭터 정보 조회 -->
+	<select id="getCharactersByUserId" parameterType="String" 
+		resultType="hashmap">
+    	SELECT  u.userLevel, 
+           		c.characterNum, 
+           		c.characterName, 
+           		c.cfrealname, 
+           		c.cfname,
+           		c.characterHeight
+    	FROM users u
+    		INNER JOIN characters c
+    	WHERE u.userId = #{userId}
+    	ORDER BY c.characterNum
+	</select>
+	
+		<!-- 캐릭터 상세보기 -->
+	<select id="myCharactersDetail" parameterType="hashmap"
+			resultType="hashmap">
+		SELECT 	u.userLevel,
+				c.characterNum,
+				c.characterName,
+				c.cfrealname,
+				c.cfname,
+				c.characterHeight,
+				c.characterDescription
+		FROM users u
+			INNER JOIN characters c
+		ON u.userLevel >= c.characterNum
+		WHERE c.characterNum = #{stage} 
+			AND u.userId = #{userId}
+	</select>
+
+</mapper>
