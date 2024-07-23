@@ -24,7 +24,13 @@
 	href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.26tY-h6gH9w.L.W.O/am=GAY/d=0/rs=AN8SPfrev-A3NvrBP0gNq8zXCqKY7IcBLA/m=el_main_css"></head>
   	<!--user-bookSearchResult.CSS-->
     <link rel="stylesheet" href="../css/user-bookSearchResult.css">
-	
+	<style>
+	       .fixed-img {
+	           width: 150px; /* 원하는 고정 너비 */
+	           height: 200px; /* 원하는 고정 높이 */
+	           object-fit: cover; /* 이미지가 고정 크기에 맞춰지도록 설정 */
+	       }
+	   </style>
 	
 	
 <body>
@@ -72,13 +78,18 @@
 			                                    </c:if>
 			                                    <div class="col-lg-3 col-md-4 col-sm-6 d-flex">
 			                                        <div class="card w-100 my-1 shadow rounded-4 overflow-hidden border-0">
-			                                            <img src="${book.bname}" class="card-img-top">
+														<a href="${pageContext.request.contextPath}/bookDetails?bookNum=${book.bookNum}">
+														             <img src="${book.bname}" class="card-img-top">
+														  </a>
 			                                            <div class="card-body d-flex flex-column p-4">
 			                                                <div class="d-flex flex-row mb-2">
 			                                                 
-			                                                    <h5 class="mb-0 me-1 fw-bold">${book.bookTitle}</h5>
+																<a href="${pageContext.request.contextPath}/bookDetails?bookNum=${book.bookNum}" class="text-decoration-none">
+																          <h6 class="mb-0 me-1 fw-bold">${book.bookTitle}</h6>
+																 </a>
 			                                                </div>
-			                                                <p>${book.writer} - ${book.publisher}<br></p>
+			                                                <p>${book.writer} <br> 
+																${book.publisher}</p>
 			                                                <div class="osahan-card-footer d-flex align-items-end px-0 pb-0 mt-auto">
 			                                                    <a href="#!" class="btn btn-purple shadow-0 me-2 w-100">위치찾기</a>
 			                                                </div>
@@ -98,7 +109,8 @@
 			                            </c:when>
 			                            <c:otherwise>
 			                                <div class="col-12 text-center">
-			                                    <p class="mt-5">검색 결과가 없어요. 😭 검색어의 철자가 정확한지 다시 한 번 확인해주세요.</p>
+			                                    <h4 class="mt-5">검색 결과가 없어요😭 <br>
+													검색어의 철자가 정확한지 다시 한 번 확인해주세요.</h4>
 			                                </div>
 			                            </c:otherwise>
 			                        </c:choose>
