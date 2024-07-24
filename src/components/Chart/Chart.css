@@ -1,29 +1,30 @@
 
 .dataCard {
-    background-color: #efefef;
-    border-radius: 0.5em;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    padding: 2em;
-    flex: 1; /* 모든 카드가 같은 너비를 가지도록 설정 */
-  }
-  
-  .dayuse {
-    justify-content: center;
-    margin-top: 30px;
-    width: 30%;
-    height: 20rem;
-  }
+  background-color: #efefef;
+  border-radius: 0.5em;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  padding: 2em;
+  width: 300px; /* flex: 1 대신 고정 너비 설정 */
+  box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
+}
 
+.dayuse {
+  justify-content: center;
+  margin-top: 30px;
+  width: 300px; /* 부모 요소의 너비에 맞추기 */
+  height: 200px; /* 내용에 맞게 높이 조정 */
+}
 
- .text {
-    text-align: center;
- }
+.text {
+  text-align: center;
+}
 
-
- .chart-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* 컴포넌트 사이의 간격을 조정합니다 */
-    flex-wrap: wrap; /* Flexbox 아이템들이 화면을 벗어나면 줄바꿈되도록 설정 */
-  }
-  
+.chart-container {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽부터 채우기 */
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.count{
+  text-align: center;
+}

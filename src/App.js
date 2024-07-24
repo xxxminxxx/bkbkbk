@@ -12,7 +12,7 @@ import Login from './components/Login';
 import Chart from './components/Chart/Chart';
 import Member2 from './components/Member/Member2';
 import Rank from './components/Rank/Rank';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /*
 Dom: BrowserRouter,Route,Routes를 사용하여 동적으로 웹페이지를 변경처리
@@ -25,6 +25,13 @@ path:경로 주소 규칙 /admin/해당 페이지 js파일 이름
 
 function App() {
   const [isLogin, setIsLoggedIn] = useState(false); // 로그인 상태를 관리하는 state
+
+  useEffect(()=> {
+    const loggedInUser = sessionStorage.getItem('admin');
+    if (loggedInUser){
+      setIsLoggedIn(true);
+    }
+  },[]);
 
   return (
     <div className="App">

@@ -2,6 +2,8 @@ import React from "react";
 import "./Modal.css";
 import person from "../../imgs/person.png";
 
+
+
 function Modal({ setOpenModal }) {
   return (
     <div className="modalBackground">

@@ -72,3 +72,38 @@
 .input-group .form-control {
   margin-right: 10px; /* 원하는 간격으로 변경 가능 */
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.pagination .active button {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination .disabled button {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.abc{
+  background-color: #007bff;
+  color: white;
+  border-color: #c8c6ca;
+}

@@ -8,6 +8,7 @@ import sourceData from '../../Data/sourceData.json';
 import MemberChart from './MemberChart';
 import BookChart from './BookChart';
 import DChart from './DChart'; 
+import CountChart from "./CountChart";
 
 
 const Chart= () => {
@@ -15,10 +16,7 @@ const Chart= () => {
     return (
         <div className="chart-container">
         <MemberChart/>
-        <BookChart/>
-        <BookChart/>
-        <BookChart/>
-        <DChart/>
+        <CountChart/>
         </div>
     );
 

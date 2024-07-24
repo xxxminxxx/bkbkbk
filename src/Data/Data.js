@@ -22,7 +22,8 @@ import book from "../imgs/book.png";
 import chart from "../imgs/chart.png";
 import chat from "../imgs/chat.png";
 import singo from "../imgs/singo.png";
-import admin from "../imgs/admin.png"
+import admin from "../imgs/admin.png";
+import rank from "../imgs/rank.png";
 
 
 // Sidebar Data
@@ -55,6 +56,12 @@ export const SidebarData = [
     icon: singo,
     path:'/admin/rank',
     heading: '신고'
+  },
+
+  {
+    icon: rank,
+    path:'/admin/rank',
+    heading: '랭킹1'
   },
 ];
 

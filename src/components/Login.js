@@ -50,6 +50,7 @@ export default function Login({setIsLoggedIn}) {
 
           if (response.data.success){
             setIsLoggedIn(true);
+            sessionStorage.setItem('admin',JSON.stringify(response.data.admin));
             navigate('/admin/chat');
             alert('로그인에 성공하였습니다');
           }else{

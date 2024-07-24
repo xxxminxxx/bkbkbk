@@ -64,7 +64,7 @@ const Sidebar = () => {
             );
           })}
           {/* signoutIcon */}
-          <div className="menuItem" onClick={() => /* 로그아웃 로직 추가 */ {}}>
+          <div className="menuItem exit" onClick={() => /* 로그아웃 로직 추가 */ {}}>
             <UilSignOutAlt />나가기 
           </div>
         </div>
