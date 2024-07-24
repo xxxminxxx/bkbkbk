@@ -22,11 +22,8 @@ public interface UserService {
 	
 	//#####################################
 	// 나의 달력
-		// 출석 정보 조회
-	List<CalendarVO> getAttendancesByUserId(String userId);
 		// 메모 정보 조회
-	List<MemoVO> getMemosByUserId(String userId);
-	
+	List<HashMap<String, Object>> getMemosAtCalendar(String userId);
 	
 		// 출석체크 데이터베이스에 저장
 	boolean  markAttendance(String userId);
