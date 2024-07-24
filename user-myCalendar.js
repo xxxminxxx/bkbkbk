@@ -1,3 +1,6 @@
+// 서버에서 받아온 events 데이터를 저장할 변수
+let eventsData = [];
+
 /* 달력 형태 */
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -11,20 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 'prev,today,next'
         },
 		events: [
-		    {
-		        title: '이벤트 제목',
-		        start: '2024-07-15',
-		        end: '2024-07-20',
-		        allDay: true,  // 종일 이벤트임을 명시
-		    },
-		    {
-		        title: '이벤트 제목2',
-		        start: '2024-07-15',
-		        allDay: true  // 종일 이벤트임을 명시
-		    }
-		    // 추가적인 이벤트 데이터
+		    
 		],
-		// 날짜 클릭 시 이벤트
+		// 날짜 옵션 클릭 시 이벤트
         dateClick: function(info) {
 			// prev, next 클릭 시 연도, 월 선택도 업데이트
 			if (info.date <= today) {
@@ -213,112 +205,158 @@ document.addEventListener('DOMContentLoaded', function() {
 	    });
 	} // end of colorizeWeekends
 	
-	// 출석체크 버튼 이벤트 리스너
+	// 출석체크 버튼에 클릭 이벤트 리스너를 추가합니다.
 	document.getElementById('attendance-check').addEventListener('click', function() {
+	    // 현재 날짜를 생성합니다.
 	    var today = new Date();
-		// 출석체크가 이미 되어 있다면
-	    if (isAttendanceMarked(today)) {
-	        alert('이미 출석체크를 완료하셨습니다.');
-	        return;
-	    }
-	    markAttendance(today);
-	    alert(today.toLocaleDateString() + '에 출석체크 되었습니다!');
+	    // 출석체크 및 마킹 함수를 호출합니다.
+	    checkAndMarkAttendance(today);
 	});
 	
-	// 출석체크 여부 판단 함수
-	function isAttendanceMarked(date) {
-	    var dateStr = date.toLocaleDateString('en-CA');
-	    var attendanceDates = JSON.parse(localStorage.getItem('attendanceDates') || '[]');
-	    return attendanceDates.includes(dateStr);
-	}
+	// *** [1] 페이지 로드 시 실행
+	document.addEventListener('DOMContentLoaded', function() {
+		// *** [2] 출석 정보를 가져와 달력에 표시
+	    getAttendanceList();
+	});
 	
-	// 날짜에 출석체크 표시 추가 함수
-	function markAttendance(date) {
-	    var dateStr = date.toLocaleDateString('en-CA');
-	    var cell = document.querySelector('.fc-day[data-date="' + dateStr + '"]');
-	    
-	    if (cell) {
-	        if (isAttendanceMarked(date)) {
-	            return;  // 이미 출석체크 완료
-	        }
-
-	        // 새로운 출석 표시 추가
-	        var mark = document.createElement('div');
-	        mark.className = 'attendance-mark';
-	        mark.style.position = 'absolute';
-	        mark.style.top = '5px';
-	        mark.style.left = '5px';
-	        mark.style.width = '20px';
-	        mark.style.height = '20px';
-	        mark.style.backgroundImage = 'url("../img/출석완료이미지.png")';
-	        mark.style.backgroundSize = 'cover';
-	        
-	        var dayTop = cell.querySelector('.fc-daygrid-day-top');
-	        if (dayTop) {
-	            dayTop.style.position = 'relative';
-	            dayTop.appendChild(mark);
-	        } else {
-	            cell.appendChild(mark);
-	        }
-
-	        // 로컬 스토리지에 출석 정보 저장
-	        var attendanceDates = JSON.parse(localStorage.getItem('attendanceDates') || '[]');
-	        attendanceDates.push(dateStr);
-	        localStorage.setItem('attendanceDates', JSON.stringify(attendanceDates));
-	    }
-
-	    // 출석체크 버튼 비활성화
-	    updateAttendanceButton();
-	}
-	
-	// 출석체크 버튼 함수 
-	function checkAttendance(date, cell) {
-	    var dateStr = date.toLocaleDateString('en-CA');
-	    var cell = document.querySelector('.fc-day[data-date="' + dateStr + '"]');
-		
-		// 출석체크 판단 코드
-		var attendanceDates = JSON.parse(localStorage.getItem('attendanceDates') || '[]');
-	        
-	    if (cell && attendanceDates.includes(dateStr)) {
-	        var existingMark = cell.querySelector('.attendance-mark');
-	        if (!existingMark) {
-	            var mark = document.createElement('div');
-	            mark.className = 'attendance-mark';
-	            mark.style.position = 'absolute';
-	            mark.style.top = '5px';
-	            mark.style.left = '5px';
-	            mark.style.width = '20px';
-	            mark.style.height = '20px';
-	            mark.style.backgroundImage = 'url("../img/출석완료이미지.png")';
-	            mark.style.backgroundSize = 'cover';
-	            
-	            var dayTop = cell.querySelector('.fc-daygrid-day-top');
-	            if (dayTop) {
-	                dayTop.style.position = 'relative';
-	                dayTop.appendChild(mark);
+	// *** [3] 출석 정보 가져오는 함수 ( getAttendanceList 실행 )
+	// 출석 정보를 가져와서 달력에 표시하는 함수를 정의합니다.
+	function getAttendanceList() {
+	    $.ajax({
+	        url: '/calendar/getAttendance',
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function(data) {
+	            console.log("Received attendance data:", data); // 받은 데이터를 콘솔에 출력합니다.
+	            if (data.attendanceList && Array.isArray(data.attendanceList)) { // 출석 리스트가 존재하고 배열이라면
+	                console.log("getAttendanceList 실행");
+	                data.attendanceList.forEach(function(attendance) {
+	                    var attendanceDate = new Date(attendance.calendarDate); // 출석 날짜를 Date 객체로 변환합니다.
+	                    markAttendance(attendanceDate); // 각 출석 날짜에 대해 출석 표시를 추가합니다.
+	                });
 	            } else {
-	                cell.appendChild(mark);
+	                console.log("No attendance data or invalid format"); // 데이터가 없거나 형식이 잘못되었다면 콘솔에 출력합니다.
+	            }
+	            updateAttendanceButton(); // 출석체크 버튼의 표시 여부를 업데이트합니다.
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error:', error); // 오류를 콘솔에 출력합니다.
+	            alert('출석 정보를 가져오는 중 오류가 발생했습니다.'); // 사용자에게 오류 알림을 표시합니다.
+	        }
+	    });
+	}
+
+	// * 출석체크 버튼 클릭 시 실행
+	// 출석체크 및 마킹 함수를 정의합니다.
+	function checkAndMarkAttendance() {
+	    $.ajax({
+	        url: '/calendar/checkAttendance',
+	        type: 'POST',
+	        dataType: 'text',
+	        success: function(result) {
+	            if (result === 'success') { // 출석체크가 성공했다면
+	                getAttendanceList(); // 출석 정보를 새로 가져와서 달력에 표시합니다.
+	                alert('출석체크 되었습니다!'); // 사용자에게 알림을 표시합니다.
+	            } else {
+	                alert('이미 출석체크를 완료하셨습니다.'); // 이미 출석체크를 했다면 알림을 표시합니다.
+	            }
+	            updateAttendanceButton(); // 출석체크 버튼의 표시 여부를 업데이트합니다.
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error:', error); // 오류를 콘솔에 출력합니다.
+	            alert('출석체크 중 오류가 발생했습니다.'); // 사용자에게 오류 알림을 표시합니다.
+	        }
+	    });
+	}
+	
+	// *  checkAndMarkAttendance()나 getAttendanceList()에서 호출될 때 실행
+	// 날짜에 출석체크 표시를 추가하는 함수를 정의합니다.
+	function markAttendance(date) {
+	    var dateStr = date.toLocaleDateString('en-CA'); // 날짜를 'YYYY-MM-DD' 형식의 문자열로 변환합니다.
+	    var cell = document.querySelector('.fc-day[data-date="' + dateStr + '"]'); // 해당 날짜의 달력 셀을 찾습니다.
+	    if (cell) { // 셀이 존재한다면
+	        var existingMark = cell.querySelector('.attendance-mark'); // 이미 출석 표시가 있는지 확인합니다.
+	        if (!existingMark) { // 출석 표시가 없다면
+	            var mark = document.createElement('div'); // 새로운 div 요소를 생성합니다.
+	            mark.className = 'attendance-mark'; // 클래스 이름을 설정합니다.
+	            mark.style.position = 'absolute'; // 위치를 절대 위치로 설정합니다.
+	            mark.style.top = '5px'; // 상단에서 5px 떨어진 위치에 배치합니다.
+	            mark.style.left = '5px'; // 왼쪽에서 5px 떨어진 위치에 배치합니다.
+	            mark.style.width = '20px'; // 너비를 20px로 설정합니다.
+	            mark.style.height = '20px'; // 높이를 20px로 설정합니다.
+	            mark.style.backgroundImage = 'url("../img/출석완료이미지.png")'; // 배경 이미지를 설정합니다.
+	            mark.style.backgroundSize = 'cover'; // 배경 이미지가 요소를 꽉 채우도록 설정합니다.
+
+	            var dayTop = cell.querySelector('.fc-daygrid-day-top'); // 날짜 표시 영역을 찾습니다.
+	            if (dayTop) {
+	                dayTop.style.position = 'relative'; // 상대 위치로 설정합니다.
+	                dayTop.appendChild(mark); // 출석 표시를 날짜 표시 영역에 추가합니다.
+	            } else {
+	                cell.appendChild(mark); // 날짜 표시 영역이 없으면 셀에 직접 추가합니다.
 	            }
 	        }
 	    }
+	}
+
+	// * 캘린더의 각 날짜 셀이 마운트될 때 실행
+	// 출석체크 여부를 확인하는 함수를 정의합니다.
+	function checkAttendance(date, cell) {
+	    var dateStr = date.toLocaleDateString('en-CA'); // 날짜를 'YYYY-MM-DD' 형식의 문자열로 변환합니다.
 	    
-	    // 출석체크 버튼 상태 업데이트
-	    updateAttendanceButton();
+	    $.ajax({
+	        url: '/calendar/getAttendance',
+	        type: 'GET',
+	        data: { date: dateStr },
+	        dataType: 'json',
+	        success: function(data) {
+	            if (data.attended) { // 출석했다면
+	                console.log("checkAttendance 실행");
+	                markAttendance(date); // 출석 표시를 추가합니다.
+	            }
+	            updateAttendanceButton(); // 출석체크 버튼의 표시 여부를 업데이트합니다.
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error:', error);
+	        }
+	    });
 	}
 	
-	// 출석 버튼의 표시 여부 관리 함수
+	// * 여러 함수에서 호출, 출석 정보를 가져온 후 실행
+	// 출석 버튼의 표시 여부를 관리하는 함수를 정의합니다.
 	function updateAttendanceButton() {
-	    var today = new Date();
-	    var attendanceButton = document.getElementById('attendance-check');
-	    if (isAttendanceMarked(today)) {
-	        attendanceButton.style.display = 'none';
-	    } else {
-	        attendanceButton.style.display = 'flex';
-	    }
+	    var today = new Date().toISOString().split('T')[0]; // 오늘 날짜를 'YYYY-MM-DD' 형식으로 가져옵니다.
+	    var attendanceButton = document.getElementById('attendance-check'); // 출석체크 버튼 요소를 가져옵니다.
+
+	    $.ajax({
+	        url: '/calendar/getAttendance',
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function(data) {
+	            console.log("updateAttendanceButton 실행");
+	            var todayAttendance = data.attendanceList.some(function(attendance) {
+	                return attendance.calendarDate.split('T')[0] === today;
+	            }); // 오늘 출석했는지 확인합니다.
+	            attendanceButton.style.display = todayAttendance ? 'none' : 'flex'; // 출석 여부에 따라 버튼을 표시하거나 숨깁니다.
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error:', error);
+	        }
+	    });
 	}
-    
-	// 초기 체크 (페이지 로드 시 실행)
-	document.addEventListener('DOMContentLoaded', function() {
-	    checkAttendance(new Date());
-	});
+
+	getAttendanceList(); // 출석 정보를 가져와 달력에 표시하는 함수를 호출합니다.
+	
+	
+	/********************* 메모 조회 *****************************/
+	function getMemoList(){
+		
+		$.ajax({
+			url : '/calendar/getMemos',
+			type : 'GET',
+			dataType: 'List',
+			success: function(data){
+				console.log("getMemoList 실행");
+			}
+		}); // end of ajax
+	}
 });
