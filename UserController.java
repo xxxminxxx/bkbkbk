@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -190,33 +189,32 @@ public class UserController {
 	//#######################################
 	//나의 달력
 		// 페이지 연결
+	/*
 	@GetMapping("/pages/user-myCalendar")
 	public String myCalendar() {
 		System.out.println("user-myCalendar 호출");
 		return "pages/user-myCalendar";
 	}
-	/*
-		// fullCalendar와 연결 및 정보 전달
-	@GetMapping("/api/calendar-data")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> getCalendarData(HttpSession session) {
-	    String userId = (String)session.getAttribute("userId");
-	    System.out.println("getCalendarData 실행");
-
-	    if (userId == null) {
-	        return ResponseEntity.status(HttpStatus.SC_UNAUTHORIZED).body(null);
-	    }
-	    // userId로 출석 정보 조회
-	    List<CalendarVO> attendances = userService.getAttendancesByUserId(userId);
-	    // userId로 메모 정보 조회
-	    List<MemoVO> memos = userService.getMemosByUserId(userId);
-
-	    Map<String, Object> response = new HashMap<>();
-	    response.put("attendances", attendances);
-	    response.put("memos", memos);
-
-	    return ResponseEntity.ok(response);
-	} */
+	*/
+	@GetMapping("/pages/user-myCalendar")
+	public String myCalendar(HttpSession session, Model m) {
+		System.out.println("user-myCalendar 호출");
+		
+		/*
+		 * String userId = (String) session.getAttribute("userId");
+		 * 
+		 * List<HashMap<String, Object>> memoList =
+		 * userService.getMemosAtCalendar(userId);
+		 * 
+		 * System.out.println("userController getMemosAtCalendar memoList : " +
+		 * memoList);
+		 */
+		
+		// m.addAttribute("memoList", memoList);
+		
+		return "pages/user-myCalendar";
+	}
+	
 		// 출석체크 데이터베이스에 저장
 	@PostMapping("/calendar/checkAttendance")
     public ResponseEntity<?> checkAttendance(HttpSession session) {
@@ -246,6 +244,20 @@ public class UserController {
 	    
 	    return ResponseEntity.ok().body(Map.of("attendanceList", attendanceList));
 	}
+
+		// 데이터베이스에서 작성한 메모 조회
+	@GetMapping("/calendar/getMemos")
+	public List<HashMap<String, Object>> getMemosAtCalendar(HttpSession session, Model m) {
+		System.out.println("userController getMemosAtCalendar 호출");
+		
+		String userId = (String) session.getAttribute("userId");
+		
+		List<HashMap<String, Object>> memoList = userService.getMemosAtCalendar(userId);
+		
+		System.out.println("userController getMemosAtCalendar memoList : " + memoList);
+		
+		return memoList;
+	} 
 		
 	//#######################################
 	//나의 메모
