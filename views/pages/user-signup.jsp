@@ -181,7 +181,8 @@
 								<input type="email" name="userId" class="form-control bg-dark bg-opacity-50 border-0 px-3 py-2" id="signupEmail" aria-describedby="emailHelp" placeholder="이메일">
 								<small id="emailFeedback" class="form-text"></small>
 								<input type="password" name=password class="form-control bg-grey border-0 px-3 py-2" id="signupPassword" placeholder="비밀번호">
-                                <input type="password" class="form-control bg-dark border-0 px-3 py-2" id="signupPasswordCheck" placeholder="비밀번호 확인">
+								<input type="password" class="form-control bg-dark border-0 px-3 py-2" id="signupPasswordCheck" placeholder="비밀번호 확인">
+								<small id="passwordFeedback" class="form-text"></small>
                                 <input type="text" name=userName class="form-control bg-dark border-0 px-3 py-2" id="signupName" aria-describedby="nameHelp" placeholder="이름">
                                 <input type="tel" name=userTel class="form-control bg-dark border-0 px-3 py-2" id="signupTel" aria-describedby="nameHelp" placeholder="연락처">
                                 
@@ -264,13 +265,14 @@
         <!-- Custom Js -->
         <script src="../js/script.js"></script>
 		
-		
+		<!-- 이용약관 -->
 		<script>
 		function openTerms() {
 		    window.open('user-signupTerms', 'termsWindow', 'width=600,height=700,resizable=yes,scrollbars=yes');
 		}
 		</script>
 		
+		<!-- 회원가입 -->
 		<script>
 			
 			$(document).ready(function() {
@@ -295,47 +297,67 @@
 					}
 			        
 			        // AJAX를 사용한 폼 제출
-			        $.ajax({
-			            url: $(this).attr('action'),
-			            type: 'POST',
-			            data: $(this).serialize(),
-			            success: function(response) {
-			                window.location.href = '/pages/page-signup-success';
-			            },
-			            error: function(xhr) {
-			                if (xhr.status === 400) {
-			                    alert(xhr.responseText);
-			                } else {
-			                    alert('회원가입 중 오류가 발생했습니다.');
-			                }
-			            }
-			        });
-			    });
+					 $.ajax({
+					        url: $(this).attr('action'),
+					        type: 'POST',
+					        data: JSON.stringify($(this).serializeArray().reduce((obj, item) => (obj[item.name] = item.value, obj), {})),
+					        contentType: 'application/json',
+					        success: function(response) {
+					            if (response.success) {
+					                window.location.href = '/pages/page-signup-success';
+					            } else {
+					                alert(response.message);
+					            }
+					        },
+					        error: function(xhr) {
+					            var errorMessage = '회원가입 중 오류가 발생했습니다.';
+					            if (xhr.responseJSON && xhr.responseJSON.message) {
+					                errorMessage = xhr.responseJSON.message;
+					            }
+					            alert(errorMessage);
+					        }
+					    });
+					});
 			});
 			
 			
 			// 이메일 실시간 중복 판별
-			$(document).ready(function() {
-			    $('#signupEmail').on('blur', function() {
-			        var email = $(this).val();
-			        if(email) {
-			            $.ajax({
-			                url: '/check-email',
-			                type: 'POST',
-			                data: { email: email },
-			                success: function(response) {
-			                    if(response === 'duplicate') {
-			                        $('#emailFeedback').text('중복된 이메일입니다.').css('color', 'red');
-			                    } else {
-			                        $('#emailFeedback').text('사용 가능한 이메일입니다.').css('color', 'green');
-			                    }
-			                },
-			                error: function() {
-			                    $('#emailFeedback').text('이메일 확인 중 오류가 발생했습니다.').css('color', 'red');
+			$('#signupEmail').on('blur', function() {
+			    var email = $(this).val();
+			    if(email) {
+			        $.ajax({
+			            url: '/check-email',
+			            type: 'POST',
+			            data: { email: email },
+			            success: function(response) {
+			                if(response === 'duplicate') {
+			                    $('#emailFeedback').text('중복된 이메일입니다.').css('color', 'red');
+			                } else {
+			                    $('#emailFeedback').text('사용 가능한 이메일입니다.').css('color', 'green');
 			                }
-			            });
+			            },
+			            error: function() {
+			                $('#emailFeedback').text('이메일 확인 중 오류가 발생했습니다.').css('color', 'red');
+			            }
+			        });
+			    }
+			});
+			
+			// 비밀번호 / 비밀번호 확인 실시간 판별
+			$(document).ready(function() {
+			    function checkPasswordMatch() {
+			        var password = $('#signupPassword').val();
+			        var confirmPassword = $('#signupPasswordCheck').val();
+			        
+			        if (password != confirmPassword) {
+			            $('#passwordFeedback').text('비밀번호가 일치하지 않습니다.').css('color', 'red');
+			        } else {
+			            $('#passwordFeedback').text('비밀번호가 일치합니다.').css('color', 'green');
 			        }
-			    });
+			    }
+
+			    $('#signupPassword, #signupPasswordCheck').on('keyup', checkPasswordMatch);
+
 			});
 		
 		</script>
