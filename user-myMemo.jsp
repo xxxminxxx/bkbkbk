@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<!-- forEach 용 taglib -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko" class="translated-ltr" data-darkreader-proxy-injected="true"><head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -100,96 +102,62 @@
 </div>
 <!-- Elements Components -->
 <div class="py-5" id="elements">
-  <div class="container">
-	<h1 class="text-center mb-4">나의 메모</h1>
-    <div class="sort-buttons mb-3">
-      <div class="btn-group" role="group">
-        <input type="radio" class="btn-check" name="sort" id="latest" autocomplete="off" checked>
-        <label class="btn btn-outline-secondary btn-sm" for="latest">최신순</label>
-        <input type="radio" class="btn-check" name="sort" id="oldest" autocomplete="off">
-        <label class="btn btn-outline-secondary btn-sm" for="oldest">오래된 순</label>
-      </div>
+    <div class="container">
+        <h1 class="text-center mb-4">나의 메모</h1>
+        
+        <c:choose>
+            <c:when test="${empty memoList}">
+                <div class="text-center py-5">
+                    <h3 class="text-muted">아직 작성한 메모가 없습니다.</h3>
+                </div>
+				<div id="without-data">
+					<div class="container text-center mt-4">
+					  <a href="/pages/user-myBookshelf" class="btn btn-primary btn-lg">나의 서재 바로가기</a>
+					</div>
+				</div>
+            </c:when>
+            <c:otherwise>
+                <div class="sort-buttons mb-3">
+                    <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="sort" id="latest" autocomplete="off" checked>
+                        <label class="btn btn-outline-secondary btn-sm" for="latest">최신순</label>
+                        <input type="radio" class="btn-check" name="sort" id="oldest" autocomplete="off">
+                        <label class="btn btn-outline-secondary btn-sm" for="oldest">오래된 순</label>
+                    </div>
+                </div>
+
+                <div id="book-entries">
+                    <c:forEach items="${memoList}" var="memo">
+                        <div class="book-entry mb-4 border rounded p-3 bg-white">
+                            <div class="row g-0">
+                                <div class="col-md-2">
+                                    <a href="/pages/user-myMemoDetail?shelfNum=${memo.shelfNum}">
+                                        <img src="${memo.bname}" alt="${memo.bfrealname}" class="img-fluid book-cover">
+                                    </a>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="card-body">
+                                        <a href="/pages/user-myMemoDetail?shelfNum=${memo.shelfNum}" class="book-title-link">
+                                            <h3 class="book-title">${memo.bookTitle}</h3>
+                                        </a>
+                                        <a href="/pages/book-bookSearchResult?author=${memo.writer}" class="book-author">${memo.writer}</a>
+                                        <div class="book-memo">
+                                            <a href="/pages/user-myMemoDetail?shelfNum=${memo.shelfNum}" class="book-memo-link">
+                                                <p>${memo.memoContent}</p>
+                                            </a>
+                                        </div>
+                                        <div class="text-end mt-2 memo-date">
+                                            <small class="text-muted">${memo.memoDate}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- end of book-entry-->
+                    </c:forEach>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
-    <div id="book-entries">
-	    <div class="book-entry mb-4 border rounded p-3 bg-white"> 
-	      <div class="row g-0">  
-	        <div class="col-md-2"> 
-	          <a href="/pages/user-myMemoDetail?memoNum=1">
-	            <img src="../img/책표지2.jpg" alt="책 표지" class="img-fluid book-cover">
-	          </a>
-	        </div> 
-	        <div class="col-md-10"> 
-	          <div class="card-body"> 
-	            <a href="/pages/user-myMemoDetail?memoNum=1" class="book-title-link">
-	              <h3 class="book-title">책 제목</h3>
-	            </a>
-	            <a href="/pages/book-bookSearchResult?author=Author 1" class="book-author">Author 1</a>
-				<div class="book-memo">
-					<a href="/pages/user-myMemoDetail?memoNum=1" class="book-memo-link">
-	              		<p>메모</p>
-					</a>
-	            </div>
-	            <div class="text-end mt-2 memo-date"> 
-	              <small class="text-muted">2024.07.16</small>
-	            </div> 
-	          </div> 
-	        </div> 
-	      </div> 
-	    </div>
-		
-		<div class="book-entry mb-4 border rounded p-3 bg-white"> 
-	      <div class="row g-0">  
-	        <div class="col-md-2"> 
-	          <a href="/pages/user-myMemoDetail?memoNum=1">
-	            <img src="../img/책표지2.jpg" alt="책 표지" class="img-fluid book-cover">
-	          </a>
-	        </div> 
-	        <div class="col-md-10"> 
-	          <div class="card-body"> 
-	            <a href="/pages/user-myMemoDetail?memoNum=1" class="book-title-link">
-	              <h3 class="book-title">책 제목</h3>
-	            </a>
-	            <a href="/pages/book-bookSearchResult?author=Author 1" class="book-author">Author 1</a>
-				<div class="book-memo">
-					<a href="/pages/user-myMemoDetail?memoNum=1" class="book-memo-link">
-	              		<p>메모</p>
-					</a>
-	            </div>
-	            <div class="text-end mt-2 memo-date"> 
-	              <small class="text-muted">2024.05.16</small>
-	            </div> 
-	          </div> 
-	        </div> 
-	      </div> 
-	    </div>
-		
-		<div class="book-entry mb-4 border rounded p-3 bg-white"> 
-	      <div class="row g-0">  
-	        <div class="col-md-2"> 
-	          <a href="/pages/user-myMemoDetail?memoNum=1">
-	            <img src="../img/책표지2.jpg" alt="책 표지" class="img-fluid book-cover">
-	          </a>
-	        </div> 
-	        <div class="col-md-10"> 
-	          <div class="card-body"> 
-	            <a href="/pages/user-myMemoDetail?memoNum=1" class="book-title-link">
-	              <h3 class="book-title">책 제목</h3>
-	            </a>
-	            <a href="/pages/book-bookSearchResult?author=Author 1" class="book-author">Author 1</a>
-				<div class="book-memo">
-					<a href="/pages/user-myMemoDetail?memoNum=1" class="book-memo-link">
-	              		<p>메모</p>
-					</a>
-	            </div>
-	            <div class="text-end mt-2 memo-date"> 
-	              <small class="text-muted">2024.05.20</small>
-	            </div> 
-	          </div> 
-	        </div> 
-	      </div> 
-	    </div> <!-- end of book-entry-->
-    </div>
-  </div>
 </div>
 <!-- Elements Section-->
 
