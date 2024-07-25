@@ -31,6 +31,19 @@ public interface UserService {
 	List<CalendarVO> getAttendanceList(String userId);
 	
 	//#####################################
+	// 나의 메모
+		// 메모 정보 조회 
+	List<HashMap<String, Object>> getMemosAtMemo(String userId);
+		// 메모 상세 조회
+	List<HashMap<String, Object>> getMemoDetailByMemoNum(HashMap<String, Object> params);
+		// 메모 삭제
+	int memoDelete(HashMap<String, Object> params);
+		// 메모 수정
+	int updateMemo(HashMap<String, Object> params);
+		// memo 테이블에서 shelfNum을 포함하는 레코드가 있는지 확인
+	int hasMemoForShelf(HashMap<String, Object> params);
+	
+	//#####################################
 	// 나의 캐릭터
 		// userId로 userLevel에 따른 캐릭터 정보 조회
 	List<HashMap<String, Object>> getCharactersByUserId(String userId);
