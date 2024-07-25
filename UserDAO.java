@@ -37,7 +37,20 @@ public interface UserDAO {
  	public Integer insertAttendance(String userId);
  		// 데이터베이스에서 출석 정보 조회
  	public List<CalendarVO> getAttendanceList(String userId);
-    
+ 	
+ 	//##############################
+ 	// 나의 메모
+ 		// 메모 정보 조회
+ 	public List<HashMap<String, Object>> getMemosAtMemo(String userId);
+ 		// 메모 상세 조회
+ 	public List<HashMap<String, Object>> getMemoDetailByMemoNum(HashMap<String, Object> params);
+ 		// 메모 삭제
+ 	public int memoDelete(HashMap<String, Object> params);
+ 		// 메모 수정
+ 	public int updateMemo(HashMap<String, Object> params);
+ 		// memo 테이블에서 shelfNum을 포함하는 레코드가 있는지 확인
+ 	int countMemoForShelf(HashMap<String, Object> params);
+ 	
     //##############################
   	// 나의 캐릭터
   		// userId로 userLevel에 따른 캐릭터 정보 조회
