@@ -135,7 +135,8 @@
 		          flex-wrap: wrap; /* 화면 크기에 따라 자동으로 줄바꿈 */
 		          justify-content: center;
 		      }
-		      .book-card {
+			  
+		.book-card {
 		          margin: 10px;
 		          padding: 20px;
 		          border: 1px solid #ddd;
@@ -144,21 +145,85 @@
 		          box-sizing: border-box; /* padding과 border를 width에 포함 */
 		          text-align: center;
 		          background-color: #f9f9f9;
-		      }
-		      .book-img {
-		          width: 100%;
-		          height: auto;
-		      }
-		      @media (max-width: 1200px) {
-		          .book-card {
-		              width: 45%; /* 화면 크기가 작아질 때 두 개씩 배치 */
-		          }
-		      }
-		      @media (max-width: 768px) {
-		          .book-card {
-		              width: 100%; /* 화면 크기가 더 작아질 때 한 개씩 배치 */
-		          }
-		      }
+		}
+			  
+		.col-md-3 {
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    padding: 15px;
+		}
+
+		.book-card2 {
+		    width: 100%;
+		    height: 100%;
+		    display: flex;
+		    flex-direction: column;
+		    align-items: center;
+		    background-color:transparent;
+		    border-radius: 10px;
+		    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+		    padding: 15px;
+		}
+
+		.book-img-container {
+		    width: 100%;
+		    height: 200px;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    overflow: hidden;
+		    margin-bottom: 15px;
+		}
+
+		.book-img {
+		    max-width: 100%;
+		    max-height: 100%;
+		    object-fit: contain;
+		}
+
+		.book-info {
+		    width: 100%;
+		    text-align: center;
+		}
+
+		.book-category {
+		    font-size: 0.8em;
+		    color: #666;
+		    margin-bottom: 5px;
+		}
+
+		.book-title {
+		    font-size: 1em;
+		    font-weight: bold;
+		    margin-bottom: 10px;
+		    /* 긴 제목을 위한 처리 */
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    display: -webkit-box;
+		    -webkit-line-clamp: 2; /* 최대 2줄 */
+		    -webkit-box-orient: vertical;
+		}
+
+		.book-author {
+		    font-size: 0.9em;
+		    color: #333;
+		}
+
+		@media (max-width: 768px) {
+		    .col-md-3 {
+		        width: 50%;
+		    }
+		}
+
+		@media (max-width: 576px) {
+		    .col-md-3 {
+		        width: 100%;
+		    }
+		}
+		
+		
+			  
         .news-section {
             margin-top: 50px;
         }
@@ -365,7 +430,79 @@
 		         margin: 0;
 		     }
 		
-		
+			 
+			 /* 인기도서 carousel 관련 */
+			 #popularBooksSection {
+			     
+			     padding: 50px 0;
+			 }
+			 
+			 .book-card {
+			     background-color: white;
+			     border-radius: 10px;
+			     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+			     padding: 15px;
+			     margin-bottom: 20px;
+			     height: 100%;
+			     display: flex;
+			     flex-direction: column;
+			 }
+
+			 .book-info {
+			     flex-grow: 1;
+			     display: flex;
+			     flex-direction: column;
+			     justify-content: flex-start;
+			 }
+
+			 .book-img-container {
+			     width: 100%;
+			     height: 300px; /* 또는 원하는 높이 */
+			     display: flex;
+			     align-items: center;
+			     justify-content: center;
+			     overflow: hidden;
+			 }
+
+			 .book-img {
+			     max-width: 100%;
+			     max-height: 100%;
+			     object-fit: contain;
+			 }
+
+			 .book-category {
+			     font-size: 0.8em;
+			     color: #666;
+			     margin-bottom: 5px;
+			 }
+
+			 .book-title {
+			     font-size: 1em;
+			     font-weight: bold;
+			     margin-bottom: 10px;
+			 }
+
+			 .book-author {
+			     font-size: 0.9em;
+			     color: #333;
+			 }
+
+			 .carousel-control-prev,
+			 .carousel-control-next {
+			     width: 5%;
+			     opacity: 0.8;
+			 }
+
+			 .carousel-control-prev-icon,
+			 .carousel-control-next-icon {
+			     background-color: rgba(0,0,0,0.5);
+			     border-radius: 50%;
+			     padding: 15px;
+			 }
+
+			 #popularBooksCarousel .carousel-item {
+			     padding: 0 50px;
+			 }
     </style>
 </head>
 <body id="page-top">
@@ -473,10 +610,10 @@
 									<div class="text-center mb-4">
 									    <c:choose>
 									        <c:when test="${not empty sessionScope.userId}">
-									            <h5>${sessionScope.userName}님이 좋아하실 만한 도서입니다.</h5>
+									            <h3>${sessionScope.userName}님이 좋아하실 만한 도서입니다.</h3>
 									        </c:when>
 									        <c:otherwise>
-									            <h5>인기 도서 추천</h5>
+									            <h3>인기 도서 추천</h3>
 									        </c:otherwise>
 									    </c:choose>
 									</div>
@@ -522,21 +659,57 @@
 				
 
 								   <div class="full-width-background">
-								       <div class="container mt-5" id="popularBooksSection" style="width: 100%;">
+								       <div class="container mt-5" id="popularBooksSection">
 								           <div class="text-center mb-4">
-								               <h5>인기 대출 도서</h5>
+								               <h3>인기 대출 도서</h3>
 								           </div>
-								           <div class="row justify-content-center">
-								               <c:forEach items="${popularBooks}" var="book" begin="0" end="3">
-								                   <div class="book-card">
-								                       <img src="${book.bestfname}" class="book-img" alt="${book.bestTitle}">
-								                       <div class="text-center">
-								                           <p>${book.cateNum}</p>
-								                           <h5>${book.bestTitle}</h5>
-								                           <p>${book.bestWriter} · ${book.bestPublisher}</p>
+								           <div id="popularBooksCarousel" class="carousel slide" data-bs-ride="carousel">
+								               <div class="carousel-inner">
+								                   <div class="carousel-item active">
+								                       <div class="row">
+								                           <c:forEach items="${popularBooks}" var="book" begin="0" end="3">
+								                               <div class="col-md-3">
+								                                   <div class="book-card2">
+																	<div class="book-img-container">
+																	    <img src="${book.bestfname}" class="book-img" alt="${book.bestTitle}">
+																	</div>
+								                                       <div class="book-info">
+								                                           <p class="book-category">${book.cateNum}</p>
+								                                           <h5 class="book-title">${book.bestTitle}</h5>
+								                                           <p class="book-author">${book.bestWriter}</p>
+								                                       </div>
+								                                   </div>
+								                               </div>
+								                           </c:forEach>
 								                       </div>
 								                   </div>
-								               </c:forEach>
+								                   <div class="carousel-item">
+								                       <div class="row">
+								                           <c:forEach items="${popularBooks}" var="book" begin="4" end="7">
+								                               <div class="col-md-3">
+								                                   <div class="book-card2">
+																	<div class="book-img-container">
+																	    <img src="${book.bestfname}" class="book-img" alt="${book.bestTitle}">
+																	</div>
+								                                       <div class="book-info">
+								                                           <p class="book-category">${book.cateNum}</p>
+								                                           <h5 class="book-title">${book.bestTitle}</h5>
+								                                           <p class="book-author">${book.bestWriter}</p>
+								                                       </div>
+								                                   </div>
+								                               </div>
+								                           </c:forEach>
+								                       </div>
+								                   </div>
+								               </div>
+								               <button class="carousel-control-prev" type="button" data-bs-target="#popularBooksCarousel" data-bs-slide="prev">
+								                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								                   <span class="visually-hidden">Previous</span>
+								               </button>
+								               <button class="carousel-control-next" type="button" data-bs-target="#popularBooksCarousel" data-bs-slide="next">
+								                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
+								                   <span class="visually-hidden">Next</span>
+								               </button>
 								           </div>
 								       </div>
 								   </div>
