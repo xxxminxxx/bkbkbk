@@ -1,3 +1,41 @@
+body, html {
+          height: 100%;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+      }
+      .container-flex {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+      }
+      .content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+      }
+	  .tab-pane {
+	            min-height: calc(100vh - 200px); /* 최소 높이 설정 */
+	        }
+			
+			.no-books-message {
+			    font-size: 36px;
+			    text-align: center;
+				margin-top: 100px;
+				margin-bottom: 100px;
+			}
+			#without-data {
+			    display: flex;
+			    flex-direction: column;
+			    align-items: center;
+			    justify-content: center;
+			    height: 100%;
+			    margin-top: 20vh; /* 페이지 중앙보다 아래로 이동 */
+			}
+
 #header{
 	background-color: white !important;
 }
@@ -42,7 +80,7 @@
 
 .star {
     font-size: 40px; /* 원하는 크기로 설정 */
-    color: gold; /* 별 색상 설정 */
+    color: #D95F76; /* 별 색상 설정 */
 }
 
 .star-empty {
