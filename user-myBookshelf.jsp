@@ -325,7 +325,7 @@ pageEncoding="UTF-8"%>
 
 			    // 모달 저장 버튼 클릭 이벤트 처리
 			    $('#saveMemoButton').on('click', function() {
-			        var memoContent = $('#memoContent').val();
+			        var memoContent = $('#memoContent').val().trim(); // 앞뒤 공백 제거
 			        var userNum = 14; // 실제로는 세션이나 다른 방법으로 가져와야 합니다.
 			        var shelfNum = 23; // 실제로는 적절한 값을 설정해야 합니다.
 
@@ -335,12 +335,17 @@ pageEncoding="UTF-8"%>
 			            return;
 			        }
 
+			        if (memoContent === '') {
+			            alert('메모 내용을 입력해주세요.');
+			            return;
+			        }
+
 			        $.ajax({
 			            url: '/saveMemo',
 			            type: 'POST',
-						contentType: 'application/json',
-						  data: JSON.stringify({
-						    memoContent: memoContent, // encodeURIComponent 제거
+			            contentType: 'application/json',
+			            data: JSON.stringify({
+			                memoContent: memoContent,
 			                userNum: userNum,
 			                shelfNum: shelfNum,
 			                bookTitle: currentBookTitle
@@ -348,7 +353,8 @@ pageEncoding="UTF-8"%>
 			            success: function(response) {
 			                console.log('서버 응답:', response);
 			                alert('메모가 저장되었습니다.');
-			                $('#memoModal').modal('hide');
+			                $('#memoContent').val(''); // 텍스트 입력창 비우기
+			                $('#memoModal').modal('hide'); // 성공 시 모달 자동으로 닫기
 			            },
 			            error: function(xhr, status, error) {
 			                console.error('저장 실패:', error);
@@ -356,9 +362,18 @@ pageEncoding="UTF-8"%>
 			            }
 			        });
 			    });
+
+			    // 모달 닫기 버튼 클릭 이벤트 처리 (선택적)
+			    $('#memoModal').on('hide.bs.modal', function (e) {
+			        if ($('#memoContent').val().trim() !== '') {
+			            if (!confirm('작성 중인 내용이 있습니다. 정말로 닫으시겠습니까?')) {
+			                e.preventDefault(); // 모달 닫기 취소
+			            } else {
+			                $('#memoContent').val(''); // 확인을 누르면 텍스트 입력창 비우기
+			            }
+			        }
+			    });
 			});
 			</script>
-			
-
     </body>
 </html>
