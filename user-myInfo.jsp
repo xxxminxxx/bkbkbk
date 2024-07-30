@@ -22,18 +22,18 @@
     <!-- Common Css -->
     <link rel="stylesheet" href="../css/common.css">
     <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.26tY-h6gH9w.L.W.O/am=GAY/d=0/rs=AN8SPfrev-A3NvrBP0gNq8zXCqKY7IcBLA/m=el_main_css">
-	<style>
-		.btn-primary {
-		    background-color: #f77808d9;
-		    border-color: #f77808d9;
-		    color: white;
-		    padding: 10px 20px;
-		    font-size: 18px;
-		    border-radius: 5px;
-		    text-decoration: none;
-		    transition: background-color 0.3s ease;
-		}
-	</style>
+    <style>
+        .btn-primary {
+            background-color: #f77808d9;
+            border-color: #f77808d9;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+    </style>
 </head>
 
 
@@ -58,7 +58,7 @@
 
                         <a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myCalendar"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 달력</font></font></font></font></a>
 
-                        <a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myStat1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 통계</font></font></font></font></a>
+                        <a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myStat"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 통계</font></font></font></font></a>
 
                     </div>
                 </div>
@@ -73,7 +73,6 @@
 <div class="py-5" id="elements">
     <div class="container">
         <h1 class="text-center mb-4">나의 정보 수정</h1>
-        <div class="text-center">
             <c:choose>
                 <c:when test="${not empty sessionScope.userId}">
                     <div class="container" style="padding:100">
