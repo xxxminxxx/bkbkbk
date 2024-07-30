@@ -84,10 +84,10 @@
                                 var imageSize = new kakao.maps.Size(24, 35);
                                 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-                                // 마커가 표시될 위치입니다
+                                // 마커가 표시될 위치
                                 var markerPosition  = new kakao.maps.LatLng(37.5542685,126.9242273);
 
-                                // 마커를 생성합니다
+                                // 마커 생성
                                 var marker = new kakao.maps.Marker({
                                     position: markerPosition,
                                     image: markerImage,
@@ -103,7 +103,6 @@
                                         '<span style="font-size:12px;">주소: 서울특별시 마포구 홍익로 2길 16</span><br> ' +
                                         '<span style="font-size:13px;">TEL: 02-2137-0000</span>' +
                                         '</div>',
-                                    /*  iwRemoveable = true; // 닫을 수 있는 x버튼*/
 
                                     iwPosition = new kakao.maps.LatLng(37.5563, 126.9347); //인포윈도우 표시 위치
 
@@ -218,6 +217,7 @@
         * 역할:      사용자가 선택한 구의 좌표를 기반으로 지도에 해당 위치를 표시하고, 해당 구의 도서관 정보를 가져와 마커와 인포윈도우를 생성해 지도에 표시하는 함수
         */
     function moveMap() {
+        //alert("시작");
         let libName, libAddr, libLat, libLng, libTel, libHomepage;
         let positions = [];
         let selectedValue = document.getElementById('gu').value;
@@ -240,7 +240,7 @@
         $.ajax({
             url: 'http://data4library.kr/api/libSrch', // 요청을 보낼 URL
             type: 'GET', // 요청 방식
-            dataType: 'xml',
+            dataType: 'xml', /*추가*/
             async: false, //동기화
             data : params,
             success: function(data) {
@@ -268,7 +268,7 @@
                 // positions 배열을 사용하여 마커를 생성하고 지도에 추가하는 로직
                 //마커
                 for (let i = 0; i < positions.length; i ++) {
-
+                console.log("호출 1");
                     // 마커 생성
                     let marker = new kakao.maps.Marker({
                         map: map, // 마커를 표시할 지도
@@ -276,7 +276,7 @@
                         title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됨
                         image : markerImage, // 마커 이미지
                     });
-
+                    console.log("호출 2");
                     // 인포윈도우 내용 동적 생성
                     let iwContent = '<div style="padding:5px; width:200px; text-align:left; word-break:break-all;">' + //word-break:break-all: 강제 줄바꿈(인포윈도우 넘어가지 않게)
                         '<strong style="font-size:14px; color:darkorange;">' + positions[i].title + '</strong><br>' +
@@ -284,17 +284,18 @@
                         '<span style="font-size:12px;">주소: ' + positions[i].addr + '</span><br>' +
                         '<span style="font-size:13px;">TEL: ' + positions[i].tel + '</span>' +
                         '</div>';
-
+                    console.log("호출 3");
                     // 인포윈도우 생성 (for문 안에서 각 마커마다)
                     let infowindow = new kakao.maps.InfoWindow({
                         content: iwContent
                     });
+                    console.log("호출 4");
 
                     // 마커에 클릭 이벤트 등록
                     kakao.maps.event.addListener(marker, 'click', function() {
                         infowindow.open(map, marker);
                     });
-
+                    console.log("호출 5");
                     // 지도 클릭시 인포윈도 사라지게
                     kakao.maps.event.addListener(map, 'click', function() {
                         infowindow.close();
@@ -309,6 +310,8 @@
     }
 
 </script>
+
+
 
 
 <!-- Nav Sidebar -->
