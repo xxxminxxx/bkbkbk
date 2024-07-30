@@ -37,7 +37,44 @@
     <!-- navbar -->
     <div class="elements-nav">
         <!-- bootom nav -->
-        <%@ include file="../header.jsp" %>
+        <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
+            <div class="container">
+                <div class="position-relative d-flex align-items-center gap-2 site-brand">
+                    <img src="../img/bookbookbookLogo.png" alt="북북북 로고">
+                    <div class="lh-1">
+                        <h5 class="fw-bold m-0 text-white">BOOKBOOKBOOK</h5>
+                        <!-- <small class="text-muted text-white-50">One Page</small> -->
+                    </div>
+                    <a class="stretched-link" href="/"></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav m-auto gap-4 m-none">
+                        <li class="nav-item dropdown single-dropdown-nav">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 서재 </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-grid.html">읽은 책</a></li>
+                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-list.html">읽고 있는 책</a></li>
+                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-three-coulmn.html">읽고 싶은 책</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
+                        </li>
+                        <li class="nav-item dropdown single-dropdown-nav">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 정보 </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-grid.html">나의 정보</a></li>
+                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-list.html">나의 달력</a></li>
+                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-three-coulmn.html">나의 메모</a></li>
+                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-four-coulmn.html">나의 통계</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <a href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그인 </a>
+                    <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
+                </div>
+            </div>
+        </nav>
     </div>
     <!-- header -->
     <div class="py-5">
@@ -84,10 +121,10 @@
                                 var imageSize = new kakao.maps.Size(24, 35);
                                 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-                                // 마커가 표시될 위치
+                                // 마커가 표시될 위치입니다
                                 var markerPosition  = new kakao.maps.LatLng(37.5542685,126.9242273);
 
-                                // 마커 생성
+                                // 마커를 생성합니다
                                 var marker = new kakao.maps.Marker({
                                     position: markerPosition,
                                     image: markerImage,
@@ -103,6 +140,7 @@
                                         '<span style="font-size:12px;">주소: 서울특별시 마포구 홍익로 2길 16</span><br> ' +
                                         '<span style="font-size:13px;">TEL: 02-2137-0000</span>' +
                                         '</div>',
+                                    /*  iwRemoveable = true; // 닫을 수 있는 x버튼*/
 
                                     iwPosition = new kakao.maps.LatLng(37.5563, 126.9347); //인포윈도우 표시 위치
 
@@ -168,8 +206,6 @@
         <!-- End Row -->
     </div>
 </div>
-<!-- End Features -->
-<!-- footer -->
 
 <script>
     document.getElementById('dosi').addEventListener('change', function() {
@@ -265,10 +301,10 @@
                     console.log(positions);
                 });
 
-                // positions 배열을 사용하여 마커를 생성하고 지도에 추가하는 로직
+                // 지도 추가 (positions 배열을 사용하여 마커를 생성하고 지도에 추가)
                 //마커
                 for (let i = 0; i < positions.length; i ++) {
-                console.log("호출 1");
+
                     // 마커 생성
                     let marker = new kakao.maps.Marker({
                         map: map, // 마커를 표시할 지도
@@ -276,26 +312,25 @@
                         title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됨
                         image : markerImage, // 마커 이미지
                     });
-                    console.log("호출 2");
+
                     // 인포윈도우 내용 동적 생성
-                    let iwContent = '<div style="padding:5px; width:200px; text-align:left; word-break:break-all;">' + //word-break:break-all: 강제 줄바꿈(인포윈도우 넘어가지 않게)
+                    let iwContent = '<div style="padding:5px; width:200px; text-align:left; word-break:break-all;">' +
                         '<strong style="font-size:14px; color:darkorange;">' + positions[i].title + '</strong><br>' +
                         '<span style="font-size:13px;"><a href="' + positions[i].page + '" target="_blank" style="color:orange; text-decoration: underline orange;">' + positions[i].page + '</a></span><br>' + // target="_blank": 링크가 새 탭에서 열리도록.
                         '<span style="font-size:12px;">주소: ' + positions[i].addr + '</span><br>' +
                         '<span style="font-size:13px;">TEL: ' + positions[i].tel + '</span>' +
                         '</div>';
-                    console.log("호출 3");
+
                     // 인포윈도우 생성 (for문 안에서 각 마커마다)
                     let infowindow = new kakao.maps.InfoWindow({
                         content: iwContent
                     });
-                    console.log("호출 4");
 
                     // 마커에 클릭 이벤트 등록
                     kakao.maps.event.addListener(marker, 'click', function() {
                         infowindow.open(map, marker);
                     });
-                    console.log("호출 5");
+
                     // 지도 클릭시 인포윈도 사라지게
                     kakao.maps.event.addListener(map, 'click', function() {
                         infowindow.close();
