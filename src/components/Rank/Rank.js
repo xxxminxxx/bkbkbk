@@ -1,50 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Rank.css';
+import SingoModal from '../Modal/SingoModal';
 
-
-const LeaderboardItem = ({ rank, name, points, read, days }) => (
-  <div className="leaderboard-item">
-    <div className="leaderboard-item-left">
-      <div className="leaderboard-item-avatar">
-        {/* 여기에 캐릭터 이미지를 넣을 수 있습니다 */}
-        <div className="leaderboard-item-avatar-placeholder">
-        </div>
-        <div className="leaderboard-item-rank">{rank}</div>
-      </div>
-      <span className="leaderboard-item-name">{name}</span>
-    </div>
-    <div className="leaderboard-item-right">
-      <span className="leaderboard-item-stat">읽은권수: {read}</span>
-      <span className="leaderboard-item-stat">회원 유지일수: {days}</span>
-    </div>
-  </div>
-);
+const projectData = [
+  { id: 1, name: '23-03-22 10:53', email: 'hgover@gmail.com', project: '악의적인 후기', weeks: '내이름', status: '욕설', budget: '23-03-22 10:53' },
+  { id: 2, name: '23-03-22 10:53', email: 'hgover@gmail.com', project: '폄하하는 내용', weeks: '강아지22', status: '욕설', budget: '23-03-22 10:53' },
+  { id: 3, name: '23-03-22 10:53', email: 'hgover@gmail.com', project: '비난의 글', weeks: '홍길동', status: '욕설', budget: '23-03-22 10:53' },
+  { id: 4, name: '23-03-22 10:53', email: 'hgover@gmail.com', project: '욕설이 난무', weeks: '코기이스베스트', status: '욕설', budget: '23-03-22 10:53' },
+  { id: 5, name: '23-03-22 10:53', email: 'hgover@gmail.com', project: '이상함', weeks: '아이앰샘2', status: '욕설', budget: '23-03-22 10:53' },
+];
 
 const Rank = () => {
-  const data = [
-    { name: '변*영', points: 15996.45, read: 997, days: 90 },
-    { name: '이*윤', points: 7507.25, read: 608, days: 90 },
-    { name: '조*빈', points: 7333.00, read: 521, days: 89 },
-    { name: '노*경', points: 7109.85, read: 677, days: 90 },
-    { name: '조*우', points: 7070.70, read: 515, days: 90 },
-    { name: '*진', points: 7047.05, read: 627, days: 87 },
-    { name: '이*이', points: 6932.00, read: 783, days: 80 },
-  ];
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const handleContentClick = (project) => {
+    setSelectedProject(project);
+    setModalOpen(true);
+  };
 
   return (
-    <div className="leaderboard-container">
-      <h2 className="leaderboard-title">2024 상반기 영어독서왕선발대회</h2>
-      <p className="leaderboard-period">대회 기간: 2024-04-01 ~ 2024-06-29</p>
-      {data.map((item, index) => (
-        <LeaderboardItem
-          key={index}
-          rank={index + 1}
-          name={item.name}
-          points={item.points}
-          read={item.read}
-          days={item.days}
-        />
-      ))}
+    <div className="project-listing">
+      <h2>신고 게시글 관리</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>신고번호</th>
+            <th>신고일</th>
+            <th>신고 내용</th>
+            <th>신고유형</th>
+            <th>신고자</th>
+            <th>처리일</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projectData.map((project) => (
+            <tr key={project.id}>
+              <td>
+                <div className="team-lead">
+                  <div>
+                    <div className="name">{project.id}</div>
+                  </div>
+                </div>
+              </td>
+              <td>{project.name}</td>
+              <td><a onClick={() => handleContentClick(project)}>{project.project}</a></td>
+              <td>{project.status}</td>
+              <td>{project.weeks}</td>
+              <td>{project.budget}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {modalOpen && <SingoModal setOpenModal={setModalOpen} project={selectedProject} />}
     </div>
   );
 };

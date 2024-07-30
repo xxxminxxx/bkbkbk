@@ -3,16 +3,32 @@
   background-color: #efefef;
   border-radius: 0.5em;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-left: 50px;
   padding: 2em;
-  width: 300px; /* flex: 1 대신 고정 너비 설정 */
+  height: 400px;
+  width: 400px; /* flex: 1 대신 고정 너비 설정 */
   box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
 }
 
 .dayuse {
   justify-content: center;
   margin-top: 30px;
-  width: 300px; /* 부모 요소의 너비에 맞추기 */
-  height: 200px; /* 내용에 맞게 높이 조정 */
+  width: 400px; /* 부모 요소의 너비에 맞추기 */
+  height: 400px; /* 내용에 맞게 높이 조정 */
+}
+
+.age {
+  justify-content: center;
+  margin-top: 30px;
+  width: 400px; /* 부모 요소의 너비에 맞추기 */
+  height: 400px; /* 내용에 맞게 높이 조정 */
+}
+
+.gender{
+  justify-content: center;
+  margin-top: 30px;
+  width: 400px; /* 부모 요소의 너비에 맞추기 */
+  height: 400px; /* 내용에 맞게 높이 조정 */
 }
 
 .text {

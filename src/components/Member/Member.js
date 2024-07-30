@@ -4,30 +4,86 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './Member.css';
 import { useState, useEffect } from "react";
 import Modal from "../Modal/Modal"
-import BookModal from "../Modal/BookModal";
 import axios from "axios";
 
 const Member = () => {
     const [searchCategory, setSearchCategory] = useState('회원명');
     const [searchKeyword, setSearchKeyword] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 2;
+    const [stop,setStop] = useState('Y');
+    const itemsPerPage = 5;
 
     const [users, setUsers] = useState([]);
 
     const [modalOpen, setModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    //사용자 목록을 다시 불러오는 함수
+    const refreshUserList = () => {
+        axios.get('http://localhost:8080/users')
+        .then(result => {
+            console.log(result.data);
+            setUsers(result.data);
+        })
+        .catch(error => {
+            console.log("Error fetching users:",error)
+        });
+    };
 
     useEffect(() => {
-        axios.get('http://localhost:8080/users')
-            .then(result => {
-                console.log(result.data);
-                setUsers(result.data);
-            });
+        refreshUserList();
     }, []);
 
     const handleCategoryClick = (searchCategory) => {
         setSearchCategory(searchCategory);
     }
+    
+    //정지기능
+    const stopHdlr = async (userId) => {
+        //alert(userId+stop)
+        
+        const temppath = `http://localhost:8080/stop`;
+        try {
+            const result = await axios.post(temppath, null, {
+                params: {
+                    userId: userId,
+                    stop: 'Y'
+                }
+            });
+            if (result.status === 200) {
+                alert('해당 회원이 성공적으로 정지되었습니다.');
+                refreshUserList(); // 사용자 목록 새로고침
+                // 여기에 사용자 목록을 새로고침하는 로직을 추가할 수 있습니다.
+            } else {
+                alert('해당 회원 정지가 실패하였습니다.');
+            }
+        } catch (error) {
+            console.error("Error stopping user:", error);
+            alert('정지 처리 중 오류가 발생했습니다.');
+        }
+    }
+    //정지해제
+    const releaseHdlr = async (userId) => {
+        const temppath = `http://localhost:8080/release`; // Change this to your release endpoint
+        try {
+            const result = await axios.post(temppath, null, {
+                params: {
+                    userId: userId,
+                    stop: 'N'
+                }
+            });
+            if (result.status === 200) {
+                alert('해당 회원이 성공적으로 해제되었습니다.');
+                refreshUserList(); // 사용자 목록 새로고침
+                // Refresh users list here if necessary
+            } else {
+                alert('해당 회원 해제가 실패하였습니다.');
+            }
+        } catch (error) {
+            console.error("Error releasing user:", error);
+            alert('해제 처리 중 오류가 발생했습니다.');
+        }
+    };
 
     const handleSearch = () => {
         let searchParam;
@@ -50,6 +106,12 @@ const Member = () => {
                 console.error("Error fetching data: ", error);
             });
     };
+
+    //회원명을 클릭했을때 호출될 함수
+    const handleUserClick = (user) => {
+        setSelectedUser(user);
+        setModalOpen(true);
+    }
 
     // 페이징 로직
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -99,21 +161,29 @@ const Member = () => {
                                 <th>신고받은수</th>
                                 <th>정지여부</th>
                                 <th>탈퇴</th>
+                                <th>관리</th>
                             </tr>
                         </thead>
                         <tbody>
                             {currentItems.map((user, index) => (
                                 <tr key={index}>
-                                    <td><a onClick={()=> setModalOpen(true)}>{user.userName}</a>
-                                    {modalOpen && <BookModal setOpenModal={setModalOpen}/>}
-                                    </td>
+                                    <td><a onClick={() => handleUserClick(user)}>{user.userName}</a></td>
                                     <td>{user.userId}</td>
                                     <td>{user.userTel}</td>
                                     <td>{user.joinedDate}</td>
                                     <td>{user.userLevel}</td>
                                     <td>{user.reported}</td>
-                                    <td>{user.banStatus}</td>
+                                    <td><span className={user.banStatus === 'Y' ? 'status-banned' : 'status-active'}>
+                                            {user.banStatus === 'Y' ? '정지중' : '정상'}
+                                        </span></td>
                                     <td>{user.quitStatus}</td>
+                                    <td>
+                                    {user.banStatus === 'Y' ? (
+                                            <button className="release-button" onClick={() => releaseHdlr(user.userId)}>해제</button>
+                                        ) : (
+                                            <button className="stop-button" onClick={() => stopHdlr(user.userId)}>정지</button>
+                                        )}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -135,6 +205,7 @@ const Member = () => {
                     </nav>
                 </div>
             </div>
+            {modalOpen && <Modal setOpenModal={setModalOpen} user={selectedUser} refreshUserList={refreshUserList} />}
         </div>
     );
 }

@@ -15,7 +15,6 @@ const RightSide = () => {
 
   return (
     <div className="RightSide">
-      <div className="login">{username ? `${username}님 :)` : '관리자f님 :)'}</div>
     </div>
   );
 };

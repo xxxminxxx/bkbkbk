@@ -4,12 +4,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // JavaScript 파일 import
 import './Chart.css';
 import 'chart.js/auto';
 
-import sourceData from '../../Data/sourceData.json';
-import MemberChart from './MemberChart';
-import BookChart from './BookChart';
-import DChart from './DChart'; 
-import CountChart from "./CountChart";
 
+
+import MemberChart from './MemberChart';
+import CountChart from "./CountChart";
+import AgeChart from "./AgeChart";
+import RegistChart from "./RegistChart";
+import RentCount from "./RentCount";
+import Gender from "./Gender";
 
 const Chart= () => {
 
@@ -17,6 +19,10 @@ const Chart= () => {
         <div className="chart-container">
         <MemberChart/>
         <CountChart/>
+        <AgeChart/>
+        <RegistChart/>
+        <RentCount/>
+        <Gender/>
         </div>
     );
 

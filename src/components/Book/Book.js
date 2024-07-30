@@ -13,7 +13,7 @@ const Book= () => {
     const [searchCategory, setSearchCategory] = useState('도서명'); // 초기 검색 카테고리 설정
     const [searchKeyword, setSearchKeyword] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 7;
+    const itemsPerPage = 5;
 
     const[books,setBooks] = useState([]);
 
@@ -135,9 +135,7 @@ const Book= () => {
               <tbody>
                   {currentItems.map((book, index) => (
                       <tr key={index}>
-                        <td><a onClick={()=> setModalOpen(true)}>{book.bookTitle}</a>
-                        {modalOpen && <Modal setOpenModal={setModalOpen}/>}
-                        </td>
+                        <td>{book.bookTitle}</td>
                         <td>{book.isbn}</td>
                         <td>{book.writer}</td>
                         <td>{book.publisher}</td>

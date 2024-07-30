@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Modal.css";
-import { useNavigate } from "react-router-dom";
 import person from "../../imgs/1.png";
 import one from "../../imgs/2.png";
 import two from "../../imgs/3.png";
@@ -14,7 +13,7 @@ import nine from "../../imgs/person.png";
 import axios from "axios";
 
 
-function Modal({ setOpenModal, user , refreshUserList}) {
+function Modal2({ setOpenModal, user }) {
 
   //사용자 레벨에 따른 이미지 선택
   const getLevelImage = (level) => {
@@ -47,7 +46,6 @@ function Modal({ setOpenModal, user , refreshUserList}) {
   const[userName,setUserName] = useState(user.userName)    //이름
   const[userTel,setUserTel] = useState(user.userTel)       //전화번호
   const[userLevel,setUserLevel] = useState(user.userLevel) //등급
-  const navigate = useNavigate();
 
   const updateHdlr = async function() {
     try {
@@ -59,7 +57,7 @@ function Modal({ setOpenModal, user , refreshUserList}) {
         alert('사용자 정보가 성공적으로 업데이트되었습니다.');
         setOpenModal(false);
         // 필요하다면 여기서 부모 컴포넌트의 상태를 업데이트하는 함수를 호출할 수 있습니다.
-        refreshUserList(); // 부모 컴포넌트의 사용자 목록 갱신 함수 호출
+        window.location.reload(); // 페이지 새로고침
       } else {
         alert('사용자 정보 업데이트에 실패했습니다.');
       }
@@ -78,7 +76,7 @@ function Modal({ setOpenModal, user , refreshUserList}) {
       if(response.status === 200){
         alert('사용자 정보가 성공적으로 삭제되었습니다.');
         setOpenModal(false);
-        refreshUserList(); // 부모 컴포넌트의 사용자 목록 갱신 함수 호출
+        window.location.reload();//페이지 새로고침
       }else{
         alert('사용자 정보 삭제에 실패했습니다');
       }
@@ -161,4 +159,4 @@ function Modal({ setOpenModal, user , refreshUserList}) {
   );
 }
 
-export default Modal;
+export default Modal2;
