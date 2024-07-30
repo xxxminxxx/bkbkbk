@@ -179,7 +179,8 @@
 		<!-- 메모 수정 -->
 	<update id="updateMemo" parameterType="hashmap">
 		UPDATE 	memo
-		SET		memoContent = #{memoContent}
+		SET		memoContent = #{memoContent},
+				memoDate 	= now()
 		WHERE	memoNum = #{memoNum}
 				AND
 				userNum = (
