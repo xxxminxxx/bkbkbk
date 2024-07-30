@@ -1,6 +1,5 @@
 package com.bookbookbook.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.bookbookbook.dao.UserDAO;
 import com.bookbookbook.domain.CalendarVO;
-import com.bookbookbook.domain.MemoVO;
 import com.bookbookbook.domain.ReportVO;
 import com.bookbookbook.domain.UserVO;
 
@@ -121,15 +119,9 @@ public class UserServiceImpl implements UserService{
 	}
 	//########################################
 	// 나의 달력
-		// 출석 정보 조회
-	public List<CalendarVO> getAttendancesByUserId(String userId){
-		List<CalendarVO> result = userDAO.getAttendancesByUserId(userId);
-		System.out.println("userServiceImpl 출석 정보 조회 : " + result);
-		return result;
-	}
 		// 메모 정보 조회
-	public List<MemoVO> getMemosByUserId(String userId){
-		List<MemoVO> result = userDAO.getMemosByUserId(userId);
+	public List<HashMap<String, Object>> getMemosAtCalendar(String userId){
+		List<HashMap<String, Object>> result = userDAO.getMemosAtCalendar(userId);
 		System.out.println("userServiceImpl 메모 정보 조회 : " + result);
 		return result;
 	}
@@ -150,7 +142,37 @@ public class UserServiceImpl implements UserService{
 	    System.out.println("userServiceImpl 출석정보 조회 : " + result);
 	    return result;
 	}
-	
+	//########################################
+	// 나의 메모
+		// 메모 정보 조회
+	public List<HashMap<String, Object>> getMemosAtMemo(String userId){
+		List<HashMap<String, Object>> result = userDAO.getMemosAtMemo(userId);
+		System.out.println("userServiceImpl 메모 정보 조회 : " + result);
+		return result;
+	}
+		// 메모 상세 조회
+	public List<HashMap<String, Object>> getMemoDetailByMemoNum(HashMap<String, Object> params) {
+		List<HashMap<String, Object>> result = userDAO.getMemoDetailByMemoNum(params);
+		System.out.println("userServiceImpl 메모 상세 조회 : " + result);
+		return result;
+	}
+		// 메모 삭제
+	public int memoDelete(HashMap<String, Object> params) {
+		int result = userDAO.memoDelete(params);
+		System.out.println("userServiceImpl 메모 삭제 : " + result);
+		return result;
+	}
+		// 메모 수정
+	public int updateMemo(HashMap<String, Object> params) {
+		int result = userDAO.updateMemo(params);
+		System.out.println("userServiceImpl 메모 수정 : " + result);
+		return result;
+	}
+		// memo 테이블에서 shelfNum을 포함하는 레코드가 있는지 확인
+	public int hasMemoForShelf(HashMap<String, Object> params) {
+	    int count = userDAO.countMemoForShelf(params);
+	    return count;
+	}
 	//########################################
 	// 나의 캐릭터
 		// userId로 userLevel에 따른 캐릭터 정보 조회
