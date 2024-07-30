@@ -22,16 +22,25 @@ public interface UserService {
 	
 	//#####################################
 	// 나의 달력
-		// 출석 정보 조회
-	List<CalendarVO> getAttendancesByUserId(String userId);
 		// 메모 정보 조회
-	List<MemoVO> getMemosByUserId(String userId);
-	
-	
+	List<HashMap<String, Object>> getMemosAtCalendar(String userId);
 		// 출석체크 데이터베이스에 저장
 	boolean  markAttendance(String userId);
 		// 데이터베이스에서 출석 정보 조회
 	List<CalendarVO> getAttendanceList(String userId);
+	
+	//#####################################
+	// 나의 메모
+		// 메모 정보 조회 
+	List<HashMap<String, Object>> getMemosAtMemo(String userId);
+		// 메모 상세 조회
+	List<HashMap<String, Object>> getMemoDetailByMemoNum(HashMap<String, Object> params);
+		// 메모 삭제
+	int memoDelete(HashMap<String, Object> params);
+		// 메모 수정
+	int updateMemo(HashMap<String, Object> params);
+		// memo 테이블에서 shelfNum을 포함하는 레코드가 있는지 확인
+	int hasMemoForShelf(HashMap<String, Object> params);
 	
 	//#####################################
 	// 나의 캐릭터
