@@ -37,44 +37,6 @@
     <!-- navbar -->
     <div class="elements-nav">
         <!-- bootom nav -->
-      <%--  <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
-            <div class="container">
-                <div class="position-relative d-flex align-items-center gap-2 site-brand">
-                    <img src="../img/bookbookbookLogo.png" alt="북북북 로고">
-                    <div class="lh-1">
-                        <h5 class="fw-bold m-0 text-white">BOOKBOOKBOOK</h5>
-                        <!-- <small class="text-muted text-white-50">One Page</small> -->
-                    </div>
-                    <a class="stretched-link" href="/"></a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav m-auto gap-4 m-none">
-                        <li class="nav-item dropdown single-dropdown-nav">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 서재 </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-grid.html">읽은 책</a></li>
-                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-list.html">읽고 있는 책</a></li>
-                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-three-coulmn.html">읽고 싶은 책</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
-                        </li>
-                        <li class="nav-item dropdown single-dropdown-nav">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 정보 </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-grid.html">나의 정보</a></li>
-                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-list.html">나의 달력</a></li>
-                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-three-coulmn.html">나의 메모</a></li>
-                                <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-four-coulmn.html">나의 통계</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <a href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그인 </a>
-                    <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
-                </div>
-            </div>
-        </nav>--%>
         <%@ include file="../header.jsp" %>
     </div>
     <!-- header -->
@@ -84,7 +46,6 @@
                 <div class="col-xl-6 col-lg-5 col-md-10 col-12 text-center">
                     <div class="text-white">
                         <h1 class="fw-bolder display-5 mb-3">도서 검색 결과</h1>
-                        <!-- <p class="-0 text-white-50">Last updated: January 2024</p> -->
                     </div>
                 </div>
             </div>
@@ -153,7 +114,7 @@
                                     /*              removable : iwRemoveable*/
                                 });
 
-                                // 마커 위에 인포윈도우를 표시. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+                                // 마커 위에 인포윈도우를 표시. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됨
                                 infowindow.open(map, marker);
 
                                 // 마커에 클릭 이벤트 등록
@@ -172,7 +133,7 @@
 
                             <select class="form-select d-inline-block border" style="width: 40%" id="dosi">
                                 <option value="" selected disabled>도 (선택)</option>
-                                <option value="37.5665,126.9780">서울</option> <%--lat, lng, 세부지역 코드--%>
+                                <option value="37.5665,126.9780">서울</option>
                                 <option value="37.4563,126.7052">인천시</option>
                                 <option value="35.1796,129.0756">부산시</option>
                                 <option value="35.8714,128.6014">대구시</option>
@@ -197,7 +158,6 @@
 
                             <button onclick="moveMap()" class="btn btn-primary fw-semibold rounded-pill py-3 px-5" style="width: 20%" type="button" id="app">검색</button>
                             <h7 class="fw-bold mb-4 text-center">마커를 눌러보세요  (이후 지도를 눌러주세요)</h7>
-                            <%--                            <h8 class="fw-bold mb-4 text-center">(지도를 누르시면 인포윈도우가 닫깁니다)</h8>--%>
 
                         </div>
 
@@ -219,7 +179,7 @@
         guSelect.innerHTML = '<option value="" selected disabled>구 (선택)</option>';
         guSelect.disabled = true;
 
-        const selectedDoSi = this.options[this.selectedIndex].text; // 선택된 도/시의 텍스트 값을 가져옵니다.
+        const selectedDoSi = this.options[this.selectedIndex].text; // 선택된 도/시의 텍스트 값을 가져옴
 
         //도 값이 존재할 때, 구 목록 가져오기
         if (selectedDoSi) {
@@ -258,7 +218,6 @@
         * 역할:      사용자가 선택한 구의 좌표를 기반으로 지도에 해당 위치를 표시하고, 해당 구의 도서관 정보를 가져와 마커와 인포윈도우를 생성해 지도에 표시하는 함수
         */
     function moveMap() {
-        //alert("시작");
         let libName, libAddr, libLat, libLng, libTel, libHomepage;
         let positions = [];
         let selectedValue = document.getElementById('gu').value;
@@ -281,7 +240,7 @@
         $.ajax({
             url: 'http://data4library.kr/api/libSrch', // 요청을 보낼 URL
             type: 'GET', // 요청 방식
-            dataType: 'xml', /*추가*/
+            dataType: 'xml',
             async: false, //동기화
             data : params,
             success: function(data) {
@@ -306,7 +265,7 @@
                     console.log(positions);
                 });
 
-                // 여기에서 positions 배열을 사용하여 마커를 생성하고 지도에 추가하는 로직을 구현하세요
+                // positions 배열을 사용하여 마커를 생성하고 지도에 추가하는 로직
                 //마커
                 for (let i = 0; i < positions.length; i ++) {
 
@@ -314,7 +273,7 @@
                     let marker = new kakao.maps.Marker({
                         map: map, // 마커를 표시할 지도
                         position: positions[i].latlng, // 마커를 표시할 위치
-                        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됨
                         image : markerImage, // 마커 이미지
                     });
 
@@ -350,8 +309,6 @@
     }
 
 </script>
-
-
 
 
 <!-- Nav Sidebar -->
