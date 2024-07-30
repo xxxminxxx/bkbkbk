@@ -109,21 +109,6 @@
 <script src="../js/script.js"></script>
 <script> window.onload = function() { let message = "${message}"; if (message && message !== "") { alert(message); } };
 
-// $("#frmMyInfo")
-//     .attr("action","/pages/modify")
-//     .attr("method","post")
-//     .on('submit', (e)=>{
-//         // e.preventDefault()
-//         if ($("input[name=password2]").val() != $("input[name=password]").val()){
-//             alert('비밀번호가 일치하지 않습니다.');
-//             return false;
-//         }else{
-//             $("#frmMyInfo").submit();
-//             return true;
-//         }
-// })
-
-
 $('#frmMyInfo')
     .attr("action","/pages/modify")
     .attr("method", "post")
@@ -137,9 +122,6 @@ $('#frmMyInfo')
             return true;
         }
 })
-
-
-
 </script>
 </body>
 </html>
