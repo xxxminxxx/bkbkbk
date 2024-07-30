@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.AdminDAO">
+
+	<!-- 로그인시 id 검색 -->	
+	<select id="findByAdminId" resultType="com.bookbookbook.domain.AdminVO">
+  		SELECT * FROM admin WHERE adminId = #{adminId}
+	</select>
+	
+	<!-- 유저 정보 리스트 가져오기 -->
+	<select id="getUserList" resultType="UserVO">
+		SELECT *
+		FROM USERS
+		ORDER BY JOINEDDATE DESC
+	</select>
+	
+	<!-- 관리자 정보 리스트 가져오기 -->
+	<select id="getAdminList" resultType="AdminVO">
+		SELECT *
+		FROM ADMIN
+		ORDER BY adminid
+	
+	</select>
+	
+	<!-- 도서 정보 리스트 가져오기 -->
+	<select id="getBookList" resultType="BookVO">
+		SELECT * FROM BOOK
+	</select>
+	
+	<!-- 특정 키워드 검색 정보 가져오기 -->
+	<select id="getSearchList" parameterType="hashmap" resultType="UserVO">
+		SELECT * 
+		FROM USERS
+		<where>
+			<if test="searchCategory !=null">
+				${searchCategory} LIKE '%${searchKeyword}%'
+			</if>
+		</where>
+	</select>
+	
+	<!-- 특정 키워드 도서 정보 검색 가져오기 -->
+	<select id="getbSearchList" parameterType="hashmap" resultType="BookVO">
+		SELECT * 
+		FROM BOOK
+		<where>
+			<if test="searchCategory !=null">
+				${searchCategory} LIKE '%${searchKeyword}%'
+			</if>
+		</where>
+	</select>
+	<!-- 일일 방문자수 데이터 가져오기 -->
+<select id="getVisitorCount" parameterType="string" resultType="VisitVo">
+    SELECT COUNT(*) as count
+    FROM visitor
+    WHERE DATE(visit_time) = DATE(NOW())
+</select>
+
+	<!-- 총 월 방문자수 데이터 들고오기 -->
+<!-- 월별 방문자수 데이터 가져오기 -->
+<select id="getVisitorCountM" parameterType="string" resultType="VisitVO">
+    SELECT COUNT(*) as count
+    FROM visitor
+    WHERE YEAR(visit_time) = YEAR(NOW())
+    AND MONTH(visit_time) = MONTH(NOW())
+</select>
+
+<update id="updateUser" parameterType="UserVO">
+    UPDATE users
+    SET userName = #{userName}, userTel = #{userTel}, userLevel = #{userLevel}
+    WHERE userId = #{userId}
+</update>
+
+  <!-- 사용자 삭제 쿼리 -->
+  <delete id="deleteUser" parameterType="UserVO">
+    DELETE FROM users
+    WHERE userId = #{userId}
+  </delete>
+  
+  <!-- 관리자 추가 -->
+  <insert id="insertAdmin" parameterType="AdminVO">
+    	INSERT INTO admin(
+        	adminId, adminName, adminPass, adminTel) 
+    	VALUES (
+        	#{adminId}, #{adminName}, #{adminPass}, #{adminTel})
+  
+  </insert>
+  
+  <!-- 사용자 정지 -->
+  <update id="updateStop" parameterType="UserVO">
+  	UPDATE users
+  	SET banStatus = #{banStatus}
+  	WHERE userId= #{userId}
+  </update>
+  
+  <!-- 사용자 정지해제 updateRelease -->
+  
+   <update id="updateRelease" parameterType="UserVO">
+  	UPDATE users
+  	SET banStatus = #{banStatus}
+  	WHERE userId= #{userId}
+  </update>
+  
+  <select id="getBirthList" parameterType="UserVO">
+  select * from users
+  </select>
+
+</mapper>
