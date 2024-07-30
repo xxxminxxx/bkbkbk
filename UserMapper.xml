@@ -51,18 +51,33 @@
 		<!-- 메모 정보 조회 -->
 	<select id="getMemosAtCalendar" parameterType="String"
 			resultType="HashMap">
-		SELECT 	m.*,
-				b.bookTitle
-		FROM	memo m
-				INNER JOIN bookShelf bs 
-					ON	m.shelfNum = bs.shelfNum
-				INNER JOIN book b
-					ON	bs.bookNum = b.bookNum
+		SELECT 
+    			m.memoNum,
+    			m.userNum,
+    			m.shelfNum,
+    			m.memoContent,
+    			DATE(m.memoDate) as memoDate,
+    			b.bookTitle
+		FROM 	memo m
+				INNER JOIN (
+    						SELECT 	shelfNum, 
+    								DATE(memoDate) as memoDay, 
+    								MAX(memoDate) as latestMemoDate
+    						FROM 	memo
+    						WHERE 	userNum = 38
+    						GROUP BY shelfNum, DATE(memoDate)
+							) 
+							grouped ON m.shelfNum = grouped.shelfNum
+          		AND DATE(m.memoDate) = grouped.memoDay
+          		AND m.memoDate = grouped.latestMemoDate
+				INNER JOIN bookShelf bs ON m.shelfNum = bs.shelfNum
+				INNER JOIN book b ON bs.bookNum = b.bookNum
 		WHERE m.userNum = (
-						SELECT userNum 
-						FROM users 
-						WHERE userId = #{userId}
-						)
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+		ORDER BY m.memoDate DESC, m.shelfNum
 	</select>
 	
 		<!-- 출석체크 기록 저장 -->
