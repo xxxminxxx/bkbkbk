@@ -40,7 +40,8 @@ export const SidebarData = [
   },
   {
     icon: admin,
-    heading: "관리",
+    path: '/admin/add',
+    heading: "관리자추가",
   },
   {
     icon: chat,
@@ -61,7 +62,7 @@ export const SidebarData = [
   {
     icon: rank,
     path:'/admin/rank',
-    heading: '랭킹1'
+    heading: '임시'
   },
 ];
 
