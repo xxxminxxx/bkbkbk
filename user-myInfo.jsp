@@ -1,4 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<!-- forEach 용 taglib -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html lang="ko" class="translated-ltr">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +22,18 @@
     <!-- Common Css -->
     <link rel="stylesheet" href="../css/common.css">
     <link type="text/css" rel="stylesheet" charset="UTF-8" href="https://www.gstatic.com/_/translate_http/_/ss/k=translate_http.tr.26tY-h6gH9w.L.W.O/am=GAY/d=0/rs=AN8SPfrev-A3NvrBP0gNq8zXCqKY7IcBLA/m=el_main_css">
+	<style>
+		.btn-primary {
+		    background-color: #f77808d9;
+		    border-color: #f77808d9;
+		    color: white;
+		    padding: 10px 20px;
+		    font-size: 18px;
+		    border-radius: 5px;
+		    text-decoration: none;
+		    transition: background-color 0.3s ease;
+		}
+	</style>
 </head>
 
 
@@ -57,39 +72,57 @@
 <!-- Elements Components -->
 <div class="py-5" id="elements">
     <div class="container">
+        <h1 class="text-center mb-4">나의 정보 수정</h1>
+        <div class="text-center">
+            <c:choose>
+                <c:when test="${not empty sessionScope.userId}">
+                    <div class="container" style="padding:100">
+                        <div class="row g-5 p">
+                            <form class="d-grid gap-2 input-group-lg row gap-5 m-" id="frmMyInfo">
+                                <div class="mb-3">
+                                    <label class="form-label small">이메일</label>
+                                    <input type="email" class="form-control bg-light border-0 px-3 py-2" placeholder="이메일을 입력하세요" id="userId" name="userId" readonly
+                                           value="${userId}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label small">비밀번호</label>
+                                    <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password" aria-describedby="emailHelp" name="password">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password2" class="form-label small">비밀번호 확인</label>
+                                    <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password2" aria-describedby="emailHelp" name="password2">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="userName" class="form-label small">이름</label>
+                                    <input type="text" class="form-control bg-light border-0 px-3 py-2" placeholder="이름을 입력하세요" id="userName" name="userName"
+                                           value="${userName}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="userTel" class="form-label small">전화번호</label>
+                                    <input type="tel" class="form-control bg-light border-0 px-3 py-2" placeholder="전화번호를 입력하세요" id="userTel" name="userTel"
+                                           value="${userTel}">
+                                </div>
 
-        <div class="container" style="padding:100">
-            <div class="row g-5 p">
-                <form class="d-grid gap-2 input-group-lg row gap-5 m-" id="frmMyInfo">
-                    <div class="mb-3">5
-                        <label class="form-label small">이메일</label>
-                        <input type="email" class="form-control bg-light border-0 px-3 py-2" placeholder="이메일을 입력하세요" id="userId" name="userId" readonly
-                               value="${userId}">
+                                <button type="submit" class="btn btn-purple btn-theme">수정하기</button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label small">비밀번호</label>
-                        <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password" aria-describedby="emailHelp" name="password">
+                </c:when>
+                <c:otherwise>
+                    <div class="text-center py-5">
+                        <h3 class="text-muted">로그인 후 이용하실 수 있습니다.</h3>
                     </div>
-                    <div class="mb-3">
-                        <label for="password2" class="form-label small">비밀번호 확인</label>
-                        <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password2" aria-describedby="emailHelp" name="password2">
+                    <div id="without-data">
+                        <div class="container text-center mt-4">
+                            <a href="/pages/login" class="btn btn-primary btn-lg">로그인 하러 가기</a>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="userName" class="form-label small">이름</label>
-                        <input type="text" class="form-control bg-light border-0 px-3 py-2" placeholder="이름을 입력하세요" id="userName" name="userName"
-                               value="${userName}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="userTel" class="form-label small">전화번호</label>
-                        <input type="tel" class="form-control bg-light border-0 px-3 py-2" placeholder="전화번호를 입력하세요" id="userTel" name="userTel"
-                               value="${userTel}">
-                    </div>
-
-                    <button type="submit" class="btn btn-purple btn-theme">수정하기</button>
-                </form>
-            </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
+</div>
+</div>
 </div>
 
 <!-- Nav Sidebar -->
