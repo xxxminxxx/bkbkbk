@@ -105,3 +105,16 @@
 .character-item[data-visible="false"] {
     cursor: default;
 }
+
+/* 0730 추가 */
+/* body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main-content {
+  flex-grow: 1;
+}
+footer {
+  margin-top: auto;
+} */
