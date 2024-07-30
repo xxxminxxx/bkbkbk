@@ -191,29 +191,9 @@ public class UserController {
 	//#######################################
 	//나의 달력
 		// 페이지 연결
-	/*
-	@GetMapping("/pages/user-myCalendar")
-	public String myCalendar() {
-		System.out.println("user-myCalendar 호출");
-		return "pages/user-myCalendar";
-	}
-	*/
 	@GetMapping("/pages/user-myCalendar")
 	public String myCalendar(HttpSession session, Model m) {
 		System.out.println("user-myCalendar 호출");
-		
-		/*
-		 * String userId = (String) session.getAttribute("userId");
-		 * 
-		 * List<HashMap<String, Object>> memoList =
-		 * userService.getMemosAtCalendar(userId);
-		 * 
-		 * System.out.println("userController getMemosAtCalendar memoList : " +
-		 * memoList);
-		 */
-		
-		// m.addAttribute("memoList", memoList);
-		
 		return "pages/user-myCalendar";
 	}
 	
@@ -300,7 +280,8 @@ public class UserController {
 		m.addAttribute("memoList", memoList);
 		
 		return "pages/user-myMemo";
-	}
+	} 
+	
 		// 메모 상세보기
 	@GetMapping("/pages/user-myMemoDetail")
 	public String myMemoDetail(@RequestParam("shelfNum") Integer shelfNum, 
@@ -514,6 +495,12 @@ public class UserController {
 	    m.addAttribute("character", result);
 
 		return "pages/user-myCharactersDetail";
+	}
+	
+	@GetMapping("/pages/user-myInfo")
+	public String getMyInfo() {
+		System.out.println("userController getMyInfo 실행");
+		return "pages/user-myInfo";
 	}
 
 }
