@@ -49,30 +49,38 @@
 						)
 	</select>
 		<!-- 메모 정보 조회 -->
-	<select id="getMemosByUserId" parameterType="String"
-			resultType="MemoVO">
-		SELECT *
-		FROM	memo
-		WHERE userNum = (
-						SELECT userNum 
-						FROM users 
-						WHERE userId = #{userId}
-						)
+	<select id="getMemosAtCalendar" parameterType="String"
+			resultType="HashMap">
+		SELECT 
+    			m.memoNum,
+    			m.userNum,
+    			m.shelfNum,
+    			m.memoContent,
+    			DATE(m.memoDate) as memoDate,
+    			b.bookTitle
+		FROM 	memo m
+				INNER JOIN (
+    						SELECT 	shelfNum, 
+    								DATE(memoDate) as memoDay, 
+    								MAX(memoDate) as latestMemoDate
+    						FROM 	memo
+    						WHERE 	userNum = 38
+    						GROUP BY shelfNum, DATE(memoDate)
+							) 
+							grouped ON m.shelfNum = grouped.shelfNum
+          		AND DATE(m.memoDate) = grouped.memoDay
+          		AND m.memoDate = grouped.latestMemoDate
+				INNER JOIN bookShelf bs ON m.shelfNum = bs.shelfNum
+				INNER JOIN book b ON bs.bookNum = b.bookNum
+		WHERE m.userNum = (
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+		ORDER BY m.memoDate DESC, m.shelfNum
 	</select>
 	
 		<!-- 출석체크 기록 저장 -->
-	<!-- <insert id="insertAttendance" parameterType="String">
-		INSERT INTO calendar
-			( userNum, attendance, calendarDate )
-		VALUES
-			( ( SELECT userNum 
-						FROM users 
-						WHERE userId = #{userId} ),
-						 true, 
-						 now() 
-			)
-		ON DUPLICATE KEY UPDATE calendarDate = now()
-	</insert> -->
 	<insert id="insertAttendance" parameterType="String">
 	    INSERT INTO calendar (userNum, attendance, calendarDate)
 	    SELECT 
@@ -105,6 +113,93 @@
 		WHERE u.userId = #{userId}
 		ORDER BY c.calendarDate	
 	</select>
+	
+	<!-- ################################### -->
+	<!-- 나의 메모 -->
+		<!-- 메모 정보 조회 -->
+	<select id="getMemosAtMemo" parameterType="String"
+			resultType="HashMap">
+		SELECT	m.*,
+				bs.*,
+				b.*
+		FROM	memo m
+				INNER JOIN (
+ 							 	SELECT shelfNum, 
+ 							 		MAX(memoDate) as latest_memo_date, 
+ 							 		MAX(memoNum) as latest_memo_num
+  								FROM memo
+  								WHERE userNum = (
+  													SELECT userNum 
+  													FROM users 
+  													WHERE userId = #{userId}
+  												)
+								GROUP BY shelfNum
+							) 
+				latest ON m.shelfNum = latest.shelfNum 
+           				AND m.memoDate = latest.latest_memo_date 
+           				AND m.memoNum = latest.latest_memo_num
+				INNER JOIN bookshelf bs 
+					ON m.shelfNum = bs.shelfNum
+				INNER JOIN book b 
+					ON bs.bookNum = b.bookNum
+		ORDER BY m.memoDate DESC
+	</select>
+		<!-- 메모 상세 조회 -->
+	<select id="getMemoDetailByMemoNum" parameterType="hashmap"
+			resultType="hashmap">
+		SELECT	m.*,
+				b.*,
+				bs.*
+		FROM	memo m
+				INNER JOIN bookShelf bs 
+					ON	m.shelfNum = bs.shelfNum
+				INNER JOIN book b
+					ON	bs.bookNum = b.bookNum
+		WHERE	m.shelfNum = #{shelfNum}	
+				AND
+				m.userNum = (
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+	</select>
+	
+		<!-- 메모 삭제 -->
+	<delete id="memoDelete" parameterType="hashmap">
+		DELETE FROM memo
+		WHERE	memoNum = #{memoNum} 
+				AND 
+				userNum = (
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+	</delete>
+	
+		<!-- 메모 수정 -->
+	<update id="updateMemo" parameterType="hashmap">
+		UPDATE 	memo
+		SET		memoContent = #{memoContent}
+		WHERE	memoNum = #{memoNum}
+				AND
+				userNum = (
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+	</update>
+		<!-- memo 테이블에서 shelfNum을 포함하는 레코드가 있는지 확인 -->
+	<select id="countMemoForShelf" parameterType="hashmap"
+			resultType="int">
+		SELECT	COUNT(*)
+		FROM	memo m
+				INNER JOIN users u
+				ON m.userNum = u.userNum
+		WHERE	m.shelfNum = #{shelfNum}
+				AND
+				u.userId = #{userId}
+	</select>
+	
 	<!-- ################################### -->
 	<!-- 나의 캐릭터 -->
 		<!-- userId로 userLevel에 따른 캐릭터 정보 조회 -->
