@@ -1,0 +1,156 @@
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 1200px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.userIcon img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.userInfo {
+  width: 100%;
+}
+
+.infoField {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.infoField label {
+  font-weight: bold;
+}
+
+.infoField input {
+  width: 60%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.updateButton, .deleteButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.updateButton {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #f44336;
+  color: white;
+}
+
+/* 1200px 이상의 큰 화면 */
+@media (min-width: 1200px) {
+  .modalContainer {
+    width: 1000px;
+  }
+
+  .infoField input {
+    width: 70%;
+  }
+}
+
+/* 900px - 1199px 중간 크기 화면 */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .modalContainer {
+    width: 80%;
+  }
+
+  .infoField input {
+    width: 65%;
+  }
+}
+
+/* 600px - 899px 작은 화면 */
+@media (min-width: 600px) and (max-width: 899px) {
+  .modalContainer {
+    width: 90%;
+  }
+
+  .infoField {
+    flex-direction: column;
+  }
+
+  .infoField input {
+    width: 100%;
+    margin-top: 5px;
+  }
+}
+
+/* 600px 미만의 매우 작은 화면 */
+@media (max-width: 599px) {
+  .modalContainer {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .infoField {
+    flex-direction: column;
+  }
+
+  .infoField input {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .modalFooter {
+    flex-direction: column;
+  }
+
+  .updateButton, .deleteButton {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
