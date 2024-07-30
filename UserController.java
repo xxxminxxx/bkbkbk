@@ -358,7 +358,7 @@ public class UserController {
 		uservo.setPassword(passwordEncoder.encode(uservo.getPassword()));
 
 		userService.updateUserInfo(uservo);
-		redirectAttributes.addFlashAttribute("message", "나의 정보 수정이 완료되었습니다"); //(-)
+		redirectAttributes.addFlashAttribute("message", "나의 정보 수정이 완료되었습니다");
 		return "redirect:/pages/user-myInfo";
 	}
 	
