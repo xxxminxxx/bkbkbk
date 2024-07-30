@@ -24,7 +24,6 @@ public interface UserService {
 	// 나의 달력
 		// 메모 정보 조회
 	List<HashMap<String, Object>> getMemosAtCalendar(String userId);
-	
 		// 출석체크 데이터베이스에 저장
 	boolean  markAttendance(String userId);
 		// 데이터베이스에서 출석 정보 조회
