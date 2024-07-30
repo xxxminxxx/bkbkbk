@@ -142,7 +142,6 @@ public class UserServiceImpl implements UserService{
 	    System.out.println("userServiceImpl 출석정보 조회 : " + result);
 	    return result;
 	}
-	
 	//########################################
 	// 나의 메모
 		// 메모 정보 조회
