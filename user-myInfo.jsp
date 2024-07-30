@@ -63,8 +63,8 @@
                 <form class="d-grid gap-2 input-group-lg row gap-5 m-" id="frmMyInfo">
                     <div class="mb-3">5
                         <label class="form-label small">이메일</label>
-                        <input type="email" class="form-control bg-light border-0 px-3 py-2" placeholder="이메일을 입력하세요" id="userId" name="userId"
-                        value="${userId}">
+                        <input type="email" class="form-control bg-light border-0 px-3 py-2" placeholder="이메일을 입력하세요" id="userId" name="userId" readonly
+                               value="${userId}">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label small">비밀번호</label>
@@ -77,12 +77,12 @@
                     <div class="mb-3">
                         <label for="userName" class="form-label small">이름</label>
                         <input type="text" class="form-control bg-light border-0 px-3 py-2" placeholder="이름을 입력하세요" id="userName" name="userName"
-                        value="${userName}">
+                               value="${userName}">
                     </div>
                     <div class="mb-3">
                         <label for="userTel" class="form-label small">전화번호</label>
                         <input type="tel" class="form-control bg-light border-0 px-3 py-2" placeholder="전화번호를 입력하세요" id="userTel" name="userTel"
-                        value="${userTel}">
+                               value="${userTel}">
                     </div>
 
                     <button type="submit" class="btn btn-purple btn-theme">수정하기</button>
@@ -121,7 +121,7 @@ $('#frmMyInfo')
             $("#frmMyInfo").submit();
             return true;
         }
-})
+    })
 </script>
 </body>
 </html>
