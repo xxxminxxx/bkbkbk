@@ -18,9 +18,10 @@ import java.util.List;
 public class LocationController {
 
     @Autowired
-    private LocationService locationService;
-    private RestTemplate restTemplate;
+    private LocationService locationService;  // LocationService 의존성 주입
+    private RestTemplate restTemplate;        // RestTemplate 의존성 주입
 
+    // 생성자를 통한 의존성 주입
     @Autowired
     public LocationController(LocationService locationService, RestTemplate restTemplate) {
         this.locationService = locationService;
@@ -28,8 +29,10 @@ public class LocationController {
     }
 
     @GetMapping("/getDistricts")
-    @ResponseBody
+    @ResponseBody // 메서드의 반환값이 HTTP 응답 본문에 직접 작성됨
+    // 해당 지역의 구/군 목록을 반환
     public List<LocationVO> getDistricts(@RequestParam String region) {
+        //지정된 도/시에 속한 구/군 목록을 조회
         List<LocationVO> districts = locationService.getCitiesByDoName(region);
         return districts;
     }
