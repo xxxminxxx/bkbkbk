@@ -9,10 +9,10 @@ import java.util.Map;
 
 public interface UserStatService {
 
-	//권수별 통계
+	//페이지별 통계
 	List<UserStatVO> getUserStatInfo1(UserStatVO userStatVO);
 
-	//페이지별 통계
+	//권수별 통계
 	List<UserStatVO> getUserStatInfo2(UserStatVO userStatVO);
 
 }
