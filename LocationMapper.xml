@@ -4,6 +4,7 @@
 
 <mapper namespace="com.bookbookbook.dao.LocationDAO">
 
+	<!--특정 도 또는 광역시에 속한 시/군/구 목록을 조회-->
 	<select id="getCitiesByDoName" parameterType="string" resultType="LocationVO">
 		SELECT *
 		FROM docity
