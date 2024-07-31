@@ -8,10 +8,10 @@ import java.util.List;
 @Mapper
 public interface UserStatDAO {
 
-	// 사용자 정보 조회
+	// 페이지별 통계
 	public List<UserStatVO> getUserStatInfo1(UserStatVO userStatVO);
 
-	//월별 권수 조회
+	// 권수별 통계
 	public List<UserStatVO> getUserStatInfo2(UserStatVO userStatVO);
 
 }
