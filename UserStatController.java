@@ -37,9 +37,9 @@ public class UserStatController {
 		UserVO userVO = userService.getUserById(String.valueOf(userStatVO.getUserId()));
 		userStatVO.setUserNum(userVO.getUserNum());
 
-		//권수별 통계 정보를 조회
-		List<UserStatVO> userStatVO1= userStatService.getUserStatInfo1(userStatVO);
 		//페이지별 통계 정보를 조회
+		List<UserStatVO> userStatVO1= userStatService.getUserStatInfo1(userStatVO);
+		//권수별 통계 정보를 조회
 		List<UserStatVO> userStatVO2= userStatService.getUserStatInfo2(userStatVO);
 
 
@@ -54,3 +54,4 @@ public class UserStatController {
 	}
 
 }
+
