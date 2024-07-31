@@ -122,7 +122,7 @@
 
 			<c:choose>
 
-				<%--사용자가 로그인헸고, 읽은 책이 없을때userStatVO가 비어있다면) 화면--%>
+			<%--사용자가 로그인헸고, 읽은 책이 없을때의 (userStatVO가 비어있다면) 화면--%>
 			<c:when test="${not empty sessionScope.userId}">
 			<c:if test="${empty userStatVO}">
 
@@ -141,7 +141,7 @@
 			</div>
 			</c:if>
 
-				<%--읽은 책이 있을때 화면--%>
+			<%--읽은 책이 있을때의 화면--%>
 			<c:if test="${not empty userStatVO}">
 			<div class="container">
 				<p/><p/>
@@ -182,7 +182,7 @@
 
 	</c:when>
 
-		<%--사용자가 로그인하지 않았을경우 화면--%>
+	<%--사용자가 로그인하지 않았을 경우의 화면--%>
 	<c:otherwise>
 		<div class="text-center py-5">
 			<h3 class="text-muted">로그인 후 이용하실 수 있습니다.</h3>
@@ -468,18 +468,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!--월별 권수-->
+<!--월별 권수 차트-->
 <script>
+	// 데이터와 월 정보를 저장할 배열 초기화
 	let datax = [];
 	let monthx = [];
+	// JSP의 JSTL을 사용하여 서버에서 전달받은 데이터를 JavaScript 배열에 추가
 	<c:forEach items="${userStatVO2}" var="vo">
-	datax.push(${vo.bookCount});
-	monthx.push(${vo.bookMonth}+'월');
+	datax.push(${vo.bookCount}); // 각 월의 책 수를 datax 배열에 추가
+	monthx.push(${vo.bookMonth}+'월'); // 월 정보를 monthx 배열에 추가
 	</c:forEach>
 </script>
 
 <script>
+	// 'myChart1' ID를 가진 캔버스 요소를 가져옴
 	const ctx = document.getElementById('myChart1');
+	// Chart.js를 사용하여 새로운 차트 생성
 	new Chart(ctx, {
 		type: 'bar',
 		data: {
