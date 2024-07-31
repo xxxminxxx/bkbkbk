@@ -93,22 +93,6 @@
 	</div>
 	<!-- header -->
 	<div class="py-5">
-		<div class="container pt-5">
-			<div class="row justify-content-center">
-
-				<div class="col-xl-6 col-lg-5 col-md-10 col-12">
-					<div class="d-flex gap-3 align-items-center">
-						<a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myInfo"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 정보</font></font>
-						</a>
-
-						<a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myMemo"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 메모</font></font></font></font></a>
-
-						<a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myCalendar"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 달력</font></font></font></font></a><a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myStat"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 통계</font></font></font></font></a>
-
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	<div class="w-100">
 		<img src="../img/pages/hero-wave.svg" alt="" class="img-fluid w-100">
