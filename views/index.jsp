@@ -553,30 +553,30 @@
 		  .tooltip {
 		    visibility: hidden;
 		    width: 150px;
-		    background-color: #D2B48C; /* 연한 갈색 */
+		    background-color: #D2B48C; 
 		    color: #fff;
 		    text-align: center;
 		    border-radius: 6px;
 		    padding: 10px;
 		    position: absolute;
 		    z-index: 1001;
-		    top: -10px; /* 상단에서 약간 아래로 이동 */
+		    top: -10px; 
 		    left: calc(100% + 10px); /* 아이콘의 오른쪽에 10px 간격을 두고 위치 */
 		    opacity: 0;
 		    transition: opacity 0.3s, visibility 0.3s;
 		    font-size: 12px;
 		    font-weight: bold;
-		    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+		    white-space: nowrap; /* 말풍선 내용이 줄바꿈되지 않도록 설정 */
 		  }
 
 		  .tooltip::after {
 		    content: "";
 		    position: absolute;
-		    top: 15px; /* 화살표 위치 조정 */
-		    right: 100%; /* 말풍선의 왼쪽에 화살표 위치 */
+		    top: 15px; 
+		    right: 100%; 
 		    border-width: 5px;
 		    border-style: solid;
-		    border-color: transparent #D2B48C transparent transparent; /* 연한 갈색으로 변경 */
+		    border-color: transparent #D2B48C transparent transparent;
 		  }
 
 		  #cute-icon-container:hover .tooltip {
