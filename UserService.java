@@ -35,15 +35,15 @@ public interface UserService {
 			// 캐릭터 상세
 		Map<String, Object> myCharactersDetail(Map<String, Object> params);
 		
-	   //#####################################
-		//나의 통계 화면
-		List<BookshelfVO> readStatus(BookshelfVO vo, HttpSession session); // 여러 개의 책 상태 정보를 조회
+	//#####################################
+	//나의 통계 화면
+	List<BookshelfVO> readStatus(BookshelfVO vo, HttpSession session); // 여러 개의 책 상태 정보를 조회
 
-		//#####################################
-		// 나의 정보 조회
-		UserVO getUserById(String userId);
+	//#####################################
+	// 나의 정보 조회
+	UserVO getUserById(String userId);
 
-		// 나의 정보 수정
-		void updateUserInfo(UserVO userVO);
-		UserStatVO getUserStatInfo(UserStatVO userStatVO);
+	// 나의 정보 수정
+	void updateUserInfo(UserVO userVO);
+	UserStatVO getUserStatInfo(UserStatVO userStatVO);
 }
