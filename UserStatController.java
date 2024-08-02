@@ -14,19 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-//필수 필드에 대한 생성자를 자동으로 생성 (Lombok 어노테이션)
 @RequiredArgsConstructor
 public class UserStatController {
-
-	// 로깅을 위한 Logger 객체를 생성
-	private static final Logger log = LoggerFactory.getLogger(UserStatController.class);
 
 	// 생성자 주입을 통해 서비스 객체들을 주입받기
 	private final UserService userService;
 	private final UserStatService userStatService;
 
-
-	//GET 요청으로 나의 통계('/pages/user-myStat') 경로에 접근했을 때 처리하는 메서드입
+	
 	@GetMapping("/pages/user-myStat")
 	public String userStat(@ModelAttribute UserStatVO userStatVO, HttpSession session, Model model) {
 
@@ -46,12 +41,7 @@ public class UserStatController {
 		// 조회한 통계 정보를 모델에 추가
 		model.addAttribute("userStatVO", userStatVO1);
 		model.addAttribute("userStatVO2", userStatVO2);
-		// 로그 메시지를 출력
-		log.info("로그인 되있어서 나의 통계로 이동");
-		//('pages/user-myStat')뷰를 반환
+		
 	    return "pages/user-myStat";
-
 	}
-
 }
-
