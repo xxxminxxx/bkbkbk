@@ -9,16 +9,24 @@
         <link rel="icon" href="../img/pages/icon.png" type="image/png">
         <title>채팅방</title>
 		<style>
-				       @font-face {
-				           font-family: 'DungGeunMo';
-				           src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-				           font-weight: normal;
-				           font-style: normal;
-				       }
-					   
-					   div{
-						 font-family: 'DungGeunMo';
-					   }
+		   #messageAreaScroll{
+		   	overflow-y:auto;
+		   	height: 36em;
+		   }
+		   .tmargin{
+			margin-top: 3rem;
+		   }
+		   .scrollable-list {
+		       max-height: 16em; 
+		       overflow-y: auto;  
+		       padding: 10px; 
+		   }
+		   
+		   .keep-text {
+               word-break: keep-all; /* 단어를 줄바꿈하지 않고 유지 */
+               overflow-wrap: break-word; /* 긴 단어를 줄바꿈하여 컨테이너의 너비를 초과하지 않도록 */
+           }
+		   
 				</style>
         <!-- Bootstrap Css -->
         <link rel="stylesheet" href="../vender/bootstrap/css/bootstrap.min.css">
@@ -41,50 +49,18 @@
             <div class="elements-nav">
               
                 <!-- bootom nav -->
-                <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-50">
-                    <div class="container">
-                        <div class="position-relative d-flex align-items-center gap-2 site-brand">
-                            <img src="../img/bookbookbookLogo.png" alt="북북북 로고"/>
-                            <div class="lh-1">
-                               <h5 class="fw-bold m-0 text-white">BOOKBOOKBOOK</h5>
-                               <!-- <small class="text-muted text-white-50">One Page</small> -->
-                            </div>
-                            <a class="stretched-link" href="/"></a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="navbar-nav m-auto gap-4 m-none">
-								<li class="nav-item dropdown single-dropdown-nav">
-		                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
-		                        </li>
-                                <li>
-                                    <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
-                                </li>
-                                <li class="nav-item dropdown single-dropdown-nav">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 정보 </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="shop-product-grid.html">나의 정보</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-list.html">나의 달력</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-three-coulmn.html">나의 메모</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-four-coulmn.html">나의 통계</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <a href="/logout" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그아웃 </a>
-                            <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
-                        </div>
-                    </div>
-                </nav>
+                	<%@ include file="../header.jsp" %>
             </div>
         <div class="pb-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="rounded-4 border  bg-white mb-4"><!-- osahan-sidebar -->
+                        <div class="rounded-4 border tmargin bg-white mb-4"><!-- osahan-sidebar -->
                             <div class="text-center p-5 border-bottom">
 								<script>
 							        var cfname = "${room.cfname}";
 							        if (cfname) {
-							            var imageSrc = `../files/${room.cfname}`;
+							            var imageSrc = `${room.cfname}`;
 							        }else{
 										var imageSrc = `../img/co2.png`;
 									}
@@ -95,9 +71,13 @@
 						            document.write(imageElement.outerHTML); // 이미지 출력
 							    </script>
 								<br/><br/>
-                                <h3 class="fw-bold mb-1">${room.chatroomName}<br/> 채팅에 참여중인 사람들</h3>
+							
+						            <h6 class="keep-text fw-bold mb-1">${room.chatroomName}<br/></h6>
+									
                             </div>
-                            <div id="joinedUser" class="p-4 osahan-sidebar-links">
+							<div><h5 class="fw-bold mb-1" style="padding:5% 0 0 24%">채팅에 참여중인 사람들</h5></div>
+								
+                            <div id="joinedUser" class="scrollable-list p-4 osahan-sidebar-links">
                                 <!-- 여기에 명단 출력-->
                             </div>
                         </div>
@@ -106,10 +86,11 @@
                         <div class="ps-lg-5 pt-lg-5">
                             
                             <div class="col d-flex align-items-center justify-content-between bg-white border px-4 py-4 rounded-4">
-                                <div>
-								<h1 class="m-0 fw-bold">${room.chatroomName}</h1>
+                                <div class="col-xl-9">
+								<h3 class="keep-text m-0 fw-bold">${room.chatroomName}</h3>
 								</div>
-								<div>
+								<div class="col-xl-1"></div>
+								<div class="col-xl-2">
 									<a id="exit" href="/pages/chat-entrance" class="btn btn-outline-purple w-100 mt-2">나가기</a>
 								</div>
                             </div>
@@ -256,6 +237,7 @@
 				   //유저 목록
 				   stompClient.subscribe('/topic/activeUsers/'+roomNum, function(users) {
 				           let userList = JSON.parse(users.body); // 받은 데이터를 파싱
+						   console.log(userList);
 				           // 여기서 userList를 이용하여 UI를 업데이트하거나 다른 작업을 수행할 수 있음
 						   var li = document.createElement('li');
 						   var joinedUser = document.getElementById('joinedUser');
@@ -263,9 +245,13 @@
 						   var members='';
 						   for(let i=0;i<userList.length;i++){
 							//console.log(userList[i].split('/'));
-							if (userList[i].split('/')[0] == roomNum){
-								members += '<p><i class="ri-user-line mb-2"></i>'+userList[i].split('/')[1]+'</p>';
-							}
+							//if (userList[i].split('/')[0] == roomNum){
+								if(userList[i]==username){
+									members += '<p style="background-color: rgba( 109, 212, 51, 0.2 )" class="text-success col-xl-4"><i class="ri-user-line mb-2"></i>'+userList[i]+'</p>';
+								}else{
+									members += '<p class="text-purple"><i class="ri-user-line mb-2"></i>'+userList[i]+'</p>';
+								}
+							//}
 						   }//end of for
 						   li.innerHTML=members;
 						   li.className = 'mb-2 list-unstyled';
@@ -274,6 +260,10 @@
 					   
 				   //유저 LEAVE
 				   window.addEventListener('beforeunload', function(event) {
+					if (!event.persisted) {
+						event.preventDefault(); // 이벤트 기본 동작을 취소하여 브라우저가 기본 메시지를 표시하지 않도록 함
+					    event.returnValue = '';
+						}
 				               // WebSocket 연결이 있다면 연결 종료
 				               if (stompClient !== null) {
 				                   stompClient.send("/app/chat.removeUser/"+${room.chatroomNum},
@@ -285,6 +275,7 @@
 				                       console.log('WebSocket disconnected');
 				                   });
 				               }
+						   
 				           });
 		       });
 			   
@@ -317,11 +308,6 @@
 				   if(parsedMessage.type==='JOIN'){
 				   		messageContent= parsedMessage.sender+'님이 참여하였습니다.'+ '<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
 						
-						//var userList= document.getElementById('joinedUser');
-						//var userAdd = '<i class="ri-user-line me-2"></i>'+ 'username';
-						//var pElement = document.createElement('p');
-						//pElement.innerHTML=userAdd;
-						//userList.appendChild(pElement);
 						
 				   }else if(parsedMessage.type==='LEAVE'){
 						messageContent= parsedMessage.sender+'님이 나가셨습니다.'+'<small class="text-muted">' + localizedDate.substring(14,25) + '</small>';
@@ -360,21 +346,21 @@
 																'<input type="hidden" name="chatroomNum" value="'+${room.chatroomNum}+'">'+
 																'<input type="hidden" name="reportTime" value="'+messageId.replaceAll('-','').replace('T','').replaceAll(':','').replace('.','')+'">'+
 																'<div class="col-md-5">신고 대상:</div>'+
-																'<div class="row col-md-7 ms-auto">'+ '<input name="reportedUser" value="'+parsedMessage.sender+'" readonly></div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<input type="hidden" name="reportedUser" value="'+parsedMessage.senderId+'"><input value="'+parsedMessage.sender+'" readonly></div>'+
 															'</div>'+
 															'<div class="row">'+
 																'<br/>'+
 															'</div>'+
 															'<div class="row">'+
 																'<div class="col-md-5">신고자:</div>'+
-																'<div class="row col-md-7 ms-auto">'+ '<input name="reportUser" value="신고자 아이디" readonly/></div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<input type="hidden" name="reportUser" value="${sessionScope.userId}"><input value="${sessionScope.userName}" readonly/></div>'+
 															'</div>'+
 															'<div class="row">'+
 																'<br/>'+
 															'</div>'+
 															'<div class="row">'+
 																'<div class="col-md-5">신고 내용:</div>'+
-																'<div class="row col-md-7 ms-auto">'+ '<span>'+parsedMessage.content +'</span></div>'+
+																'<div class="row col-md-7 ms-auto">'+ '<input type="text" readonly value="'+parsedMessage.content +'" name="reportedMessage"></div>'+
 															'</div>'+
 															'<div class="row">'+
 																'<br/>'+
@@ -384,6 +370,8 @@
 															   '<select name="reportType" class="row col-md-7 ms-auto">'+
 																'<option>욕설</option>'+
 																'<option>광고</option>'+
+																'<option>음란물</option>'+
+																'<option>도배</option>'+
 																'<option>기타</option>'+
 																'</select>'+
 															'</div>'+
@@ -456,7 +444,7 @@
 			   $('#exit').click(function(e) {
 			           e.preventDefault(); // 기본 동작(링크 이동)을 막음
 			           var href = $(this).attr('href'); // 클릭한 링크의 href 속성 값 가져오기
-					   var confirmResult = confirm("채팅방을 나가시겠습니까? 채팅방에 남은 인원이 0명이 될 경우 방은 자동으로 삭제됩니다.");
+					   var confirmResult = confirm("채팅방을 나가시겠습니까?\r\n채팅방에 남은 인원이 0명이 될 경우 방은 자동으로 삭제됩니다.");
 			           if (confirmResult) {
 			               window.location.href = href; // 새로운 페이지로 이동
 			           }
