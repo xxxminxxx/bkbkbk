@@ -46,24 +46,6 @@
     </div>
     <!-- header -->
     <div class="py-5">
-        <div class="container pt-5">
-            <div class="row justify-content-center">
-
-                <div class="col-xl-6 col-lg-5 col-md-10 col-12">
-                    <div class="d-flex gap-3 align-items-center">
-                        <a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myInfo"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 정보</font></font>
-                        </a>
-
-                        <a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myMemo"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 메모</font></font></font></font></a>
-
-                        <a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myCalendar"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 달력</font></font></font></font></a>
-
-                        <a class="btn btn-outline-light px-5 py-3 rounded-pill" href="/pages/user-myStat"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">나의 통계</font></font></font></font></a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="w-100">
         <img src="../img/pages/hero-wave.svg" alt="" class="img-fluid w-100">
@@ -73,53 +55,53 @@
 <div class="py-5" id="elements">
     <div class="container">
         <h1 class="text-center mb-4">나의 정보 수정</h1>
-            <c:choose>
-                <c:when test="${not empty sessionScope.userId}">
-                    <div class="container" style="padding:100">
-                        <div class="row g-5 p">
-                            <form class="d-grid gap-2 input-group-lg row gap-5 m-" id="frmMyInfo">
-                                <div class="mb-3">
-                                    <label class="form-label small">이메일</label>
-                                    <input type="email" class="form-control bg-light border-0 px-3 py-2" placeholder="이메일을 입력하세요" id="userId" name="userId" readonly
-                                           value="${userId}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label small">비밀번호</label>
-                                    <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password" aria-describedby="emailHelp" name="password">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password2" class="form-label small">비밀번호 확인</label>
-                                    <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password2" aria-describedby="emailHelp" name="password2">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="userName" class="form-label small">이름</label>
-                                    <input type="text" class="form-control bg-light border-0 px-3 py-2" placeholder="이름을 입력하세요" id="userName" name="userName"
-                                           value="${userName}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="userTel" class="form-label small">전화번호</label>
-                                    <input type="tel" class="form-control bg-light border-0 px-3 py-2" placeholder="전화번호를 입력하세요" id="userTel" name="userTel"
-                                           value="${userTel}">
-                                </div>
+        <c:choose>
+            <c:when test="${not empty sessionScope.userId}">
+                <div class="container" style="padding:100">
+                    <div class="row g-5 p">
+                        <form class="d-grid gap-2 input-group-lg row gap-5 m-" id="frmMyInfo">
+                            <div class="mb-3">
+                                <label class="form-label small">이메일</label>
+                                <input type="email" class="form-control bg-light border-0 px-3 py-2" placeholder="이메일을 입력하세요" id="userId" name="userId" readonly
+                                       value="${userId}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label small">비밀번호</label>
+                                <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password" aria-describedby="emailHelp" name="password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password2" class="form-label small">비밀번호 확인</label>
+                                <input type="password" class="form-control bg-light border-0 px-3 py-2" placeholder="비밀번호를 입력하세요" id="password2" aria-describedby="emailHelp" name="password2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="userName" class="form-label small">이름</label>
+                                <input type="text" class="form-control bg-light border-0 px-3 py-2" placeholder="이름을 입력하세요" id="userName" name="userName"
+                                       value="${userName}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="userTel" class="form-label small">전화번호</label>
+                                <input type="tel" class="form-control bg-light border-0 px-3 py-2" placeholder="전화번호를 입력하세요" id="userTel" name="userTel"
+                                       value="${userTel}">
+                            </div>
 
-                                <button type="submit" class="btn btn-purple btn-theme">수정하기</button>
-                            </form>
-                        </div>
+                            <button type="submit" class="btn btn-purple btn-theme">수정하기</button>
+                        </form>
                     </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="text-center py-5">
-                        <h3 class="text-muted">로그인 후 이용하실 수 있습니다.</h3>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="text-center py-5">
+                    <h3 class="text-muted">로그인 후 이용하실 수 있습니다.</h3>
+                </div>
+                <div id="without-data">
+                    <div class="container text-center mt-4">
+                        <a href="/pages/login" class="btn btn-primary btn-lg">로그인 하러 가기</a>
                     </div>
-                    <div id="without-data">
-                        <div class="container text-center mt-4">
-                            <a href="/pages/login" class="btn btn-primary btn-lg">로그인 하러 가기</a>
-                        </div>
-                    </div>
-                </c:otherwise>
-            </c:choose>
-        </div>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
+</div>
 </div>
 </div>
 </div>
@@ -139,21 +121,9 @@
 <script src="../vender/aos/dist/aos.js"></script>
 <!-- Custom Js -->
 <script src="../js/script.js"></script>
+<!-- user-myInfo Js -->
+<script src="../js/user-myInfo.js"></script>
 <script> window.onload = function() { let message = "${message}"; if (message && message !== "") { alert(message); } };
-
-$('#frmMyInfo')
-    .attr("action","/pages/modify")
-    .attr("method", "post")
-    .on('submit', (e)=>{
-        // e.preventDefault()
-        if ($("input[name=password2]").val() != $("input[name=password]").val()){
-            alert('비밀번호가 일치하지 않습니다.');
-            return false;
-        }else{
-            $("#frmMyInfo").submit();
-            return true;
-        }
-    })
 </script>
 </body>
 </html>
