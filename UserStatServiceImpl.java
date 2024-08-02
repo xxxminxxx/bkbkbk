@@ -21,10 +21,10 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class UserStatServiceImpl implements UserStatService{
 
-    // UserStatDAO 객체를 주입받음 (final 키워드와 @RequiredArgsConstructor에 의해 생성자 주입이 이루어짐)
+    // UserStatDAO 객체 주입
     private final UserStatDAO userStatDAO;
 
-    // 페이지별 통계를 가져오는 메서드
+    // 페이지별 통계
     @Override
     public List<UserStatVO> getUserStatInfo1(UserStatVO userStatVO) {
         // UserStatDAO를 통해 권수별 통계 정보를 조회
@@ -32,7 +32,7 @@ public class UserStatServiceImpl implements UserStatService{
         return userStatVO1;
     }
 
-    // 권수별 통계를 가져오는 메서드
+    // 권수별 통계
     @Override
     public List<UserStatVO> getUserStatInfo2(UserStatVO userStatVO) {
         List<UserStatVO> userStatVO2 = userStatDAO.getUserStatInfo2(userStatVO);
