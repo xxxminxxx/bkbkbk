@@ -457,7 +457,7 @@
 	// 데이터와 월 정보를 저장할 배열 초기화
 	let datax = [];
 	let monthx = [];
-	// JSP의 JSTL을 사용하여 서버에서 전달받은 데이터를 JavaScript 배열에 추가
+	// 서버에서 전달받은 데이터를 JavaScript 배열에 추가
 	<c:forEach items="${userStatVO2}" var="vo">
 	datax.push(${vo.bookCount}); // 각 월의 책 수를 datax 배열에 추가
 	monthx.push(${vo.bookMonth}+'월'); // 월 정보를 monthx 배열에 추가
