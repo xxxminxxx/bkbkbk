@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../img/pages/icon.png" type="image/png">
-        <title>도서 추천</title>
+        <title>북북북 | 카테고리별 도서</title>
         <!-- Bootstrap Css -->
         <link rel="stylesheet" href="../vender/bootstrap/css/bootstrap.min.css">
         <!-- Icofont Css -->
@@ -23,17 +23,7 @@
         <link rel="stylesheet" href="../css/common.css">
 
 		<style>
-		@font-face {
-			     font-family: 'DungGeunMo';
-			     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-			     font-weight: normal;
-			     font-style: normal;
-		}
-
-		div{
-			font-family: 'DungGeunMo';
-		}
-
+		
 		#bookList{
 			overflow-y:auto;
 			height: 59em;
@@ -51,39 +41,7 @@
             <!-- navbar -->
             <div class="elements-nav">
                 <!-- bootom nav -->
-                <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
-                    <div class="container">
-                        <div class="position-relative d-flex align-items-center gap-2 site-brand">
-                            <img src="../img/bookbookbookLogo.png" alt="북북북 로고"/>
-                            <div class="lh-1">
-                               <h5 class="fw-bold m-0 text-white">BOOKBOOKBOOK</h5>
-                               <!-- <small class="text-muted text-white-50">One Page</small> -->
-                            </div>
-                            <a class="stretched-link" href="/"></a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="navbar-nav m-auto gap-4 m-none">
-								<li class="nav-item dropdown single-dropdown-nav">
-		                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
-		                        </li>
-                                <li>
-                                    <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
-                                </li>
-                                <li class="nav-item dropdown single-dropdown-nav">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 정보 </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="shop-product-grid.html">나의 정보</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-list.html">나의 달력</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-three-coulmn.html">나의 메모</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-four-coulmn.html">나의 통계</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <a href="./page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그인 </a>
-                            <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
-                        </div>
-                    </div>
-                </nav>
+               <%@ include file="../header.jsp" %>
             </div>
             <!-- header -->
             <div class=" py-5">
@@ -121,29 +79,9 @@
                                           </h2>
                                           <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
-                                                <ul class="list-unstyled m-0">
-													<li class="mb-1"><a href="#" class="text-dark" name="가정/요리/뷰티">가정/요리/뷰티 </a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="건강/취미/레저">건강/취미/레저</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="경제경영">경제경영 </a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="과학">과학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="만화">만화</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="사회과학">사회과학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="소설/시/희곡">소설/시/희곡</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="어린이">어린이</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="에세이">에세이</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="여행">여행</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="역사">역사</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="예술/대중문화">예술/대중문화</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="외국어">외국어</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="유아">유아</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="인문학">인문학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="자기계발">자기계발</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="잡지">잡지</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="종교/역학">종교/역학</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="좋은부모">좋은부모</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="청소년">청소년</a></li>
-                                                    <li class="mb-1"><a href="#" class="text-dark" name="컴퓨터/모바일">컴퓨터/모바일</a></li>
-                                                </ul>
+                                                <ul id="depth_first" class="list-unstyled m-0">
+													
+												</ul>
                                             </div>
                                           </div>
                                         </div>
@@ -153,7 +91,7 @@
                                                   카테고리 중분류
                                               </button>
                                             </h2>
-                                            <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                            <div id="collapseTwo" class="accordion-collapse collapse hide" data-bs-parent="#accordionExample">
                                               <div class="accordion-body">
                                                   <ul id="depth_second" class="list-unstyled m-0">
                                                       <!--<li class="mb-1"><a href="#" class="text-dark">중분류 카테고리 항목 출력해오기 </a></li>-->
@@ -168,7 +106,7 @@
                                                   카테고리 소분류
                                               </button>
                                             </h2>
-                                            <div id="collapseThree" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                            <div id="collapseThree" class="accordion-collapse collapse hide" data-bs-parent="#accordionExample">
                                               <div class="accordion-body">
                                                   <ul id="depth_third" class="list-unstyled m-0">
                                                       <!--<li class="mb-1"><a href="#" class="text-dark">중분류 카테고리 항목 출력해오기 </a></li>-->
@@ -185,7 +123,7 @@
                     <div class="bg-light col-lg-9 col-12">
                         <div class="p-3">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <small>선택하신 분야에 맞는 책은 다음과 같습니다.</small>
+                                <small id="selectedCate">선택하신 분야의 책은 다음과 같습니다.</small>
                                 <select id="select" class="form-select w-25" aria-label="Default select example">
                                     <option selected>정렬</option>
                                     <option value="titleAsc">이름 오름차순 정렬</option>
@@ -197,47 +135,7 @@
                         </div>
                     </div>
 					<div id="paginationContainer"></div>
-						<!-- 페이지-->
-						<!--<nav aria-label="Page navigation example">
-						    <ul class="pagination align-items-center justify-content-center" style="margin-left: 3rem;">
-						        <li class="page-item">
-				                    <li class="page-item">
-				                        <a class="page-link text-purple" href="?page=1">&lt;&lt;</a>  첫 페이지로 
-				                    </li>
-									<c:if test="${currentPage>1}">
-					                    <li class="page-item">
-					                        <a class="page-link text-purple" href="?page=${currentPage - 1}" aria-label="Previous">
-					                            <span aria-hidden="true">&laquo;</span>
-					                        </a>
-					                    </li>
-									</c:if>
-						        </li>
-						        <c:forEach begin="${startPage}" end="${endPage}" var="pageNumber">
-						            <li class="page-item">
-						                <c:choose>
-						                    <c:when test="${pageNumber eq currentPage}">
-						                        <a class="page-link text-purple" href="#">${pageNumber}</a>
-						                    </c:when>
-						                    <c:otherwise>
-						                        <a class="page-link text-purple" href="?page=${pageNumber+1}">${pageNumber}</a>
-						                    </c:otherwise>
-						                </c:choose>
-						            </li>
-						        </c:forEach>
-						        <li class="page-item">
-						            <c:if test="${currentPage < totalPages}">
-										<li class="page-item">
-							                <a class="page-link text-purple" href="?page=${currentPage + 1}" aria-label="Next">
-							                    <span aria-hidden="true">&raquo;</span>
-							                </a>
-										</li>
-									</c:if>
-					                <li class="page-item">
-					                    <a class="page-link text-purple" href="?page=${totalPages}">&gt;&gt;</a>  마지막 페이지로 
-					                </li>
-						        </li>
-						    </ul>
-						</nav>-->
+						
                     </div>
                 </div>
             </div>
@@ -337,13 +235,31 @@
 			var sortType='';
 			
 			$(document).ready(function() {
-				    $('a[name]').click(function(e) {
-		            e.preventDefault();
-		            var categoryFirst = $(this).attr('name');//categoryFirst이 대분류
-					sort_first=categoryFirst;
-					//대분류 선택 시 중분류 목록 가져오는 함수
-		            loadCategoryData(categoryFirst);
-		        });//end of click
+				$.ajax({
+					url:'/loadCategory',
+					method:'POST',
+					success:function(data){
+						var cateHtml ='';
+						for(let i=0; i<data.length;i++){
+							cateHtml+='<li class="mb-1"><a href="#" class="text-dark" name="'+data[i].interestNum1+'">'+data[i].interestNum1+'</a></li>'
+						}
+						$('#depth_first').html(cateHtml); 
+						
+						
+						$('a[name]').on('click',function(e) {
+				            e.preventDefault();
+				            var categoryFirst = $(this).attr('name');//categoryFirst가 대분류
+							sort_first=categoryFirst;
+							//대분류 선택 시 중분류 목록 가져오는 함수
+				            loadCategoryData(categoryFirst);
+		       			 });//end of click
+					},
+					erorr: function(err){
+						console.log(err);
+					}
+				});//end of ajax
+				
+				   
 				
 				$('#select').change(function(){
 					sortType= $(this).val();
@@ -374,6 +290,11 @@
 				                // 중분류 선택 시 책을 가져오는 함수 호출
 				                loadCategoryDataSecond(categoryFirst, categorySecond);      
 				            });
+							//카테고리 대분류 클래스에 show 지우고 hide 부여
+							$('#collapseOne').removeClass("show");
+							$('#collapseOne').addClass("hide");
+							$('#collapseTwo').addClass("show");
+							$('#collapseThree').addClass("hide");
 						},
 			            error: function(err) {
 			                console.error('Failed to load category data1:', err);
@@ -390,7 +311,9 @@
 						success:function(data){
 							var html = '<ul class="list-unstyled">';  // 리스트 시작
 				            for (var i = 0; i < data.length; i++) {
+								if(i===0 || data[i].interestNum3 != data[i-1].interestNum3){
 				                html += '<li class="list-unstyled mb-1"><a href="#" class="text-dark" cateThird="'+data[i].interestNum3+'">' + data[i].interestNum3 + '</a></li>';
+								}
 				            }
 				            html += '</ul>';
 				            $('#depth_third').html(html);  // #depth_second에 HTML 추가
@@ -403,7 +326,10 @@
 								//소분류 선택 시 책 가져오는 함수 호출
 								cateBookList(sort_first, sort_second, sort_third, sortType)   
 				            });
-							
+							//카테고리 중분류 클래스에 show 지우고 hide 부여
+							$('#collapseTwo').removeClass("show");
+							$('#collapseTwo').addClass("hide");
+							$('#collapseThree').addClass("show");
 						},
 						error:function(err){
 							console.error('Failed to load category data2:', err);
@@ -418,6 +344,10 @@
 						method:'get',
 						data: {categoryFirst: sort_first, categorySecond: sort_second, categoryThird: sort_third, sortType: sortType},
 						success:function(data){
+								//카테고리 대분류 클래스에 show 지우고 hide 부여
+								$('#collapseThree').removeClass("show");
+								$('#collapseThree').addClass("hide");
+								
 								//한 페이지에 9개씩 출력
 					            var itemsPerPage = 9; 
 					            var currentPage = 1;
@@ -429,14 +359,16 @@
 					                var endIndex = startIndex + itemsPerPage;
 					                var slicedData = data.slice(startIndex, endIndex);
 									if(slicedData.length==0){
-										bookData="해당하는 데이터가 없습니다.";
+										bookData="<h3>해당하는 데이터가 없습니다.</h3>";
 									}else{
 									//목록 출력
 									for(let i=0; i<slicedData.length;i++){
+									var bookImage = slicedData[i].bname ? '<img src="'+slicedData[i].bname+'" class="rounded" alt="'+slicedData[i].bookTitle+'의 표지">' : '<img src="../img/noimage.jpg" class="rounded" alt="등록된 이미지가 없습니다.">'
+																			
 									bookData += '<div class="col-lg-4 col-md-6 col-12">'+
 					                                    '<div class="card bg-transparent border-0 h-100">'+
-					                                        '<a href="책상세페이지 링크'+slicedData[i].isbn+'" class="position-relative">'+ //상세페이지로 수정. isbn값으로 넘기기
-																'<img src="'+slicedData[i].bname+'" class="rounded" alt="featured-1">'+
+					                                        '<a href="/pages/book-bookDetail?bookNum='+slicedData[i].bookNum+'" class="position-relative">'+ //상세페이지로 수정. isbn값으로 넘기기
+																bookImage+
 					                                        	'<div class="card-body px-0">'+
 					                                            '<h6 class="text-purple card-title lh-base">'+slicedData[i].bookTitle+'</h6>'+
 																'</a>'+
