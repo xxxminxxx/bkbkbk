@@ -8,17 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="../img/pages/icon.png" type="image/png">
         <title>오픈책팅방</title>
-		<style>
-		       @font-face {
-		           font-family: 'DungGeunMo';
-		           src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-		           font-weight: normal;
-		           font-style: normal;
-		       }
-			   div{
-				 font-family: 'DungGeunMo';
-			   }
-		</style>
         <!-- Bootstrap Css -->
         <link rel="stylesheet" href="../vender/bootstrap/css/bootstrap.min.css">
         <!-- Icofont Css -->
@@ -39,39 +28,7 @@
             <!-- navbar -->
             <div class="elements-nav">
                 <!-- bootom nav -->
-                <nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-50">
-                    <div class="container">
-                        <div class="position-relative d-flex align-items-center gap-2 site-brand">
-                            <img src="../img/bookbookbookLogo.png" alt="북북북 로고"/>
-                            <div class="lh-1">
-                               <h5 class="fw-bold m-0 text-white">BOOKBOOKBOOK</h5>
-                               <!-- <small class="text-muted text-white-50">One Page</small> -->
-                            </div>
-                            <a class="stretched-link" href="/"></a>
-                        </div>
-                        <div class="collapse navbar-collapse">
-                            <ul class="navbar-nav m-auto gap-4 m-none">
-								<li class="nav-item dropdown single-dropdown-nav">
-		                            <a class="nav-link " href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
-		                        </li>
-                                <li>
-                                    <a class="nav-link" href="#" role="button" aria-expanded="false"> 나의 캐릭터 </a>
-                                </li>
-                                <li class="nav-item dropdown single-dropdown-nav">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 정보 </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="shop-product-grid.html">나의 정보</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-list.html">나의 달력</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-three-coulmn.html">나의 메모</a></li>
-                                        <li><a class="dropdown-item" href="shop-product-full-four-coulmn.html">나의 통계</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <a href="./page-login.html" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그아웃 </a>
-                            <a href="#" class="link-light d-lg-none ms-auto" data-bs-toggle="offcanvas" data-bs-target="#sidebarnav" aria-controls="sidebarnav"><i class="ri-menu-3-line ri-lg"></i></a>
-                        </div>
-                    </div>
-                </nav>
+				<%@ include file="../header.jsp" %>
             </div>
             <!-- header -->
             <div class="py-5">
@@ -91,19 +48,27 @@
 		                                        <h1 class="modal-title fs-5" id="exampleModalLabel">새 채팅방 만들기</h1>
 		                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		                                    </div>
-											<form  action="/createChatroom" method="POST" enctype="multipart/form-data" name="createChatroom"><!---->
+											 <form action="/createChatroom" method="POST" enctype="multipart/form-data" name="createChatroom" onsubmit="return validateForm(event)">
 		                                    <div class="modal-body">
 												<div class="container-fluid">
 													<div class="row">
 		                                        		<div class="col-md-5">채팅방 이름</div>
-														<div class="row col-md-7 ms-auto"><input type="text" name="chatroomName"></div>
+														<div class="row col-md-7 ms-auto">
+															<select  id="chatroomNameSelect" name="chatroomName" size=3>
+																<option value="" disabled selected>채팅방을 선택하세요</option>
+																<c:forEach items="${myBooks}" var="book">
+																    <option value="${book.bookTitle}" data-image="${book.bname}">${book.bookTitle}</option>
+																</c:forEach>
+															</select>
+														</div>
 													</div>
 													<div class="row">
 														<br/>
 													</div>
 													<div class="row">
 														<div class="col-md-5">채팅방 이미지</div>
-														<div class="row col-md-7 ms-auto"> <input id="imageUpload" type="file" name="file"></div>
+														<div class="row col-md-7 ms-auto" style="display:none"> <input id="imageUpload" type="file" name="file"></div>
+														<div class="row col-md-7 ms-auto"> <img id="chatroomImage" src=""><input id="imgPath" type="hidden" value="" name="chatFilePath"></div>
 													</div>
 													<div class="row">
 														<br/>
@@ -141,10 +106,20 @@
 							
                             <div class="row g-4">
 								<div id="getChatroom" class="row g-4">
+									<input type="hidden" name="userCount" value="${userCountsByRoom}">
 	                                <c:forEach items="${chatrooms}" var="chatroom">
 										<div class="col-lg-6 col-12 mb-4">
 		                                    <div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">
-		                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
+												<input type="hidden" name="hiddenroomNum" value="${chatroom.chatroomNum}" data-room-name="${chatroom.chatroomName}">
+												
+												<c:choose>
+				                                   <c:when test="${userCountsByRoom[chatroom.chatroomNum.toString()]/chatroom.chatroomStatus lt 1}">
+				                                        <span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>
+				                                   </c:when>
+				                                   <c:otherwise>
+				                                       <span class="badge bg-danger small text-danger bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여불가</span>
+				                                   </c:otherwise>
+				                               </c:choose>
 		                                        <div class="row">
 													<div class="col-lg-8">
 													<h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">${chatroom.chatroomName}</h5>
@@ -154,7 +129,18 @@
 			                                                 <i class="ri-user-line"></i>
 			                                                <div>
 			                                                    <small class="text-muted">참여자 수</small>
-			                                                    <p class="m-0">/${chatroom.chatroomStatus}명</p>
+																<c:choose>
+								                                   <c:when test="${userCountsByRoom[chatroom.chatroomNum.toString()] != null}">
+								                                       <p class="m-0">
+								                                           ${userCountsByRoom[chatroom.chatroomNum.toString()]}명/${chatroom.chatroomStatus}명
+								                                       </p>
+								                                   </c:when>
+								                                   <c:otherwise>
+								                                       <p class="m-0">
+								                                           0명/${chatroom.chatroomStatus}명
+								                                       </p>
+								                                   </c:otherwise>
+								                               </c:choose>
 			                                                </div>
 			                                            </div>
 													</div><!--end of class="col-lg-8"-->
@@ -162,7 +148,7 @@
 													<script>
 													        var cfname = "${chatroom.cfname}";
 													        if (cfname) {
-													            var imageSrc = `../files/${chatroom.cfname}`;
+													            var imageSrc = `${chatroom.cfname}`;
 													            var imageElement = document.createElement("img");
 													            imageElement.setAttribute("src", imageSrc);
 													            imageElement.setAttribute("width", "80px");
@@ -174,30 +160,37 @@
 												</div><!--end of class="row"-->
 		                                        <div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">
 		                                        </div>
-		                                        <a href="chat-chatroom?roomNum=${chatroom.chatroomNum}" class="btn btn-outline-purple w-100 mt-2">입장하기</a>
+												<c:choose>
+				                                   <c:when test="${userCountsByRoom[chatroom.chatroomNum.toString()]/chatroom.chatroomStatus lt 1}">
+		                                        		<a href="chat-chatroom?roomNum=${chatroom.chatroomNum}" class="encounter btn btn-outline-purple w-100 mt-2">입장하기</a>
+													</c:when>
+													<c:otherwise>
+														<a  class="btn btn-outline-purple w-100 mt-2">입장할 수 없습니다.</a>
+													</c:otherwise>
+												</c:choose>
 		                                    </div>
 		                                </div>
 									</c:forEach>
 	                            </div> <!-- end of <div id="getChatroom" class="row g-4">-->
 									
 									<div class="row" id="chatroomPage">
-										<div class="col-xl-6">
-									<%-- 이전 버튼 --%>
-								        <c:if test="${currentPage > 1}">
-								            <a class="text-purple" href="/pages/chat-entrance?page=${currentPage - 1}">
-								                &lt; 이전으로
-								            </a>
-								        </c:if>
-										</div>
-										<div class="col-xl-6 ms-auto">
-									<%-- 다음 버튼 --%>
-								       <c:if test="${currentPage < totalPage}">
-								           <a class="text-purple" href="/pages/chat-entrance?page=${currentPage + 1}">
-								               다음으로 &gt;
-								           </a>
-								       </c:if>   
-									   </div> 
-								  	</div>
+									    <div class="col-xl-6">
+									        <%-- 이전 버튼 --%>
+									        <c:if test="${currentPage > 1}">
+									            <a class="text-purple" href="/pages/chat-entrance?page=${currentPage - 1}">
+									                &lt; 이전으로
+									            </a>
+									        </c:if>
+									    </div>
+									    <div class="col-xl-6 d-flex justify-content-end">
+									        <%-- 다음 버튼 --%>
+									        <c:if test="${currentPage < totalPage}">
+									            <a class="text-purple" href="/pages/chat-entrance?page=${currentPage + 1}">
+									                다음으로 &gt;
+									            </a>
+									        </c:if>
+									    </div>
+									</div>
 								  
 							</div>
                         </div>
@@ -286,9 +279,12 @@
         <script src="../vender/aos/dist/aos.js"></script>
         <!-- Custom Js -->
         <script src="../js/script.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+		
+		
 		<script>
-
-			//채팅방 이미지 업로드 미리보기
+			<!--//채팅방 이미지 업로드 미리보기
 			var imageUpload = document.getElementById('imageUpload');
 			imageUpload.addEventListener('change', function(event) {  
 				var file = event.target.files[0];
@@ -305,10 +301,63 @@
 			    			};//end of reader.onload function
 			    		reader.readAsDataURL(file);  
 			   		 } //end of if
-			 });//end of imageUpload addEventListener
+			 });//end of imageUpload addEventListener-->
 			 
+			 //입장 시 읽은 책 여부 확인하기
+			 $('#getChatroom').on('click','.encounter',function(e){
+				e.preventDefault();
+				   var chatroomName = $(this).closest('.shadow').find('h5').text();
+				   //myBooks 리스트 가져오기
+				   var chatroomNames = [];
+                   $('#chatroomNameSelect option').each(function() {
+                       var value = $(this).val();
+                       if (value) { // Exclude the disabled and selected option
+                           chatroomNames.push(value);
+                       }
+                   });
+				   if (chatroomNames.includes(chatroomName)) {
+					   window.location.href = $(this).attr('href');
+                   } else {
+                       alert('내 서재에 해당 책을 저장한 후 입장하실 수 있습니다.');
+                   }
+			 });
 			 
-			 //채팅방 검색
+			 //이미지 띄우기
+			 var selectElement = document.getElementById('chatroomNameSelect');
+			 var imageElement = document.getElementById('chatroomImage');
+			 var imgPath = document.getElementById('imgPath');
+
+		    selectElement.addEventListener('change', function() {
+		        var selectedOption = selectElement.options[selectElement.selectedIndex];
+		        var imageUrl = selectedOption.getAttribute('data-image');
+				console.log(imageUrl);
+		        imageElement.src = imageUrl;
+				imgPath.value=imageUrl;
+		    });
+			
+			
+			//검색기능 이용 시 인원 수 표시 파트 #####################
+			var userCount = $('input[name="userCount"]').val();
+
+			// 문자열에서 중괄호를 제거하고, 등호를 콜론으로 변경
+			var jsonStr = userCount
+			    .replace('{', '')
+			    .replace('}', '')
+			    .replaceAll('=', ':'); // 등호를 콜론으로 변경
+				
+			var countSet = {};
+			// 쉼표를 기준으로 문자열을 나누어 배열로 변환하고, 각 항목을 JSON 형식의 문자열로 변환
+			var formattedStr = jsonStr.split(',') 
+			    .map(item => {
+			        var [key, value] = item.split(':'); // 각 항목을 콜론을 기준으로 나눔
+					countSet[key]= parseInt(value);
+			    })
+			// countSet 객체를 JSON 문자열로 변환
+			var jsonString = JSON.stringify(countSet);
+			// ############################################
+			
+			
+			 //채팅방 출력
 			 $('#searchBtn').click(function(e){
 				e.preventDefault();
 				var keyword = $('input[name="chatRoomName"]').val();
@@ -336,20 +385,46 @@
 					                $('#chatroomPage').html('');
 					                chatroomList.html('');
 					                for (let i = 0; i < slicedData.length; i++) {
+										var imgData = '';
+										//이미지 존재 여부
+										if(slicedData[i].cfname){
+											imgData='<img src="'+slicedData[i].cfname+'" width="80px" height="100px">';
+										}
+										//참여 인원 수 
+										var enterAble= '<span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>';
+										var enter =  '<a href="chat-chatroom?roomNum=' + slicedData[i].chatroomNum + '" class="encounter btn btn-outline-purple w-100 mt-2">입장하기</a>'
+										if(countSet[slicedData[i].chatroomNum] !=null){
+											var memberCount = countSet[slicedData[i].chatroomNum];
+											if(memberCount >= slicedData[i].chatroomStatus){
+												enterAble='<span class="badge bg-danger small text-danger bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여불가</span>';
+												enter = '<a  class="btn btn-outline-purple w-100 mt-2">입장할 수 없습니다.</a>';
+											}
+										}else{
+											var memberCount =0;
+										}
 					                    searchResult += '<div class="col-lg-6 col-12 mb-4">' +
 					                        '<div class="shadow bg-white rounded-0 border-light-subtle hover:bg-warning rounded-4 p-4">' +
-					                        '<span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>' +
-					                        '<h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">' + slicedData[i].chatroomName + '</h5>' +
-					                        '<div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">' +
+					                        //'<span class="badge bg-success small text-success bg-opacity-10 text-uppercase mb-2 px-3 py-2 rounded-pill">참여가능</span>'+
+											enterAble+
+											'<div class="row">'+
+											'<div class="col-lg-8">'+
+					                        '<h5 class="fw-bold mt-2 mb-0 text-black d-flex align-items-center">' + slicedData[i].chatroomName + '</h5>' +'<br/>'+
 					                        '<div class="d-flex align-items-center gap-2">' +
 					                        '<i class="ri-user-line"></i>' +
 					                        '<div>' +
 					                        '<small class="text-muted">참여자 수</small>' +
-					                        '<p class="m-0">' + slicedData[i].chatroomStatus + '명</p>' +
+					                        '<p class="m-0">' + memberCount
+											+'명/'+slicedData[i].chatroomStatus + '명</p>' +
 					                        '</div>' +
 					                        '</div>' +
 					                        '</div>' +
-					                        '<a href="chat-chatroom?roomNum=' + slicedData[i].chatroomNum + '" class="btn btn-outline-purple w-100 mt-2">입장하기</a>' +
+											'<div class="col-lg-4">'+
+											imgData+
+											'</div>'+
+											'</div>'+ <!--end of class="row"-->
+											'<div class="fs-7 d-flex small align-items-center gap-3 w-100 justify-content-between my-3">'+
+											'</div>'+
+					                       enter +
 					                        '</div>' +
 					                        '</div>';
 					                }
@@ -383,5 +458,18 @@
 			 });//end of click event
 		 
 		</script>
+		<script>
+		       function validateForm(event) {
+		           var selectBox = document.getElementById('chatroomNameSelect');
+		           var selectedValue = selectBox.value;
+
+		           if (selectedValue === "") {
+		               alert('채팅방을 선택하세요.');
+		               event.preventDefault(); // 폼 제출을 막음
+		               return false;
+		           }
+		           return true;
+		       }
+		   </script>
     </body>
 </html>
