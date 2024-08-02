@@ -26,7 +26,7 @@
 		
 		#bookList{
 			overflow-y:auto;
-			height: 59em;
+			height: 58em;
 		}
 		.active .page-link{
 			background-color: white;
@@ -50,7 +50,7 @@
                         <div class="col-xl-6 col-lg-5 col-md-10 col-12 text-center">
                             <div class="text-white">
                                 <h1 class="text-white fw-bolder display-5 mb-3">카테고리별 도서 추천</h1>
-                                <!-- <p class="m-0 text-white-50">Last updated: January 2024</p> -->
+                                <p class="m-0 text-white-50">분류 주제를 선택하여 책을 찾아보세요.</p>
                             </div>
                         </div>
                     </div>
