@@ -27,7 +27,6 @@ public class UserStatServiceImpl implements UserStatService{
     // 페이지별 통계
     @Override
     public List<UserStatVO> getUserStatInfo1(UserStatVO userStatVO) {
-        // UserStatDAO를 통해 권수별 통계 정보를 조회
         List<UserStatVO> userStatVO1 = userStatDAO.getUserStatInfo1(userStatVO);
         return userStatVO1;
     }
