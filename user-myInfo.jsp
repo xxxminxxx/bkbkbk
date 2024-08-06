@@ -123,7 +123,24 @@
 <script src="../js/script.js"></script>
 <!-- user-myInfo Js -->
 <script src="../js/user-myInfo.js"></script>
-<script> window.onload = function() { let message = "${message}"; if (message && message !== "") { alert(message); } };
+<!--sweetalert-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+<!--Sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!--alert 메시지-->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var message = "${message}";
+    if(message) {
+        Swal.fire({
+            title: '알림',
+            text: message,
+            icon: 'success',
+            confirmButtonText: '확인'
+        });
+    }
+});
 </script>
+
 </body>
 </html>
