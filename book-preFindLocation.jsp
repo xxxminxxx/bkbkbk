@@ -46,68 +46,9 @@
 			}
 		</style>
 
-		<nav class="navbar navbar-expand bottom-nav bg-black borer-bottom border-opacity-10 border-white py-lg-0 py-3 bg-opacity-25">
-			<div class="container">
-				<div class="position-relative d-flex align-items-center gap-2 site-brand">
-					<img src="../img/bookbookbookLogo.png" alt="북북북 로고">
-					<div class="lh-1">
-						<h5 class="fw-bold m-0 text-white">BOOKBOOKBOOK</h5>
-					</div>
-					<a class="stretched-link" href="/"></a>
-				</div>
-
-
-				<div class="collapse navbar-collapse">
-					<ul class="navbar-nav m-auto gap-4 m-none">
-						<li class="nav-item dropdown single-dropdown-nav">
-							<a class="nav-link" href="/pages/user-myBookshelf" role="button" aria-expanded="false"> 나의 서재 </a>
-
-						</li>
-						<li>
-							<a class="nav-link" href="/pages/user-myCharacters" role="button" aria-expanded="false"> 나의 캐릭터 </a>
-						</li>
-						<li class="nav-item dropdown single-dropdown-nav">
-							<a class="nav-link dropdown-toggle" href="/pages/user-myInfo" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 나의 정보 </a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/pages/user-myInfo">나의 정보</a></li>
-								<li><a class="dropdown-item" href="/pages/user-myCalendar">나의 달력</a></li>
-								<li><a class="dropdown-item" href="/pages/user-myMemo">나의 메모</a></li>
-								<li><a class="dropdown-item" href="/pages/user-myStat">나의 통계</a></li>
-							</ul>
-						</li>
-					</ul>
-					<!--검색 폼-->
-					<form class="d-flex justify-content-center" action="/bookSearchResult" method="get">
-						<div class="input-group border border-2 border-dark rounded-pill overflow-hidden bg-white p-1" style="max-width: 800px;">
-							<select name="type" class="form-select form-select-xs custom-select" style="border-radius: 50px;">
-								<option value="title">제목</option>
-								<option value="writer">작가</option>
-								<option value="publisher">출판사</option>
-								<option value="bookPreview">소개글</option>
-							</select>
-							<input type="text" class="form-control border-0 py-3 px-4" placeholder="책을 검색해 보세요!" aria-label="Enter your query" name="query" required="">
-							<input type="image" src="../img/searchIcon.png" class="search-button" alt="검색하기" id="app">
-						</div>
-					</form>
-
-
-					<div class="d-flex align-items-center">
-
-
-
-						<a href="/pages/login" class="btn btn-purple rounded-pill btn-theme">로그인</a>
-
-
-					</div>
-				</div>
-			</div>
-		</nav>
-
 		<!-- header -->
-		<div class="svg-border-rounded text-light">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="#ffffff"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
-		</div>
-	</div>
+		<%@ include file="../header.jsp" %>
+		
 	<!-- 메인 컨텐츠 영역 -->
 	<div class="py-5">
 		<div class="container py-4 ">
@@ -218,43 +159,6 @@
 					<!-- 지도를 표시할 div -->
 					<div id="map" style="width:100%;height:400px;display:none;margin-top:20px;"></div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Nav Sidebar -->
-	<div class="offcanvas offcanvas-top bg-purple text-white border-0 h-100" tabindex="-1" id="sidebarnav" aria-labelledby="sidebarnavLabel">
-		<div class="offcanvas-header d-flex justify-content-end">
-			<a href="#" class="link-light" data-bs-dismiss="offcanvas" aria-label="닫다"><i class="ri-close-line ri-lg"></i></a>
-		</div>
-		<div class="offcanvas-body">
-			<div class="sidebar-nav text-center">
-				<div class="position-relative d-flex align-items-center gap-2 site-brand">
-					<i class="ri-slideshow-line fs-2 lh-1 text-white"></i>
-					<div class="lh-1">
-						<h5 class="fw-bold m-0 text-white">북북북</h5>
-					</div>
-					<a class="stretched-link" href="../index.html"></a>
-				</div>
-				<ul class="navbar-nav justify-content-end flex-grow-1 mt-4">
-					<li class="nav-item">
-						<a class="nav-link" href="#"><font style="vertical-align: inherit;">나의 서재</font></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#"><font style="vertical-align: inherit;">나의 캐릭터</font></a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;">나의 정보</font></a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="../pages/page-help-center.html"><font style="vertical-align: inherit;">나의 정보</font></a></li>
-							<li><a class="dropdown-item" href="../pages/page-help-center.html"><font style="vertical-align: inherit;">나의 달력</font></a></li>
-							<li><a class="dropdown-item" href="../pages/page-help-center.html"><font style="vertical-align: inherit;">나의 메모</font></a></li>
-							<li><a class="dropdown-item" href="../pages/page-help-center-categories.html"><font style="vertical-align: inherit;">나의 통계</font></a></li>
-						</ul>
-					</li>
-				</ul>
-				<a href="/pages/user-login" class="btn btn-purple rounded-pill d-none d-lg-block btn-theme"> 로그인 </a>
 			</div>
 		</div>
 	</div>
