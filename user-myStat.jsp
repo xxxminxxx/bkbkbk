@@ -353,38 +353,9 @@
       </div>
    </div>
 </div>
-<!-- Video Modal -->
-<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-   <div class="modal-dialog modal-dialog-centered modal-xl">
-      <div class="modal-content bg-transparent border-0 rounded-0">
-         <div class="modal-header d-flex justify-content-end border-0 py-0">
-            <a href="#" class="link-light" data-bs-dismiss="modal" aria-label="닫다"><i class="ri-close-fill ri-2x"></i></a>
-         </div>
-         <div class="modal-body px-5">
-            <div class="ratio ratio-16x9">
-               <iframe src="https://www.youtube.com/embed/gu-HhgJ7vfM?si=egwKhEDMVeXg3IuJ" title="유튜브 비디오 플레이어" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
 
 <!-- 푸터 포함 -->
-<footer class="footer-container text-white py-3">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-6 mb-2 mb-md-0">
-            <p class="mb-0">
-               <small>
-                  위치: 서울 마포구 백범로 23<br>
-                  연락처: 02-739-7235 | 이메일: hi@bookbookbook.com<br>
-                  이용약관 | 개인정보처리방침
-               </small>
-            </p>
-         </div>
-      </div>
-   </div>
-</footer>
+<%@ include file="../footer.jsp" %>
 
 <style>
    .footer-container{
