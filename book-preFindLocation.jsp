@@ -85,7 +85,6 @@
 							</div>
 						</form>
 						<p>
-
 							<!-- 검색 결과가 없을 경우 메시지 표시 -->
 							<c:if test="${empty libraries}">
 						<p class="alert alert-warning">해당 도서를 보유한 도서관이 없습니다.</p>
@@ -235,4 +234,4 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<!--user-myInfo Js -->
 		<script src="../js/book-preFindLocation.js"></script>
-</html>
+</body></html>
