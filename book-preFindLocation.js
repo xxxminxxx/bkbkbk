@@ -1,41 +1,56 @@
 $(function() {
-	
-	  // 도(시/도) 선택 드롭다운에 변경 이벤트 리스너 추가
-	  $('.doSelect').on('change', fetchGuguns);
-	
-	  // '위치찾기' 버튼들을 선택하고 각각에 클릭 이벤트 리스너 추가
-	  let buttons = document.querySelectorAll('button[value="위치찾기"]');
-	  	    buttons.forEach(function(button) {
-	  	        button.addEventListener('click', function() {
-	  	            findLocation(this);					
-	  	        });
-	  	    });
-			
-// 구/군 목록을 가져오는 함수
+    // URL에서 쿼리 파라미터 추출
+    const query = window.location.search;
+    const param = new URLSearchParams(query);
+    const doName = param.get('doName');
+    const localCode = param.get('localCode');
+
+     // 도(시/도) 선택 드롭다운에 변경 이벤트 리스너 추가
+     $('.doSelect').on('change', fetchGuguns);
+
+     // 페이지 진입 시 이미 선택된 도시 표기
+      $('#doName').val(doName).trigger("change");
+      
+     // '위치찾기' 버튼들을 선택하고 각각에 클릭 이벤트 리스너 추가
+     let buttons = document.querySelectorAll('button[value="위치찾기"]');
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                findLocation(this);
+            });
+        });
+    
+
+    // 구/군 목록을 가져오는 함수
     function fetchGuguns() {
-		// 선택된 도(시/도) 이름 가져오기
+      // 선택된 도(시/도) 이름 가져오기
         let doName = $('.doSelect').val(); 
         if (doName) {
-			// AJAX 요청으로 해당 도의 구/군 목록 가져오기
+         // AJAX 요청으로 해당 도의 구/군 목록 가져오기
             $.ajax({
                 url: '/getGuguns',
                 type: 'GET',
                 data: { doName: doName },
-                success: function(response) {
-                    console.log("/getGuguns 실행 결과 : " + response);
-					let gugunSelect = $('.gugunSelect'); 
-					// 구/군 선택 드롭다운 초기화
-                    gugunSelect.innerHTML = '<option value="" selected disabled>구/군 선택</option>';
-					// 받아온 구/군 목록으로 드롭다운 옵션 생성
-					response.forEach(function(gugun) {
-					                   gugunSelect.append($('<option>', {
-					                       value: gugun.localCode,
-					                       text: gugun.city
-					                   }));
-					               });
-					           },
+                success: function (response) {
+                    /*// 디버깅: 서버 응답 로그
+                    console.log("/getGuguns 실행 결과 : " + response);*/
+                    let gugunSelect = $('.gugunSelect');
+                    // 구/군 선택 드롭다운 초기화
+                    gugunSelect.html('<option value="" selected disabled>구/군 선택</option>');
+                    // 받아온 구/군 목록으로 드롭다운 옵션 생성
+                    response.forEach(function (gugun) {
+                        gugunSelect.append($('<option>', {
+                            value: gugun.localCode,
+                            text: gugun.city
+                        }));
+                    });
+                    // 이미 선택된 구가 있으면 selected 상태로 설정
+                    $('#localCode').val(localCode).trigger("change");
+
+                },
                 error: function(error) {
+                    // 에러 발생 시 사용자에게 알림
                     alert('구/군 목록을 가져오는 데 실패했습니다.');
+                    // 디버깅: 에러 로그
                     console.error("AJAX 요청 실패: ", error);
                 }
             });
@@ -43,10 +58,10 @@ $(function() {
     }
 
     let map;
-	
-	// 도서관 위치를 지도에 표시하는 함수
+   
+   // 도서관 위치를 지도에 표시하는 함수
     function findLocation(button) {
-		// 클릭된 버튼의 부모 행(tr)에서 도서관 정보 추출
+      // 클릭된 버튼의 부모 행(tr)에서 도서관 정보 추출
         let row = button.closest('tr');
         let libraryName = row.cells[0].textContent;
         let address = row.cells[1].textContent;
@@ -56,51 +71,55 @@ $(function() {
         let longitude = parseFloat(row.cells[5].textContent);
         let localCode = row.cells[6].textContent;
         let libraryCode = row.cells[7].textContent;
-		
-      console.log("1: " + libraryCode);
-	  
-	  	// 지도를 표시할 div 요소 가져오기 및 표시 설정
+
+        // 디버깅: 추출된 도서관 코드 로그
+       console.log("1: " + libraryCode);
+     
+        // 지도를 표시할 div 요소 가져오기 및 표시 설정
         let mapDiv = document.getElementById('map');
         mapDiv.style.display = 'block';
-      console.log("2: " + mapDiv);
-	  
-	    //지도 옵션 설정
+        // 디버깅: 지도 div 요소 로그
+        console.log("지도 div: " + mapDiv);
+
+       //지도 옵션 설정
         let options = {
             center: new kakao.maps.LatLng(latitude, longitude),
             level: 3
         };
+        // 디버깅: 지도 옵션 로그
         console.log("3: " +options);
-	  
-	    // 지도 생성
+
+       // 지도 생성
         map = new kakao.maps.Map(mapDiv, options);
-        console.log("map 생성 : " + map);
-		
-		// 마커 생성 및 지도에 표시
+        // 디버깅: 지도 생성 로그
+        console.log("지도 생성 완료 : " + map);
+      
+      // 마커 생성 및 지도에 표시
         let markerPosition = new kakao.maps.LatLng(latitude, longitude);
         let marker = new kakao.maps.Marker({
             position: markerPosition
         });
         marker.setMap(map);
 
-		// 인포윈도우 내용 설정
+      // 인포윈도우 내용 설정
         let iwContent = '<div style="padding:5px;">' +
                 '도서관명: ' + libraryName + '<br>' +
                 '주소: ' + address + '<br>' +
                 '전화번호: ' + libraryTel + '<br>' +
                 '<a href="' + url + '" target="_blank">웹사이트</a>' +
                 '</div>';
-		
-		// 인포윈도우 생성
+      
+      // 인포윈도우 생성
         let infowindow = new kakao.maps.InfoWindow({
             content : iwContent
         });
 
-		// 마커에 마우스오버 이벤트 추가
+      // 마커에 마우스오버 이벤트 추가
         kakao.maps.event.addListener(marker, 'mouseover', function() {
             infowindow.open(map, marker);
         });
-		
-		// 마커에 마우스아웃 이벤트 추가
+      
+      // 마커에 마우스아웃 이벤트 추가
         kakao.maps.event.addListener(marker, 'mouseout', function() {
             infowindow.close();
         });
