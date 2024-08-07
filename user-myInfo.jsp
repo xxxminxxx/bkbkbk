@@ -38,15 +38,9 @@
 
 
 <body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
+<!-- header -->
 <div class="bg-elements elements-top-header">
-    <!-- navbar -->
-    <div class="elements-nav">
-        <!-- bootom nav -->
-        <%@ include file="../header.jsp" %>
-    </div>
-    <!-- header -->
-    <div class="py-5">
-    </div>
+<%@ include file="../header.jsp" %>
     <div class="w-100">
         <img src="../img/pages/hero-wave.svg" alt="" class="img-fluid w-100">
     </div>
