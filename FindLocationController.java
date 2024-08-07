@@ -30,7 +30,7 @@ public class FindLocationController {
 			Model model) {
 		// 모든 시/도 이름 목록을 가져옴
 		List<String> regions = findLocationService.findDistinctDoNames();
-		// 모델에 필요한 데이터 추가
+		// 모델에 필요한 데이터 추가 (시/도 목록, ISBN, 책 제목)
 		model.addAttribute("regions", regions);
 		model.addAttribute("isbn", isbn);
 		model.addAttribute("bookTitle", bookTitle);
@@ -49,20 +49,16 @@ public class FindLocationController {
 		) { 
 			System.out.println("findLibraries 실행");
 			System.out.println("indLocationController findLibraries isbn : " + isbn + "doName : " +doName +"localCode : " + localCode); 
-			
-			// 기존 세션 삭제
-		    if (session.getAttribute("isbn") != null) {
-		        session.removeAttribute("isbn");
-		    }
-		    if (session.getAttribute("localCode") != null) {
-		        session.removeAttribute("localCode");
-		    }
-		    
-		    // localCode에 해당하는 libararyCode 조회
-		   List<Integer> libraries = findLocationService.getLibraryCodeByLocalCode(localCode);
-		   System.out.println("findLibraries 컨트롤러 실행 libraries 결과 : " +libraries );
-		    
-		   // isbn, library API 이용해 조회
+
+			// 모든 시/도 이름 목록을 가져와 모델에 추가
+			List<String> regions = findLocationService.findDistinctDoNames();
+			m.addAttribute("regions", regions);
+
+		    // localCode에 해당하는 libraryCode 조회
+		    List<Integer> libraries = findLocationService.getLibraryCodeByLocalCode(localCode);
+		    System.out.println("findLibraries 컨트롤러 실행 libraries 결과 : " +libraries );
+
+			// isbn과 libraryCode를 이용해 API로 도서관 정보 조회
 		    List<LibraryVO> availableLibraries = new ArrayList<>();
 		    for (Integer libraryCode : libraries) {
 		        LibraryVO library = findLocationService.getLibraryByApi(isbn, libraryCode);
@@ -73,15 +69,14 @@ public class FindLocationController {
 		    }
 		    System.out.println("API 조회 결과: " + availableLibraries);
 
-		   
-		    //새로운 값 세션에 저장
+			// 세션에 ISBN과 localCode 저장
 		    session.setAttribute("isbn", isbn);
 		    session.setAttribute("localCode", localCode);
 			return "pages/book-preFindLocation";
 		}
 
 
-	// [2] 시/도에 해당하는 구/군 목록을 가져오는 요청을 처리 (localCode도 함께 가져옴)
+	// [2] 시/도에 해당하는 구/군 목록을 가져오는 AJAX 요청을 처리
 	@ResponseBody
 	@GetMapping("/getGuguns")
 	public List<DocityVO> getGuguns(@RequestParam("doName") String doName) {
