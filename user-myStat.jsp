@@ -158,204 +158,23 @@
 </div>
 
 
-<!-- Nav Sidebar -->
-<div class="offcanvas offcanvas-top bg-purple text-white border-0 h-100" tabindex="-1" id="sidebarnav" aria-labelledby="sidebarnavLabel">
-   <div class="offcanvas-header d-flex justify-content-end">
-      <a href="#" class="link-light" data-bs-dismiss="offcanvas" aria-label="닫다"><i class="ri-close-line ri-lg"></i></a>
-   </div>
-   <div class="offcanvas-body">
-      <div class="sidebar-nav text-center">
-         <div class="position-relative d-flex align-items-center gap-2 site-brand">
-            <i class="ri-slideshow-line fs-2 lh-1 text-white"></i>
-            <div class="lh-1">
-               <h5 class="fw-bold m-0 text-white"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소프트웨어</font></font></h5>
-               <small class="text-muted text-white-50"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">한 페이지</font></font></small>
-            </div>
-            <a class="stretched-link" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/index.html"></a>
-         </div>
-         <ul class="navbar-nav justify-content-end flex-grow-1 mt-4">
-            <li class="nav-item">
-               <a class="nav-link active" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/index.html"><i class="ri-apps-2-line"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">집</font></font></a>
-            </li>
-
-            <li class="nav-item dropdown osahan-mega-menu position-static">
-               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">강요</font></font></a>
-               <ul class="dropdown-menu w-100 m-0 border-opacity-10 border-dark border-top border-bottom p-0 start-0 end-0 rounded-0 shadow">
-                  <li>
-                     <div class="dropdown-mega-content container">
-                        <div class="row g-0">
-                           <div class="col-lg-3 p-5 border-end border-start border-opacity-10 border-dark">
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">요소 1</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-accordions-toggles.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">아코디언 및 토글</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-tabs.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">탭</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-icons.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">아이콘</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-pagination.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">쪽수 매기기</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-cards.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">카드</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-carousels.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회전목마</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-modals.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">모달</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-placeholders.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">자리 표시자</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-medias.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">미디어</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-maps.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지도</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-forms-basic.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">양식</font></font></a></li>
-                              </ul>
-                           </div>
-                           <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">요소 2</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-buttons.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">버튼</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-badges.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">배지</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-lists.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">기울기</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-offcanvas.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오프캔버스</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-image-frames.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이미지 프레임</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-testimonials.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">추천사</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-blockquotes.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">인용구</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-borders.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">국경</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-process.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">프로세스</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-countdowns.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">카운트다운</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-spinners.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">스피너</font></font></a></li>
-                              </ul>
-                           </div>
-                           <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">요소 3</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-call-to-action.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">행동을 요구하다</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-pricing-tables.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가격표</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-tables.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">테이블</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-progress-bars.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">진행률 표시줄</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-colors.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">그림 물감</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-dropdowns.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">드롭다운</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-tooltips-popovers.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">툴팁 및 팝오버</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-sticky-elements.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">스티키 엘리먼트</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-typography.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">타이포그래피</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="elements-alerts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">알림</font></font></a></li>
-                              </ul>
-                           </div>
-                           <div class="col-lg-3 dropdown-mega-sub-content-block d-none d-lg-block bg-light p-5 osahan-dropdown-box border-end border-opacity-10 border-dark">
-                              <div class="position-relative d-flex align-items-center gap-2 site-brand">
-                                 <i class="ri-slideshow-line fs-2 lh-1 text-black"></i>
-                                 <div class="lh-1">
-                                    <h5 class="fw-bold m-0 text-black"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">소프트웨어</font></font></h5>
-                                    <small class="text-muted text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">한 페이지</font></font></small>
-                                 </div>
-                                 <a class="stretched-link" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/index.html"></a>
-                              </div>
-                              <h5 class="text-dark mt-5 mb-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">다목적</font></font></h5>
-                              <h1 class="text-primary fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">강력한 Bootstrap 기반</font></font></h1>
-                              <p class="lead mb-5"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-                                 180개 이상의 유효한 다중 페이지 및 단일 페이지 레이아웃이 있는 템플릿
-
-                              </font></font></p>
-                              <a class="btn btn-primary px-5 py-3" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">시작하다</font></font></a>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-               </ul>
-            </li>
-            <li class="nav-item dropdown single-dropdown-nav">
-               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가게</font></font></a>
-               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 그리드</font></font></a></li>
-                  <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-list.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">상품 목록</font></font></a></li>
-                  <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-three-coulmn.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 3개 컬럼</font></font></a></li>
-                  <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-full-four-coulmn.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 4가지 컬럼</font></font></a></li>
-                  <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-product-detail.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">제품 상세 정보</font></font></a></li>
-                  <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-cart.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">쇼핑 카트</font></font></a></li>
-                  <li><a class="dropdown-item" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/shop-checkout.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">쇼핑 체크아웃</font></font></a></li>
-               </ul>
-            </li>
-            <li class="nav-item dropdown osahan-mega-menu position-static">
-               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">추가 페이지</font></font></a>
-               <ul class="dropdown-menu w-100 m-0 border-opacity-10 border-dark border-top border-bottom p-0 start-0 end-0 rounded-0 shadow">
-                  <li>
-                     <div class="dropdown-mega-content container">
-                        <div class="row g-0">
-                           <div class="col-lg-3 p-5 border-end border-start border-opacity-10 border-dark">
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">포트폴리오</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/portfolio-full-width.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">포트폴리오 전체 폭</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/portfolio-boxed.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">포트폴리오 박스형</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/portfolio-classic.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">포트폴리오 클래식</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/portfolio-masonry.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">포트폴리오 메이슨리</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/single-project.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">단일 프로젝트</font></font></a></li>
-                              </ul>
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold mt-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">돕다</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-help-center.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지원 센터</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-help-center-categories.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">도움말 센터: 카테고리</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-help-center-article.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">도움말 센터: 기사</font></font></a></li>
-                              </ul>
-                           </div>
-                           <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-grid.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 그리드</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-grid-classic.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 그리드 클래식</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-grid-sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 그리드 사이드바</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-list.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 목록</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-list-sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 목록 오른쪽 사이드바</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-left-sidebar.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 목록 왼쪽 사이드바</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-full-width.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 전체 폭</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-post.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">블로그 게시물</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/blog-author-profile.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">작가 프로필</font></font></a></li>
-                              </ul>
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold mt-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">자주하는 질문</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/faq.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">자주 묻는 질문 v.1</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/faq-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">자주 묻는 질문 v.2</font></font></a></li>
-                              </ul>
-                           </div>
-                           <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회사</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-hire-us.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">우리를 고용하세요</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-careers.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">경력</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-careers-role-overview.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">경력: 역할 개요</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-careers-apply.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">경력: 지원하세요</font></font></a></li>
-                              </ul>
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold mt-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">추가 페이지</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-coming-soon.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">곧 출시 예정</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-coming-soon-simple.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">곧 출시: Simple</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-error-404.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">유지</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-error-404.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">오류 404</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-terms.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이용약관</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-privacy.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">개인 정보 정책</font></font></a></li>
-                              </ul>
-                           </div>
-                           <div class="col-lg-3 p-5 border-end border-opacity-10 border-dark">
-                              <h6 class="dropdown-mega-sub-title mb-3 fw-bold"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">내 계정</font></font></h6>
-                              <ul class="dropdown-mega-sub-nav list-unstyled">
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-login.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">로그인 v.1</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-login-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">로그인 v.2</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-signup.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가입하기 v.1</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-signup-2.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">가입하기 v.2</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/page-reset-password.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">비밀번호를 잊으 셨나요</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/account-orders.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">명령</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/account-settings.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">설정</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/account-address.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/my-wallet.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">내 지갑</font></font></a></li>
-                                 <li><a class="dropdown-item px-0 py-1 bg-transparent" href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/pages/account-notification.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">공고</font></font></a></li>
-                              </ul>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-               </ul>
-            </li>
-         </ul>
-         <div class="d-flex align-items-center justify-content-center gap-3 my-4">
-            <a href="#" class="link-light"><i class="ri-facebook-circle-fill"></i></a> <a href="#" class="link-light"><i class="ri-twitter-fill"></i></a> <a href="#" class="link-light"><i class="ri-instagram-fill"></i></a>
-            <a href="#" class="link-light"><i class="ri-linkedin-box-fill"></i></a>
-         </div>
-         <a href="../../../../../../../../../../Users/eunji/OneDrive/바탕%20화면/bookbookbook/src/main/webapp/WEB-INF/views/index.html" class="btn btn-warning rounded-0"> <i class="ri-shopping-cart-line me-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">지금 구입</font></font></a>
-      </div>
-   </div>
-</div>
 
 <!-- 푸터 포함 -->
-<%@ include file="../footer.jsp" %>
+<footer class="footer-container text-white py-3">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-6 mb-2 mb-md-0">
+            <p class="mb-0">
+               <small>
+                  위치: 서울 마포구 백범로 23<br>
+                  연락처: 02-739-7235 | 이메일: hi@bookbookbook.com<br>
+                  이용약관 | 개인정보처리방침
+               </small>
+            </p>
+         </div>
+      </div>
+   </div>
+</footer>
 
 <style>
    .footer-container{
