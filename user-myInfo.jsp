@@ -33,18 +33,45 @@
             text-decoration: none;
             transition: background-color 0.3s ease;
         }
+		/* nav 컬러 변경 + 물결 변경 */
+		.bg-black {
+		    background-color: #8fbc8f !important;
+		}
+		.hero-wave {
+		    width: 100%;
+		    display: block;
+		    margin-bottom: -200px;
+		}
+
+		.top-header {
+		    background-color: #abd1ab;
+		    padding-top: 100px; 
+		    padding-bottom: 0;
+		}
     </style>
 </head>
 
 
-<body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
-<!-- header -->
-<div class="bg-elements elements-top-header">
-<%@ include file="../header.jsp" %>
-    <div class="w-100">
-        <img src="../img/pages/hero-wave.svg" alt="" class="img-fluid w-100">
-    </div>
-</div>
+<body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0" style="background-color: white;">
+	<div class="bg-elements elements-top-header">
+	   <!-- navbar -->
+	   <div class="elements-nav">
+	      <!-- bootom nav -->
+	      <%@ include file="../header.jsp" %>
+	   </div>
+	   <!-- header -->
+	   <div class="row justify-content-center">
+	      <div class="col-xl-6 col-lg-5 col-md-10 col-12">
+	         <div class="d-flex gap-3 align-items-center">
+	         </div>
+	      </div>
+	   </div>
+	   </div>
+	   <div class="top-header">
+	      <div class="w-100">
+	           <img src="../img/pages/hero-wave.svg" alt="" class="img-fluid w-100">
+	       </div>
+	   </div>
 <!-- Elements Components -->
 <div class="py-5" id="elements">
     <div class="container">
@@ -117,24 +144,18 @@
 <script src="../js/script.js"></script>
 <!-- user-myInfo Js -->
 <script src="../js/user-myInfo.js"></script>
-<!--sweetalert-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
-<!--Sweetalert2 -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!--alert 메시지-->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var message = "${message}";
-    if(message) {
-        Swal.fire({
-            title: '알림',
-            text: message,
-            icon: 'success',
-            confirmButtonText: '확인'
-        });
-    }
-});
+<script> 
+	document.addEventListener('DOMContentLoaded', function() {
+	    var message = "${message}";
+	    if(message) {
+	        Swal.fire({
+	            title: '알림',
+	            text: message,
+	            icon: 'success',
+	            confirmButtonText: '확인'
+	        });
+	    }
+	});
 </script>
-
 </body>
 </html>
