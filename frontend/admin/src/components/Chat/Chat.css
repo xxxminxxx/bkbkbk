@@ -1,0 +1,40 @@
+.dataCard {
+  background-color: #efefef;
+  border-radius: 0.5em;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-left: 50px;
+  padding: 2em;
+  height: 1400px;
+  width: 400px;
+  box-sizing: border-box;
+}
+
+.dayuse, .age, .gender, .level {
+  justify-content: center;
+  margin-top: 30px;
+  width: 400px;
+  height: 400px;
+}
+
+.text {
+  text-align: center;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.count {
+  text-align: center;
+}
+
+/* 지도 컨테이너에 대한 추가 스타일 */
+#map_div {
+  width: 1200px;
+  height: 600px;
+  border-radius: 0.4em; /* 지도 모서리를 둥글게 */
+}
