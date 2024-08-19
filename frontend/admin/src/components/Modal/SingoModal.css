@@ -1,0 +1,123 @@
+.singo-modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.singo-modalContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.singo-modalContainer .singo-title {
+  text-align: center;
+  margin-top: 0px;
+}
+
+.singo-titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.singo-titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.singo-modalContainer .singo-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.singo-modalContainer .singo-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.singo-modalContainer .singo-footer button {
+  width: 120px;
+  height: 40px;
+  margin: 0 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.singo-modalContainer #singo-delBtn {
+  background-color: crimson;
+}
+
+.singo-modalContainer .singo-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.singo-modalContainer .singo-table th,
+.singo-modalContainer .singo-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.singo-modalContainer .singo-table th {
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 767px) {
+  .singo-modalContainer {
+    width: 95%;
+    padding: 15px;
+    max-height: 95vh;
+  }
+
+  .singo-modalContainer .singo-body {
+    font-size: 0.9rem;
+  }
+
+  .singo-modalContainer .singo-footer button {
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .singo-modalContainer {
+    width: 80%;
+  }
+}
+
+@media (min-width: 992px) {
+  .singo-modalContainer .singo-table {
+    font-size: 1rem;
+  }
+
+  .singo-modalContainer .singo-table th,
+  .singo-modalContainer .singo-table td {
+    padding: 1rem;
+  }
+}

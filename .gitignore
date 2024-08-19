@@ -1,0 +1,75 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# IDE 관련 파일
+.idea/
+*.iml
+.vscode/
+
+# 빌드 결과물
+target/
+out/
+
+# 애플리케이션 프로퍼티 파일 (민감한 정보 포함)
+src/main/resources/application-secret.properties
+
+# 스프링 부트 관련
+.spring-boot-devtools.restart.trigger
+
+# Maven 관련
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle 관련 (사용하는 경우)
+.gradle/
+gradle-app.setting
+
+# 기타 임시 파일
+*.tmp
+*.bak
+*.swp
+
+# 개인 설정 파일 (필요한 경우)
+*.properties
+!application.properties
+!application-public.properties
+
+# 테스트 결과
+test-output/
+
+# 패키지 파일
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# 가상 머신 충돌 로그
+hs_err_pid*
+
+# 운영체제 관련 파일
+Thumbs.db

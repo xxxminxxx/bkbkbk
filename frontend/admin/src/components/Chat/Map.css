@@ -1,0 +1,21 @@
+.mapContainer {
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+}
+
+.dataCard33 {
+  width: 800px;
+  height: 600px;
+  background-color: #efefef;
+  border-radius: 0.5em;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-sizing: border-box;
+  padding: 1em;
+}
+
+.mapDiv {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.4em;
+}
