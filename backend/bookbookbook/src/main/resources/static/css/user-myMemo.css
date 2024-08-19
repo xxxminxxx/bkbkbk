@@ -1,0 +1,217 @@
+.book-entry {
+  background-color: #f8f9fa;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.book-cover {
+  max-height: 200px;
+  width: auto;
+}
+
+.book-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.book-author {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.book-rating {
+  font-size: 1.2rem;
+}
+
+.star {
+  color: #D95F76;
+}
+
+.star-empty {
+  color: lightgray;
+}
+
+.book-dates {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.book-memo {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #fff1f1;
+  border-radius: 0.25rem;
+  min-height: 100px; /* 메모 영역의 최소 높이 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-memo p {
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+
+.memo-date {
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+.sort-buttons {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+/* 0725 추가 */
+.btn-primary {
+  background-color: #f77808d9; /* 파란색 배경 */
+  border-color: #f77808d9;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #D35400; /* 마우스 오버 시 더 진한 파란색 */
+  border-color: #D35400;
+}
+
+#elements {
+  min-height: calc(100vh - footer의 높이px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+/* 0807 추가 */
+/* 메모 개수 표시 */
+.book-memo {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #fff1f1;
+    border-radius: 0.25rem;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-memo p {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.memo-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.memo-count {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.memo-date {
+    font-size: 0.9rem;
+}
+.book-memo-link {
+  color: #000000;
+  text-decoration: none;
+}
+
+/* 책 커버 이미지 확대 효과 */
+.book-cover {
+    max-height: 200px;
+    width: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.book-cover:hover {
+    transform: scale(1.1); /* 호버 시 10% 확대 */
+}
+
+/* 책 제목 링크 효과 */
+.book-title-link {
+    text-decoration: none;
+}
+
+.book-title-link .book-title {
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.book-title-link:hover .book-title {
+    color: #4a90e2; /* 호버 시 색상 변경 */
+}
+
+/* 작가 이름 링크 효과 */
+.book-author {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.book-author:hover {
+    color: #f77808d9; /* 호버 시 색상 변경 */
+}
+
+/* 메모 컨텐트 링크 효과 */
+.book-memo-link {
+    text-decoration: none;
+}
+
+.book-memo-link p {
+    color: #000000; /* 기존 색상 유지 */
+    transition: color 0.3s ease;
+}
+
+.book-memo-link:hover p {
+    color: #4a90e2; /* 호버 시 색상 변경 (파란 계열로 설정) */
+}
+
+/* [0808 수정] */
+/* nav 컬러 변경 + 물결 변경 */
+
+.bg-black {
+    background-color: #8fbc8f !important;
+}
+.hero-wave {
+    width: 100%;
+    display: block;
+    margin-bottom: -200px;
+}
+
+.top-header {
+    background-color: #abd1ab;
+    padding-top: 100px; /* 상단 여백 조정 */
+    padding-bottom: 0;
+}
+
+/* [0809 추가] */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+#elements {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+/*페이징 버튼 파랑 제거*/
+.active .page-link{
+         background-color: white;
+         border-color: #e74c3c;
+      }

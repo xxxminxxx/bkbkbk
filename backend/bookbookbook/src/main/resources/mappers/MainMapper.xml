@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.MainDAO">
+   <!-- 채팅방 전체 목록 불러오기 -->
+   <select id="getChatroom" resultType="ChatroomVO">
+   SELECT * FROM chatroom ORDER BY chatroomNum DESC
+   </select>
+   <!-- 유저 서재 불러오기 -->
+   <select id="getMyBookshelf" parameterType="String" resultType="BookshelfVO">
+   select b.bookTitle bookTitle , b.bname bname
+   from bookshelf bs join book b on b.bookNum = bs.bookNum  
+   where userNum= #{userNum} 
+   order by endDate desc
+   </select>
+   
+   <!-- 채팅방 생성 -->
+   <insert id="createChatroom" parameterType="ChatroomVO">
+      INSERT INTO chatroom (chatroomName, chatroomStatus, userNum
+       <if test="cfname != null and cfname != ''">
+            ,  cfname, chatFilePath
+        </if>
+        ) VALUES (#{chatroomName}, #{chatroomStatus},#{userNum}
+         <if test="cfname != null and cfname != ''">
+            ,  #{cfname}, #{chatFilePath}
+        </if>)
+   </insert>
+   <!-- 번호 불러오기 -->
+   <select id="getUserID" parameterType="String" resultType="String">
+   SELECT userNum FROM users WHERE userId=#{userId}
+   </select>
+   
+   <!-- 채팅방 하나 정보 불러오기 -->
+   <select id="getRoomInfo" parameterType="String" resultType="ChatroomVO">
+   SELECT * FROM chatroom WHERE chatroomNum=#{roomNum}
+   </select>
+   
+   <!-- 채팅방 검색 -->
+   <select id="searchChatroom" parameterType="String" resultType="ChatroomVO">
+   SELECT * FROM chatroom WHERE chatroomName LIKE CONCAT('%', #{keyword}, '%') ORDER BY chatroomNum DESC
+   </select>
+   
+   <!-- 방 삭제 -->
+   <delete id="deleteChatroom" parameterType="String">
+    DELETE FROM chatroom WHERE chatroomNum=#{roomNum}
+   </delete>
+
+	
+	
+	<!--서울시 희망 여가 활동 데이터 처리-->
+     <select id="findCateNumByPreference" parameterType="String" resultType="Integer">
+          SELECT b.cateNum
+          from book as b inner join category as cate
+          on b.cateNum = cate.cateNum
+          where b.cateNum in
+          ( select cateNum from category
+          WHERE `1depth` LIKE CONCAT('%', #{preference}, '%')
+           OR `2depth` LIKE CONCAT('%', #{preference}, '%')
+           OR `3depth` LIKE CONCAT('%', #{preference}, '%'))
+        ORDER BY RAND()
+        LIMIT 4
+    
+    </select>
+
+    <select id="findBookByCateNum" parameterType="Integer" resultType="BookVO">
+        SELECT *
+        FROM book
+        WHERE cateNum = #{cateNum}
+        ORDER BY RAND()
+        LIMIT 1
+    </select>
+    <!-- #################################  -->
+    <!-- 머신러닝 사용 사용자 맞춤 도서 정보 조회 -->
+    <select id="getBookByBookNum" parameterType="Integer" resultType="hashmap">
+    	SELECT 	*
+    	FROM   	book
+    	WHERE	bookNum = #{bookNum}
+    </select>
+</mapper>

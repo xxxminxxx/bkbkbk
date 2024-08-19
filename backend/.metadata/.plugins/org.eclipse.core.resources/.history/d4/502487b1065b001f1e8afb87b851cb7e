@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.UserStatDAO">
+
+
+	<!--월별 권수-->
+	<select id="getUserStatInfo2" parameterType="UserStatVO" resultType="UserStatVO">
+		SELECT
+    SUBSTRING(bs.endDate, 6, 2) AS bookMonth,
+    COUNT(*) AS bookCount,
+    MIN(LEFT(bs.endDate, 7)) AS sortDate
+FROM bookshelf AS bs
+INNER JOIN book AS bk ON bs.bookNum = bk.bookNum
+WHERE bs.readPages = bk.bookPage
+    AND LEFT(bs.endDate, 4) = LEFT(NOW(), 4)
+    AND bs.userNum = #{userNum}
+GROUP BY SUBSTRING(bs.endDate, 6, 2)
+ORDER BY sortDate
+	</select>
+
+	<!--월별 페이지수-->
+	<select id="getUserStatInfo1" parameterType="UserStatVO" resultType="UserStatVO">
+		SELECT
+    bs.shelfNum,
+    bs.userNum,
+    bs.readPages,
+    bs.bookNum,
+    bs.startDate,
+    bs.endDate,
+    bs.readStatus,
+    bs.rating,
+    bk.bookPage AS totalbookpage,
+    bk.bookTitle,
+    LEFT(bk.bookTitle, 10) AS titleLengthStr,
+    TRUNCATE((bs.readPages / bk.bookPage) * 100, -1) AS percent
+FROM bookshelf AS bs
+INNER JOIN book AS bk ON bs.bookNum = bk.bookNum
+WHERE bs.userNum = #{userNum}
+	</select>
+
+
+</mapper>

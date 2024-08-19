@@ -1,0 +1,180 @@
+.current-character {
+  margin-bottom: 2rem;
+  /* [0808 추가] */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 캐릭터 섹션을 세로로 정렬하고 가운데 정렬 */
+}
+
+.current-character img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.character-item {
+  height: 200px; /* 적절한 높이로 조정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+}
+
+.character-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+.character-rank {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #333333;
+}
+
+.character-name {
+  font-weight: 300;
+  margin-bottom: 5px;
+  font-size: 17px;
+  color: #333333;
+}
+
+.character-rank,
+.character-name,
+.character-item span {
+  text-align: center;
+  width: 100%;
+}
+
+.character-item span {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+/* 단계별 캐릭터 이미지 처리 */
+.character-image-container {
+    position: relative;
+}
+.character-item img {
+    width: 80px;
+  	height: 80px;
+    object-fit: cover;
+  	margin-bottom: 10px;
+}
+
+/* 잠금 상태인 캐릭터 설정 */
+.character-item[data-visible="false"] img {
+    content: url('../img/물음표.png'); /* 이미지 교체 */
+}
+
+.character-item[data-visible="false"] .character-name,
+.character-item[data-visible="false"] .character-length {
+    display: none;
+}
+
+.character-item[data-visible="false"]::after {
+  /* content: "?"; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  height: 80px; /* 이미지 높이와 동일하게 */
+  margin: 0 auto 10px;
+}
+
+.character-item[data-visible="true"] {
+    cursor: pointer;
+}
+
+.character-item[data-visible="false"] {
+    cursor: default;
+}
+/* 0801 추가 */
+.character-item::after {
+    content: none; 
+}
+/* [0808 수정] */
+/* nav 컬러 변경 + 물결 변경 */
+.bg-black {
+    background-color: #8fbc8f !important;
+}
+
+.hero-wave {
+    width: 100%;
+    display: block;
+    margin-bottom: -200px;
+}
+
+.top-header {
+    background-color: #abd1ab;
+    padding-top: 100px; /* 상단 여백 조정 */
+    padding-bottom: 0;
+}
+#title-character {
+	color : white;
+}
+/* 캐릭터 스토리 바로가기 글씨 */
+#characterStoryLink {
+    color: #f77808d9 !important;
+    transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out; /* 부드러운 전환 효과 */
+	font-size: 18px;
+}
+
+#characterStoryLink:hover {
+    color: #d55c00 !important; /* 진한 색으로 변경 */
+    font-size: 1.6em; /* 글씨 크기 증가 */
+}
+
+/* 이미지에 마우스를 올리면 칸 자체가 커지는 효과 (data-visible이 true인 경우에만) */
+.character-item[data-visible="true"]:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+  background-color: #ffb6c1;
+}
+
+#currentCharacterName{
+	font-size:30px;
+}
+#currentCharacterStage{
+	font-size:25px;
+}
+.character-length{
+	font-size:16px;
+	color:#666666;
+}
+
+/* lottie 좌우반전 */
+.flipped {
+  transform: scaleX(-1) scale(0.6); /* Lottie 좌우 반전과 크기 축소를 동시에 적용 */
+}
+
+.character-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* 요소 간의 간격 조정 */
+  /* Lottie 애니메이션과 이미지를 가로로 정렬하고 간격을 줌 */
+}
+
+.small-lottie {
+  transform: scale(0.6); /* Lottie 애니메이션 크기를 80%로 축소 */
+}
+body{
+	font-size: 20px;
+}

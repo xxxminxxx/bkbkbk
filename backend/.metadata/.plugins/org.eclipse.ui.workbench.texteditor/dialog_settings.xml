@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="나의 정보"/>
+		<list key="findhistory">
+			<item value="나의 정보"/>
+			<item value="정보"/>
+			<item value="정ㅈ보"/>
+			<item value="채팅"/>
+			<item value="VerifyTempCode"/>
+			<item value="TempCode"/>
+			<item value="Temp"/>
+			<item value="delete"/>
+			<item value="삭제"/>
+			<item value="ajax"/>
+			<item value="서울"/>
+			<item value="create"/>
+			<item value="calculateBooksToNextLevel"/>
+			<item value="레벨"/>
+			<item value="남은"/>
+		</list>
+		<list key="replacehistory">
+			<item value="북북북"/>
+			<item value="font-family: &apos;DungGeunMo&apos;;"/>
+			<item value="src=&quot;&lt;%=pjName%&gt;resources/js"/>
+			<item value="src=&quot;&lt;&gt;"/>
+			<item value="href=&quot;&lt;%=pjName%&gt;resources/css"/>
+			<item value="&lt;%=pjName%&gt;resources/css"/>
+			<item value="&lt;%=pjName%&gt;resources/vender"/>
+			<item value="&lt;%=pjName%&gt;resources/"/>
+			<item value="th:src"/>
+			<item value="th:href"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="825"/>
+		<item key="DIALOG_Y_ORIGIN" value="301"/>
+		<item key="DIALOG_WIDTH" value="455"/>
+		<item key="DIALOG_HEIGHT" value="467"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-24|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+</section>
