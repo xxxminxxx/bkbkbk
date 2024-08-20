@@ -1,0 +1,1027 @@
+<%@ page language="java" 
+contentType="text/html; charset=UTF-8" 
+pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%-- 세션에서 userNum 가져오기 --%>
+<c:set var="userNum" value="${userNum}" />
+<c:choose>
+    <c:when test="${empty shelfNum}">
+        <c:set var="shelfNum" value="0" />
+    </c:when>
+    <c:otherwise>
+        <c:set var="shelfNum" value="${shelfNum}" />
+    </c:otherwise>
+</c:choose>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="img/pages/icon.png" type="image/png">
+        <title>북북북 | 나의 서재</title>
+        <!-- Bootstrap Css -->
+        <link rel="stylesheet" href="../vender/bootstrap/css/bootstrap.min.css">
+        <!-- Icofont Css -->
+        <link rel="stylesheet" href="../vender/icofont/icofont.min.css">
+        <!-- AOS Css -->
+        <link rel="stylesheet" href="../vender/aos/dist/aos.css">
+        <!-- Remix Icons -->
+        <link rel="stylesheet" href="../vender/remixicon/remixicon.css">
+        <!-- Slick Slider Css -->
+        <link rel="stylesheet" href="../vender/slick/slick/slick.css">
+        <link rel="stylesheet" href="../vender/slick/slick/slick-theme.css">
+        <!-- Custom Css -->
+        <link rel="stylesheet" href="../css/style.css">
+        <!-- Common Css -->
+        <link rel="stylesheet" href="../css/common.css">
+      <!--sweetalert-->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+      <!--user-myLibrary CSS-->
+      <link rel="stylesheet" href="../css/user-myBookshelf.css">
+      
+      <!-- ********************JS SECTION************************ -->
+      <!-- Bootsrap Bundle Js -->
+      <script src="../vender/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <!-- Jquery Js -->
+      <script src="../vender/jquery/jquery-3.6.4.min.js"></script>
+      <!-- AOS Js -->
+      <script src="../vender/aos/dist/aos.js"></script>
+      <!-- Slick Slider Js -->
+      <script src="../vender/slick/slick/slick.min.js"></script>
+      <!-- Slick Js -->
+      <script src="../js/slick.js"></script>
+      <!-- Custom Js -->
+      <script src="../js/script.js"></script>
+      <!--Sweetalert2 -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+</head>
+<body>
+        
+<div class="bg-elements elements-top-header position-relative">
+    <!-- navbar -->
+    <div class="elements-nav">
+        <!-- bootom nav -->
+        <%@ include file="../header.jsp" %>
+   <!-- header -->
+   </div>
+
+<!-- ############################################## -->
+<!-- tab panes -->
+<div class="py-5 bg-light">
+    <div class="container bshelf py-4">
+        <h1 class="text-center mb-4">📚 나의 서재 📚</h1>
+		<div style="display: flex; justify-content: center; margin-bottom: 4rem;">
+		  <h6>읽은 책을 확인하고, 읽고 있는 책의 진행 상황을 기록하며 메모도 남길 수 있어요.</h6>
+		</div>
+        <c:choose>
+            <c:when test="${not empty sessionScope.userId}">
+                <div class="row">
+                    <div class="col-12">
+                        <nav>
+                            <div class="nav nav-tabs d-flex justify-content-center gap-2 nav-tabs-osahan" id="nav-tab" role="tablist">
+                                <button class="nav-link active px-lg-4 py-lg-3" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all" aria-selected="true">전체</button>
+                                <button class="nav-link px-lg-4 py-lg-3" id="nav-read-tab" data-bs-toggle="tab" data-bs-target="#nav-read" type="button" role="tab" aria-controls="nav-read" aria-selected="false">읽은 책</button>
+                                <button class="nav-link px-lg-4 py-lg-3" id="nav-reading-tab" data-bs-toggle="tab" data-bs-target="#nav-reading" type="button" role="tab" aria-controls="nav-reading" aria-selected="false">읽고 있는 책</button>
+                                <button class="nav-link px-lg-4 py-lg-3" id="nav-wishlist-tab" data-bs-toggle="tab" data-bs-target="#nav-wishlist" type="button" role="tab" aria-controls="nav-wishlist" aria-selected="false">읽고 싶은 책</button>
+                            </div>
+                        </nav>
+                        
+                        <div class="tab-content bg-white p-lg-5 p-4 border-end border-bottom border-start" id="nav-tabContent">
+                            <!-- 전체 탭 팬 -->
+                            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                                <c:choose>
+                                    <c:when test="${not empty characterStages}">
+                                        <div id="character-stages" class="d-flex justify-content-between"> 
+                                            <!--#[0809수정] 중앙 정렬을 위해 클래스 추가 및 스타일 변경-->
+                                            <div class="character-section col-md-6 d-flex justify-content-center align-items-center" style="width: 45%;">
+                                                <div class="stage-character p-3 text-center user-level-info">
+                                                    <h3>현재 나의                                              
+                                                        <!-- '단계' 텍스트에 툴팁 추가 -->
+                                                        <span class="custom-tooltip">단계
+                                                               <span class="tooltiptext">
+                                                                   1단계: 0-5권<br/>
+                                                                   2단계: 6-10권<br/>
+                                                                   3단계: 11-20권 <br/>
+                                                                   4단계: 21-35권<br/>
+                                                                   5단계: 36-55권<br/>
+                                                                   6단계: 56-80권<br/>
+                                                                   7단계: 81-110권<br/>
+                                                                   8단계: 111-145권<br/>
+                                                                   9단계: 146권 이상
+                                                               </span> 
+                                                         </span> :
+                                                        <span id="characterStage">${characterStages[0].characterStage}</span></h3>
+                                                  <!--  <p>다음 단계까지 남은 책: <span id="booksToNextLevel">${booksToNextLevel}</span>권</p>-->
+                                                    <div class="progress mb-3">
+                                                        <div class="progress-bar" role="progressbar" 
+                                                             style="width: ${(readBooksNum / nextLevelBooks) * 100}%;" 
+                                                             aria-valuenow="${readBooksNum}" 
+                                                             aria-valuemin="0" 
+                                                             aria-valuemax="${nextLevelBooks}">
+                                                            ${readBooksNum} / ${nextLevelBooks}
+                                                        </div>
+                                                    </div>
+                                                    <img src="${characterStages[0].characterImage}" alt="Character Image" class="character-image img-fluid">
+                                                    <p id="characterName"></p>
+                                                </div>
+                                            </div>
+                                          <!--#[0809수정] 북섹션 중앙 정렬 및 간격 조정-->
+                                          <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                             <div class="books-section">
+                                               <div class="book-shelves">
+                                                 <c:forEach var="book" items="${characterStages}" varStatus="status">
+                                                   <c:if test="${status.index % 7 == 0 && status.index != 0}">
+                                                     <div class="shelf-divider"></div>
+                                                   </c:if>
+                                                            <div class="book-spine book-color-${status.index % 4 + 1}">
+                                                                <span class="book-title">
+                                                                    <c:choose>
+                                                                        <c:when test="${fn:length(book.bookTitle) > 10}">
+                                                                            ${fn:substring(book.bookTitle, 0, 10)}...
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            ${book.bookTitle}
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </span>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="without-data">
+                                            <p  class="no-books-message">읽은 책이 없습니다!</p>
+                                            <div class="d-flex justify-content-center">
+                                                <a href="/" class="btn btn-primary mx-2">베스트셀러 구경하러 가기</a>
+                                                <a href="/pages/book-categorySearch" class="btn btn-secondary mx-2">카테고리별 책 구경하기</a>
+                                                <a href="/pages/book-bookSearchResult" class="btn btn-success mx-2">읽고 싶은 책 등록하기</a>                                           
+                                            </div>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                     
+                            <!-- 읽은 책 탭 팬 -->
+                            <div class="tab-pane fade" id="nav-read" role="tabpanel" aria-labelledby="nav-read-tab">
+                                <div class="text-end mt-3">
+                                    <div class="btn-group" role="group">
+                                        <input type="radio" class="btn-check" name="sort-read" id="startDateRead" autocomplete="off" checked>
+                                        <label class="btn btn-outline-secondary btn-sm" for="startDateRead">시작일순</label>
+                                        <input type="radio" class="btn-check" name="sort-read" id="endDateRead" autocomplete="off">
+                                        <label class="btn btn-outline-secondary btn-sm" for="endDateRead">종료일순</label>
+                                    </div>
+                                </div>
+								<div id="read-content">
+                                <%@ include file="readBooksTab.jsp" %>
+								</div>
+                            </div>
+
+                            <!-- 읽고 있는 책 탭 팬 -->
+                            <div class="tab-pane fade" id="nav-reading" role="tabpanel" aria-labelledby="nav-reading-tab" tabindex="0">
+                                <div class="text-end mt-3">
+                                    <div class="btn-group" role="group">
+                                        <input type="radio" class="btn-check" name="sort-reading" id="startDateReading" autocomplete="off" checked>
+                                        <label class="btn btn-outline-secondary btn-sm" for="startDateReading">시작일순</label>
+                                        <input type="radio" class="btn-check" name="sort-reading" id="readCountReading" autocomplete="off">
+                                        <label class="btn btn-outline-secondary btn-sm" for="readCountReading">많이 읽은 순</label>
+                                    </div>
+                                </div>
+								<div id="reading-content">
+                                <%@ include file="readingBooksTab.jsp" %>
+								</div>
+                            </div>
+
+                            <!-- 읽고 싶은 책 탭 팬 -->
+                            <div class="tab-pane fade" id="nav-wishlist" role="tabpanel" aria-labelledby="nav-wishlist-tab" tabindex="0">
+                                <div class="text-end mt-3">
+                                    <div class="btn-group" role="group">
+                                        <input type="radio" class="btn-check" name="sort-wishlist" id="alphabeticalWishlist" autocomplete="off" checked>
+                                        <label class="btn btn-outline-secondary btn-sm" for="alphabeticalWishlist">가나다순</label>
+                                        <input type="radio" class="btn-check" name="sort-wishlist" id="addedDateWishlist" autocomplete="off">
+                                        <label class="btn btn-outline-secondary btn-sm" for="addedDateWishlist">추가된 날짜순</label>
+                                    </div>
+                                </div>
+								<div id="wishlist-content">
+                                <%@ include file="wishlistBooksTab.jsp" %>
+								</div>
+                            </div>   
+                        
+                        </div>
+                    </div>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="text-center py-5">
+                    <h3 class="text-muted">로그인 후 이용하실 수 있습니다.</h3>
+                </div>
+                <div id="without-data">
+                    <div class="container text-center mt-4">
+                        <a href="${pageContext.request.contextPath}/pages/login" class="btn btn-primary btn-lg">로그인 하러 가기</a>
+                    </div>
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</div>
+</div>
+<!-- 모달 창 HTML -->
+<c:if test="${not empty sessionScope.userId}">
+   <div class="modal fade" id="memoModal1" tabindex="-1" aria-labelledby="memoModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="memoModalLabel">메모 입력</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <textarea class="form-control" id="memoContent" rows="5" placeholder="메모를 입력하세요"></textarea>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 97px; height: 50px; margin-right: 10px;">닫기</button>
+               <input type="hidden" id="shelfNum" name="shelfNum" value="${shelfNum}">
+               <input type="hidden" id="userNum" name="userNum" value="${sessionScope.userNum}">
+               <button type="button" class="btn btn-primary" id="saveMemoButton" style=" height: 50px; margin-left: 10px;">저장</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</c:if>
+        
+                              
+         <!-- Nav Sidebar -->
+         <%@ include file="../navSidebar.jsp" %>
+         <!-- 푸터 포함 -->
+         <%@ include file="../footer.jsp" %>
+         
+       <script>
+		// 전역 변수로 책 목록 배열 선언
+		let readBooks, readingBooks, wishBooks;
+		console.log("전역 변수 확인: ", readBooks,readingBooks, wishBooks);
+		
+       $(document).ready(function() {
+         
+         // 모든 툴팁 초기화
+                var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+                var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl)
+                })
+               
+               
+               
+           var userNum = $('#userNum').val();
+           
+           console.log('userNum 및 shelfNum:', userNum);
+
+           // 캐릭터 이름 표시 
+           const characterNames = [
+               "철푸덕 아기코기",
+               "산책 아기코기",
+               "이족보행 아기코기",
+               "노릇노릇 엉덩 코기",
+               "노릇노릇 휴식 코기",
+               "노릇노릇 철푸덕 코기",
+               "늠름 산책 코기",
+               "늠름 질주 코기",
+               "늠름 정복 코기"
+           ];
+
+           const characterStage = document.getElementById('characterStage').textContent;
+           const characterNameElement = document.getElementById('characterName');
+
+           // 문자열에서 숫자만 추출
+           const stageNumber = parseInt(characterStage.replace(/[^0-9]/g, ''));
+
+           if (stageNumber > 0 && stageNumber <= characterNames.length) {
+               characterNameElement.textContent = characterNames[stageNumber - 1];
+           } else {
+               characterNameElement.textContent = "알 수 없는 단계";
+           }
+
+           // 메모 버튼 클릭 이벤트 처리
+           let currentBookTitle;
+           let shelfNum;  // #[수정] 외부에서 사용할 수 있도록 변수를 전역으로 설정
+
+           $(document).on('click', '.memo-btn', function() {
+               currentBookTitle = $(this).data('book-title');
+               shelfNum = $(this).data('shelf-num'); // MODIFIED: 버튼에서 shelfNum 가져오기
+               $('#memoContent').val(''); // 모달 열 때 입력 필드 초기화
+               console.log("선택된 책 제목:", currentBookTitle);
+               console.log("선택된 책장 번호:", shelfNum); // MODIFIED: shelfNum 로깅
+           });
+
+           // 모달 저장 버튼 클릭 이벤트 처리
+           $('#saveMemoButton').on('click', function() {
+               var memoContent = $('#memoContent').val().trim(); // 앞뒤 공백 제거
+
+               if (!currentBookTitle) {
+                   console.error('책 제목이 선택되지 않았습니다.');
+                   alert('책을 선택해주세요.');
+                   return;
+               }
+
+               if (memoContent === '') {
+                   alert('메모 내용을 입력해주세요.');
+                   return;
+               }
+
+               console.log('User Number:', userNum);
+               console.log('Memo Content:', memoContent);
+               console.log('Shelf Number:', shelfNum);
+
+               $.ajax({
+                   url: '/saveMemo',
+                   type: 'POST',
+                   contentType: 'application/json',
+                   data: JSON.stringify({
+                       memoContent: memoContent,
+                       userNum: userNum,
+                       shelfNum: shelfNum,
+                       bookTitle: currentBookTitle
+                   }),
+                   success: function(response) {
+                       console.log('서버 응답:', response);
+                       Swal.fire({ 
+                           icon: 'success',
+                           title: '저장 완료',
+                           text: '메모가 저장되었습니다.',
+                           confirmButtonText: '확인'
+                       });
+                       $('#memoContent').val('');
+                       $('#memoModal1').modal('hide');
+                   },
+                   error: function(xhr, status, error) {
+                       console.error('저장 실패:', error);
+                       Swal.fire({ 
+                           icon: 'error',
+                           title: '저장 실패',
+                           text: '잠시 후 다시 시도해주세요.',
+                           confirmButtonText: '확인'
+                       });
+                   }
+               });
+           });
+
+           // 모달 닫기 버튼 클릭 이벤트 처리 
+           $('#memoModal1').on('hide.bs.modal', function (e) {
+               if ($('#memoContent').val().trim() !== '') {
+                   e.preventDefault(); // 모달 닫기 일시 중지
+                   Swal.fire({
+                       title: '작성 중인 내용이 있습니다',
+                       text: "정말로 닫으시겠습니까?",
+                       icon: 'warning',
+                       showCancelButton: true,
+                       confirmButtonColor: '#3085d6',
+                       cancelButtonColor: '#d33',
+                       confirmButtonText: '예',
+                       cancelButtonText: '아니오'
+                   }).then((result) => {
+                       if (result.isConfirmed) {
+                           $('#memoContent').val(''); // 확인을 누르면 텍스트 입력창 비우기
+                           $('#memoModal1').modal('hide'); // 모달 닫기
+                       }
+                   });
+               }
+           });
+
+		   // 삭제 버튼 클릭 이벤트 처리
+		   $(document).on('click', '.delete-book', function() {
+		       console.log("삭제 버튼 클릭됨");
+		       var shelfNum = $(this).data('shelf-num');
+		       var bookNum = $(this).data('book-num');
+		       var $bookItem = $(this).closest('.book-item'); // 삭제할 책 항목
+
+		       console.log("삭제할 책의 shelfNum + bookNum:", shelfNum, bookNum);
+		       
+		       Swal.fire({
+		           title: '정말 삭제하시겠습니까?',
+		           icon: 'warning',
+		           showCancelButton: true,
+		           confirmButtonColor: '#e74c3c',
+		           cancelButtonColor: '#3085d6',
+		           confirmButtonText: '네',
+		           cancelButtonText: '아니오'
+		       }).then((result) => {
+		           if (result.isConfirmed) {
+		               $.ajax({
+		                   url: '/deleteBook',
+		                   type: 'POST',
+		                   data: { shelfNum: shelfNum, bookNum: bookNum },
+						   success: function(result) {
+				                 if(result === 'success') {
+				                     $bookItem.fadeOut(300, function() {
+				                         $(this).remove();
+				                         if ($('.book-item').length === 0) {
+				                             showNoBookMessage();
+				                         }
+				                         updateBookArrays(); // 책 목록 배열 갱신
+				                     });
+				                     Swal.fire('삭제 완료', '책이 삭제되었습니다.', 'success');
+				                 } else {
+				                     Swal.fire('삭제 실패', '책 삭제에 실패했습니다.', 'error');
+				                 }
+				             },
+		                   error: function() {
+		                       Swal.fire('오류', '잠시 후 다시 시도해주세요.', 'error');
+		                   }
+		               });
+		           }
+		       });
+		   });
+		   /*
+           // 삭제 버튼 클릭시
+           $(document).on('click', '.delete-book', function() {
+               console.log("삭제 버튼 클릭됨");
+               var shelfNum = $(this).data('shelf-num');
+               var bookNum = $(this).data('book-num');
+               console.log("삭제할 책의 shelfNum + bookNum:", shelfNum, bookNum);
+               
+               Swal.fire({
+                   title: '정말 삭제하시겠습니까?',
+                   icon: 'warning',
+                   showCancelButton: true,
+                   confirmButtonColor: '#e74c3c',
+                   cancelButtonColor: '#3085d6',
+                   confirmButtonText: '네',
+                   cancelButtonText: '아니오'
+               }).then((result) => {
+                   if (result.isConfirmed) {
+                       $.ajax({
+                           url: '/deleteBook',
+                           type: 'POST',
+                           data: { shelfNum: shelfNum, bookNum: bookNum },
+                           success: function(result) {
+                               if(result === 'success') {
+                                   Swal.fire(
+                                       '삭제 완료',
+                                       '책이 삭제되었습니다.',
+                                       'success'
+                                   ).then(() => {
+                                       refreshCurrentTab(); // 현재 탭 새로고침
+                                   });
+                               } else {
+                                   Swal.fire(
+                                       '삭제 실패',
+                                       '책 삭제에 실패했습니다.',
+                                       'error'
+                                   );
+                               }
+                           },
+                           error: function() {
+                               Swal.fire(
+                                   '오류',
+                                   '잠시 후 다시 시도해주세요.',
+                                   'error'
+                               );
+                           }
+                       });
+                   }
+               });
+           });
+		   */
+		   
+		   function showNoBookMessage() {
+		       var noBookHtml = `
+		           <div class="without-data">
+		               <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+		                   <h4 class="no-books-message text-center m-0">책이 없습니다!</h4>
+		               </div>
+		               <div class="d-flex justify-content-center">
+		                   <a href="/" class="btn btn-primary mx-2">베스트셀러 구경하러 가기</a>
+		                   <a href="/pages/book-categorySearch" class="btn btn-secondary mx-2">카테고리별 책 구경하기</a>
+		                   <a href="/pages/book-bookSearchResult" class="btn btn-success mx-2">읽고 싶은 책 등록하기</a>
+		               </div>
+		           </div>
+		       `;
+
+		       // 현재 활성화된 탭 찾기
+		       var activeTabId = $('.nav-link.active').attr('id');
+		       var activeTabContentId = activeTabId.replace('-tab', '');
+		       
+		       // 활성화된 탭의 책 목록 컨테이너에 메시지 삽입
+		       $(`#${activeTabContentId} [id$="-list"]`).html(noBookHtml);
+		   }
+		   
+		   // 현재 탭의 내용만 새로고침하는 함수
+		   function refreshCurrentTab() {
+		       var activeTabId = $('.nav-link.active').attr('id');
+		       var activeTabContentId = activeTabId.replace('-tab', '');
+		       
+		       var $activeTab = $('#' + activeTabContentId);
+		       
+		       // 정렬 버튼을 포함한 전체 상단 영역을 저장
+		       var $topSection = $activeTab.children().first().clone();
+
+		       $.ajax({
+		           url: '/refreshTab',
+		           type: 'GET',
+		           data: { tabId: activeTabContentId },
+		           success: function(response) {
+		               // 새로운 내용으로 탭을 업데이트하되, 상단 영역은 제외
+		               var $newContent = $(response);
+		               $newContent.children().first().remove(); // 새 컨텐츠의 상단 영역 제거
+		               
+		               // 기존 상단 영역과 새 컨텐츠를 결합
+		               $activeTab.html('').append($topSection).append($newContent);
+		               
+		               // 정렬 이벤트 리스너 다시 추가
+		               addSortListeners($activeTab.find('input[name^="sort-"]'));
+		           },
+		           error: function() {
+		               console.error('탭 새로고침 실패');
+		           }
+		       });
+		   }
+
+		   /*
+           // 현재 탭의 내용만 새로고침하는 함수
+           function refreshCurrentTab() {
+               var activeTabId = $('.nav-link.active').attr('id');
+               var activeTabContentId = activeTabId.replace('-tab', '');
+               
+               $.ajax({
+                   url: '/refreshTab',
+                   type: 'GET',
+                   data: { tabId: activeTabContentId },
+                   success: function(response) {
+                       $('#' + activeTabContentId).html(response);
+                   },
+                   error: function() {
+                       console.error('탭 새로고침 실패');
+                   }
+               });
+           }
+		   */
+
+           // 읽고 있는 책에서 수정 클릭시
+           let currentShelfNum;
+           let totalPages;
+           let bookNum;
+           
+           // #[수정] 읽고 있는 책 수정 버튼 클릭 이벤트
+           $(document).on('click', '.edit-progress', function() { // #[수정] 이벤트 위임 방식으로 변경
+               currentShelfNum = $(this).data('shelf-num');
+               totalPages = $(this).data('book-page');
+               bookNum = $(this).data('book-num');
+               let $bookItem = $(this).closest('.book-item');
+               let startDate = $bookItem.find('.start-date').text();
+               let currentReadPages = $bookItem.find('.book-progress').text().match(/(\d+)\/(\d+)/)[1];
+               
+               console.log('수정 버튼 클릭:', { shelfNum: currentShelfNum, totalPages, bookNum, startDate, currentReadPages });
+
+               $('#editStartDate').val(startDate);
+               $('#editPageInput').val(currentReadPages);
+               $('#editProgressModal').modal('show');
+           });
+
+         // ##[수정] 저장 버튼 클릭 이벤트
+         $('#saveProgress').on('click', function(e) {
+             e.preventDefault();
+             let newStartDate = $('#editStartDate').val();
+             let newReadPages = parseInt($('#editPageInput').val());
+             let isCompleted = newReadPages === totalPages;
+             
+             console.log('저장 버튼 클릭:', { newStartDate, newReadPages, totalPages, currentShelfNum });
+
+             if (newReadPages > totalPages) {
+                 Swal.fire({
+                     icon: 'error',
+                     title: '오류',
+                     text: '총 페이지 수를 초과할 수 없습니다.',
+                 });
+                 return;
+             }
+             
+             // ##[수정] 데이터 객체 생성
+             let data = {
+                 shelfNum: currentShelfNum,
+                 readPages: newReadPages,
+                 startDate: newStartDate,
+                 isCompleted: isCompleted,
+				 totalPages: totalPages  // totalPages 추가
+             };
+             
+             // ##[수정] 책을 완독한 경우에만 별점 입력 모달 표시 및 데이터에 추가
+             if (isCompleted) {
+                 Swal.fire({
+                     title: '책을 다 읽으셨군요!',
+                     text: '이 책에 대한 별점을 입력해주세요.',
+                     input: 'range',
+                     inputAttributes: {
+                         min: 1,
+                         max: 5,
+                         step: 1
+                     },
+                     inputValue: 3,
+                     showCancelButton: true,
+                     confirmButtonText: '확인',
+                     cancelButtonText: '취소'
+                 }).then((result) => {
+                     if (result.isConfirmed) {
+                         data.rating = result.value;
+                         saveBookProgress(data);
+                     }
+                 });
+             } else {
+                 saveBookProgress(data);
+             }
+         });
+		 
+	
+
+		 /*
+         // ##[수정] 책 진행 상태 저장 함수
+         function saveBookProgress(data) {
+             $.ajax({
+                 url: '/updateBooks',
+                 type: 'POST',
+                 contentType: 'application/json',
+                 data: JSON.stringify(data),
+                 success: function(response) {
+                     if(response.status === "success") {
+                         Swal.fire({
+                             icon: 'success',
+                             title: '저장 완료',
+                             text: response.message
+                         });
+                         $('#editProgressModal').modal('hide');
+                         refreshAllTabs(); // 모든 탭 새로고침
+                     } else {
+                         Swal.fire({
+                             icon: 'error',
+                             title: '저장 실패',
+                             text: response.message
+                         });
+                     }
+                 },
+                 error: function(xhr, status, error) {
+                     Swal.fire({
+                         icon: 'error',
+                         title: '오류',
+                         text: '서버와의 통신 중 오류가 발생했습니다.'
+                     });
+                     console.error('Error:', error);
+                 }
+             });
+         }
+		 */
+         
+         function refreshAllTabs() {
+             refreshTab('nav-read');  // 읽은 책 탭
+             refreshTab('nav-reading');  // 읽고 있는 책 탭
+             refreshTab('nav-wishlist');  // 읽고 싶은 책 탭
+         }
+		 
+
+		 // 책 목록 배열을 갱신하는 함수
+		 function updateBookArrays() {
+		     readBooks = Array.from($('#nav-read .read-books.book-item'));
+		     readingBooks = Array.from($('#nav-reading .reading-books.book-item'));
+		     wishBooks = Array.from($('#nav-wishlist .wish-books.book-item'));
+		     console.log("Book arrays updated:", { readBooks, readingBooks, wishBooks });
+		 }
+         
+         /* function refreshTab(tabId) {
+             $.ajax({
+                 url: '/refreshTab',
+                 type: 'GET',
+                 data: { tabId: tabId },
+                 success: function(response) {
+                     $('#' + tabId).html(response);
+                 },
+                 error: function() {
+                     console.error(tabId + ' 탭 새로고침 실패');
+                 }
+             });
+         } */
+		 // 탭 새로고침 함수 수정
+		    function refreshTab(tabId) {
+		        $.ajax({
+		            url: '/refreshTab',
+		            type: 'GET',
+		            data: { tabId: tabId },
+		            success: function(response) {
+		                let $tab = $(`#${tabId}`);
+		                // 정렬 버튼 보존
+		                let sortButtons = $tab.find('.btn-group').detach();
+		                
+		                // 탭 내용 업데이트
+		                $tab.html(response);
+		                
+		                // 정렬 버튼 다시 추가
+		                $tab.prepend(sortButtons);
+		                
+		                // 책 목록 배열 갱신
+		                updateBookArrays();
+		                
+		                // 정렬 이벤트 리스너 다시 추가
+		                addSortListeners($tab.find('input[name^="sort-"]'));
+		            },
+		            error: function(xhr, status, error) {
+		                console.error(`${tabId} 탭 새로고침 실패:`, error);
+		            }
+		        });
+		    }
+			
+			// 책 항목 UI 업데이트 함수
+			function updateBookItem(updatedBook) {
+			    let $bookItem = $(`.reading-books[data-shelf-num="${updatedBook.shelfNum}"]`);
+				console.log("-----"+$bookItem);
+			    if ($bookItem != null) {
+			        let progress = (updatedBook.readPages / updatedBook.bookPage) * 100;
+			        let formattedProgress = progress.toFixed(2);
+
+			        $bookItem.find('.start-date').text(updatedBook.startDate);
+			        $bookItem.find('.progress-bar')
+			            .css('width', `${progress}%`)
+			            .attr('aria-valuenow', progress);
+			        $bookItem.find('.book-progress').html(
+			            `${formattedProgress}% (${updatedBook.readPages}/${updatedBook.bookPage} 페이지)`
+			        );
+
+			        console.log('Book item updated:', updatedBook.shelfNum);
+			    } else {
+			        console.error('Book item not found:', updatedBook.shelfNum);
+			    }
+			}
+
+			function saveBookProgress(data) {
+			    $.ajax({
+			        url: '/updateBooks',
+			        type: 'POST',
+			        contentType: 'application/json',
+			        data: JSON.stringify(data),
+			        success: function(response) {
+			            if(response.status === "success") {
+			                Swal.fire({
+			                    icon: 'success',
+			                    title: '저장 완료',
+			                    text: response.message
+			                });
+			                $('#editProgressModal').modal('hide');
+			                
+			                // 서버에서 반환된 업데이트된 책 정보로 UI를 즉시 업데이트합니다.
+			                updateBookItem(response.updatedBook);
+			                
+			                // 책 목록 배열 갱정
+			                updateBookArrays();
+
+			                // 필요한 경우 현재 탭만 새로고침
+			                refreshCurrentTab();
+			            } else {
+			                Swal.fire({
+			                    icon: 'error',
+			                    title: '저장 실패',
+			                    text: response.message
+			                });
+			            }
+			        },
+			        error: function(xhr, status, error) {
+			            Swal.fire({
+			                icon: 'error',
+			                title: '오류',
+			                text: '서버와의 통신 중 오류가 발생했습니다.'
+			            });
+			            console.error('Error:', error);
+			        }
+			    });
+			}
+			/*
+		//0813[1]
+		 function updateBookItem(shelfNum, startDate, readPages, totalPages) {
+		     if (shelfNum != null && startDate != null && !isNaN(readPages) && !isNaN(totalPages) && totalPages > 0) {
+		         let progress = (readPages / totalPages) * 100;
+		         let formattedProgress = progress.toFixed(2);
+
+		         let $bookItem = $(`.reading-books[data-shelf-num="${shelfNum}"]`);
+		         if ($bookItem.length > 0) {
+		             $bookItem.find('.start-date').text(startDate);
+		             $bookItem.find('.progress-bar')
+		                 .css('width', `${progress}%`)
+		                 .attr('aria-valuenow', progress);
+		             $bookItem.find('.book-progress').html(
+		                 `${formattedProgress}% (${readPages}/${totalPages} 페이지)`
+		             );
+		             console.log('Book item updated:', shelfNum);
+		         } else {
+		             console.log('Book item not found:', shelfNum);
+		         }
+		     } else {
+		         console.log('Invalid input for updateBookItem:', { shelfNum, startDate, readPages, totalPages });
+		     }
+		 }
+		 */
+		 /*
+         function updateBookItem(shelfNum, startDate, readPages, totalPages) {
+             if (shelfNum != null && startDate != null && !isNaN(readPages) && !isNaN(totalPages) && totalPages > 0) {
+                 let progress = (readPages / totalPages) * 100;
+               let formattedProgress = progress.toFixed(2); // 두 자리 소수점까지 포맷
+               console.log('소수'+formattedProgress)
+
+                 let $bookItem = $(`[data-shelf-num="${shelfNum}"]`).closest('.book-item');
+
+                 console.log('책 아이템 업데이트:', { shelfNum, startDate, readPages, totalPages, progress });
+
+                 $bookItem.find('.start-date').text(startDate);
+                 $bookItem.find('.progress-bar')
+                     .css('width', `${progress}%`)
+                     .attr('aria-valuenow', progress);
+                 $bookItem.find('.book-progress').html(
+                     `${formattedProgress}% (${readPages}/${totalPages} 페이지)`
+                 );
+
+                 console.log('업데이트된 HTML:', $bookItem.html());
+             } else {
+                 console.log('유효하지 않은 입력 값:', { shelfNum, startDate, readPages, totalPages });
+             }
+         } // end of updateBookItem
+		 */
+		 
+		 
+         // *************************************
+         // [0809 추가] 정렬 버튼
+         
+         // 정렬 버튼 요소
+         const sortButtonsRead = document.querySelectorAll('input[name="sort-read"]'); // 읽은 책
+         const sortButtonsReading = document.querySelectorAll('input[name="sort-reading"]'); // 읽고 있는 책
+         const sortButtonsWish = document.querySelectorAll('input[name="sort-wishlist"]'); // 위시리스트
+         // 책 설명 div
+         const readBookNav = document.getElementById('nav-read'); // 읽은 책 div
+         const readingBookNav = document.getElementById('nav-reading'); // 읽고 있는 책 div
+         const wishListNav = document.getElementById('nav-wishlist'); // 위시리스트 div
+         
+         console.log("readingBookNav : ", readingBookNav);
+
+         // 책 항목을 배열로 변환
+         let readBooks = Array.from(readBookNav.getElementsByClassName('read-books')); // 읽은 책 항목
+         let readingBooks = Array.from(readingBookNav.getElementsByClassName('reading-books')); // 읽고 있는 책 항목
+         let wishBooks = Array.from(wishListNav.getElementsByClassName('wish-books')); // 위시리스트 항목
+
+		 // 정렬 버튼 이벤트 리스너 추가 함수
+		    function addSortListeners() {
+		        $('input[name^="sort-"]').off('click').on('click', function() {
+		            console.log("Sort button clicked:", this.id);
+		            sortEntries(this.id);
+		        });
+		    }
+		 /*
+         // 정렬 버튼 클릭 이벤트리스너 
+         function addSortListeners(buttons) {
+             buttons.forEach(button => {
+                 button.addEventListener('click', function() {
+                     console.log("Sorting by:", this.id);
+                     sortEntries(this.id);
+                 });
+             });
+         }
+		 */
+
+         addSortListeners(sortButtonsRead);
+         addSortListeners(sortButtonsReading);
+         addSortListeners(sortButtonsWish);
+
+         // 날짜 문자열을 Date 객체로 변환하는 함수 (연-월-일만 고려)
+         function parseDate(dateString) {
+             const [year, month, day] = dateString.split('-').map(Number);
+             return new Date(year, month - 1, day);
+         }
+
+         // 진행률 형변환 함수 
+         function extractProgress(element) {
+             const progressText = element.querySelector('.book-progress')?.textContent.trim();
+             if (progressText) {
+                 const match = progressText.match(/(\d+(\.\d+)?)%/);
+                 return match ? parseFloat(match[1]) : 0;
+             }
+             return 0;
+         }
+
+		 /*
+         function sortEntries(order) {
+             console.log("Sorting entries...");
+             let books;
+             let container;
+
+             // [ 읽은 책 ]
+             if (order === 'startDateRead' || order === 'endDateRead') {
+                 console.log("Read sortEntries");
+                 books = readBooks;
+                 container = readBookNav.querySelector('#read-list');
+             }
+             // [ 읽고 있는 책 ]
+             else if (order === 'startDateReading' || order === 'readCountReading') {
+                 console.log("Reading sortEntries");
+                 books = readingBooks;
+                 container = readingBookNav.querySelector('#reading-list');
+             }
+             // [ 위시리스트 ]
+             else if (order === 'alphabeticalWishlist' || order === 'addedDateWishlist') {
+                 console.log("Wishlist sortEntries");
+                 books = wishBooks;
+                 container = wishListNav.querySelector('#wishlist-list');
+             }
+*/
+		// 정렬 함수 수정
+		function sortEntries(order) {
+		       console.log("Sorting entries...");
+		       let books;
+		       let container;
+
+		       updateBookArrays(); // 정렬 전 배열 업데이트
+
+		       // 현재 활성화된 탭에 따라 적절한 책 목록과 컨테이너 선택
+		       if ($('#nav-read').hasClass('active')) {
+		           books = readBooks;
+		           container = $('#read-list');
+		       } else if ($('#nav-reading').hasClass('active')) {
+		           books = readingBooks;
+		           container = $('#reading-list');
+		       } else if ($('#nav-wishlist').hasClass('active')) {
+		           books = wishBooks;
+		           container = $('#wishlist-list');
+		       }
+
+		       console.log("Current active tab:", $('.nav-link.active').attr('id'));
+		       console.log("Sorting books:", books);
+
+		       if (!books || books.length === 0) {
+		           console.log("No books to sort");
+		           return;
+		       }
+
+			 
+             books.sort((a, b) => {
+               // [ 시작일순 ]
+                 if (order === 'startDateRead' || order === 'startDateReading') {
+                     const dateA = parseDate(a.querySelector('.book-dates .start-date').textContent.trim());
+                     const dateB = parseDate(b.querySelector('.book-dates .start-date').textContent.trim());
+                  // 오름차순
+                     return dateA - dateB;
+                 }
+               // [ 종료일순 ]
+                 else if (order === 'endDateRead') {
+                     const dateA = parseDate(a.querySelector('.book-dates .end-date').textContent.trim());
+                     const dateB = parseDate(b.querySelector('.book-dates .end-date').textContent.trim());
+                  // 내림차순 
+                     return dateB - dateA;
+                 }
+               // [ 많이 읽은 순 ]
+                 else if (order === 'readCountReading') {
+                     const progressA = extractProgress(a);
+                     const progressB = extractProgress(b);
+                     console.log("progressA : ", progressA);
+                     console.log("progressB : ", progressB);
+                     return progressB - progressA; // 내림차순 정렬 (많이 읽은 순)
+                 }
+                 // [ 가나다 순 ]
+               else if (order === 'alphabeticalWishlist'){
+                  const titleA = a.querySelector('.book-title').textContent.trim();
+                  const titleB = b.querySelector('.book-title').textContent.trim();
+                  return titleA.localeCompare(titleB, 'ko-KR');  // 한글 가나다순 정렬
+               }
+               // [ 추가된 날짜 순 ] 
+               else if (order === 'addedDateWishlist'){
+                   const dateA = parseDate(a.querySelector('.book-added-date .added-date').textContent.trim());
+                   const dateB = parseDate(b.querySelector('.book-added-date .added-date').textContent.trim());
+                   // 내림차순
+                   return dateB - dateA;
+               }
+             });
+
+            // 화면에 붙이기 
+             //container.innerHTML = '';
+             //books.forEach(entry => container.appendChild(entry));
+			 
+			 // 정렬된 목록을 화면에 다시 표시
+			 container.empty().append(books);
+             console.log("Sorting completed");
+         }
+		 
+		 updateBookArrays();
+
+		    // 탭 변경 이벤트
+		    $('.nav-link').on('shown.bs.tab', function (e) {
+		        console.log("Tab changed:", e.target.id);
+		        updateBookArrays();
+		    });
+		 
+			// 초기 설정
+			   updateBookArrays();
+			   addSortListeners();
+         
+         
+      });
+   </script>
+         
+      
+</body>
+</html>

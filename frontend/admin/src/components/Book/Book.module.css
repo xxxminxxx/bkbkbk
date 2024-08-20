@@ -1,0 +1,115 @@
+.bookComponent .mb-3 {
+  display: flex;
+  max-width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bookComponent .input-group {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.bookComponent .btn-light {
+  background-color: bisque;
+}
+
+.bookComponent .items-per-page {
+  width: auto;
+  min-width: 120px;
+}
+
+
+/* 모바일 화면 */
+@media (max-width: 767px) {
+  .bookComponent .table {
+      font-size: 0.8rem;
+  }
+  
+  .bookComponent .table th,
+  .bookComponent .table td {
+      padding: 0.3rem;
+  }
+
+  .bookComponent .mb-3 {
+      flex-direction: column;
+  }
+
+  .bookComponent .input-group,
+  .bookComponent .items-per-page {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+}
+
+/* 태블릿 화면 */
+@media (min-width: 768px) and (max-width: 991px) {
+  .bookComponent .table {
+      font-size: 0.9rem;
+  }
+  
+  .bookComponent .table th,
+  .bookComponent .table td {
+      padding: 0.75rem;
+  }
+}
+
+/* 데스크탑 화면 */
+@media (min-width: 992px) {
+  .bookComponent .table {
+      font-size: 1rem;
+  }
+  
+  .bookComponent .table th,
+  .bookComponent .table td {
+      padding: 1rem;
+  }
+}
+
+.bookComponent .abc {
+  background-color: #007bff;
+  color: white;
+  border-color: #c8c6ca;
+}
+
+.bookComponent .pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.bookComponent .pagination li {
+  margin: 5px;
+}
+
+.bookComponent .pagination button {
+  padding: 5px 10px;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.bookComponent .pagination .active button {
+  background-color: #007bff;
+  color: white;
+}
+
+.bookComponent .pagination .disabled button {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bookComponent .col {
+  margin-top: 30px;
+  padding: 30px;
+  margin-bottom: 60px;
+}
+
+.bookComponent .table-responsive {
+  overflow-x: auto;
+}

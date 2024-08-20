@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.UserDAO">
+
+
+
+<!-- 구글 네이버 로그인시 매칭되는 아이디 있는지 없는지 확인-->
+	<select id="findByEmail" resultType="UserVO">
+	SELECT * FROM users
+	WHERE userId=#{email}
+	</select>
+<!-- 방문 기록 저장 -->
+    <insert id="insertVisitLog" parameterType="VisitVO">
+        INSERT INTO visitor (VISIT_IP, VISIT_TIME, VISIT_SITE, VISIT_BROWSER)
+        VALUES (#{VISIT_IP}, #{VISIT_TIME}, #{VISIT_SITE}, #{VISIT_BROWSER})
+    </insert>
+
+	<!--회원가입-->
+	<insert id="registerUser" parameterType="UserVO">
+       INSERT INTO users (userId, password, userName, userTel, gender, birthDate, joinedDate, naverId, quitStatus, banStatus, reported, interestHobby, address)
+        VALUES (#{userId}, #{password}, #{userName}, #{userTel}, #{gender}, #{birthDate}, now(), #{naverId}, "N", "N", 0, #{interestHobby}, #{address})
+    </insert>
+    
+    <!-- 이메일 유효성 확인 -->
+    <select id="existsByUserTel" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM USERS
+        WHERE userTel = #{userTel}
+    </select>
+    
+    
+    <!--선호도 저장-->
+    <update id="updateUserPreferences" parameterType="com.bookbookbook.domain.UserVO">
+        UPDATE users SET interestHobby = #{interestHobby}, address = #{address} WHERE userId = #{userId}
+    </update>
+	
+	<!-- 이메일 실시간 중복 체크 -->
+	<select id="existsByUserId" resultType="int">
+        SELECT COUNT(*) FROM users WHERE userId = #{email}
+    </select>
+
+	<!-- 로그인 -->
+	<select id="loginUser" parameterType="String" resultType="UserVO">
+        SELECT * FROM users WHERE userId = #{userId}
+    </select>
+
+	
+    <select id="findEmail" resultType="String">
+        SELECT userId FROM users 
+        WHERE userName = #{userName} AND userTel = #{userTel}
+    </select>
+    
+     <update id="updatePassword">
+        UPDATE users SET password = #{newPassword} 
+        WHERE userId = #{userId}
+    </update>
+    
+    <select id="checkDuplicateUser" resultType="int">
+    	SELECT COUNT(*) FROM users 
+    	WHERE userId = #{userId} OR userTel = #{userTel}
+	</select>
+	
+	 <select id="findUserByEmail" resultType="UserVO" parameterType="String">
+        SELECT *
+        FROM users
+        WHERE userId = #{userId}
+    </select>
+    
+    <!--비번 찾기-->
+       <select id="findUserByNameIdAndTel" parameterType="map" resultType="UserVO">
+        SELECT *
+        FROM users
+        WHERE userName = #{userName}
+          AND userId = #{userId}
+          AND userTel = #{userTel}
+    </select>
+	
+	<!-- 로그인 실패 시 재인증 -->
+	<!-- 임시 코드 업데이트 -->
+    <update id="updateTempCode">
+        UPDATE users 
+        SET tempCode = #{tempCode}
+        WHERE userId = #{userId}
+    </update>
+
+
+    <update id="clearTempCodeAndAttempts">
+        UPDATE users SET tempCode = NULL, attempts = 0 WHERE userId = #{userId}
+    </update>
+    
+    
+	 <update id="incrementLoginAttempts">
+        UPDATE users SET attempts = COALESCE(attempts, 0) + 1 WHERE userId = #{userId}
+    </update>
+
+    <select id="getLoginAttempts" resultType="int">
+        SELECT COALESCE(attempts, 0) FROM users WHERE userId = #{userId}
+    </select>
+
+    <update id="resetLoginAttempts">
+        UPDATE users SET attempts = 0 WHERE userId = #{userId}
+    </update>
+	
+	 
+	 
+<!--#############################################-->    
+<!--채팅 신고-->
+<insert id="submitReport" parameterType="ReportVO">
+INSERT INTO report (reportedUser, reportTime, reportType, reportUser, reportedMessage, reportResult) 
+VALUES (#{reportedUserNum},now(),#{reportType},#{reportUserNum},#{reportedMessage}, '미처리' )
+</insert>
+
+<!-- ################################### -->
+	<!-- 나의 달력 -->
+		<!-- 출석 정보 조회 -->
+	<select id="getAttendancesByUserId" parameterType="String"
+			resultType="CalendarVO">
+		SELECT *
+		FROM	calendar
+		WHERE userNum = (
+						SELECT userNum 
+						FROM users 
+						WHERE userId = #{userId}
+						)
+	</select>
+		<!-- 메모 정보 조회 -->
+	<select id="getMemosAtCalendar" parameterType="String"
+         resultType="HashMap">
+      SELECT 
+             m.memoNum,
+             m.userNum,
+             m.shelfNum,
+             m.memoContent,
+             DATE(m.memoDate) as memoDate,
+             b.bookTitle
+      FROM    memo m
+            INNER JOIN (
+                      SELECT    shelfNum, 
+                            DATE(memoDate) as memoDay, 
+                            MAX(memoDate) as latestMemoDate
+                      FROM    memo
+                      WHERE    userNum = (
+                                    SELECT userNum 
+                                    FROM users 
+                                    WHERE userId = #{userId}
+                                    )
+                      GROUP BY shelfNum, DATE(memoDate)
+                     ) 
+                     grouped ON m.shelfNum = grouped.shelfNum
+                AND DATE(m.memoDate) = grouped.memoDay
+                AND m.memoDate = grouped.latestMemoDate
+            INNER JOIN bookShelf bs ON m.shelfNum = bs.shelfNum
+            INNER JOIN book b ON bs.bookNum = b.bookNum
+      WHERE m.userNum = (
+                     SELECT userNum 
+                     FROM users 
+                     WHERE userId = #{userId}
+                     )
+      ORDER BY m.memoDate DESC, m.shelfNum
+   </select>
+	
+		<!-- 출석체크 기록 저장 -->
+	<insert id="insertAttendance" parameterType="String">
+	    INSERT INTO calendar (userNum, attendance, calendarDate)
+	    SELECT 
+	        u.userNum, 
+	        true, 
+	        CURDATE()
+	    FROM 
+	        users u
+	    WHERE 
+	        u.userId = #{userId}
+	        AND NOT EXISTS (
+	            SELECT 1 
+	            FROM calendar c 
+	            WHERE c.userNum = u.userNum 
+	            AND DATE(c.calendarDate) = CURDATE()
+	        )
+	    ON DUPLICATE KEY UPDATE 
+	        attendance = calendar.attendance
+	</insert>
+		<!-- 달력 테이블에서 userNum이 가진 출석 정보 조회 -->
+	<select id="getAttendanceList" parameterType="String"
+			resultType="calendarVO">
+		SELECT 	c.calendarNum,
+				c.userNum,
+				c.attendance,
+				c.calendarDate
+		FROM 	calendar c
+			INNER JOIN users u
+			ON	c.userNum = u.userNum
+		WHERE u.userId = #{userId}
+		ORDER BY c.calendarDate	
+	</select>
+	
+	<!-- ################################### -->
+   <!-- 나의 메모 -->
+      <!-- 메모 정보 조회 -->
+   <select id="getMemosAtMemo" parameterType="String"
+         resultType="HashMap">
+      SELECT m.*,
+             bs.*,
+             b.*,
+             (
+                SELECT COUNT(*)
+              FROM memo
+              WHERE shelfNum = m.shelfNum
+                      AND userNum = m.userNum
+             ) as memoCount
+      FROM memo m
+         INNER JOIN (
+                      SELECT shelfNum,
+                               MAX(memoDate) as latest_memo_date,
+                                MAX(memoNum) as latest_memo_num
+                      FROM memo
+                      WHERE userNum = (
+                                      SELECT userNum
+                                      FROM users
+                                      WHERE userId = #{userId}
+                                  )
+                      GROUP BY shelfNum
+                     ) 
+               latest ON m.shelfNum = latest.shelfNum
+                      AND m.memoDate = latest.latest_memo_date
+                      AND m.memoNum = latest.latest_memo_num
+         INNER JOIN bookshelf bs 
+            ON m.shelfNum = bs.shelfNum
+         INNER JOIN book b 
+            ON bs.bookNum = b.bookNum
+      ORDER BY m.memoDate DESC
+   </select>
+   
+		<!-- 메모 상세 조회 -->
+	<select id="getMemoDetailByMemoNum" parameterType="hashmap"
+			resultType="hashmap">
+		SELECT	m.*,
+				b.*,
+				bs.*
+		FROM	memo m
+				INNER JOIN bookshelf bs 
+					ON	m.shelfNum = bs.shelfNum
+				INNER JOIN book b
+					ON	bs.bookNum = b.bookNum
+		WHERE	m.shelfNum = #{shelfNum}	
+				AND
+				m.userNum = (
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+	</select>
+	
+		<!-- 메모 삭제 -->
+	<delete id="memoDelete" parameterType="hashmap">
+		DELETE FROM memo
+		WHERE	memoNum = #{memoNum} 
+				AND 
+				userNum = (
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+	</delete>
+	
+		<!-- 메모 수정 -->
+	<update id="updateMemo" parameterType="hashmap">
+		UPDATE 	memo
+		SET		memoContent = #{memoContent},
+				memoDate 	= now()
+		WHERE	memoNum = #{memoNum}
+				AND
+				userNum = (
+							SELECT userNum 
+							FROM users 
+							WHERE userId = #{userId}
+							)
+	</update>
+		<!-- memo 테이블에서 shelfNum을 포함하는 레코드가 있는지 확인 -->
+	<select id="countMemoForShelf" parameterType="hashmap"
+			resultType="int">
+		SELECT	COUNT(*)
+		FROM	memo m
+				INNER JOIN users u
+				ON m.userNum = u.userNum
+		WHERE	m.shelfNum = #{shelfNum}
+				AND
+				u.userId = #{userId}
+	</select>
+	
+	<!-- ################################### -->
+	<!-- 나의 캐릭터 -->
+      <!-- userId로 userLevel에 따른 캐릭터 정보 조회 -->
+   <select id="getCharactersByUserId" parameterType="String" 
+      resultType="hashmap">
+       SELECT  u.userLevel, 
+                 c.characterNum, 
+                 c.characterName, 
+                 c.cfrealname, 
+                 c.cfname,
+                 c.characterStage,
+                 c.characterBirth
+       FROM users u
+          INNER JOIN characters c
+       WHERE u.userId = #{userId}
+       ORDER BY c.characterNum
+   </select>
+	
+	<!-- 캐릭터 상세보기 -->
+   <select id="myCharactersDetail" parameterType="hashmap"
+         resultType="hashmap">
+      SELECT    u.userLevel,
+            c.characterNum,
+            c.characterName,
+            c.cfrealname,
+            c.cfname,
+            c.characterHeight,
+            c.characterDescription,
+              c.characterBirth
+      FROM users u
+         INNER JOIN characters c
+      ON u.userLevel >= c.characterNum
+      WHERE c.characterNum = #{stage} 
+         AND u.userId = #{userId}
+   </select>
+	
+	<!--#############################################################-->
+	<!-- 리그 -->
+	<select id="usersReadRank" resultType="BookshelfVO">
+	SELECT u.userId userId, u.userlevel characterStage, COUNT(*) AS readBooks
+	FROM bookshelf bs
+	JOIN users u ON bs.userNum = u.userNum
+	WHERE MONTH(bs.endDate) = MONTH(CURRENT_DATE())
+	GROUP BY bs.userNum, u.userId, u.userlevel
+	ORDER BY readBooks DESC
+	</select>
+	
+	<!-- 리그 책제목 불러오기 -->
+	<select id="getBooksByUserId" parameterType="String" resultType="BookshelfVO">
+	select b.bookTitle as bookTitle
+	from book as b join bookshelf bs on b.bookNum =bs.bookNum
+	join users as u on u.userNum = bs.userNum 
+	WHERE MONTH(bs.endDate) = MONTH(CURRENT_DATE()) and userId=#{userId}
+	order by bs.endDate DESC
+	</select>
+	
+	<!--##########################-->
+	<!-- 나의정보 수정 -->
+	<select id="getUserById" parameterType="String" resultType="UserVO">
+		SELECT userName, userTel, userId, userNum
+		FROM users
+		WHERE userId = #{userId}
+
+	</select>
+
+	<update id="updateUserInfo" parameterType="UserVO">
+		UPDATE users
+		<set>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="userName != null">
+				userName = #{userName},
+			</if>
+			<if test="userTel != null">
+				userTel = #{userTel},
+			</if>
+		</set>
+		WHERE userId = #{userId}
+	</update>
+	
+<!--######################################-->	
+<!--나의 통계-->
+	<select id="getUserStatInfo" parameterType="UserStatVO" resultType="UserStatVO">
+		select *
+		from bookshelf
+	</select>
+	
+	<update id="updateGoogleStatus" parameterType="UserVO">
+        UPDATE users
+        SET googleId = 'Y'
+        WHERE userId = #{email}
+    </update>
+    
+    <update id="updateNaverStatus" parameterType="UserVO">
+        UPDATE users
+        SET naverId = 'Y'
+        WHERE userId = #{email}
+    </update>
+
+</mapper>

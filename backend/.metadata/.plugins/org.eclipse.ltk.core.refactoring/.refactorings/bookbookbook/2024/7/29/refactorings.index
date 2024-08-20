@@ -1,0 +1,38 @@
+1720964208548	Rename resource 'my-info.jsp'
+1720964339703	Rename resource 'my-info-analysis.jsp'
+1720964349172	Rename resource 'my-info-analysis2.jsp'
+1720964409257	Rename resource 'find-location.jsp'
+1720964425292	Rename resource 'user-bookDetails.jsp'
+1720964435902	Rename resource 'user-bookSearchResult.jsp'
+1720964448621	Rename resource 'user-my.jsp'
+1720964505662	Rename resource 'main-slidecover.jsp'
+1720964657066	Delete element
+1721005895640	Delete element
+1721006574125	Delete element
+1721012587279	Rename resource 'user-findPassword'
+1721012760109	Rename resource 'user-findEmails.jsp'
+1721091492296	Rename resource 'user-myLibrary.jsp'
+1721115512819	Rename resource 'user-myLibrary.css'
+1721115560315	Rename resource 'user-myLibrary.js'
+1721177428367	Rename resource 'user-404.jsp'
+1721177462546	Rename resource 'user-errror404.jsp'
+1721177598218	Move 'footer.jsp' to 'WEB-INF'
+1721177614276	Move 'footer.jsp' to 'views'
+1721185721804	Rename resource 'errror-404.jsp'
+1721188949156	Copy compilation unit
+1721188955437	Delete element
+1721195065004	Copy compilation unit
+1721195080435	Delete element
+1721195139452	Delete element
+1721195144477	Delete element
+1721195981396	Delete element
+1721195986569	Rename resource 'user-myStat2.jsp'
+1721206642981	Rename resource 'NavSidebar.jsp'
+1721206680323	Rename resource 'navSidebar2.jsp'
+1721225469010	Delete element
+1721355272511	Delete element
+1721362547348	Move file
+1721363090753	Delete element
+1721369754831	Delete element
+1721378968618	Rename resource 'img'
+1721378973289	Rename resource 'img2'

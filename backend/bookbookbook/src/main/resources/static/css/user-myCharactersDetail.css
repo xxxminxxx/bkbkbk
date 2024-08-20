@@ -1,0 +1,125 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  align-items: center;
+}
+
+.back-button {
+	cursor: pointer;
+	font-size: 2.0em;
+}
+.nav-buttons span {
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: transform 0.3s ease; /* 모든 상태에서 일관된 애니메이션 효과 */
+}
+
+.character-image {
+  text-align: center;
+  margin-bottom: 20px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-image img {
+  max-width: 100%;
+  max-height: 300px; 
+  object-fit: contain;
+}
+
+.character-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #444444;
+}
+
+.info-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.info-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 45%;
+  text-align: center;
+  color: #555555;
+}
+
+.description {
+  background-color: aliceblue;
+  border-radius: 10px;
+  padding: 30px 20px 15px 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  overflow-y: auto; /* 내용 많을 경우, 스크롤 생성 */
+  font-size: 20px;
+  /* [0808 추가] */
+  line-height: 1.0; /* 줄 간격을 약간 좁힘 */
+  color: #555555;
+
+}
+
+.disabled {
+  color: #999;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* [0808 수정] */
+/* nav 컬러 변경 + 물결 변경 */
+.bg-black {
+    background-color: #8fbc8f !important;
+}
+
+.hero-wave {
+    width: 100%;
+    display: block;
+    margin-bottom: -200px;
+}
+
+.top-header {
+    background-color: #abd1ab;
+    padding-top: 100px; /* 상단 여백 조정 */
+    padding-bottom: 0;
+}
+
+#title-character {
+	color : white;
+}
+
+.back-button:hover {
+  transform: scale(1.7); /* 1.2배로 확대 */
+  transition: transform 0.3s ease; /* 부드러운 확대 효과 */
+}
+
+/* [수정] .character-stage 스타일 중앙 정렬 */
+.character-stage {
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-size: 2.5em; /* 적절한 폰트 크기 조정 */
+  margin: 20px 0; /* 위와 아래 여백 조정 */
+  color: #555555;
+}
+
+/* .nav-buttons의 내부에 공백 추가 */
+.nav-buttons {
+  display: flex;
+  gap: 20px; /* 이전과 다음 버튼 사이의 공백을 늘림 */
+  color: #555555;
+}
+
+/* lottie 좌우반전 */
+.flipped {
+    transform: scaleX(-1); /* 좌우 반전 */
+}
+
+

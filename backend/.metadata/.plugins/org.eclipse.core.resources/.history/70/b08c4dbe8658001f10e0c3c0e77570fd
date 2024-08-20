@@ -1,0 +1,199 @@
+/* 캐릭터 이미지 스타일 */
+.character-image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* #[0809수정] 책장 섹션 스타일 - 간격 조정 */
+.books-section {
+  border: 5px solid #d4a373;
+  padding: 30px;
+  height: 100%;
+  min-height: 400px;
+}
+
+/* #[0809수정] 책장 레이아웃 조정 */
+.book-shelves {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: 15px;
+  height: 100%;
+}
+
+/* #[0809수정] 책 스파인 스타일 - 크기 및 간격 조정 */
+.book-spine {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  padding: 15px 8px;
+  height: 180px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 책 색상 */
+.book-color-1 { background-color: #FFB3BA; }
+.book-color-2 { background-color: #BAFFC9; }
+.book-color-3 { background-color: #BAE1FF; }
+.book-color-4 { background-color: #FFFFBA; }
+
+/* #[0809수정] 책 제목 스타일 - 폰트 크기 조정 */
+.book-shelves .book-title {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  transform: rotate(0deg);
+}
+
+/* 책장 선 스타일 */
+.shelf-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e0c9a6;
+  margin: 15px 0;
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.book-spine {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* #[0809수정] 반응형 디자인 조정 */
+@media (max-width: 768px) {
+  .book-spine {
+    height: 140px;
+    width: 30px;
+    font-size: 12px;
+  }
+  
+  .books-section {
+    padding: 20px;
+  }
+}
+
+/* #[0809추가] 캐릭터 섹션 중앙 정렬 */
+.character-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* #[0809추가] 캐릭터 스테이지 텍스트 중앙 정렬 */
+.stage-character {
+  text-align: center;
+}
+
+/* [0809 추가] nav 색 변경 */
+/* nav 컬러 변경 + 물결 변경 */
+.bg-black {
+    background-color: #8fbc8f !important;
+}
+.nav-item .nav-link {
+   color: white !important;
+}
+
+/* [0809 추가] */
+/* [수정] body 스타일 변경 */
+body {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  margin: 0; /* 기본 마진 제거 */
+}
+
+/* [수정] main 컨텐츠를 감싸는 요소에 flex-grow 적용 */
+#elements {
+  flex: 1 0 auto; /* flex-grow: 1, flex-shrink: 0, flex-basis: auto */
+}
+
+.btn-primary {
+    background-color: #f77808d9;
+    border-color: #f77808d9;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/* [0812 수정] */
+
+/* 
+기존
+.py-5 {
+    padding-top: 6rem !important;
+} */
+/* py-5 클래스의 상단 패딩 증가 */
+.py-5 {
+    padding-top: 8rem !important; /* 상단 여백을 더 늘립니다 */
+    padding-bottom: 8rem !important; /* 하단 여백도 늘립니다 */
+}
+
+/* 컨테이너 스타일 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/*책 이미지랑 글자 좀 떨이지게*/
+.bshelf img {
+   margin-right: 10px;
+}
+
+/*툴팁*/
+.custom-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.custom-tooltip .tooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: #D2B48C;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1001;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.custom-tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #D2B48C transparent transparent transparent;
+}
+
+.custom-tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+/* 나의 서재 아래 여백 */
+.text-center.mb-4 {
+    margin-bottom: 4rem !important; /* 기존 1.5rem에서 2rem으로 증가 */
+}

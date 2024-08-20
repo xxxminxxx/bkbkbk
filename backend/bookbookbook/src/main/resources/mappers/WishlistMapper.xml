@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.WishlistDAO">
+
+
+  <insert id="insertWishlist">
+        INSERT INTO wishlist (bookNum, userNum, addedDate)
+        VALUES (#{bookNum}, #{userNum}, NOW())
+    </insert>
+
+ <!--탭팬에서 삭제-->
+       <delete id="deleteWishlistBook" parameterType="Integer">
+        DELETE FROM wishlist WHERE bookNum = #{bookNum}
+    </delete>
+	
+<!-- 중복 체크를 위한 쿼리 추가 -->
+    <select id="checkWishlistDuplicate" resultType="int">
+        SELECT COUNT(*) FROM wishlist 
+        WHERE bookNum = #{bookNum} AND userNum = #{userNum}
+    </select>
+</mapper>

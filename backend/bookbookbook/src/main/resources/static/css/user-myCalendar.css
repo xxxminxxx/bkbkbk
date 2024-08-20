@@ -1,0 +1,337 @@
+h5.fw-bold.m-0 {
+  color: white;
+}
+#elements {
+  min-height: calc(100vh - footer의 높이px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
+
+.container {
+  flex-grow: 1;
+}
+footer {
+  margin-top: auto;
+}
+.container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.calendar-wrapper {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#calendar {
+    width: 100%;
+    font-size: 1.1em;
+}
+
+h1.text-center {
+  padding: 10px 0;
+  margin: 0;
+  z-index: 10;
+}
+.fc-daygrid-day-number {
+    font-size: 1.2em;
+}
+
+.fc-daygrid-day-events {
+    min-height: 2em;
+}
+
+.fc-daygrid-day:not(.fc-day-other):not(.fc-day-today) {
+    cursor: pointer;
+}
+
+.fc-event {
+    cursor: default !important;
+}
+
+#year-select, #month-select {
+    margin-right: 10px;
+    display: inline-block;
+    width: auto;
+    font-size: 1.1em;
+}
+
+.fc-header-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.fc-toolbar-title {
+    font-size: 1.8em;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.fc-toolbar-chunk {
+    display: flex;
+    align-items: center;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row.no-gutters>[class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+#selected-date {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.event-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* 평일, 토요일, 일요일 날짜 색상 변경 */
+.fc-col-header-cell .fc-col-header-cell-cushion {
+    color: black; /* 기본적으로 모든 요일 헤더를 검정색으로 설정 */
+}
+
+.fc-daygrid-day .fc-daygrid-day-number {
+    color: black; /* 기본적으로 모든 날짜를 검정색으로 설정 */
+}
+
+.fc-col-header-cell.fc-day-sun .fc-col-header-cell-cushion {
+    color: red;
+}
+
+.fc-col-header-cell.fc-day-sat .fc-col-header-cell-cushion {
+    color: blue;
+}
+
+.fc-daygrid-day.fc-day-sun .fc-daygrid-day-number {
+    color: red;
+}
+
+.fc-daygrid-day.fc-day-sat .fc-daygrid-day-number {
+    color: blue;
+}
+
+.fc-day-today {
+    background-color: #E4F7BA !important; /* 오늘 날짜 배경색 복원 */
+}
+
+.fc-day-today .fc-daygrid-day-number {
+    background-color: inherit; /* 날짜 숫자 배경색 제거 */
+    border-radius: 0;
+}
+
+/* 출석체크 버튼 스타일 */
+#attendance-check {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-image: url('../img/출석완료이미지.png');
+    background-size: cover;
+    color: white;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    display: none; /* 기본적으로 숨김 */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#attendance-check span {
+    position: relative;
+    z-index: 1;
+}
+
+.attendance-mark {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    background-image: url('../img/출석완료이미지.png'); /* 출석 체크 이미지 경로 */
+    background-size: cover;
+}
+/* 이벤트 사이드바 스타일 */
+#event-sidebar {
+    position: relative;
+    min-height: 300px; /* 사이드바의 최소 높이 설정 */
+}
+
+#event-sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+/* today 이후 날짜들 커서 처리 */
+.future-date {
+    background-color: #f0f0f0;
+    cursor: default !important;
+}
+
+.future-date .fc-daygrid-day-top a {
+    pointer-events: none;
+}
+
+.future-date:not(.fc-day-other) {
+    opacity: 0.3;
+    cursor: default !important;
+}
+
+.future-date:not(.fc-day-other) .fc-daygrid-day-top a {
+    pointer-events: none;
+}
+
+.fc-day-other.future-date {
+    opacity: 0.1;
+}
+.btn-primary {
+    background-color: #f77808d9;
+    border-color: #f77808d9;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.event-item {
+    background-color: #3788d8;
+    color: white;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    transition: transform 0.3s ease; /* 변환 효과 추가 */
+}
+
+.event-item:hover {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+/* [ 0807 수정 ] '+ n more' 텍스트 스타일 변경 */
+.fc-daygrid-more-link {
+    color: #f77808d9; /* 주황색으로 변경, 기존 버튼 색상과 일치 */
+    background-color: rgba(255, 255, 255, 0.8); /* 약간의 흰색 배경 추가 */
+    padding: 2px 4px;
+    border-radius: 3px;
+    margin-top: 2px;
+    display: inline-block;
+}
+
+.fc-daygrid-more-link:hover {
+    background-color: #f77808d9;
+    color: white;
+    text-decoration: none;
+}
+
+/* [0808 수정] */
+/* nav 컬러 변경 + 물결 변경 */
+.bg-black {
+    background-color: #8fbc8f !important;
+}
+.hero-wave {
+    width: 100%;
+    display: block;
+    margin-bottom: -200px;
+}
+
+.top-header {
+    background-color: #abd1ab;
+    padding-top: 100px; /* 상단 여백 조정 */
+    padding-bottom: 0;
+}
+
+/* 말하는 웰시 배경 */
+.calendar-background {
+    background-image: url('../img/calendarCover.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.calendar-wrapper {
+    background-color: rgba(255, 255, 255, 0.8); /* 반투명한 흰색 배경 */
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* 기존 .calendar-wrapper 스타일에서 box-shadow 제거 */
+.calendar-wrapper {
+    width: 100%;
+    font-size: 1.1em;
+}
+/* 로그인하지 않은 경우를 위한 새로운 클래스 */
+.no-login-background {
+    background-image: none;
+    background-color: #f8f9fa; /* 또는 원하는 배경색 */
+}
+
+/* 로그인하지 않은 경우의 내용 스타일 */
+.no-login-content {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* [0809 추가] */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+#elements {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}

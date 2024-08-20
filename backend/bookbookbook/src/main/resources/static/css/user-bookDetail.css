@@ -1,0 +1,173 @@
+@font-face {
+    font-family: 'NeoDunggeunmoPro-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 기본 폰트 설정 */
+body {
+    font-family: 'NeoDunggeunmoPro-Regular';
+    font-size: 16px;
+}
+/* 헤더 패딩 제거 */
+.h-page {
+    padding: 0 !important; /* 중요도를 높여 padding을 강제로 제거 */
+    margin: -20px; /* body의 padding을 상쇄시키기 위해 마이너스 마진 사용 */
+    box-sizing: border-box; /* 박스 모델 설정 */
+}
+
+/* 링크 밑줄 제거 */
+a {
+    text-decoration: none;
+}
+
+/* 컨테이너 상단 여백 */
+.container{
+    padding-top: 20px;
+}
+
+/* 탭 스타일링 */
+.nav-tabs .nav-link {
+    border: none;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* 활성 탭 하단 테두리 */
+.nav-tabs .nav-link.active {
+    border-bottom: 3px solid #e74c3c;
+}
+
+/* 탭 링크 색상 */
+.nav-link {
+    color: rgb(0, 0, 0);
+}
+
+/* 별점 스타일링 */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+	
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    justify-content: space-around;
+    padding: 0 0.2em;
+    text-align: center;
+    width: 5em;
+	margin: 0 auto;
+}
+
+/* 별점 입력 숨기기 */
+.star-rating input {
+    display: none;
+}
+
+/* 별 모양 스타일링 */
+.star-rating label {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #2b2a29;
+    cursor: pointer;
+}
+
+/* 선택된 별 색상 */
+.star-rating :checked ~ label {
+    -webkit-text-fill-color: #D95F76;
+}
+
+/* 호버 효과 */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    -webkit-text-fill-color: #D95F76;
+}
+
+/* 버튼 호버 효과 */
+#wish-book-btn:hover {
+    border: 3px solid #e74c3c;
+}
+
+#update-btn:hover,
+#save-btn:hover,
+#save-as-reading-book-btn:hover {
+    border: 3px solid black;
+}
+
+/* 버튼 기본 스타일 */
+#update-btn, #save-btn, #save-as-reading-book-btn {
+    background-color: #e74c3c;
+    color: white;
+    margin-bottom: 20px;
+    border: 3px solid white; /* 기본 테두리를 줘서 마우스 오버 시 움직이지 않게 처리 */
+}
+#wish-book-btn {
+    border: 3px solid white; /* 기본 테두리를 줘서 마우스 오버 시 움직이지 않게 처리 */
+}
+
+/* 저장 버튼 정렬 */
+#save-btn, #save-as-reading-book-btn {
+    display: flex;
+    justify-content: space-evenly;
+	width: 100%;
+	max-width: 200px; /* 최대 너비 설정 */
+	 border: 3px solid white;
+}
+
+
+
+/* 탭 컨테이너 중앙 정렬 */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#nav-tab {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.nav-tabs .nav-link {
+    flex: 0 1 auto;
+    text-align: center;
+}
+
+/* 폼 전체를 중앙 정렬하기 위한 스타일 */
+#readBookForm, #readingBookForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* 최대 너비 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+/* 입력 필드 컨테이너 스타일 */
+.mb-3 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* 라벨 스타일 */
+.form-label {
+    align-self: center;
+    margin-bottom: 0.5rem;
+}
+
+/* 입력 필드 스타일 */
+.form-control {
+    width: 100%;
+    max-width: 300px; /* 최대 너비 설정 */
+	display: inline-block;
+}
+
+
+/* 버튼 컨테이너 스타일 */
+.b-page .d-flex.justify-content-center {
+    width: 100%;
+}
+

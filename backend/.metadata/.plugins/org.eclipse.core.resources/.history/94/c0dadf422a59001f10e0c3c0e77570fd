@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookbookbook.dao.BookshelfDAO">
+
+ <!--나의 서재 전체 탭팬-->
+ <!--  
+     쿼리 목적: 	특정 사용자(userId)에 대한 나의 서재 전체 탭팬에 출력될 데이터 조회
+     인자:      		String형 userId
+     리턴형:     	BookshelfVO 객체 리스트
+     역할:      		특정 userId에 해당하는 사용자의 단계와 캐릭터 이미지 및 읽은 책의 목록 정보를 가져오는 쿼리
+     설명:      		bookshelf 테이블, user 테이블, book 테이블을 조인하여 특정 사용자가 읽은 책의 수와 
+                		해당하는 캐릭터 단계, 캐릭터 이미지를 계산하고, 읽은 책의 제목 목록도 함께 가져온다
+                
+						****                
+						OVER는 "이 작업을 어디에 적용할지"를 말하고,
+						PARTITION BY는 "어떻게 데이터를 나눌지"를 정한다
+						
+						초과, 미만 기호가 에러가 나서 HTML 엔티티인 &lt 등을 사용
+						
+						case문 구조
+						SELECT
+							  CASE 
+							    WHEN 조건1 THEN 결과1
+							    WHEN 조건2 THEN 결과2
+							    ELSE 기본결과
+							  END AS 새_컬럼명 (END: CASE 문 종료)
+							FROM 테이블명;
+
+    -->
+     <select id="getUserData" parameterType="String" resultType="com.bookbookbook.domain.BookshelfVO">
+      SELECT 
+            u.userId,  
+            b.bookTitle,
+            COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) AS readBooks, 
+            CASE 
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 1 AND 4 THEN '1단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 5 AND 9 THEN '2단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 10 AND 19 THEN '3단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 20 AND 34 THEN '4단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 35 AND 54 THEN '5단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 55 AND 79 THEN '6단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 80 AND 109 THEN '7단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 110 AND 144 THEN '8단계'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) >= 145 THEN '9단계'
+                ELSE '캐릭터 없음'
+            END AS characterStage, 
+            CASE 
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 1 AND 4 THEN '../img/코기1.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 5 AND 9 THEN '../img/코기2.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 10 AND 19 THEN '../img/코기3.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 20 AND 34 THEN '../img/코기4.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 35 AND 54 THEN '../img/코기5.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 55 AND 79 THEN '../img/코기6.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 80 AND 109 THEN '../img/코기7.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) BETWEEN 110 AND 144 THEN '../img/코기8.png'
+                WHEN COUNT(bs.bookNum) OVER (PARTITION BY u.userNum) >= 145 THEN '../img/코기9.png'
+                ELSE '../img/코기9.png'
+            END AS characterImage
+        FROM bookshelf bs
+        JOIN users u ON bs.userNum = u.userNum
+        JOIN book b ON bs.bookNum = b.bookNum
+        WHERE bs.readStatus = 'Y' AND u.userNum = (SELECT userNum FROM users WHERE userId = #{userId})
+     </select>
+  
+    <!-- 읽은 책 상세 정보 -->
+    <!--
+        쿼리 목적: 특정 사용자의 읽은 책 상세 정보 조회
+        인자: 없음
+        리턴형: BookshelfVO 객체 리스트
+        역할: 사용자의 읽은 책 목록과 각 책의 제목, 저자, 평점, 시작일 및 종료일, 표지 파일(bname)을 가져오는 쿼리
+        설명: bookshelf 테이블과 book 테이블을 조인하여 특정 사용자가 읽은 책의 상세 정보를 가져온다
+    -->
+    <select id="getReadBooksDetails"  parameterType="String" resultType="com.bookbookbook.domain.BookshelfVO">
+        SELECT
+            b.bookTitle,
+            b.writer,
+            bs.shelfNum,
+            bs.startDate,
+            bs.endDate,
+            b.bname AS bname,
+            bs.rating
+        FROM bookShelf bs
+        JOIN `book` b ON bs.bookNum = b.bookNum
+        WHERE bs.readStatus = 'Y' AND bs.userNum =  (SELECT userNum FROM users WHERE userId = #{userId})
+    </select>
+    
+    <!-- 읽고 있는 책 상세 정보 -->
+    <!--
+        쿼리 목적: 특정 사용자의 읽고 있는 책 상세 정보 조회
+        인자: 없음
+        리턴형: BookshelfVO 객체 리스트
+        역할: 사용자의 읽고 있는 책 목록과 각 책의 제목, 저자, 시작일, 표지 파일(bname)을 가져오는 쿼리
+        설명: bookshelf 테이블과 book 테이블을 조인하여 특정 사용자가 읽고 있는 책의 상세 정보를 가져온다
+    -->
+   <!-- <select id="getReadingBooksDetails"  parameterType="String" resultType="com.bookbookbook.domain.BookshelfVO">
+        SELECT
+            b.bookTitle,
+            b.writer,
+            bs.startDate,
+            bs.shelfNum,
+            b.bname AS bname
+        FROM bookshelf bs
+        JOIN `book` b ON bs.bookNum = b.bookNum
+        WHERE bs.readStatus = 'N' AND bs.userNum =(SELECT userNum FROM users WHERE userId = #{userId})
+    </select>-->
+    
+    <!-- 위시리스트 책 정보 -->
+    <!--
+        쿼리 목적: 특정 사용자의 위시리스트에 있는 책 정보 조회
+        인자: 없음
+        리턴형: BookshelfVO 객체 리스트
+        역할: 사용자의 위시리스트 목록과 각 책의 표지 파일(bname), 제목, 저자, 추가된 날짜를 가져오는 쿼리
+        설명: wishlist 테이블과 book 테이블을 조인하여 특정 사용자의 위시리스트에 있는 책의 상세 정보를 가져온다
+    -->
+    <select id="getWishlistBooks"  parameterType="String" resultType="com.bookbookbook.domain.BookshelfVO">
+       SELECT
+        w.bookNum,
+        b.bname AS bname,
+        b.bookTitle,
+        b.writer,
+        w.addedDate,
+        bs.shelfNum
+    FROM wishlist w
+    JOIN book b ON w.bookNum = b.bookNum
+    LEFT JOIN bookshelf bs ON w.bookNum = bs.bookNum AND bs.userNum = w.userNum
+    WHERE w.userNum = (SELECT userNum FROM users WHERE userId = #{userId})
+    </select>
+
+
+<!-- 읽은 책에서 메모 저장-->
+  <insert id="insertMemo" parameterType="java.util.Map">
+       INSERT INTO memo (shelfNum, userNum, memoContent, memoDate)
+        VALUES (#{memo.shelfNum}, (SELECT userNum FROM users WHERE userId = #{userId}), #{memo.memoContent}, NOW())
+    </insert>
+    
+     <!-- checkBookStatus 메소드에 대한 SQL 쿼리 -->
+    <select id="checkBookStatus" parameterType="com.bookbookbook.domain.BookshelfVO" resultType="com.bookbookbook.domain.BookshelfVO">
+        SELECT 
+            bs.shelfNum,
+            bs.userNum,
+            b.bookTitle,
+            b.writer,
+            bs.rating,
+            bs.startDate,
+            bs.endDate,
+            b.bfrealname,
+            b.bname,
+            bs.addedDate
+        FROM bookShelf bs
+        JOIN book b ON bs.bookNum = b.bookNum
+        WHERE bs.userNum = #{userNum}
+    </select>
+
+    
+     <!-- 책 상세에서 읽은 책 저장 -->
+    <insert id="saveBook" parameterType="com.bookbookbook.domain.BookshelfVO">
+ INSERT INTO bookShelf (userNum, bookNum, readPages, startDate, endDate, readStatus, rating)
+    VALUES (
+        #{userNum},
+        #{bookNum},
+        (SELECT bookPage FROM book WHERE bookNum = #{bookNum}),
+		 DATE(#{startDate}),
+        DATE(#{endDate}),
+        #{readStatus},
+        #{rating}
+    )
+    </insert>
+    
+    <!--이미 저장된 책인지 확인-->
+      <select id="checkBookExists" resultType="int" parameterType="map">
+        SELECT COUNT(*)
+		FROM bookShelf
+		WHERE bookNum = #{bookNum}
+		AND 
+		<if test="userNum != null">
+		    userNum = #{userNum}
+		</if>
+		<if test="userNum == null and userId != null">
+		    userNum = (SELECT userNum FROM users WHERE userId = #{userId})
+		</if>
+		<if test="readStatus != null">
+		    AND readStatus = #{readStatus}
+		</if>
+    </select>
+    
+    <!-- 특정 사용자의 읽은 책 권수 가져오기 -->
+    <select id="getReadBooksByUserNum" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM bookShelf WHERE userNum = #{userNum} AND readStatus = 'Y'
+    </select>
+
+    <!-- 특정 사용자의 userLevel 업데이트 -->
+    <update id="updateUserLevel" parameterType="map">
+        UPDATE users SET userLevel = #{userLevel} WHERE userNum = #{userNum}
+    </update>
+    
+    <!--읽고 있는 책 저장-->
+    <insert id="saveReadingBook" parameterType="com.bookbookbook.domain.BookshelfVO" >
+    INSERT INTO bookShelf (
+        userNum, 
+        readPages, 
+        bookNum, 
+        startDate, 
+        readStatus
+    )
+    VALUES (
+        #{userNum}, 
+        #{readPages}, 
+        #{bookNum}, 
+        #{startDate}, 
+    	"N"
+    )
+    </insert>
+    
+    <!--읽고 있는 책에서 진행바 표시-->
+    <select id="getReadingBooksStatus">
+        SELECT bs.shelfNum, bs.readPages, b.bookPage, b.bookTitle, b.writer, bs.startDate, b.bname
+		FROM bookShelf bs
+		INNER JOIN book b ON bs.bookNum = b.bookNum
+		WHERE bs.userNum = #{userNum} AND bs.readStatus = 'N'
+    </select>
+    
+    
+ <!-- 독서 진행 상황 업데이트 -->
+ <update id="updateBookProgress" parameterType="map">
+    UPDATE bookshelf
+    SET readPages = #{readPages},
+        startDate = #{startDate},
+        readStatus = #{readStatus},
+        endDate = #{endDate},
+      rating = #{rating}
+    WHERE shelfNum = #{shelfNum}
+</update>
+  <!-- <update id="updateBookProgress" parameterType="BookshelfVO">
+        UPDATE bookShelf
+        <set>
+            <if test="readPages != null">
+                readPages = #{readPages},
+            </if>
+            <if test="startDate != null and startDate != ''">
+                startDate = #{startDate},
+            </if>
+        </set>
+        WHERE 
+            shelfNum = #{shelfNum}
+            AND userNum = (SELECT userNum FROM users WHERE userId = #{userId})
+    </update>-->
+    
+    <!--읽은 책에서 삭제 / 읽고싶은 책 삭제는 wishlistMapper.xml-->
+       <delete id="deleteBook" parameterType="Integer">
+        DELETE FROM bookShelf WHERE shelfNum = #{shelfNum}
+    </delete>
+    
+    <!-- 책과 관련된 메모 삭제 -->
+<delete id="deleteMemosByShelfNum" parameterType="int">
+    DELETE FROM memo WHERE shelfNum = #{shelfNum}
+</delete>
+
+ <!-- 책의 현재 상태 확인 -->
+    <select id="getBookStatus" parameterType="map" resultType="string">
+        SELECT readStatus
+        FROM bookShelf
+        WHERE bookNum = #{bookNum}
+        AND userNum = #{userNum}
+    </select>
+    
+</mapper>

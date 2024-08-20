@@ -1,0 +1,80 @@
+.dataCard {
+  background-color: #efefef;
+  border-radius: 0.5em;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-left: 50px;
+  padding: 2em;
+  height: 400px;
+  width: 400px;
+  box-sizing: border-box;
+}
+
+.dataCard33 {
+  background-color: #efefef;
+  border-radius: 0.5em;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-left: 50px;
+  padding: 2em;
+  height: 600px;
+  width: 800px;
+  box-sizing: border-box;
+}
+
+.dayuse, .age, .gender , .level {
+  justify-content: center;
+  margin-top: 30px;
+  width: 400px;
+  height: 400px;
+}
+
+.text {
+  text-align: center;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+}
+
+.count {
+  text-align: center;
+}
+
+/* 1200px 이하 화면에 대한 반응형 스타일 */
+@media screen and (max-width: 1200px) {
+  .chart-container {
+    justify-content: center;
+    margin-top: 60px;
+    
+  }
+
+  .dataCard {
+    margin-left: 0;
+    margin: 15px;
+  }
+
+  .dayuse, .age, .gender .level {
+    margin-top: 15px;
+  }
+}
+
+/* 768px 이하 화면에 대한 반응형 스타일 */
+@media screen and (max-width: 768px) {
+  .dataCard, .dayuse, .age, .gender {
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    min-height: 350px;
+  }
+}
+
+/* 480px 이하 화면에 대한 반응형 스타일 */
+@media screen and (max-width: 480px) {
+  .dataCard, .dayuse, .age, .gender .level{
+    padding: 1.5em;
+    min-height: 300px;
+  }
+}

@@ -1,0 +1,62 @@
+package com.bookbookbook.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
+import com.bookbookbook.domain.BookshelfVO;
+import com.bookbookbook.domain.MemoVO;
+
+@Service
+public interface BookshelfService {
+
+	//나의 서재 읽은 책 
+	  List<BookshelfVO> getUserData(String userId);
+	  
+	//나의 서재 읽은 책 탭팬
+	  List<BookshelfVO> getReadBooksDetails(String userId);
+	  
+	  //나의 서재 읽고 있는 책 탭팬
+	  //List<BookshelfVO> getReadingBooksDetails(String userId);
+	  
+	  //나의 서재 읽고 싶은 책 탭팬 
+	  List<BookshelfVO> getWishlistBooks(String userId);
+	  
+	  //읽은책에서 메모 저장
+	  void saveMemo(MemoVO memo, String userId);
+	  
+	  //책 상세에서 읽은 책 저장
+	  String saveBook(BookshelfVO bookshelfVO);
+	  
+//	  //이미 저장한 책인지 확인
+//	  int checkBookExists(Map<String, Object> params);
+	  
+	  // 읽은 책 권수 가져오기
+	    int getReadBooksByUserNum(int userNum);
+	    
+	    // 사용자 레벨 업데이트
+	    void updateUserLevel(int userLevel, int userNum);
+	    
+	    /**
+	     * 다음 레벨까지 필요한 책 수를 계산합니다.
+	     * @param userNum 사용자 번호
+	     * @return 다음 레벨까지 필요한 책 수
+	     */
+	    int calculateBooksToNextLevel(int userNum);
+	    
+	
+	    //책 상세에서 읽고 있는 책으로 저장
+	  String saveReadingBook(BookshelfVO bookshelfVO);
+	  
+	  //
+	  boolean checkBookExists(Integer bookNum, Integer userNum);
+	  //읽고 있는 책 진행바 표시
+	  List<BookshelfVO> getReadingBooksStatus(Integer userNum);
+	  
+	  //읽고 있는 책 수정
+	  boolean updateBookProgress(Map<String, Object> params);
+	  
+	  //삭제 
+	  boolean deleteBook(Integer shelfNum);
+}
