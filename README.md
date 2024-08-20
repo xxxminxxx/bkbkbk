@@ -110,4 +110,4 @@ AI 기반 맞춤 도서추천: 공공데이터와 게이미피케이션의 소�
     - 도서별 도서관 대여가능여부 수집
 
 ## 🔗 포트폴리오 주소
-[프로젝트 포트폴리오](https://drive.google.com/file/d/1EuRsMCJO5eIM4cSpU-ez6nsltmQAxvGj/view?usp=sharing)
+[프로젝트 포트폴리오](https://drive.google.com/file/d/1bi1WEjQU7P0Iex48i4A7lCiJI66KOe1D/view?usp=sharing)
