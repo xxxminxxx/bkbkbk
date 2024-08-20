@@ -96,7 +96,7 @@ AI 기반 맞춤 도서추천: 공공데이터와 게이미피케이션의 소�
 - 월별 독서량 권수 및 페이지별 통계 산출을 통한 사용자 활동 분석
 
 ## 📝 프로젝트 아키텍쳐
-![프로젝트 아키텍처](./images/project-architecture.png)
+![프로젝트 아키텍처](backend/bookbookbook/src/main/resources/static/img/archi.png)
 
 ## 🚀 API
 - Kakao Maps API
