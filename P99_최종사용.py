@@ -7,10 +7,10 @@ from sqlalchemy import create_engine
 
 # MySQL 연결 설정
 db_config = {
-    'host': '192.168.',
-    'user': 'final',
-    'password': 'final',
-    'database': 'final1'
+    'host': '',
+    'user': '',
+    'password': '',
+    'database': ''
 }
 
 # SQLAlchemy 엔진 생성
